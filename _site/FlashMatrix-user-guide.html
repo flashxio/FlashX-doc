@@ -1,0 +1,571 @@
+<!DOCTYPE html>
+<head>
+    <meta charset="utf-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="description" content="The User Guide of FlashMatrix">
+<meta name="keywords" content="tutorial,  tutorial">
+<title>The User Guide of FlashMatrix | Documentation of FlashX</title>
+<link rel="stylesheet" href="css/syntax.css">
+
+
+<link rel="stylesheet" type="text/css" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.5.0/css/font-awesome.min.css">
+<!--<link rel="stylesheet" type="text/css" href="css/bootstrap.min.css">-->
+<link rel="stylesheet" href="css/modern-business.css">
+<link rel="stylesheet" href="css/lavish-bootstrap.css">
+<link rel="stylesheet" href="css/customstyles.css">
+<link rel="stylesheet" href="css/theme-blue.css">
+
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/2.1.4/jquery.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery-cookie/1.4.1/jquery.cookie.min.js"></script>
+<script src="js/jquery.navgoco.min.js"></script>
+
+
+<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.4/js/bootstrap.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/anchor-js/2.0.0/anchor.min.js"></script>
+<script src="js/toc.js"></script>
+<script src="js/customscripts.js"></script>
+
+<link rel="shortcut icon" href="images/favicon.ico">
+
+<!-- HTML5 Shim and Respond.js IE8 support of HTML5 elements and media queries -->
+<!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
+<!--[if lt IE 9]>
+<script src="https://oss.maxcdn.com/libs/html5shiv/3.7.0/html5shiv.js"></script>
+<script src="https://oss.maxcdn.com/libs/respond.js/1.4.2/respond.min.js"></script>
+<![endif]-->
+
+<link rel="alternate" type="application/rss+xml" title="" href="http://localhost:4005feed.xml">
+
+    <script>
+        $(document).ready(function() {
+            // Initialize navgoco with default options
+            $("#mysidebar").navgoco({
+                caretHtml: '',
+                accordion: true,
+                openClass: 'active', // open
+                save: false, // leave false or nav highlighting doesn't work right
+                cookie: {
+                    name: 'navgoco',
+                    expires: false,
+                    path: '/'
+                },
+                slide: {
+                    duration: 400,
+                    easing: 'swing'
+                }
+            });
+
+            $("#collapseAll").click(function(e) {
+                e.preventDefault();
+                $("#mysidebar").navgoco('toggle', false);
+            });
+
+            $("#expandAll").click(function(e) {
+                e.preventDefault();
+                $("#mysidebar").navgoco('toggle', true);
+            });
+
+        });
+
+    </script>
+    <script>
+        $(function () {
+            $('[data-toggle="tooltip"]').tooltip()
+        })
+    </script>
+    
+
+</head>
+<body>
+<!-- Navigation -->
+<nav class="navbar navbar-inverse navbar-fixed-top">
+    <div class="container topnavlinks">
+        <div class="navbar-header">
+            <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1">
+                <span class="sr-only">Toggle navigation</span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+            </button>
+            <a class="fa fa-home fa-lg navbar-brand" href="index.html">&nbsp;<span class="projectTitle"> Documentation of FlashX</span></a>
+        </div>
+        <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
+            <ul class="nav navbar-nav navbar-right">
+                <!-- entries without drop-downs appear here -->
+                
+                
+                
+                <li><a href="https://github.com/zheng-da/FlashX" target="_blank">Source code</a></li>
+                
+                
+                
+                <!-- entries with drop-downs appear here -->
+                <!-- conditional logic to control which topnav appears for the audience defined in the configuration file.-->
+                
+                
+			<li><a class="email" title="Submit feedback" href="#" onclick="javascript:window.location='mailto:zhengda1936@gmail.com?subject=Documentation of FlashX f eedback&body=I have some feedback about the The User Guide of FlashMatrix page: ' + window.location.href;"><i class="fa fa-envelope-o"></i> Feedback</a><li>
+
+		
+                <!--comment out this block if you want to hide search-->
+                <li>
+                    <!--start search-->
+                    <div id="search-demo-container">
+                        <input type="text" id="search-input" placeholder="search...">
+                        <ul id="results-container"></ul>
+                    </div>
+                    <script src="js/jekyll-search.js" type="text/javascript"></script>
+                    <script type="text/javascript">
+                            SimpleJekyllSearch.init({
+                                searchInput: document.getElementById('search-input'),
+                                resultsContainer: document.getElementById('results-container'),
+                                dataSource: 'search.json',
+                                searchResultTemplate: '<li><a href="{url}" title="The User Guide of FlashMatrix">{title}</a></li>',
+                    noResultsText: 'No results found.',
+                            limit: 10,
+                            fuzzy: true,
+                    })
+                    </script>
+                    <!--end search-->
+                </li>
+            </ul>
+        </div>
+        </div>
+        <!-- /.container -->
+</nav>
+
+<!-- Page Content -->
+<div class="container">
+    <div class="col-lg-12">&nbsp;</div>
+    <!-- Content Row -->
+    <div class="row">
+        <!-- Sidebar Column -->
+        <div class="col-md-3">
+
+          
+
+
+
+
+
+
+
+
+
+
+
+
+<ul id="mysidebar" class="nav">
+    <li class="sidebarTitle">Documentation of FlashX 6.0</li>
+    
+    
+    
+        
+    
+    <li>
+        <a href="#">Overview</a>
+        <ul>
+            
+            
+            
+            <li><a href="FlashX-Quick-Start-Guide.html">Get started</a></li>
+            
+            
+            
+            
+            
+            
+            <li><a href="mydoc_about.html">About the theme author</a></li>
+            
+            
+            
+            
+            
+            
+            <li><a href="mydoc_support.html">Support</a></li>
+            
+            
+            
+            
+        </ul>
+        
+        
+    
+    <li>
+        <a href="#">User Guide</a>
+        <ul>
+            
+            
+            
+            <li><a href="FlashGraph-user-guide.html">FlashGraph</a></li>
+            
+            
+            
+            
+            
+            
+            <li class="active"><a href="FlashMatrix-user-guide.html">FlashMatrix</a></li>
+            
+            
+            
+            
+        </ul>
+        
+        
+    
+    <li>
+        <a href="#">Tutorials</a>
+        <ul>
+            
+            
+            
+            <li><a href="FlashMatrix-programming-tutorial.html">FlashMatrix</a></li>
+            
+            
+            
+            
+        </ul>
+        
+        
+    
+    <li>
+        <a href="#">Contributing</a>
+        <ul>
+            
+            
+            
+            <li><a href="mydoc_pages.html">Pages</a></li>
+            
+            
+            
+            
+        </ul>
+        
+        
+    
+    <li>
+        <a href="#">API</a>
+        <ul>
+            
+            
+            
+            <li><a href="http://flashx.io/docs/html/" target="_blank">C++</a></li>
+            
+            
+            
+            
+            
+            
+            <li><a href="http://flashx.io/docs/FlashR/" target="_blank">R</a></li>
+            
+            
+            
+            
+        </ul>
+        
+        
+    
+    <li>
+        <a href="#">Troubleshooting</a>
+        <ul>
+            
+            
+            
+            <li><a href="mydoc_troubleshooting.html">Troubleshooting</a></li>
+            
+            
+            
+            
+        </ul>
+        
+        
+        
+        <!-- if you aren't using the accordion, uncomment this block:
+           <p class="external">
+               <a href="#" id="collapseAll">Collapse All</a> | <a href="#" id="expandAll">Expand All</a>
+           </p>
+           -->
+    </li>
+</ul>
+</div>
+
+<!-- this highlights the active parent class in the navgoco sidebar. this is critical so that the parent expands when you're viewing a page. This must appear below the sidebar code above. Otherwise, if placed inside customscripts.js, the script runs before the sidebar code runs and the class never gets inserted.-->
+<script>$("li.active").parents('li').toggleClass("active");</script>
+
+    <!-- Content Column -->
+    <div class="col-md-9">
+        <div class="post-header">
+   <h1 class="post-title-main">The User Guide of FlashMatrix</h1>
+</div>
+
+
+
+<div class="post-content">
+
+   
+    <div class="summary">The User Guide of FlashMatrix</div>
+   
+
+    
+    
+<!-- this handles the automatic toc. use ## for subheads to auto-generate the on-page minitoc. if you use html tags, you must supply an ID for the heading element in order for it to appear in the minitoc. -->
+<script>
+$( document ).ready(function() {
+  // Handler for .ready() called.
+
+$('#toc').toc({ minimumHeaders: 0, listType: 'ul', showSpeed: 0, headers: 'h2,h3,h4' });
+
+/* this offset helps account for the space taken up by the floating toolbar. */
+$('#toc').on('click', 'a', function() {
+  var target = $(this.getAttribute('href'))
+    , scroll_target = target.offset().top
+
+  $(window).scrollTop(scroll_target - 10);
+  return false
+})
+  
+});
+</script>
+
+<div id="toc"></div>
+
+    
+
+    
+
+    
+
+    <a target="_blank" href="https://github.com/tomjohnson1492/documentation-theme-jekyll/blob/gh-pages/pages//_pages/mydoc/FlashMatrix-user-guide.html.md" class="btn btn-default githubEditButton" role="button"><i class="fa fa-github fa-lg"></i> Edit me</a>
+    
+
+    
+
+  <h1 id="flashr-programming-tutorial">FlashR programming tutorial</h1>
+<p>FlashR is an extension of the R programming framework. It executes R code in parallel automatically and stores and accesses arrays in the R code on disks automatically to scale R to large datasets that can’t fit in memory. The core of FlashR is a small set of generalized operators to perform computation in an array-oriented fashion. In addition to the generalized operators, FlashR reimplements many commonly used R functions to provide users a familiar R programming environment to reduce the learning curve. FlashR is completely implemented as an R package.</p>
+
+<p>FlashR is designed with goals in four aspects:
+* Efficiency: Comparable to optimized C code.
+* Scalability: Tera-scale or larger.
+* Generality: as many applications as possible in data mining and machine learning and more.
+* Productivity: the same productivity as R.</p>
+
+<p>Although FlashR tries to provide a familiar environment for R users, some operations in the traditional R are not supported in FlashR. The biggest difference is that FlashR does not allow users to modify individual elements in a vector or a matrix. FlashR intentionally chooses so for the sake of performance. FlashR stores vectors and matrices on SSDs. Modifying individual elements results in read-modify-write to SSDs, which causes many small random I/O. It causes efficiency issues and these operations are harmful to SSDs. By forbidding modifying individual elements, FlashR advocates array-oriented programming to achieve superior efficiency.</p>
+
+<h2 id="how-to-start">How to start</h2>
+
+<p>Users can follow the <a href="https://github.com/icoming/FlashX/wiki/FlashX-Quick-Start-Guide">instructions</a> to install FlashR in Ubuntu. To load FlashR to R, run
+<code class="highlighter-rouge">
+&gt; library(FlashR)
+</code></p>
+
+<h2 id="construct-flashr-vectors-and-matrices">Construct FlashR vectors and matrices</h2>
+
+<p>FlashR provides a set of functions to generate FlashR vectors and matrices. These functions have very similar interface as the R counterparts that generate vectors and matrices.
+* <code class="highlighter-rouge">fm.rep.int</code>: Create a vector with replicated elements. e.g., <code class="highlighter-rouge">fm.rep.int(1, 10)</code> creates a FlashR vector with 10 elements and each element is 1.
+* <code class="highlighter-rouge">fm.seq.int</code>: Create a vector with a sequence of numbers. e.g., <code class="highlighter-rouge">fm.seq.int(1, 10, 1)</code> creates a FlashR vector with a sequence of numbers between [1:10].
+* <code class="highlighter-rouge">fm.runif</code>: Create a vector with uniformly random numbers. e.g., <code class="highlighter-rouge">fm.runif(10, 0, 1)</code> creates a FlashR vector with 10 uniformly random values between 0 and 1.
+* <code class="highlighter-rouge">fm.matrix</code>: Create a matrix from a FlashR vector. e.g., <code class="highlighter-rouge">fm.matrix(vec, 10, 2)</code> creates a 10x2 FlashR matrix from a FlashR vector.</p>
+
+<p>FlashR also provides functions to access vectors and matrices from the filesystem.
+* <code class="highlighter-rouge">fm.read.obj</code>: Read a FlashR object (vector/matrix) from a Linux file.
+* <code class="highlighter-rouge">fm.write.obj</code>: Write a FlashR object (vector/matrix) to a Linux file.</p>
+
+<h2 id="interact-with-native-r">Interact with native R</h2>
+
+<p>FlashR also provides functions to interact with the original R system.
+* <code class="highlighter-rouge">fm.as.vector</code>: convert an R vector to a FlashR vector.
+* <code class="highlighter-rouge">fm.as.matrix</code>: convert an R matrix to a FlashR matrix.
+* <code class="highlighter-rouge">as.vector</code>: convert a FlashR vector to a R vector.
+* <code class="highlighter-rouge">as.matrix</code>: convert a FlashR matrix to a R matrix.</p>
+
+<p>FlashR has the following functions for users to test if an object is a FlashR vector or matrix.
+* <code class="highlighter-rouge">fm.is.vector</code>: test if an object is a FlashR vector.
+* <code class="highlighter-rouge">fm.is.matrix</code>: test if an object is a FlashR matrix.</p>
+
+<h2 id="generalized-operators">Generalized operators</h2>
+
+<p>FlashR has two sets of programming API. It provides users a set of generalized operators, with which users can implement varieties of data mining and machine learning algorithms. On top of them, FlashR implements many R functions in the base package with the generalized operators to mimic the original R programming environment.
+Generalized operators</p>
+
+<p>Generalized operators (GenOp) are the core of FlashR. There are a very small number of GenOps in FlashR. Each operator accepts a user-defined operator (UDO) or the name of a UDO to perform users’ tasks. Currently, there are four GenOps, but some of them have multiple forms. There are many UDOs in FlashR such as addition and subtraction (see <code class="highlighter-rouge">?fm.basic.op</code> for details). Below lists all GenOps currently supported by FlashR.</p>
+
+<p><strong>Inner product</strong>: a generalized matrix multiplication. It replaces multiplication and addition in matrix multiplication with two UDOs, respectively. As such, we can define many operations with inner product. For example, we can use inner product to compute various pair-wise distance matrics of data points such as Euclidean distance and Hamming distance.
+<code class="highlighter-rouge">
+fm.inner.prod(fm, mat, FUN1, FUN2)
+</code></p>
+
+<p>One example of using <code class="highlighter-rouge">fm.inner.prod</code> is to compute a pair-wise distance between every data point. <code class="highlighter-rouge">fm.bo.euclidean</code> and <code class="highlighter-rouge">fm.bo.add</code> are some UDOs written in C++. <code class="highlighter-rouge">fm.bo.euclidean</code> computes <code class="highlighter-rouge">(x-y)*(x-y)</code>. <code class="highlighter-rouge">fm.bo.add</code> computes <code class="highlighter-rouge">x + y</code>.
+<code class="highlighter-rouge">fm.inner.prod(data, t(data), fm.bo.euclidean, fm.bo.add)</code></p>
+
+<p><strong>Apply</strong>: a generalized form of element-wise operations and has multiple variants.
+* <code class="highlighter-rouge">fm.sapply</code>:  a generalized element-wise unary operation whose UDO takes an element in a vector or a matrix at a time and outputs an element.
+* <code class="highlighter-rouge">fm.mapply2</code>: a generalized element-wise binary operation whose UDO takes an element from each vector or matrix and outputs an element.
+* <code class="highlighter-rouge">fm.mapply.row</code> and <code class="highlighter-rouge">fm.mapply.col</code> are two variants of <code class="highlighter-rouge">fm.mapply2</code>. They are similar to <code class="highlighter-rouge">sweep()</code> in R and the broadcasting mechanism in Numpy. They are equivalent to mapply2 on every row or column of the matrix (in the first argument) with the vector (in the second argument). Currently, <code class="highlighter-rouge">fm.mapply.row</code> and <code class="highlighter-rouge">fm.mapply.col</code> only accept the cases that the vector has the same length as a row or a column of the matrix.
+<code class="highlighter-rouge">
+fm.sapply(o, FUN)
+fm.mapply2(o1, o2, FUN)
+fm.mapply.row(o1, o2, FUN)
+fm.mapply.col(o1, o2, FUN)
+</code></p>
+
+<p>Many matrix operations in FlashR are implemented with <code class="highlighter-rouge">fm.sapply</code> and <code class="highlighter-rouge">fm.mapply2</code>.
+Example 1: compute m1 + m2
+<code class="highlighter-rouge">fm.mapply2.fm(m1, m2, fm.bo.add)</code></p>
+
+<p>Example 2: compute -m1
+<code class="highlighter-rouge">fm.sapply(m1, fm.buo.neg)</code></p>
+
+<p>These are some examples of using <code class="highlighter-rouge">fm.sapply</code> and <code class="highlighter-rouge">fm.mapply2</code>. Both matrix addition and matrix negation have been implemented in FlashR.</p>
+
+<p>Aggregation takes multiple elements and outputs a single element.
+* <code class="highlighter-rouge">fm.agg</code>: aggregates over the entire vector or matrix.
+* <code class="highlighter-rouge">fm.agg.mat</code>: aggregates over each individual row or column of a matrix and outputs a vector.
+<code class="highlighter-rouge">
+fm.agg(fm, FUN)
+fm.agg.mat(fm, margin, FUN)
+</code></p>
+
+<p>Example 1: compute sum(m)
+<code class="highlighter-rouge">fm.agg(x, fm.bo.add)</code></p>
+
+<p>Example 2: compute rowSums(m)
+<code class="highlighter-rouge">fm.agg.mat(x, 1, fm.bo.add)</code></p>
+
+<p>Again, both <code class="highlighter-rouge">sum()</code> and <code class="highlighter-rouge">rowSums()</code> have been implemented with aggregation in FlashR.</p>
+
+<p>Groupby is similar to groupby in SQL. It groups multiple elements by their values and perform some computation on the elements. Currently, the function passed to a groupby function has to aggregate values.
+<code class="highlighter-rouge">fm.sgroupby</code>:  groups elements by their values in a vector and invokes UDO on the elements associated with the same value. It outputs a vector.
+<code class="highlighter-rouge">fm.groupby</code>: takes a matrix and a vector of categorical values, groups rows/columns of the matrix based on the corresponding categorical value and runs UDO on the rows/columns with the same categorical value. It outputs a matrix.
+<code class="highlighter-rouge">
+fm.sgroupby(o, FUN)
+fm.groupby(fm, margin, factor, FUN)
+</code></p>
+
+<p>In practice, groupby requires an aggregation operation over some of the original elements in a group and combine operation over the aggregation results. The reason is that groupby runs in parallel and each time it can only aggregate over some of the elements in a group. Essentially, the combine operation is an aggregation. Usually, it is sufficient to pass a UDO to a groupby function because a UDO can work as both aggregation and combine. In some cases, however, we need these operations to be different. As such, users can pass an aggregation operator to groupby. A user can create an aggregation operator themselves by calling fm.create.agg.op() and specify two UDOs for the aggregation and combine operation.
+fm.create.agg.op(agg, combine, name)</p>
+
+<h2 id="base-r-functions">“Base” R functions</h2>
+
+<p>FlashR implements many R functions in the base package to mimic the R programming environment. Although we have a goal of having these functions as similar as possible to the original R functions, we do not provide 100% compatibility with the original R version for some functions. Overall, we try to provide similarity under the condition of not sacrificing performance. Below shows a list of R functions in the base package currently supported by FlashR. In the future, more functions will be provided.</p>
+
+<p>The following functions have exactly the same interface as the original R function.
+* matrix info: <code class="highlighter-rouge">dim, nrow, ncol, length, typeof</code>
+* change matrix shape: <code class="highlighter-rouge">t</code>
+* element-wise unary: <code class="highlighter-rouge">abs, sqrt, ceiling, floor, round, log, log2, log10, exp, !, -</code>
+* inner product: <code class="highlighter-rouge">%*%, crossprod, tcrossprod</code>
+* aggregation: <code class="highlighter-rouge">sum, min, max, range, all, any, mean, rowSums, colSums, rowMeans, colMeans, sd, cov, cov.wt</code></p>
+
+<p>Many binary operations have exactly the same interface as the original R functions. When they are applied to a matrix and a vector, it requires the vector has the same length as the columns in the matrix.
+* <code class="highlighter-rouge">+, -, *, /, pmin, pmax, </code>==, !=, &gt;, &gt;=, &lt;, &lt;=, |, &amp;, sweep`</p>
+
+<p>Some of them have slightly different interface and semantics. These slightly different functions always start with “fm.” to indicate that they are actually FlashR functions. In the future, we will provide implementations with exactly the same interface and semantics as the original R functions.
+* <code class="highlighter-rouge">fm.table</code>
+* <code class="highlighter-rouge">fm.as.integer, fm.as.numeric</code></p>
+
+<h2 id="some-examples-of-using-flashr">Some examples of using FlashR</h2>
+
+<h3 id="pagerank">PageRank</h3>
+
+<p><a href="https://en.wikipedia.org/wiki/PageRank">PageRank</a> is the classical algorithm to rank Web pages originally used by Google search engine. PageRank is an iterative algorithm. In each iteration, the PageRank value of a vertex is updated as follow:</p>
+
+<p><img src="https://upload.wikimedia.org/math/8/0/1/80125f33d12ceb608fdb9daec09d9c10.png" alt="PageRank" /></p>
+
+<p>As such, the PageRank algorithm is implemented as follows:</p>
+
+<div class="language-R highlighter-rouge"><pre class="highlight"><code><span class="n">pr1</span><span class="w"> </span><span class="o">&lt;-</span><span class="w"> </span><span class="n">fm.rep.int</span><span class="p">(</span><span class="m">1</span><span class="o">/</span><span class="n">N</span><span class="p">,</span><span class="w"> </span><span class="n">N</span><span class="p">)</span><span class="w">
+</span><span class="n">converge</span><span class="w"> </span><span class="o">&lt;-</span><span class="w"> </span><span class="m">0</span><span class="w">
+</span><span class="k">while</span><span class="w"> </span><span class="p">(</span><span class="n">converge</span><span class="w"> </span><span class="o">&lt;</span><span class="w"> </span><span class="n">N</span><span class="p">)</span><span class="w"> </span><span class="p">{</span><span class="w">
+ </span><span class="n">pr2</span><span class="w"> </span><span class="o">&lt;-</span><span class="w"> </span><span class="p">(</span><span class="m">1</span><span class="o">-</span><span class="n">d</span><span class="p">)</span><span class="o">/</span><span class="n">N</span><span class="o">+</span><span class="n">d</span><span class="o">*</span><span class="p">(</span><span class="n">A</span><span class="w"> </span><span class="o">%*%</span><span class="w"> </span><span class="p">(</span><span class="n">pr1</span><span class="o">/</span><span class="n">out.deg</span><span class="p">))</span><span class="w">
+ </span><span class="n">diff</span><span class="w"> </span><span class="o">&lt;-</span><span class="w"> </span><span class="nf">abs</span><span class="p">(</span><span class="n">pr1</span><span class="o">-</span><span class="n">pr2</span><span class="p">)</span><span class="w">
+ </span><span class="n">converge</span><span class="w"> </span><span class="o">&lt;-</span><span class="w"> </span><span class="nf">sum</span><span class="p">(</span><span class="n">diff</span><span class="w"> </span><span class="o">&lt;</span><span class="w"> </span><span class="n">epsilon</span><span class="p">)</span><span class="w">
+ </span><span class="n">pr1</span><span class="w"> </span><span class="o">&lt;-</span><span class="w"> </span><span class="n">pr2</span><span class="w">
+</span><span class="p">}</span><span class="w">
+</span></code></pre>
+</div>
+
+<h3 id="non-negative-matrix-factorization">Non-negative Matrix Factorization</h3>
+<p><a href="https://en.wikipedia.org/wiki/Non-negative_matrix_factorization">Non-negative Matrix Factorization</a> (NMF) factorizes a matrix to two non-negative matrices. The following code implements the algorithm described in the Lee’s <a href="http://papers.nips.cc/paper/1861-algorithms-for-non-negative-matrix-factorization.pdf">paper</a>.
+The update rules described in Lee’s paper are implemented as follow
+<code class="highlighter-rouge">R
+den &lt;- (t(W) %*% W) %*% H
+H &lt;- fm.pmax2(H * t(tA %*% W), eps) / (den + eps)
+den &lt;- W %*% (H %*% t(H))
+W &lt;- fm.pmax2(W * (A %*% t(H)), eps) / (den + eps)
+</code></p>
+
+<p>One of the convergence condition is ||A - WH||^2. It is computationally expensive to compute the Frobenius norm of (A-WH) directly. Suppose A is a n×m matrix, W is a n×k matrix and H is a k×m matrix. The computation complexity is O(n×k×m). Therefore, instead of computing the Frobenius norm, we compute trace(t(A-WH)(A-WH)) = trace(t(A)A) -2×trace((t(A)W)H)+trace((t(H)(t(W)W))H). We need to order the matrix multiplication in a certain way to reduce computation complexity. The computation complexity of (t(A)W)H is O(l<em>k), where l is the number of non-zero entries in A. The computation complexity of (t(H)(t(W)W))H is O(k×k×n+k×k×m).
+```R
+# trace of W %</em>% H
+trace.MM &lt;- function(W, H) {
+ X &lt;- W * t(H)
+ sum(X)
+}</p>
+
+<h1 id="a---w--h2">||A - W %*% H||^2</h1>
+<p>Fnorm &lt;- function(A, W, H) {
+ sum(A<em>A) - 2 * trace.MM(t(A) %</em>% W, H) + trace.MM(t(H) %<em>% (t(W) %</em>% W), H)
+}
+```</p>
+
+<h3 id="kmeans">KMeans</h3>
+<p>KMeans is another iterative algorithm that cluster data pointers. In an iteration, it has three steps and below are the steps and the corresponding FlashR code.
+Step 1: calculate distances between all data points to all cluster centers.
+<code class="highlighter-rouge">R
+m &lt;- fm.inner.prod(data, t(centers), fm.bo.euclidean, fm.bo.add)
+</code></p>
+
+<p>Step 2: find the closest cluster center for each data point.
+<code class="highlighter-rouge">R
+parts &lt;- fm.as.integer(fm.agg.mat(m, 1, agg.which.min) - 1)
+</code></p>
+
+<p>Step 3: update all cluster centers.
+<code class="highlighter-rouge">R
+centers &lt;- as.matrix(fm.groupby(data, 2, parts, agg.sum))
+cnts &lt;- fm.table(parts)
+centers &lt;- diag(1/cnts$Freq) %*% centers
+</code></p>
+
+<h2 id="requirements-for-flashr-users">Requirements for FlashR users</h2>
+
+<p>There are two requirements for FlashR users to get the best performance out of FlashR:
+* Array-oriented programming
+* Understand space &amp; computation complexity</p>
+
+
+    <div class="tags">
+        
+        <b>Tags: </b>
+        
+        
+        
+        
+        
+    </div>
+
+    
+
+</div>
+
+<hr class="shaded"/>
+
+<footer>
+            <div class="row">
+                <div class="col-lg-12 footer">
+               &copy;2016 FlashX. All rights reserved. <br />
+<span>Page last updated:</span> Nov 3, 2016<br/> Site last generated: Nov 3, 2016 <br />
+<p><img src="images/company_logo.png" alt="Company logo"/></p>
+                </div>
+            </div>
+</footer>
+
+
+    </div>
+    <!-- /.row -->
+</div>
+<!-- /.container -->
+    </div>
+
+</body>
+
+</html>

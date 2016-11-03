@@ -1,0 +1,503 @@
+<!DOCTYPE html>
+<head>
+    <meta charset="utf-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="description" content="The programming tutorials of FlashMatrix">
+<meta name="keywords" content="tutorial,  tutorial">
+<title>The programming tutorials of FlashMatrix | Documentation of FlashX</title>
+<link rel="stylesheet" href="css/syntax.css">
+
+
+<link rel="stylesheet" type="text/css" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.5.0/css/font-awesome.min.css">
+<!--<link rel="stylesheet" type="text/css" href="css/bootstrap.min.css">-->
+<link rel="stylesheet" href="css/modern-business.css">
+<link rel="stylesheet" href="css/lavish-bootstrap.css">
+<link rel="stylesheet" href="css/customstyles.css">
+<link rel="stylesheet" href="css/theme-blue.css">
+
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/2.1.4/jquery.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery-cookie/1.4.1/jquery.cookie.min.js"></script>
+<script src="js/jquery.navgoco.min.js"></script>
+
+
+<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.4/js/bootstrap.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/anchor-js/2.0.0/anchor.min.js"></script>
+<script src="js/toc.js"></script>
+<script src="js/customscripts.js"></script>
+
+<link rel="shortcut icon" href="images/favicon.ico">
+
+<!-- HTML5 Shim and Respond.js IE8 support of HTML5 elements and media queries -->
+<!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
+<!--[if lt IE 9]>
+<script src="https://oss.maxcdn.com/libs/html5shiv/3.7.0/html5shiv.js"></script>
+<script src="https://oss.maxcdn.com/libs/respond.js/1.4.2/respond.min.js"></script>
+<![endif]-->
+
+<link rel="alternate" type="application/rss+xml" title="" href="http://localhost:4005feed.xml">
+
+    <script>
+        $(document).ready(function() {
+            // Initialize navgoco with default options
+            $("#mysidebar").navgoco({
+                caretHtml: '',
+                accordion: true,
+                openClass: 'active', // open
+                save: false, // leave false or nav highlighting doesn't work right
+                cookie: {
+                    name: 'navgoco',
+                    expires: false,
+                    path: '/'
+                },
+                slide: {
+                    duration: 400,
+                    easing: 'swing'
+                }
+            });
+
+            $("#collapseAll").click(function(e) {
+                e.preventDefault();
+                $("#mysidebar").navgoco('toggle', false);
+            });
+
+            $("#expandAll").click(function(e) {
+                e.preventDefault();
+                $("#mysidebar").navgoco('toggle', true);
+            });
+
+        });
+
+    </script>
+    <script>
+        $(function () {
+            $('[data-toggle="tooltip"]').tooltip()
+        })
+    </script>
+    
+
+</head>
+<body>
+<!-- Navigation -->
+<nav class="navbar navbar-inverse navbar-fixed-top">
+    <div class="container topnavlinks">
+        <div class="navbar-header">
+            <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1">
+                <span class="sr-only">Toggle navigation</span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+            </button>
+            <a class="fa fa-home fa-lg navbar-brand" href="index.html">&nbsp;<span class="projectTitle"> Documentation of FlashX</span></a>
+        </div>
+        <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
+            <ul class="nav navbar-nav navbar-right">
+                <!-- entries without drop-downs appear here -->
+                
+                
+                
+                <li><a href="https://github.com/zheng-da/FlashX" target="_blank">Source code</a></li>
+                
+                
+                
+                <!-- entries with drop-downs appear here -->
+                <!-- conditional logic to control which topnav appears for the audience defined in the configuration file.-->
+                
+                
+			<li><a class="email" title="Submit feedback" href="#" onclick="javascript:window.location='mailto:zhengda1936@gmail.com?subject=Documentation of FlashX f eedback&body=I have some feedback about the The programming tutorials of FlashMatrix page: ' + window.location.href;"><i class="fa fa-envelope-o"></i> Feedback</a><li>
+
+		
+                <!--comment out this block if you want to hide search-->
+                <li>
+                    <!--start search-->
+                    <div id="search-demo-container">
+                        <input type="text" id="search-input" placeholder="search...">
+                        <ul id="results-container"></ul>
+                    </div>
+                    <script src="js/jekyll-search.js" type="text/javascript"></script>
+                    <script type="text/javascript">
+                            SimpleJekyllSearch.init({
+                                searchInput: document.getElementById('search-input'),
+                                resultsContainer: document.getElementById('results-container'),
+                                dataSource: 'search.json',
+                                searchResultTemplate: '<li><a href="{url}" title="The programming tutorials of FlashMatrix">{title}</a></li>',
+                    noResultsText: 'No results found.',
+                            limit: 10,
+                            fuzzy: true,
+                    })
+                    </script>
+                    <!--end search-->
+                </li>
+            </ul>
+        </div>
+        </div>
+        <!-- /.container -->
+</nav>
+
+<!-- Page Content -->
+<div class="container">
+    <div class="col-lg-12">&nbsp;</div>
+    <!-- Content Row -->
+    <div class="row">
+        <!-- Sidebar Column -->
+        <div class="col-md-3">
+
+          
+
+
+
+
+
+
+
+
+
+
+
+
+<ul id="mysidebar" class="nav">
+    <li class="sidebarTitle">Documentation of FlashX 6.0</li>
+    
+    
+    
+        
+    
+    <li>
+        <a href="#">Overview</a>
+        <ul>
+            
+            
+            
+            <li><a href="FlashX-Quick-Start-Guide.html">Get started</a></li>
+            
+            
+            
+            
+            
+            
+            <li><a href="mydoc_about.html">About the theme author</a></li>
+            
+            
+            
+            
+            
+            
+            <li><a href="mydoc_support.html">Support</a></li>
+            
+            
+            
+            
+        </ul>
+        
+        
+    
+    <li>
+        <a href="#">User Guide</a>
+        <ul>
+            
+            
+            
+            <li><a href="FlashGraph-user-guide.html">FlashGraph</a></li>
+            
+            
+            
+            
+            
+            
+            <li><a href="FlashMatrix-user-guide.html">FlashMatrix</a></li>
+            
+            
+            
+            
+        </ul>
+        
+        
+    
+    <li>
+        <a href="#">Tutorials</a>
+        <ul>
+            
+            
+            
+            <li class="active"><a href="FlashMatrix-programming-tutorial.html">FlashMatrix</a></li>
+            
+            
+            
+            
+        </ul>
+        
+        
+    
+    <li>
+        <a href="#">Contributing</a>
+        <ul>
+            
+            
+            
+            <li><a href="mydoc_pages.html">Pages</a></li>
+            
+            
+            
+            
+        </ul>
+        
+        
+    
+    <li>
+        <a href="#">API</a>
+        <ul>
+            
+            
+            
+            <li><a href="http://flashx.io/docs/html/" target="_blank">C++</a></li>
+            
+            
+            
+            
+            
+            
+            <li><a href="http://flashx.io/docs/FlashR/" target="_blank">R</a></li>
+            
+            
+            
+            
+        </ul>
+        
+        
+    
+    <li>
+        <a href="#">Troubleshooting</a>
+        <ul>
+            
+            
+            
+            <li><a href="mydoc_troubleshooting.html">Troubleshooting</a></li>
+            
+            
+            
+            
+        </ul>
+        
+        
+        
+        <!-- if you aren't using the accordion, uncomment this block:
+           <p class="external">
+               <a href="#" id="collapseAll">Collapse All</a> | <a href="#" id="expandAll">Expand All</a>
+           </p>
+           -->
+    </li>
+</ul>
+</div>
+
+<!-- this highlights the active parent class in the navgoco sidebar. this is critical so that the parent expands when you're viewing a page. This must appear below the sidebar code above. Otherwise, if placed inside customscripts.js, the script runs before the sidebar code runs and the class never gets inserted.-->
+<script>$("li.active").parents('li').toggleClass("active");</script>
+
+    <!-- Content Column -->
+    <div class="col-md-9">
+        <div class="post-header">
+   <h1 class="post-title-main">The programming tutorials of FlashMatrix</h1>
+</div>
+
+
+
+<div class="post-content">
+
+   
+    <div class="summary">The programming tutorials of FlashMatrix</div>
+   
+
+    
+    
+<!-- this handles the automatic toc. use ## for subheads to auto-generate the on-page minitoc. if you use html tags, you must supply an ID for the heading element in order for it to appear in the minitoc. -->
+<script>
+$( document ).ready(function() {
+  // Handler for .ready() called.
+
+$('#toc').toc({ minimumHeaders: 0, listType: 'ul', showSpeed: 0, headers: 'h2,h3,h4' });
+
+/* this offset helps account for the space taken up by the floating toolbar. */
+$('#toc').on('click', 'a', function() {
+  var target = $(this.getAttribute('href'))
+    , scroll_target = target.offset().top
+
+  $(window).scrollTop(scroll_target - 10);
+  return false
+})
+  
+});
+</script>
+
+<div id="toc"></div>
+
+    
+
+    
+
+    
+
+    <a target="_blank" href="https://github.com/tomjohnson1492/documentation-theme-jekyll/blob/gh-pages/pages//_pages/mydoc/FlashMatrix-programming-tutorial.html.md" class="btn btn-default githubEditButton" role="button"><i class="fa fa-github fa-lg"></i> Edit me</a>
+    
+
+    
+
+  <h1 id="examples-of-using-flashr">Examples of using FlashR</h1>
+<p>## Spectral analysis on a median-size graph
+Here shows the steps of performing spectral analysis on an undirected graph with 4,036,538 vertices and 34,681,189 edges. The graph is downloaded at <a href="http://snap.stanford.edu/data/com-LiveJournal.html">SNAP</a>. Interested users can try this example at Amazon EC2 instance (see the instructions <a href="https://github.com/icoming/FlashX/wiki/Run-FlashX-in-the-Amazon-cloud">here</a> to set up a FlashX instance) or on a local machine (see the instructions <a href="https://github.com/icoming/FlashX/wiki/FlashX-Quick-Start-Guide">here</a> to install FlashX locally).</p>
+
+<p>Download the graph.
+<code class="highlighter-rouge">
+wget http://snap.stanford.edu/data/bigdata/communities/com-lj.ungraph.txt.gz
+</code></p>
+
+<p>Load FlashR in R.
+<code class="highlighter-rouge">R
+&gt; library(FlashR)
+</code></p>
+
+<p>FlashR loads a graph in the text edge list format and constructs a FlashGraph graph automatically. FlashR is able to construct from a zipped file. The constructed graph is an undirected graph with 4,036,538 vertices and 34,681,189 edges.
+<code class="highlighter-rouge">R
+&gt; fg &lt;- fg.load.graph("./com-lj.ungraph.txt.gz", directed=FALSE)
+&gt; fg
+FlashGraph ./com-lj.ungraph.txt.gz (U): 4036538 34681189
+</code></p>
+
+<p>We compute connected components of this graph. The result shows that all vertices with edges are connected with each other, but there are 38,576 isolated vertices.
+<code class="highlighter-rouge">R
+&gt; cc &lt;- fg.clusters(fg, mode="weak")
+&gt; table(cc)
+cc
+     -1       0 
+  38576 3997962 
+</code></p>
+
+<p>We extract the largest connected component from the graph and construct a new graph with the largest connected component. The new graph has 3,997,962 vertices and 34,681,189 edges.
+```R
+&gt; tcc &lt;- table(cc)
+&gt; lccV &lt;- which(cc == as.integer(names(which(tcc == max(tcc)))))</p>
+
+<blockquote>
+  <p>lcc &lt;- fg.fetch.subgraph(fg, vertices=lccV - 1, compress=TRUE)
+lcc
+FlashGraph ./com-lj.ungraph.txt.gz-sub (U): 3997962 34681189
+```</p>
+</blockquote>
+
+<p>We compute eigenvalues of the largest connected component.
+<code class="highlighter-rouge">R
+&gt; m &lt;- fm.get.sparse.matrix(lcc)
+&gt; multiply &lt;- function(x, extra) m %*% x
+&gt; res &lt;- fm.eigen(multiply, options=list(n=dim(m)[1], nev=10))
+&gt; res$vals
+</code></p>
+
+<p>Run KMeans on the 10 eigenvectors.
+<code class="highlighter-rouge">R
+&gt; kmeans.res &lt;- fg.kmeans(as.matrix(res$vecs), k=10, max.iters=100)
+</code></p>
+
+<p>Here summaries all the computation
+<code class="highlighter-rouge">R
+library(FlashR)
+fg &lt;- fg.load.graph("./com-lj.ungraph.txt.gz", directed=FALSE)
+cc &lt;- fg.clusters(fg, mode="weak")
+tcc &lt;- table(cc)
+lccV &lt;- which(cc == as.integer(names(which(tcc == max(tcc)))))
+lcc &lt;- fg.fetch.subgraph(fg, vertices=lccV - 1, compress=TRUE)
+m &lt;- fm.get.sparse.matrix(lcc)
+multiply &lt;- function(x, extra) m %*% x
+res &lt;- fm.eigen(multiply, options=list(n=dim(m)[1], nev=10))
+kmeans.res &lt;- fg.kmeans(as.matrix(res$vecs), k=10, max.iters=100)
+</code></p>
+
+<h2 id="spectral-analysis-on-a-larger-graph">Spectral analysis on a larger graph</h2>
+<p>To compute eigenvalues of a larger graph, users may need to store the graph on SAFS. Here shows the steps of computing eigenvalues of a larger graph, which has 65,608,366 vertices and 1,806,067,135 edges. The text edge list format of the graph can be downloaded at <a href="http://snap.stanford.edu/data/com-Friendster.html">SNAP</a>.</p>
+
+<p>To perform computation on graphs stored on SAFS, users need to construct a graph in FlashGraph format and load it to SAFS in advance. We assume users have followed the steps in shown in <a href="https://github.com/icoming/FlashX/wiki/FlashX-Quick-Start-Guide">FlashX Quick Start Guide</a> to configure SAFS.</p>
+
+<p>Go to the top directory of FlashX and download the graph.
+<code class="highlighter-rouge">
+wget http://snap.stanford.edu/data/bigdata/communities/com-friendster.ungraph.txt.gz
+</code></p>
+
+<p>Use the tool <code class="highlighter-rouge">el2fg</code> to convert the edge list file in text format to the FlashGraph format. The command below creates two files <code class="highlighter-rouge">friendster.adj</code> and <code class="highlighter-rouge">friendster.index</code> and stores them to SAFS directly.
+<code class="highlighter-rouge">
+build/matrix/utils/el2fg -e run_test.txt com-friendster.ungraph.txt.gz friendster
+</code></p>
+
+<p>Initialize FlashR.
+<code class="highlighter-rouge">R
+&gt; library(FlashR)
+&gt; fg.set.conf("run_test.txt")
+</code></p>
+
+<p>List all of the graphs stored on SAFS. This function lists the names of all the graphs on SAFS. To get a graph listed by this function, the graph must have two files named with <code class="highlighter-rouge">graph_name.adj</code> and <code class="highlighter-rouge">graph_name.index</code> on SAFS.
+<code class="highlighter-rouge">R
+&gt; fg.list.graphs()
+             name in.mem
+1      friendster  FALSE
+2      page-graph  FALSE
+3   rmat-100M-160  FALSE
+4 rmat-100M-160-u  FALSE
+5    rmat-100M-40  FALSE
+6  rmat-100M-40-u  FALSE
+7     twitter-lcc  FALSE
+8            wiki  FALSE
+</code></p>
+
+<p>Get a reference to the friendster graph and then reference it as a sparse matrix. Note: the functions don’t load a graph to memory, nor converting it to a sparse matrix physically. We support sparse matrix multiplication on a graph in the FlashGraph format.
+<code class="highlighter-rouge">R
+&gt; fg &lt;- fg.get.graph("friendster")      
+&gt; m &lt;- fm.get.sparse.matrix(fg)
+</code></p>
+
+<p>Compute 10 eigenvalues of the graph with FlashEigen.
+<code class="highlighter-rouge">R
+&gt; multiply &lt;- function(x, extra) m %*% x
+&gt; res &lt;- fm.eigen(multiply, options=list(n=dim(m)[1], nev=10))
+&gt; res$vals
+ [1] 693304.9 407554.7 312981.7 272623.5 257470.4 220616.7 204678.5 184447.2
+ [9] 178047.9 177168.6
+</code></p>
+
+<p>Run KMeans on the 10 eigenvectors.
+<code class="highlighter-rouge">R
+&gt; kmeans.res &lt;- fg.kmeans(as.matrix(res$vecs), k=10)
+</code></p>
+
+
+    <div class="tags">
+        
+        <b>Tags: </b>
+        
+        
+        
+        
+        
+    </div>
+
+    
+
+</div>
+
+<hr class="shaded"/>
+
+<footer>
+            <div class="row">
+                <div class="col-lg-12 footer">
+               &copy;2016 FlashX. All rights reserved. <br />
+<span>Page last updated:</span> Nov 3, 2016<br/> Site last generated: Nov 3, 2016 <br />
+<p><img src="images/company_logo.png" alt="Company logo"/></p>
+                </div>
+            </div>
+</footer>
+
+
+    </div>
+    <!-- /.row -->
+</div>
+<!-- /.container -->
+    </div>
+
+</body>
+
+</html>
