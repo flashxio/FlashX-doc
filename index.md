@@ -1,5 +1,5 @@
 ---
-title: Documentation of the FlashX project.
+title: the FlashX Documentation
 keywords: sample homepage
 tags: [getting_started]
 sidebar: mydoc_sidebar

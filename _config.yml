@@ -2,10 +2,10 @@
 output: web
 # this property is useful for conditional filtering of content that is separate from the PDF.
 
-topnav_title: Documentation of FlashX
+topnav_title: FlashX Documentation
 # this appears on the top navigation bar next to the home button
 
-site_title: Documentation of FlashX
+site_title: FlashX Documentation
 # this appears in the html browser tab for the site title (seen mostly by search engines, not users)
 
 company_name: FlashX
@@ -28,7 +28,7 @@ exclude:
   - .gitignore
 # these are the files and directories that jekyll will exclude from the build
 
-feedback_subject_line: Documentation of FlashX
+feedback_subject_line: FlashX Documentation
 
 feedback_email: zhengda1936@gmail.com
 # used as a contact email for the Feedback link in the top navigation bar
