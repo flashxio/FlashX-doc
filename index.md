@@ -4,11 +4,11 @@ keywords: sample homepage
 tags: [getting_started]
 sidebar: mydoc_sidebar
 permalink: index.html
-summary: 
+summary:
 ---
 
 FlashX performs data analytics in the form of graphs and matrices. It runs
-in a variety of hardwares and can utilize solid-state drives (SSDs) to scale
+on a variety of hardware and can utilize solid-state drives (SSDs) to scale
 to large datasets in a single machine. It has two main components:
 
 * FlashGraph is a general-purpose programming framework with a vertex-centric
@@ -21,14 +21,15 @@ learning algorithms. It keeps matrices on SSDs to scale to very large datasets.
 
 FlashX provides the R programming interface to process datasets at a scale of
 terabytes with the speed of optimized parallel C code. It provides
-users a familiar R programming environment to express many machine learning
+users with a familiar R programming environment to express many machine learning
 algorithms completely in R.
 
 ![Architecture](http://www.cs.jhu.edu/~zhengda/FlashGraph/arch.png)
 
 ## Quick Start
 
-We provide instructions of installing FlashR, the R programming interface of FlashX, to help users install FlashR.
+We provide instructions to install FlashR, the R programming interface
+for FlashX.
 
 ### Installation
 
