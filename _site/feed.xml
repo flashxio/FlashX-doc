@@ -5,8 +5,8 @@
         <description>This provides the documentation of the FlashX project.</description>
         <link>http://localhost:4005/</link>
         <atom:link href="http://localhost:4005/feed.xml" rel="self" type="application/rss+xml"/>
-        <pubDate>Thu, 03 Nov 2016 16:33:09 -0400</pubDate>
-        <lastBuildDate>Thu, 03 Nov 2016 16:33:09 -0400</lastBuildDate>
+        <pubDate>Thu, 03 Nov 2016 16:34:35 -0400</pubDate>
+        <lastBuildDate>Thu, 03 Nov 2016 16:34:35 -0400</lastBuildDate>
         <generator>Jekyll v3.3.0</generator>
         
         <item>
