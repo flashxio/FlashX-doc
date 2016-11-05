@@ -15,8 +15,9 @@ to large datasets in a single machine. It has two main components:
 programming interface for large-scale graph analysis. FlashGraph is able to
 scale to billion-node graphs in a single machine and significantly outperforms
 state-of-art distributed graph analysis frameworks at this scale.
-* FlashMatrix is a matrix computation engine that provides a small set of
-generalized matrix operations to express varieties of data mining and machine
+* FlashMatrix is a matrix computation engine that provides generalized matrix
+operations (GenOps). FlashMatrix uses a small set of GenOps to support a large
+variety of matrix operations and express varieties of data mining and machine
 learning algorithms. It keeps matrices on SSDs to scale to very large datasets.
 
 FlashX provides the R programming interface to process datasets at a scale of
