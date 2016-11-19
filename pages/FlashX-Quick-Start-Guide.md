@@ -9,125 +9,55 @@ permalink: FlashX-Quick-Start-Guide.html
 folder: mydoc
 ---
 
-Although FlashX is designed to run on top of a high-speed SSD array, it can also run on magnetic disks and completely in memory. Intuitively, FlashX runs slower on magnetic disks than on SSDs. The guide below walks you through the steps to run FlashX on a magnetic disk and completely in memory for small graphs. In the following steps, we denote the top FlashX directory as `FG_TOP` and we assume we are in the top directory throughout this guide. The steps have been tested in Ubuntu 12.04 and Ubuntu 14.04.
+# Install FlashR
 
-# Install FlashX
+FlashR is an R package. The installation steps have been tested in Ubuntu 14.04
+and Ubuntu 16.04.
 
 ## Step 0: Library dependency
-FlashX requires the following libraries: `libpthread, libaio, libnuma, librt, boost, libhwloc, BLAS, zlib`.
+FlashR requires the following libraries: `libboost-dev, BLAS, libaio, libnuma, libhwloc`.
 Users need to install these libraries before compiling the code of FlashX.
+Among them, `libaio`, `libnuma` and `libhwloc` are optional. However, `libaio`
+is required to take advantage of SSDs to scale computation to large datasets.
+`libnuma` is required for machines with more than two processor sockets. `libhwloc`
+is required to tune FlashR automatically to achieve the best speed for a given
+hardware.
+
 In Ubuntu, we install all tools and libraries for compiling FlashX as follows:
 ```
-sudo apt-get install -y git cmake g++
-sudo apt-get install -y libboost-dev libboost-system-dev libboost-filesystem-dev libnuma-dev libaio-dev libhwloc-dev libatlas-base-dev zlib1g-dev
+sudo apt-get update
+sudo apt-get install -y g++ libboost-dev libnuma-dev libaio-dev libhwloc-dev libatlas-base-dev
 ```
 
-## Step 1: Get FlashX's source code
-Users can download FlashX's source code from [here](https://github.com/icoming/FlashX/releases) or clone it from the [github](https://github.com/icoming/FlashX.git) repository.
+## Step 1: install FlashR
 
-## Step 2: Compile FlashX
-In the top directory of FlashX, run `mkdir build; cd build; cmake ../; make` to create a new directory, enter the new directory and compile all code of FlashX. If you have multiple processing cores you may prefer to run `make -j #procs`
-
-By default, FlashEigen is disabled because it requires users to install Trilinos in advance. FlashEigen was designed to compute eigenvalues of a graph with hundreds of millions of vertices or even billions of vertices. For smaller graphs, we can use [FlashR with ARPACK](https://github.com/icoming/FlashX/wiki/Use-FlashR-with-ARPACK) to compute eigenvalues of graphs of multiple million vertices. As such, users who don't need to compute eigenvalues of very large graphs can just to Step 3.
-
-### Step 2.1 Install Trilinos (optional)
-To compile FlashX with FlashEigen, users need to install the Anasazi eigensolver in Trilinos first.
-The Trilinos packages require a Fortran compiler and a BLAS and LAPACK package.
-
-`sudo apt-get install gfortran libatlas-dev liblapack-dev`
-
-Follow the [instructions](https://trilinos.org/oldsite/TrilinosBuildQuickRef.html#configuring-makefile-generator) in Trilinos' website to compile it. Here summaries the steps:
-
-Inside the top directory of the Trilinos source code, create the following script named `do-configure`:
-```
-#!/bin/sh
-EXTRA_ARGS=$@
-SOURCE_BASE=..
-cmake \
-    -D CMAKE_BUILD_TYPE:STRING=RELEASE \
-    -D BUILD_SHARED_LIBS:BOOL=ON \
-    -D Trilinos_ENABLE_TESTS=OFF \
-    $EXTRA_ARGS \
-    ${SOURCE_BASE}
+```R
+> library(devtools)
+> install_github("flashxio/FlashR")
 ```
 
-Make the script executable.
-`chmod u+x do-configure`
+# Run FlashR.
 
-Create a directory named `build` in the top directory and compile the Trilinos source code in the build directory.
+FlashR is designed to optimize for different hardware. If FlashR is installed
+with libhwloc, it adapts itself to a regular laptop (with a single processor)
+a high-end server (with multiple processors) automatically. For a machine with
+SSDs, FlashR can utilize the SSDs to scale computation to very large datasets
+if `libaio` is installed.
+
+## Run FlashR in memory
+If we run FlashR in memory and FlashR is installed with `libhwloc`, we do not
+need to configure FlashR at all and all computation in FlashR is parallelized
+automatically.
+
+However, if FlashR is not installed with `libhwloc`, we still maximize
+the performance of FlashR by explicitly telling FlashR the number of processors
+and the number of CPU cores in the machine.
 ```
-mkdir build
-cd build/
-../do-configure -DTrilinos_ENABLE_Anasazi=ON
-make -j32
-make install
-```
-
-### Step 2.2: compile FlashX with FlashEigen (optional)
-In the top directory of FlashX, run `mkdir build; cd build; cmake -D ENABLE_TRILINOS:BOOL=ON ..; make`
-
-## Step 3: compile and install FlashR
-
-If users don't have R installed, they can follow the [instruction](https://cran.r-project.org/bin/linux/ubuntu/README) to install R in Ubuntu.
-
-`sudo apt-get install r-base-dev`
-
-FlashR requires igraph and Rcpp packages. Before installing FlashR, a user needs to install igraph, which installs the Rcpp package automatically. Users should install the latest R in order to install igraph. In the R environment, run
-
-`> install.packages("igraph")`
-
-In the top directory of FlashX, run `./install_FlashR.sh` to install FlashR. The script tests if FlashEigen is compiled in Step 2. If FlashEigen is compiled, the script will compile FlashR with FlashEigen automatically.
-
-# Install FlashX in docker
-We prepare a docker file for users to install FlashX in docker easily, by simply following the two steps below. The following docker file builds all components in FlashX but doesn't build FlashX with Trilinos.
-
-```
-git clone https://github.com/zheng-da/FlashxStuff.git
-docker build -t flashx FlashxStuff/
-```
-For default, the docker file compiles FlashX source code with 4 processes. If users' platforms have many more CPU cores, they can utilize more CPU cores to accelerate the complication of FlashX. For example, if a user's platform has 32 CPU cores, he can modify line 40 in `FlashxStuff/Dockerfile` to `RUN make -j32` before building the docker image.
-
-To run the docker image, users can simply run `docker run -t -i flashx /bin/bash`.
-
-# Run FlashGraph
-FlashGraph can run both in memory and on SSDs.
-
-## Convert a graph in edge list format to the FlashGraph format
-
-To run FlashGraph, users need to construct a graph in the FlashGraph format. We demonstrate the process with graphs from Stanford's [SNAP](http://snap.stanford.edu/data/) project. We currently require the input graph to be in **edge list text format**.
-
-Go to the top directory of FlashX and download a graph from the SNAP website.
-
-` wget http://snap.stanford.edu/data/wiki-Vote.txt.gz`
-
-FlashX provides a tool `el2fg` to convert an edge list file in text format to the graph format supported by FlashGraph.
-```
-gunzip wiki-Vote.txt.gz
-build/matrix/utils/el2fg flash-graph/conf/run_test.txt wiki-Vote.txt wiki-Vote
+fm.set.conf()
 ```
 
-This tool takes a configuration file, a graph file in text edge list and a user-specified graph name. The command above creates two files `wiki-Vote.adj` and `wiki-Vote.index`.
-For the purpose of demonstration, FlashGraph provides `flash-graph/conf/run_test.txt`. The details on the configuration file can be found [here](https://github.com/icoming/FlashGraph/wiki/FlashGraph-tutorial#flashgraph-configuration-parameters).
-
-The FlashGraph format allows one attribute for an edge. To construct a graph with edge attributes, users need to provide option `-t` to indicate the attribute type ("I" for 32-bytes integers, "L" for 64-bits integers, "F" for single-precision floating point, "D" for double-precision floating point). The command below shows an example of converting a graph with integer edge attributes.
-```
-build/matrix/utils/el2fg flash-graph/conf/run_test.txt graph_edgelist.txt graph_name -t I
-```
-
-## Run FlashGraph in the standalone mode
-Although FlashGraph is designed to work with SAFS, it can also run in the standalone mode. In this mode, FlashGraph loads graphs in memory and perform computation on the in-memory graphs. This is the simplest setup for FlashGraph. This mode detects the number of CPU cores and runs in parallel automatically.
-
-FlashGraph provides a few built-in graph algorithm implementations. Users can run these implementations in flash-graph/test-algs/test_algs. test_algs takes three arguments: a FlashGraph config file, a graph file of the FlashGraph format and an index file for the graph file from the local Linux filesystem.
-For example, the command below runs WCC (weakly connected components) on the wiki graph.
-```
-build/flash-graph/test-algs/test_algs flash-graph/conf/run_test.txt wiki-Vote.adj wiki-Vote.index wcc
-...
-There are 1183 empty vertices
-There are 24 components (exclude empty vertices), and largest comp has 7066 vertices
-```
-
-## Run FlashGraph with SAFS.
-FlashGraph is designed to run with SAFS, so that it can run on top of an SSD array. When running FlashGraph with SAFS, we get the full power of FlashGraph. It requires us to configure SAFS properly.
+## Run FlashR with SSDs.
+To run FlashR with SSDs, it is mandatory to install FlashR with `libaio`.
 
 ### Step 1: Configure SAFS
 It is fairly simple to configure SAFS for a small SSD array in an SMP machine. Users only need to mount the SSDs, create data directories on SSDs and inform SAFS of the paths to the data directories. It becomes more complex to configure SAFS for a large SSD array in a NUMA machine, where we need to take processor affinity into account to maximize the performance of the SSD array. SAFS also provides a script to automate the process. To achieve the maximal performance from an SSD array, we refer users to [SAFS configurations](https://github.com/zheng-da/FlashX/wiki/SAFS-user-manual#configurations) for more details.
@@ -149,37 +79,10 @@ mkdir flash-graph/data
 
 **NOTE: users should never manually create files or directories in the data directories where SAFS runs.** Instead, users should always use `SAFS-util` to operate on SAFS.
 
-### Step 2: Load graph files to SAFS
-We need to load a graph to SAFS before we run FlashGraph.
-
-If a user has a graph in the FlashGraph format, we load a file from a Linux filesystem to SAFS with `SAFS-util`. The following commands load the wiki-Vote graph to SAFS. When loading graph files to SAFS, the recommended naming convention is that for a graph named `graph_name`, the graph file should be named with `graph_name.adj` and the index file should be named with `graph_name.index`. This naming convention is important when users run FlashGraph in R.
-```
-build/utils/SAFS-util flash-graph/conf/run_test.txt load wiki-Vote.adj wiki-Vote.adj
-build/utils/SAFS-util flash-graph/conf/run_test.txt load wiki-Vote.index wiki-Vote.index
-```
-
-If a user has a graph in the text format, we can construct a graph and store it on SAFS directly with `el2al`.
-```
-build/matrix/utils/el2fg -e flash-graph/conf/run_test.txt wiki-Vote.txt wiki-Vote
+### Step 2: Load data to SSDs
 ```
 
 ### Step 3: Run graph algorithms
-The command below demonstrates how to run PageRank on wiki-Vote.
-```
-build/flash-graph/test-algs/test_algs flash-graph/conf/run_test.txt wiki-Vote.adj wiki-Vote.index pagerank2
-...
-The sum of pagerank of all vertices: 3146.831787
-v5254: 6.384571
-v7553: 6.444084
-v4191: 6.734981
-v2237: 7.413904
-v2470: 7.496633
-v2398: 7.745999
-v2625: 9.750073
-v6634: 10.646951
-v15: 10.923159
-v4037: 13.684291
-```
 
 # Run FlashR
 FlashR contains functions that call graph algorithms in FlashGraph, the eigensolvers in FlashEigen and matrix operations in FlashMatrix.
