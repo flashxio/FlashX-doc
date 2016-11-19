@@ -30,6 +30,9 @@ sudo apt-get install -y g++ libboost-dev libnuma-dev libaio-dev libhwloc-dev lib
 ```
 
 ## Step 1: install FlashR
+Currently, FlashR is uploaded to a [Github](https://github.com/flashxio/FlashR) repo.
+We can install FlashR in R with [devtools](https://cran.r-project.org/web/packages/devtools/index.html)
+as follows.
 
 ```R
 > library(devtools)
@@ -39,8 +42,9 @@ sudo apt-get install -y g++ libboost-dev libnuma-dev libaio-dev libhwloc-dev lib
 # Run FlashR.
 
 FlashR is designed to optimize for different hardware. If FlashR is installed
-with libhwloc, it adapts itself to a regular laptop (with a single processor)
-a high-end server (with multiple processors) automatically. For a machine with
+with `libhwloc`, it adapts itself to different hardware automatically, from
+a regular laptop (with a single processor) to a high-end server (with multiple
+processors). For a machine with
 SSDs, FlashR can utilize the SSDs to scale computation to very large datasets
 if `libaio` is installed.
 
@@ -51,9 +55,10 @@ automatically.
 
 However, if FlashR is not installed with `libhwloc`, we still maximize
 the performance of FlashR by explicitly telling FlashR the number of processors
-and the number of CPU cores in the machine.
-```
-fm.set.conf()
+and the number of CPU cores in the machine. We can configure FlashR with
+`fm.set.conf` as follows, by passing a configuration file.
+```R
+> fm.set.conf("path/to/conf/file")
 ```
 
 ## Run FlashR with SSDs.
