@@ -25,10 +25,9 @@ hardware.
 
 In Ubuntu, we install all tools and libraries for compiling FlashX as follows:
 
-```
-sudo apt-get update
-
-sudo apt-get install -y g++ libboost-dev libnuma-dev libaio-dev libhwloc-dev libatlas-base-dev
+```shell
+$ sudo apt-get update
+$ sudo apt-get install -y g++ libboost-dev libnuma-dev libaio-dev libhwloc-dev libatlas-base-dev
 ```
 
 ### Step 1: install FlashR
