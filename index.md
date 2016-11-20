@@ -27,7 +27,7 @@ algorithms completely in R.
 
 ![Architecture](https://flashxio.github.io/FlashX-doc/images/flashmatrix.png)
 
-## Quick Start
+## [Quick Start](https://flashxio.github.io/FlashX-doc/FlashX-Quick-Start-Guide.html)
 
 We provide instructions of installing FlashR, the R programming interface of FlashX, to help users install FlashR.
 
