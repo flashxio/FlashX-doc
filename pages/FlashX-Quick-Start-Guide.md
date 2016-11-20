@@ -76,6 +76,6 @@ connected with a RAID controller, we can create a directory on the SSD(s),
 and give the path to `root_conf`. Please check [here]() for more advanced configuration
 of a large SSD array on a large parallel machine.
 
-** NOTE: to run FlashR with SSDs, it is mandatory to install FlashR with `libaio`.**
+**NOTE: to run FlashR with SSDs, it is mandatory to install FlashR with `libaio`.**
 
 ### Run an example in FlashR
