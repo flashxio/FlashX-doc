@@ -55,8 +55,14 @@ automatically.
 
 However, if FlashR is not installed with `libhwloc`, we still maximize
 the performance of FlashR by explicitly telling FlashR the number of processors
-and the number of CPU cores in the machine. We can configure FlashR with
+and the number of CPU cores in a machine. We can configure FlashR with
 `fm.set.conf` as follows, by passing a configuration file.
+[Here](https://github.com/flashxio/FlashX/blob/dev-zd/matrix/conf/run_test.txt)
+shows an example of the configuration file. To set the number of processors and
+the number of threads, the important parameters here are `num_nodes` and `num_threads`.
+For example, a machine with 4 processors and each with 12 CPU cores, we should
+set `num_nodes=4` and `num_threads=48`.
+
 ```R
 > fm.set.conf("path/to/conf/file")
 ```
