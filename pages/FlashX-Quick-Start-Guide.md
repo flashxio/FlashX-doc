@@ -129,6 +129,20 @@ fm.rmvnorm <- function (n, mean = rep(0, nrow(sigma)), sigma = diag(length(mean)
     # , byrow = !pre0.9_9994
     retval <- sweep(retval, 2, mean, "+")
     colnames(retval) <- names(mean)
-    fm.materialize(retval)
+    retval
 }
+
+mat1 <- fm.rmvnorm(1000000, runif(10), in.mem = TRUE)
+mat2 <- fm.rmvnorm(1000000, runif(10), in.mem = TRUE)
+mat3 <- fm.rmvnorm(1000000, runif(10), in.mem = TRUE)
+mat4 <- fm.rmvnorm(1000000, runif(10), in.mem = TRUE)
+mat5 <- fm.rmvnorm(1000000, runif(10), in.mem = TRUE)
+mat6 <- fm.rmvnorm(1000000, runif(10), in.mem = TRUE)
+mat7 <- fm.rmvnorm(1000000, runif(10), in.mem = TRUE)
+mat8 <- fm.rmvnorm(1000000, runif(10), in.mem = TRUE)
+mat9 <- fm.rmvnorm(1000000, runif(10), in.mem = TRUE)
+mat10 <- fm.rmvnorm(1000000, runif(10), in.mem = TRUE)
+
+mat <- fm.rbind(mat1, mat2, mat3, mat4, mat5, mat6, mat7, mat8, mat9, mat10)
+res <- fm.KMeans(mat, 10)
 ```
