@@ -29,15 +29,12 @@ algorithms completely in R.
 
 ## [Quick Start](https://flashxio.github.io/FlashX-doc/FlashX-Quick-Start-Guide.html)
 
-We provide instructions of installing FlashR, the R programming interface of FlashX, to help users install FlashR.
-
-### Installation
-
-### A simple example of using FlashR
+We provide instructions of installing FlashR, an R package that provides R bindings
+for FlashX, and some simple examples of using FlashR for computation.
 
 ## User Guide
 
-This lists all of the functions.
+This documentation provides detailed description of the FlashR functions.
 
 ## Tutorials
 
