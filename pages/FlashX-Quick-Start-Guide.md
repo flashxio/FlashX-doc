@@ -69,75 +69,13 @@ set `num_nodes=4` and `num_threads=48`.
 ```
 
 ### Run FlashR with SSDs.
-To run FlashR with SSDs, it is mandatory to install FlashR with `libaio`.
+To run FlashR with SSDs, we need to specify the data directories for FlashR
+with `root_conf` in the configuration file. `root_conf` accepts the path to
+a text file or to a directory. If a machine has only one SSD or multiple SSDs
+connected with a RAID controller, we can create a directory on the SSD(s),
+and give the path to `root_conf`. Please check [here]() for more advanced configuration
+of a large SSD array on a large parallel machine.
 
-It is fairly simple to configure SAFS for a small SSD array in an SMP machine. Users only need to mount the SSDs, create data directories on SSDs and inform SAFS of the paths to the data directories. It becomes more complex to configure SAFS for a large SSD array in a NUMA machine, where we need to take processor affinity into account to maximize the performance of the SSD array. SAFS also provides a script to automate the process. To achieve the maximal performance from an SSD array, we refer users to [SAFS configurations](https://github.com/zheng-da/FlashX/wiki/SAFS-user-manual#configurations) for more details.
+** NOTE: to run FlashR with SSDs, it is mandatory to install FlashR with `libaio`.**
 
-To run SAFS, users need to provide a data config file that indicates the paths of the data directories of SAFS. Users need to set up the SAFS parameter `root_conf` to specify the data config file. For example, if a user has two SSDs, mounted in `/mnt/ssd1` and `/mnt/ssd2`, respectively. The data config file contains two lines:
-```
-0:/mnt/ssd1
-0:/mnt/ssd2
-```
-The number before ":" indicates the NUMA node Id where the SSD is attached to. For an SMP machine, the node Id is always 0.
-
-To run FlashGraph with SAFS, we need to specify `root_conf` in the FlashGraph config file.
-For the purpose of demonstration, FlashGraph provides `run_test.txt` (FlashGraph config file) and `data_files.txt` (data config file) in `flash-graph/conf/`. `data_files.txt` specifies the directory where SAFS runs. Replace `FG_TOP` in the two config files with the location of the top directory of FlashGraph.
-
-Users have to make sure the directories in the data config file have been created. For example, if users use the example data config file `flash-graph/conf/data_files.txt`, they have to create `flash-graph/data` first.
-```
-mkdir flash-graph/data
-```
-
-**NOTE: users should never manually create files or directories in the data directories where SAFS runs.** Instead, users should always use `SAFS-util` to operate on SAFS.
-
-## Compute eigenvalues in FlashR
-There are two ways of computing eigenvalues on a large sparse graph. Users can compute eigenvalues with FlashEigen in FlashR if FlashEigen is installed. Otherwise, users can compute eigenvalues with ARPACK and FlashR for relatively smaller graphs (millions of vertices).
-
-### Construct a sparse matrix
-FlashX provides a tool called `fg2fm` to construct a sparse matrix image from a FlashGraph image. Currently, this is the only way of constructing a sparse matrix for FlashR.
-```
-build/matrix/utils/fg2fm matrix/conf/run_test.txt ./wiki-Vote.adj ./wiki-Vote.index wiki
-```
-The wiki graph is directed, so `fg2fm` outputs four files.
-```
-$ ls wiki*
-wiki.mat  wiki.mat_idx  wiki_t.mat  wiki_t.mat_idx
-```
-
-### Load a sparse matrix in FlashR
-There are multiple ways of loading a sparse matrix in FlashR.
-* Users can load a graph image in FlashGraph format and get a sparse matrix.
-```R
-> g <- fg.load.graph("./wiki-Vote.adj", "./wiki-Vote.index")
-> m <- fm.get.matrix(g)
-```
-* Users can load a sparse matrix image directly.
-```R
-> m <- fm.load.matrix("./wiki.mat", "./wiki.mat_idx", "./wiki_t.mat", "./wiki_t.mat_idx")
-```
-
-### Run FlashEigen
-`fm.eigen` is the R wrapper of FlashEigen. It is designed to have a very similar interface to ARPACK in iGraph. Below shows an example of using `fm.eigen` to compute SVD on the asymmetric matrix. Currently, FlashEigen only supports computing eigenvalues on symmetric matrices.
-```R
-> library(FlashR)
-> fg.set.conf("matrix/conf/run_test.txt")
-> m <- fm.load.matrix("wiki.mat", "wiki.mat_idx", "wiki_t.mat", "wiki_t.mat_idx")
-> multiply <- function(x, extra) t(m) %*% (m %*% x)
-> res <- fm.eigen(multiply, options=list(n=dim(m)[1], nev=10))
-> res$vals
- [1] 10647.6830  4489.1724  2999.1288  2272.7854  1608.5572  1285.5764
- [7]  1149.1096   921.1726   826.9480   758.7215
-```
-
-### Run FlashR + ARPACK
-To compute eigenvalues with ARPACK and FlashR,
-```R
-> library(FlashR)
-> fg.set.conf("matrix/conf/run_test.txt")
-> m <- fm.load.matrix("wiki.mat", "wiki.mat_idx", "wiki_t.mat", "wiki_t.mat_idx")
-> multiply <- function(x, extra) as.vector(t(m) %*% (m %*% fm.as.vector(x)))
-> res <- arpack(multiply, sym=TRUE, options=list(n=nrow(m), nev=10, ncv=20))
-> res$values
- [1] 10647.6830  4489.1724  2999.1288  2272.7854  1608.5572  1285.5764
- [7]  1149.1096   921.1726   826.9480   758.7215
-```
+### Run an example in FlashR
