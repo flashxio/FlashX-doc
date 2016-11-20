@@ -70,7 +70,9 @@ set `num_nodes=4` and `num_threads=48`.
 
 ### Run FlashR with SSDs.
 To run FlashR with SSDs, we need to specify the data directories for FlashR
-with `root_conf` in the configuration file. `root_conf` accepts the path to
+with `root_conf` in the configuration file as above (see an [example config file]
+(https://github.com/flashxio/FlashX/blob/dev-zd/matrix/conf/run_test.txt)).
+`root_conf` accepts the path to
 a text file or to a directory. If a machine has only one SSD or multiple SSDs
 connected with a RAID controller, we can create a directory on the SSD(s),
 and give the path to `root_conf`. Please check [here]() for more advanced configuration
