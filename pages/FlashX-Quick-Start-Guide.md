@@ -75,7 +75,11 @@ with `root_conf` in the configuration file as above (see an [example config file
 `root_conf` accepts the path to
 a text file or to a directory. If a machine has only one SSD or multiple SSDs
 connected with a RAID controller, we can create a directory on the SSD(s),
-and give the path to `root_conf`. Please check [here]() for more advanced configuration
+and give the path to `root_conf`. For example, if the SSDs are mounted on
+`/mnt/ssd` and we want to store FlashR data in `/mnt/ssd/FlashR_data`, we set
+`root_conf=/mnt/ssd/FlashR_data`.
+
+Please check [here]() for more advanced configuration
 of a large SSD array on a large parallel machine.
 
 **NOTE: to run FlashR with SSDs, it is mandatory to install FlashR with `libaio`.**
