@@ -32,7 +32,7 @@ algorithms completely in R.
 We provide instructions of installing FlashR, an R package that provides R bindings
 for FlashX, and some simple examples of using FlashR for computation.
 
-## User Guide
+## [User Guide](https://flashxio.github.io/FlashX-doc/FlashMatrix-user-guide.html)
 
 This documentation provides detailed description of the FlashR functions.
 
