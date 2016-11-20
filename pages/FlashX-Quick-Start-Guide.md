@@ -87,7 +87,8 @@ of a large SSD array on a large parallel machine.
 ### Run an example in FlashR
 FlashR implements the existing R matrix functions. As such, we can run existing
 R code with little modification. Here we show an example of creating a mixture
-of multivariant Gaussian and running k-means on it.
+of multivariant Gaussian and running
+[k-means](https://github.com/flashxio/FlashX/blob/release/Rpkg/R/KMeans.R) on it.
 
 First, we create `fm.rmvnorm`, adapted from
 [mvtnorm](https://cran.r-project.org/web/packages/mvtnorm/index.html)
