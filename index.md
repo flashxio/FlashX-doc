@@ -25,7 +25,7 @@ terabytes with the speed of optimized parallel C code. It provides
 users a familiar R programming environment to express many machine learning
 algorithms completely in R.
 
-![Architecture](http://www.cs.jhu.edu/~zhengda/FlashGraph/arch.png)
+![Architecture](https://flashxio.github.io/FlashX-doc/images/flashmatrix.png)
 
 ## Quick Start
 
