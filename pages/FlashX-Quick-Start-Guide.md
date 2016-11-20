@@ -46,6 +46,11 @@ and
 > install.packages("devtools")
 ```
 
+NOTE: the current `devtools` package has a bug in the low-version R framework.
+Ubuntu 14.04 users should follow the instructions
+[here](https://www.digitalocean.com/community/tutorials/how-to-set-up-r-on-ubuntu-14-04)
+to upgrade the R framework before installing `devtools`.
+
 ### Step 1: install FlashR
 Currently, FlashR is uploaded to a [Github](https://github.com/flashxio/FlashR) repo.
 We can install FlashR in R with [devtools](https://cran.r-project.org/web/packages/devtools/index.html)
