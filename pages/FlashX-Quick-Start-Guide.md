@@ -86,12 +86,13 @@ of a large SSD array on a large parallel machine.
 
 ### Run an example in FlashR
 FlashR implements the existing R matrix functions. As such, we can run existing
-R code with little modification. Here we should an example of creating a mixture
+R code with little modification. Here we show an example of creating a mixture
 of multivariant Gaussian and running k-means on it.
 
 First, we create `fm.rmvnorm`, adapted from
 [mvtnorm](https://cran.r-project.org/web/packages/mvtnorm/index.html)
-to create multivariant normal distribution.
+to create multivariant normal distribution and use it to create 10 distributions
+with different means. Then we combine the 10 datasets and run k-means on it.
 
 ```R
 fm.rmvnorm <- function (n, mean = rep(0, nrow(sigma)), sigma = diag(length(mean)),
