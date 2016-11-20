@@ -33,8 +33,8 @@ $ sudo apt install -y r-base-core
 $ sudo apt-get install -y libnuma-dev libaio-dev libhwloc-dev
 ```
 
-We rely on `devtools` to install the FlashR package in R. Users who do not
-have `devtools` can install FlashR as follows:
+We rely on `devtools` to install the FlashR package in R. Users can install
+`devtools` as follows:
 
 ```shell
 $ sudo apt-get install libcurl4-openssl-dev libssl-dev
