@@ -28,6 +28,20 @@ In Ubuntu, we install all tools and libraries for compiling FlashX as follows:
 ```shell
 $ sudo apt-get update
 $ sudo apt-get install -y g++ libboost-dev libnuma-dev libaio-dev libhwloc-dev libatlas-base-dev
+$ sudo apt install r-base-core
+```
+
+We rely on `devtools` to install the FlashR package in R. Users who do not
+have `devtools` can install FlashR as follows:
+
+```shell
+$ sudo apt-get install libcurl4-openssl-dev libssl-dev
+```
+
+and
+
+```R
+> install.packages("devtools")
 ```
 
 ### Step 1: install FlashR
