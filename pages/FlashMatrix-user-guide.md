@@ -22,15 +22,19 @@ Users can follow the [instructions](https://flashxio.github.io/FlashX-doc/FlashX
 
 ## Construct FlashR vectors and matrices
 
-FlashR provides a set of functions to generate FlashR vectors and matrices. These functions have very similar interface as the R counterparts that generate vectors and matrices.
+FlashR provides a set of functions to generate FlashR vectors and matrices. These functions have similar interface to the R counterparts.
+
+The following functions generate a FlashR vector:
 * `fm.rep.int`: Create a vector with replicated elements. e.g., `fm.rep.int(1, 10)` creates a FlashR vector with 10 elements and each element is 1.
 * `fm.seq.int`: Create a vector with a sequence of numbers. e.g., `fm.seq.int(1, 10, 1)` creates a FlashR vector with a sequence of numbers between [1:10].
-* `fm.seq.matrix`
-* `fm.runif`: Create a vector with uniformly random numbers. e.g., `fm.runif(10, 0, 1)` creates a FlashR vector with 10 uniformly random values between 0 and 1.
-* `fm.runif.matrix`
-* `fm.rnorm`
-* `fm.rnorm.matrix`
+* `fm.runif`: Create a vector with uniformly random numbers. e.g., `fm.runif(10, 0, 1, in.mem=TRUE)` creates a FlashR vector with 10 uniformly random values between 0 and 1, stored in memory. `in.mem` instructs FlashR to store data in memory or on disks.
+* `fm.rnorm`: Create a vector under normal distribution. e.g., `fm.rnorm(10, 0, 1, in.mem=TRUE)` creates a FlashR vector with 10 random values following normal distribution with mean 0 and standard deviation 1 and stores data in memory. Like the one in `fm.runif`, `in.mem` instructs FlashR to store data in memory or on disks.
+
 * `fm.matrix`: Create a matrix from a FlashR vector. e.g., `fm.matrix(vec, 10, 2)` creates a 10x2 FlashR matrix from a FlashR vector.
+* `fm.seq.matrix`
+* `fm.runif.matrix`
+* `fm.rnorm.matrix`
+
 * `fm.load.dense.matrix`
 * `fm.load.dense.matrix.bin`
 * `fm.load.sparse.matrix`
