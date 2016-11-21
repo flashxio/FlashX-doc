@@ -26,11 +26,11 @@ hardware.
 In Ubuntu, we install all tools and libraries for compiling FlashX as follows:
 
 ```shell
-$ sudo apt-get update
-$ sudo apt-get install -y g++ libboost-dev libatlas-base-dev
-$ sudo apt-get install -y r-base-core
+sudo apt-get update
+sudo apt-get install -y g++ libboost-dev libatlas-base-dev
+sudo apt-get install -y r-base-core
 # This is optional
-$ sudo apt-get install -y libnuma-dev libaio-dev libhwloc-dev
+sudo apt-get install -y libnuma-dev libaio-dev libhwloc-dev
 ```
 
 We rely on `devtools` to install the FlashR package in R. Users can install
