@@ -9,20 +9,13 @@ permalink: FlashMatrix-user-guide.html
 folder: mydoc
 ---
 
-# FlashR programming tutorial
-FlashR is an extension of the R programming framework. It executes R code in parallel automatically and stores and accesses arrays in the R code on disks automatically to scale R to large datasets that can't fit in memory. The core of FlashR is a small set of generalized operators to perform computation in an array-oriented fashion. In addition to the generalized operators, FlashR reimplements many commonly used R functions to provide users a familiar R programming environment to reduce the learning curve. FlashR is completely implemented as an R package.
+FlashR extends the R programming framework for large-scale data analysis. It executes R code in parallel automatically and utilizes disks to scale R to large datasets. The core of FlashR is a small set of generalized matrix operations to perform computation in an array-oriented fashion. In addition, FlashR reimplements many commonly used R functions in the [base](https://stat.ethz.ch/R-manual/R-devel/library/base/html/00Index.html) and [stats](https://stat.ethz.ch/R-manual/R-devel/library/stats/html/00Index.html) packages to provide users a familiar R programming environment to reduce the learning curve. FlashR is completely implemented as an R package.
 
-FlashR is designed with goals in four aspects:
-* Efficiency: Comparable to optimized C code.
-* Scalability: Tera-scale or larger.
-* Generality: as many applications as possible in data mining and machine learning and more.
-* Productivity: the same productivity as R.
-
-Although FlashR tries to provide a familiar environment for R users, some operations in the traditional R are not supported in FlashR. The biggest difference is that FlashR does not allow users to modify individual elements in a vector or a matrix. FlashR intentionally chooses so for the sake of performance. FlashR stores vectors and matrices on SSDs. Modifying individual elements results in read-modify-write to SSDs, which causes many small random I/O. It causes efficiency issues and these operations are harmful to SSDs. By forbidding modifying individual elements, FlashR advocates array-oriented programming to achieve superior efficiency.
+Although FlashR tries to provide a familiar environment for R users, some operations in the R framework are not supported in FlashR. The biggest difference is that FlashR does not allow users to modify individual elements in a vector or a matrix. FlashR intentionally chooses so for the sake of performance. FlashR stores vectors and matrices on SSDs. Modifying individual elements results in read-modify-write to SSDs, which causes many small random I/O. It causes efficiency issues and these operations are harmful to SSDs. By forbidding modifying individual elements, FlashR advocates array-oriented programming to achieve superior efficiency.
 
 ## How to start
 
-Users can follow the [instructions](https://github.com/icoming/FlashX/wiki/FlashX-Quick-Start-Guide) to install FlashR in Ubuntu. To load FlashR to R, run
+Users can follow the [instructions](https://flashxio.github.io/FlashX-doc/FlashX-Quick-Start-Guide.html) to install FlashR in Ubuntu. To load FlashR to R, run
 ```
 > library(FlashR)
 ```
@@ -32,8 +25,15 @@ Users can follow the [instructions](https://github.com/icoming/FlashX/wiki/Flash
 FlashR provides a set of functions to generate FlashR vectors and matrices. These functions have very similar interface as the R counterparts that generate vectors and matrices.
 * `fm.rep.int`: Create a vector with replicated elements. e.g., `fm.rep.int(1, 10)` creates a FlashR vector with 10 elements and each element is 1.
 * `fm.seq.int`: Create a vector with a sequence of numbers. e.g., `fm.seq.int(1, 10, 1)` creates a FlashR vector with a sequence of numbers between [1:10].
+* `fm.seq.matrix`
 * `fm.runif`: Create a vector with uniformly random numbers. e.g., `fm.runif(10, 0, 1)` creates a FlashR vector with 10 uniformly random values between 0 and 1.
+* `fm.runif.matrix`
+* `fm.rnorm`
+* `fm.rnorm.matrix`
 * `fm.matrix`: Create a matrix from a FlashR vector. e.g., `fm.matrix(vec, 10, 2)` creates a 10x2 FlashR matrix from a FlashR vector.
+* `fm.load.dense.matrix`
+* `fm.load.dense.matrix.bin`
+* `fm.load.sparse.matrix`
 
 FlashR also provides functions to access vectors and matrices from the filesystem.
 * `fm.read.obj`: Read a FlashR object (vector/matrix) from a Linux file.
@@ -44,8 +44,11 @@ FlashR also provides functions to access vectors and matrices from the filesyste
 FlashR also provides functions to interact with the original R system.
 * `fm.as.vector`: convert an R vector to a FlashR vector.
 * `fm.as.matrix`: convert an R matrix to a FlashR matrix.
+* `fm.as.factor`
 * `as.vector`: convert a FlashR vector to a R vector.
 * `as.matrix`: convert a FlashR matrix to a R matrix.
+* `fm.conv.FM2R`
+* `fm.conv.R2FM`
 
 FlashR has the following functions for users to test if an object is a FlashR vector or matrix.
 * `fm.is.vector`: test if an object is a FlashR vector.
@@ -76,6 +79,10 @@ fm.mapply2(o1, o2, FUN)
 fm.mapply.row(o1, o2, FUN)
 fm.mapply.col(o1, o2, FUN)
 ```
+
+`fm.multiply`
+
+lazy evaluation.
 
 Many matrix operations in FlashR are implemented with `fm.sapply` and `fm.mapply2`.
 Example 1: compute m1 + m2
@@ -112,6 +119,24 @@ fm.groupby(fm, margin, factor, FUN)
 
 In practice, groupby requires an aggregation operation over some of the original elements in a group and combine operation over the aggregation results. The reason is that groupby runs in parallel and each time it can only aggregate over some of the elements in a group. Essentially, the combine operation is an aggregation. Usually, it is sufficient to pass a UDO to a groupby function because a UDO can work as both aggregation and combine. In some cases, however, we need these operations to be different. As such, users can pass an aggregation operator to groupby. A user can create an aggregation operator themselves by calling fm.create.agg.op() and specify two UDOs for the aggregation and combine operation.
 fm.create.agg.op(agg, combine, name)
+
+## FlashR object information
+
+* `fm.is.sym`
+
+* `fm.matrix.layout`
+
+* `fm.is.sparse`
+
+* `fm.is.sink`
+
+* `fm.in.mem`
+
+## FlashR configuration
+
+* `fm.print.features`
+
+* `fm.set.conf`
 
 ## "Base" R functions
 
