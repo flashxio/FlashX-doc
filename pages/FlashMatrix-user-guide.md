@@ -16,7 +16,8 @@ Although FlashR tries to provide a familiar environment for R users, some operat
 ## How to start
 
 Users can follow the [instructions](https://flashxio.github.io/FlashX-doc/FlashX-Quick-Start-Guide.html) to install FlashR in Ubuntu. To load FlashR to R, run
-```
+
+```R
 > library(FlashR)
 ```
 
@@ -50,20 +51,20 @@ FlashR also provides functions to interact with the original R system.
 
 * `fm.as.vector`: convert an R vector/matrix and a FlashR matrix to a FlashR vector. The current implementation only supports converting from a one-column FlashR matrix to a FlashR vector.
 * `fm.as.matrix`: convert an R vector/matrix and a FlashR vector to a FlashR matrix. A vector is converted into a one-column matrix.
-* `fm.as.factor`: 
-* `as.vector`: convert a FlashR vector to a R vector.
-* `as.matrix`: convert a FlashR matrix to a R matrix.
-* `fm.conv.FM2R`: 
-* `fm.conv.R2FM`: 
+* `fm.as.factor`: convert a FlashR vector to a factor vector. By default, this function determines the number of levels in the factor vector automatically. If the input vector stores integers, users can also provide a maximal number of levels. Right now, FlashR factor vectors are used by `fm.sgroupby` and `fm.groupby`.
+* `as.vector`: convert a FlashR vector/matrix to a R vector.
+* `as.matrix`: convert a FlashR vector/matrix to a R matrix.
+* `fm.conv.FM2R`: convert a FlashR vector or matrix to an R vector or matrix respectively.
+* `fm.conv.R2FM`: convert an R vector or matrix to a FlashR vector or matrix respectively.
 
-FlashR has the following functions for users to test if an object is a FlashR vector or matrix.
+FlashR has the following functions to test if an object is a FlashR vector or matrix.
 
 * `fm.is.vector`: test if an object is a FlashR vector.
 * `fm.is.matrix`: test if an object is a FlashR matrix.
 
 ## "Base" R functions
 
-FlashR implements many R functions in the base package to mimic the R programming environment. Although we have a goal of having these functions as similar as possible to the original R functions, we do not provide 100% compatibility with the original R version for some functions. Overall, we try to provide similarity under the condition of not sacrificing performance. Below shows a list of R functions in the base package currently supported by FlashR. In the future, more functions will be provided.
+FlashR implements many R functions in the base package to mimic the existing R programming environment. Although we have a goal of having these functions as similar as possible to the original R functions, we do not provide 100% compatibility with the original R version for some functions for the sake of performance. Below shows a list of R functions in the base package currently supported by FlashR. More functions will be provided in the future.
 
 The following functions have exactly the same interface as the original R function.
 
@@ -170,6 +171,10 @@ fm.create.agg.op(agg, combine, name)
 
 * `fm.print.features`
 * `fm.set.conf`
+
+## Lazy evaluation and matrix materialization
+
+FlashR gains performance by lazily evaluating most of the matrix operations and merging them into a single execution. As such, most of the matrices output from a matrix operation do not contain actual computation results. By default, only the operations that output an R scalar value perform actual computation when the function is called. The computation can also be triggered when a user wants to convert FlashR vectors/matrices to R vectors/matrices. Users can also explicitly force FlashR to perform computation by invoking `fm.materialize` and `fm.materialize.list`. In addition, users can set a flag on a matrix to notify FlashR to save the materialized results.
 
 ## Some examples of using FlashR
 
