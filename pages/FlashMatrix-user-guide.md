@@ -73,15 +73,19 @@ The following functions have exactly the same interface as the original R functi
 * element-wise unary: `abs`, `sqrt`, `ceiling`, `floor`, `round`, `log`, `log2`, `log10`, `exp`, `!`, `-`
 * inner product: `%*%`, `crossprod`, `tcrossprod`
 * aggregation: `sum`, `min`, `max`, `range`, `all`, `any`, `mean`, `rowSums`, `colSums`, `rowMeans`, `colMeans`, `sd`, `cov`, `cov.wt`
+* type cast: `as.integer`, `as.numeric`
+* extract element: `[`, `head`, `tail`
 
-Many binary operations have exactly the same interface as the original R functions. When they are applied to a matrix and a vector, it requires the vector has the same length as the columns in the matrix.
+Many operations have exactly the same interface as the original R functions but perform computation slightly differently in certain cases.
 
-* `+, -, *, /, pmin, pmax, `==, !=, >, >=, <, <=, |, &, sweep`
+* binary operations: `+`, `-`, `*`, `/`, `^`, `==`, `!=`, `>`, `>=`, `<`, `<=`, `|`, `&`. When they are applied to a matrix and a vector, it requires the vector has the same length as the columns of the matrix.
+* `sweep`
+* `print`
+* `pmin`, `pmax`. In addtion, we createpmin2, pmax2
 
 Some of them have slightly different interface and semantics. These slightly different functions always start with "fm." to indicate that they are actually FlashR functions. In the future, we will provide implementations with exactly the same interface and semantics as the original R functions.
 
 * `fm.table`
-* `fm.as.integer, fm.as.numeric`
 
 ## Generalized operators
 
