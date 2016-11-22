@@ -46,7 +46,7 @@ and
 > install.packages("devtools")
 ```
 
-NOTE: the current `devtools` package has a bug in the low-version R framework.
+**NOTE**: the current `devtools` package has a bug in the low-version R framework.
 Ubuntu 14.04 users should follow the instructions
 [here](https://www.digitalocean.com/community/tutorials/how-to-set-up-r-on-ubuntu-14-04)
 to upgrade the R framework before installing `devtools`.
@@ -91,8 +91,8 @@ set `num_nodes=4` and `num_threads=48`.
 
 ### Run FlashR with SSDs.
 To run FlashR with SSDs, we need to specify the data directories for FlashR
-with `root_conf` in the configuration file as above (see an [example config file]
-(https://github.com/flashxio/FlashX/blob/dev-zd/matrix/conf/run_test.txt)).
+with `root_conf` in the configuration file as above (see an
+[example config file](https://github.com/flashxio/FlashX/blob/dev-zd/matrix/conf/run_test.txt)).
 `root_conf` accepts the path to
 a text file or to a directory. If a machine has only one SSD or multiple SSDs
 connected with a RAID controller, we can create a directory on the SSD(s),
