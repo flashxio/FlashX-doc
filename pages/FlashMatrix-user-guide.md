@@ -25,12 +25,14 @@ Users can follow the [instructions](https://flashxio.github.io/FlashX-doc/FlashX
 FlashR provides a set of functions to generate FlashR vectors and matrices. These functions have similar interface to the R counterparts.
 
 The following functions generate FlashR vectors:
+
 * `fm.rep.int`: create a vector with replicated elements. e.g., `fm.rep.int(1, 10)` creates a FlashR vector with 10 elements and each element is 1.
 * `fm.seq.int`: create a vector with a sequence of numbers. e.g., `fm.seq.int(1, 10, 1)` creates a FlashR vector with a sequence of numbers between [1:10].
 * `fm.runif`: create a vector with uniformly random numbers. e.g., `fm.runif(10, 0, 1, in.mem=TRUE)` creates a FlashR vector with 10 uniformly random values between 0 and 1, stored in memory. `in.mem` instructs FlashR to store data in memory or on disks.
 * `fm.rnorm`: create a vector under normal distribution. e.g., `fm.rnorm(10, 0, 1, in.mem=TRUE)` creates a FlashR vector with 10 random values following normal distribution with mean 0 and standard deviation 1 and stores data in memory. Like the one in `fm.runif`, `in.mem` instructs FlashR to store data in memory or on disks.
 
 The following functions generate FlashR matrices:
+
 * `fm.matrix`: create a matrix filled with repeated values from an R object. e.g., `fm.matrix(0, 10, 2)` creates a 10x2 FlashR matrix with 0.
 * `fm.seq.matrix`: create a matrix filled with sequence numbers. e.g., `fm.seq.matrix()` creates 
 * `fm.runif.matrix`: 
@@ -41,12 +43,14 @@ The following functions generate FlashR matrices:
 * `fm.load.sparse.matrix`: 
 
 FlashR also provides functions to access vectors and matrices from the filesystem.
+
 * `fm.read.obj`: Read a FlashR object (vector/matrix) from a Linux file.
 * `fm.write.obj`: Write a FlashR object (vector/matrix) to a Linux file.
 
 ## Interact with native R
 
 FlashR also provides functions to interact with the original R system.
+
 * `fm.as.vector`: convert an R vector to a FlashR vector.
 * `fm.as.matrix`: convert an R matrix to a FlashR matrix.
 * `fm.as.factor`: 
@@ -56,6 +60,7 @@ FlashR also provides functions to interact with the original R system.
 * `fm.conv.R2FM`: 
 
 FlashR has the following functions for users to test if an object is a FlashR vector or matrix.
+
 * `fm.is.vector`: test if an object is a FlashR vector.
 * `fm.is.matrix`: test if an object is a FlashR matrix.
 
@@ -67,6 +72,7 @@ Generalized operators
 Generalized operators (GenOp) are the core of FlashR. There are a very small number of GenOps in FlashR. Each operator accepts a user-defined operator (UDO) or the name of a UDO to perform users' tasks. Currently, there are four GenOps, but some of them have multiple forms. There are many UDOs in FlashR such as addition and subtraction (see `?fm.basic.op` for details). Below lists all GenOps currently supported by FlashR.
 
 **Inner product**: a generalized matrix multiplication. It replaces multiplication and addition in matrix multiplication with two UDOs, respectively. As such, we can define many operations with inner product. For example, we can use inner product to compute various pair-wise distance matrics of data points such as Euclidean distance and Hamming distance.
+
 ```
 fm.inner.prod(fm, mat, FUN1, FUN2)
 ```
@@ -75,9 +81,11 @@ One example of using `fm.inner.prod` is to compute a pair-wise distance between 
 `fm.inner.prod(data, t(data), fm.bo.euclidean, fm.bo.add)`
 
 **Apply**: a generalized form of element-wise operations and has multiple variants.
+
 * `fm.sapply`:  a generalized element-wise unary operation whose UDO takes an element in a vector or a matrix at a time and outputs an element.
 * `fm.mapply2`: a generalized element-wise binary operation whose UDO takes an element from each vector or matrix and outputs an element.
 * `fm.mapply.row` and `fm.mapply.col` are two variants of `fm.mapply2`. They are similar to `sweep()` in R and the broadcasting mechanism in Numpy. They are equivalent to mapply2 on every row or column of the matrix (in the first argument) with the vector (in the second argument). Currently, `fm.mapply.row` and `fm.mapply.col` only accept the cases that the vector has the same length as a row or a column of the matrix.
+
 ```
 fm.sapply(o, FUN)
 fm.mapply2(o1, o2, FUN)
@@ -91,25 +99,31 @@ lazy evaluation.
 
 Many matrix operations in FlashR are implemented with `fm.sapply` and `fm.mapply2`.
 Example 1: compute m1 + m2
+
 `fm.mapply2.fm(m1, m2, fm.bo.add)`
 
 Example 2: compute -m1
+
 `fm.sapply(m1, fm.buo.neg)`
 
 These are some examples of using `fm.sapply` and `fm.mapply2`. Both matrix addition and matrix negation have been implemented in FlashR.
 
 Aggregation takes multiple elements and outputs a single element.
+
 * `fm.agg`: aggregates over the entire vector or matrix.
 * `fm.agg.mat`: aggregates over each individual row or column of a matrix and outputs a vector.
+
 ```
 fm.agg(fm, FUN)
 fm.agg.mat(fm, margin, FUN)
 ```
 
 Example 1: compute sum(m)
+
 `fm.agg(x, fm.bo.add)`
 
 Example 2: compute rowSums(m)
+
 `fm.agg.mat(x, 1, fm.bo.add)`
 
 Again, both `sum()` and `rowSums()` have been implemented with aggregation in FlashR.
@@ -117,6 +131,7 @@ Again, both `sum()` and `rowSums()` have been implemented with aggregation in Fl
 Groupby is similar to groupby in SQL. It groups multiple elements by their values and perform some computation on the elements. Currently, the function passed to a groupby function has to aggregate values.
 `fm.sgroupby`:  groups elements by their values in a vector and invokes UDO on the elements associated with the same value. It outputs a vector.
 `fm.groupby`: takes a matrix and a vector of categorical values, groups rows/columns of the matrix based on the corresponding categorical value and runs UDO on the rows/columns with the same categorical value. It outputs a matrix.
+
 ```
 fm.sgroupby(o, FUN)
 fm.groupby(fm, margin, factor, FUN)
@@ -128,19 +143,14 @@ fm.create.agg.op(agg, combine, name)
 ## FlashR object information
 
 * `fm.is.sym`
-
 * `fm.matrix.layout`
-
 * `fm.is.sparse`
-
 * `fm.is.sink`
-
 * `fm.in.mem`
 
 ## FlashR configuration
 
 * `fm.print.features`
-
 * `fm.set.conf`
 
 ## "Base" R functions
@@ -148,6 +158,7 @@ fm.create.agg.op(agg, combine, name)
 FlashR implements many R functions in the base package to mimic the R programming environment. Although we have a goal of having these functions as similar as possible to the original R functions, we do not provide 100% compatibility with the original R version for some functions. Overall, we try to provide similarity under the condition of not sacrificing performance. Below shows a list of R functions in the base package currently supported by FlashR. In the future, more functions will be provided.
 
 The following functions have exactly the same interface as the original R function.
+
 * matrix info: `dim, nrow, ncol, length, typeof`
 * change matrix shape: `t`
 * element-wise unary: `abs, sqrt, ceiling, floor, round, log, log2, log10, exp, !, -`
@@ -155,9 +166,11 @@ The following functions have exactly the same interface as the original R functi
 * aggregation: `sum, min, max, range, all, any, mean, rowSums, colSums, rowMeans, colMeans, sd, cov, cov.wt`
 
 Many binary operations have exactly the same interface as the original R functions. When they are applied to a matrix and a vector, it requires the vector has the same length as the columns in the matrix.
+
 * `+, -, *, /, pmin, pmax, `==, !=, >, >=, <, <=, |, &, sweep`
 
 Some of them have slightly different interface and semantics. These slightly different functions always start with "fm." to indicate that they are actually FlashR functions. In the future, we will provide implementations with exactly the same interface and semantics as the original R functions.
+
 * `fm.table`
 * `fm.as.integer, fm.as.numeric`
 
@@ -185,6 +198,7 @@ while (converge < N) {
 ### Non-negative Matrix Factorization
 [Non-negative Matrix Factorization](https://en.wikipedia.org/wiki/Non-negative_matrix_factorization) (NMF) factorizes a matrix to two non-negative matrices. The following code implements the algorithm described in the Lee's [paper](http://papers.nips.cc/paper/1861-algorithms-for-non-negative-matrix-factorization.pdf).
 The update rules described in Lee's paper are implemented as follow
+
 ```R
 den <- (t(W) %*% W) %*% H
 H <- fm.pmax2(H * t(tA %*% W), eps) / (den + eps)
@@ -193,6 +207,7 @@ W <- fm.pmax2(W * (A %*% t(H)), eps) / (den + eps)
 ```
 
 One of the convergence condition is ||A - WH||^2. It is computationally expensive to compute the Frobenius norm of (A-WH) directly. Suppose A is a n×m matrix, W is a n×k matrix and H is a k×m matrix. The computation complexity is O(n×k×m). Therefore, instead of computing the Frobenius norm, we compute trace(t(A-WH)(A-WH)) = trace(t(A)A) -2×trace((t(A)W)H)+trace((t(H)(t(W)W))H). We need to order the matrix multiplication in a certain way to reduce computation complexity. The computation complexity of (t(A)W)H is O(l*k), where l is the number of non-zero entries in A. The computation complexity of (t(H)(t(W)W))H is O(k×k×n+k×k×m).
+
 ```R
 # trace of W %*% H
 trace.MM <- function(W, H) {
@@ -209,16 +224,19 @@ Fnorm <- function(A, W, H) {
 ### KMeans
 KMeans is another iterative algorithm that cluster data pointers. In an iteration, it has three steps and below are the steps and the corresponding FlashR code.
 Step 1: calculate distances between all data points to all cluster centers.
+
 ```R
 m <- fm.inner.prod(data, t(centers), fm.bo.euclidean, fm.bo.add)
 ```
 
 Step 2: find the closest cluster center for each data point.
+
 ```R
 parts <- fm.as.integer(fm.agg.mat(m, 1, agg.which.min) - 1)
 ```
 
 Step 3: update all cluster centers.
+
 ```R
 centers <- as.matrix(fm.groupby(data, 2, parts, agg.sum))
 cnts <- fm.table(parts)
@@ -228,5 +246,6 @@ centers <- diag(1/cnts$Freq) %*% centers
 ## Requirements for FlashR users
 
 There are two requirements for FlashR users to get the best performance out of FlashR:
+
 * Array-oriented programming
 * Understand space & computation complexity
