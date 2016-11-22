@@ -68,11 +68,11 @@ FlashR implements many R functions in the base package to mimic the existing R p
 
 The following functions have exactly the same interface as the original R function.
 
-* matrix info: `dim, nrow, ncol, length, typeof`
+* matrix info: `dim`, `nrow`, `ncol`, `length`, `typeof`
 * change matrix shape: `t`
-* element-wise unary: `abs, sqrt, ceiling, floor, round, log, log2, log10, exp, !, -`
-* inner product: `%*%, crossprod, tcrossprod`
-* aggregation: `sum, min, max, range, all, any, mean, rowSums, colSums, rowMeans, colMeans, sd, cov, cov.wt`
+* element-wise unary: `abs`, `sqrt`, `ceiling`, `floor`, `round`, `log`, `log2`, `log10`, `exp`, `!`, `-`
+* inner product: `%*%`, `crossprod`, `tcrossprod`
+* aggregation: `sum`, `min`, `max`, `range`, `all`, `any`, `mean`, `rowSums`, `colSums`, `rowMeans`, `colMeans`, `sd`, `cov`, `cov.wt`
 
 Many binary operations have exactly the same interface as the original R functions. When they are applied to a matrix and a vector, it requires the vector has the same length as the columns in the matrix.
 
