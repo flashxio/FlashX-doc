@@ -34,9 +34,11 @@ The following functions generate FlashR vectors:
 The following functions generate FlashR matrices:
 
 * `fm.matrix`: create a matrix filled with repeated values from an R object. e.g., `fm.matrix(0, 10, 2)` creates a 10x2 FlashR matrix with 0.
-* `fm.seq.matrix`: create a matrix filled with sequence numbers. e.g., `fm.seq.matrix()` creates 
-* `fm.runif.matrix`: 
-* `fm.rnorm.matrix`: 
+* `fm.seq.matrix`: create a matrix filled with sequence numbers. e.g., `fm.seq.matrix(0, 20, 10, 2)` creates a 10x2 FlashR matrix with columns filled with 1:20.
+* `fm.runif.matrix`: create a matrix filled with uniform random numbers. e.g., `fm.runif.matrix(10, 2, 0, 1, in.mem=TRUE)` creates a 10x2 FlashR matrix with 20 uniformly random values between 0 and 1, stored in memory.
+* `fm.rnorm.matrix`: create a matrix filled under normal distribution. e.g., `fm.rnorm.matrix(10, 2, 0, 1, in.mem=TRUE)` creats a 10x2 FlashR matrix with 20 random values following normal distribution with mean 0 and standard deviation 1, and stores data in memory.
+
+The following functions load data outside the FlashR environment.
 
 * `fm.load.dense.matrix`: 
 * `fm.load.dense.matrix.bin`: 
