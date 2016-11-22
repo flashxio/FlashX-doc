@@ -52,8 +52,8 @@ FlashR also provides functions to interact with the original R system.
 * `fm.as.vector`: convert an R vector/matrix and a FlashR matrix to a FlashR vector. The current implementation only supports converting from a one-column FlashR matrix to a FlashR vector.
 * `fm.as.matrix`: convert an R vector/matrix and a FlashR vector to a FlashR matrix. A vector is converted into a one-column matrix.
 * `fm.as.factor`: convert a FlashR vector to a factor vector. The current implementation only supports converting an integer vector. By default, this function determines the number of levels in the factor vector automatically. Users can also provide a maximal number of levels. Right now, FlashR factor vectors are used by `fm.sgroupby` and `fm.groupby`.
-* `as.vector`: convert a FlashR vector/matrix to a R vector.
-* `as.matrix`: convert a FlashR vector/matrix to a R matrix.
+* [`as.vector`](https://stat.ethz.ch/R-manual/R-devel/library/base/html/vector.html): convert a FlashR vector/matrix to a R vector.
+* [`as.matrix`](https://stat.ethz.ch/R-manual/R-devel/library/base/html/matrix.html): convert a FlashR vector/matrix to a R matrix.
 * `fm.conv.FM2R`: convert a FlashR vector or matrix to an R vector or matrix respectively.
 * `fm.conv.R2FM`: convert an R vector or matrix to a FlashR vector or matrix respectively.
 
@@ -79,9 +79,9 @@ The following functions have exactly the same interface as the original R functi
 Many operations have exactly the same interface as the original R functions but perform computation slightly differently in certain cases.
 
 * binary operations: `+`, `-`, `*`, `/`, `^`, `==`, `!=`, `>`, `>=`, `<`, `<=`, `|`, `&`. When they are applied to a matrix and a vector, it requires the vector has the same length as the columns of the matrix.
-* `sweep` requires the vector in `STATS` has the same length as the rows or the columns of the matrix in `x`. In addition, the function in `FUN` has to be one of the pre-defined functions in FlashR (see the section "Generalized operations").
-* `print`: instead of printing the elements in a FlashR vector/matrix, this function prints the basic information of the FlashR object, such as the number of rows or columns.
-* `pmin`, `pmax` requires input arrays to be all FlashR vectors or FlashR matrices. Thess functions do not work on a mix of FlashR vectors/matrices and R vectors/matrices. In addtion, we create `pmin2` and `pmax2` to compute parallel maxima and minima of two input vectors/matrices.
+* [`sweep`](http://stat.ethz.ch/R-manual/R-patched/library/base/html/sweep.html) requires the vector in `STATS` has the same length as the rows or the columns of the matrix in `x`. In addition, the function in `FUN` has to be one of the pre-defined functions in FlashR (see the section "Generalized operations").
+* [`print`](https://stat.ethz.ch/R-manual/R-devel/library/base/html/print.html): instead of printing the elements in a FlashR vector/matrix, this function prints the basic information of the FlashR object, such as the number of rows or columns.
+* [`pmin`, `pmax`](https://stat.ethz.ch/R-manual/R-devel/library/base/html/Extremes.html) requires input arrays to be all FlashR vectors or FlashR matrices. Thess functions do not work on a mix of FlashR vectors/matrices and R vectors/matrices. In addtion, we create `pmin2` and `pmax2` to compute parallel maxima and minima of two input vectors/matrices.
 
 Some of them have slightly different interface and semantics. These slightly different functions always start with "fm." to indicate that they are actually FlashR functions. In the future, we will provide implementations with exactly the same interface and semantics as the original R functions.
 
