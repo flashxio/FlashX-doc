@@ -61,6 +61,27 @@ FlashR has the following functions for users to test if an object is a FlashR ve
 * `fm.is.vector`: test if an object is a FlashR vector.
 * `fm.is.matrix`: test if an object is a FlashR matrix.
 
+## "Base" R functions
+
+FlashR implements many R functions in the base package to mimic the R programming environment. Although we have a goal of having these functions as similar as possible to the original R functions, we do not provide 100% compatibility with the original R version for some functions. Overall, we try to provide similarity under the condition of not sacrificing performance. Below shows a list of R functions in the base package currently supported by FlashR. In the future, more functions will be provided.
+
+The following functions have exactly the same interface as the original R function.
+
+* matrix info: `dim, nrow, ncol, length, typeof`
+* change matrix shape: `t`
+* element-wise unary: `abs, sqrt, ceiling, floor, round, log, log2, log10, exp, !, -`
+* inner product: `%*%, crossprod, tcrossprod`
+* aggregation: `sum, min, max, range, all, any, mean, rowSums, colSums, rowMeans, colMeans, sd, cov, cov.wt`
+
+Many binary operations have exactly the same interface as the original R functions. When they are applied to a matrix and a vector, it requires the vector has the same length as the columns in the matrix.
+
+* `+, -, *, /, pmin, pmax, `==, !=, >, >=, <, <=, |, &, sweep`
+
+Some of them have slightly different interface and semantics. These slightly different functions always start with "fm." to indicate that they are actually FlashR functions. In the future, we will provide implementations with exactly the same interface and semantics as the original R functions.
+
+* `fm.table`
+* `fm.as.integer, fm.as.numeric`
+
 ## Generalized operators
 
 FlashR has two sets of programming API. It provides users a set of generalized operators, with which users can implement varieties of data mining and machine learning algorithms. On top of them, FlashR implements many R functions in the base package with the generalized operators to mimic the original R programming environment.
@@ -149,27 +170,6 @@ fm.create.agg.op(agg, combine, name)
 
 * `fm.print.features`
 * `fm.set.conf`
-
-## "Base" R functions
-
-FlashR implements many R functions in the base package to mimic the R programming environment. Although we have a goal of having these functions as similar as possible to the original R functions, we do not provide 100% compatibility with the original R version for some functions. Overall, we try to provide similarity under the condition of not sacrificing performance. Below shows a list of R functions in the base package currently supported by FlashR. In the future, more functions will be provided.
-
-The following functions have exactly the same interface as the original R function.
-
-* matrix info: `dim, nrow, ncol, length, typeof`
-* change matrix shape: `t`
-* element-wise unary: `abs, sqrt, ceiling, floor, round, log, log2, log10, exp, !, -`
-* inner product: `%*%, crossprod, tcrossprod`
-* aggregation: `sum, min, max, range, all, any, mean, rowSums, colSums, rowMeans, colMeans, sd, cov, cov.wt`
-
-Many binary operations have exactly the same interface as the original R functions. When they are applied to a matrix and a vector, it requires the vector has the same length as the columns in the matrix.
-
-* `+, -, *, /, pmin, pmax, `==, !=, >, >=, <, <=, |, &, sweep`
-
-Some of them have slightly different interface and semantics. These slightly different functions always start with "fm." to indicate that they are actually FlashR functions. In the future, we will provide implementations with exactly the same interface and semantics as the original R functions.
-
-* `fm.table`
-* `fm.as.integer, fm.as.numeric`
 
 ## Some examples of using FlashR
 
