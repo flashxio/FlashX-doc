@@ -75,6 +75,7 @@ The following functions have exactly the same interface as the original R functi
 * aggregation: `sum`, `min`, `max`, `range`, `all`, `any`, `mean`, `rowSums`, `colSums`, `rowMeans`, `colMeans`, `sd`, `cov`, `cov.wt`
 * type cast: `as.integer`, `as.numeric`
 * extract element: `[]`, `head`, `tail`
+* element selection: `ifelse`
 
 Many operations have exactly the same interface as the original R functions but perform computation slightly differently in certain cases.
 
@@ -87,10 +88,11 @@ Some of them have slightly different interface and semantics. These slightly dif
 
 * `fm.table`: similar to [`table`](https://stat.ethz.ch/R-manual/R-devel/library/base/html/table.html) in R, builds a contingency table of the counts of unique elements in the input vector. It currently only works for FlashR vectors and factor vectors. It outputs a list with two FlashR vectors: `val` and `Freq`. `val` contains the unique values in the input vector and `Freq` contains the counts of the unique values.
 
+## "stat" R functions
+
 ## Generalized operations
 
-FlashR has two sets of programming API. It provides users a set of generalized operators, with which users can implement varieties of data mining and machine learning algorithms. On top of them, FlashR implements many R functions in the base package with the generalized operators to mimic the original R programming environment.
-Generalized operators
+In addition to the basic functions above, FlashR provides a set of generalized operations (GenOps) to increase the generality of FlashR. With these GenOps, users can implement more computations efficiently, required by many data mining and machine learning algorithms. The "Base" R functions shown above are also implemented with the GenOps.
 
 Generalized operators (GenOp) are the core of FlashR. There are a very small number of GenOps in FlashR. Each operator accepts a user-defined operator (UDO) or the name of a UDO to perform users' tasks. Currently, there are four GenOps, but some of them have multiple forms. There are many UDOs in FlashR such as addition and subtraction (see `?fm.basic.op` for details). Below lists all GenOps currently supported by FlashR.
 
