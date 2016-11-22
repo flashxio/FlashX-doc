@@ -51,7 +51,7 @@ FlashR also provides functions to interact with the original R system.
 
 * `fm.as.vector`: convert an R vector/matrix and a FlashR matrix to a FlashR vector. The current implementation only supports converting from a one-column FlashR matrix to a FlashR vector.
 * `fm.as.matrix`: convert an R vector/matrix and a FlashR vector to a FlashR matrix. A vector is converted into a one-column matrix.
-* `fm.as.factor`: convert a FlashR vector to a factor vector. By default, this function determines the number of levels in the factor vector automatically. If the input vector stores integers, users can also provide a maximal number of levels. Right now, FlashR factor vectors are used by `fm.sgroupby` and `fm.groupby`.
+* `fm.as.factor`: convert a FlashR vector to a factor vector. The current implementation only supports converting an integer vector. By default, this function determines the number of levels in the factor vector automatically. Users can also provide a maximal number of levels. Right now, FlashR factor vectors are used by `fm.sgroupby` and `fm.groupby`.
 * `as.vector`: convert a FlashR vector/matrix to a R vector.
 * `as.matrix`: convert a FlashR vector/matrix to a R matrix.
 * `fm.conv.FM2R`: convert a FlashR vector or matrix to an R vector or matrix respectively.
@@ -74,20 +74,20 @@ The following functions have exactly the same interface as the original R functi
 * inner product: `%*%`, `crossprod`, `tcrossprod`
 * aggregation: `sum`, `min`, `max`, `range`, `all`, `any`, `mean`, `rowSums`, `colSums`, `rowMeans`, `colMeans`, `sd`, `cov`, `cov.wt`
 * type cast: `as.integer`, `as.numeric`
-* extract element: `[`, `head`, `tail`
+* extract element: `[]`, `head`, `tail`
 
 Many operations have exactly the same interface as the original R functions but perform computation slightly differently in certain cases.
 
 * binary operations: `+`, `-`, `*`, `/`, `^`, `==`, `!=`, `>`, `>=`, `<`, `<=`, `|`, `&`. When they are applied to a matrix and a vector, it requires the vector has the same length as the columns of the matrix.
-* `sweep`
-* `print`
-* `pmin`, `pmax`. In addtion, we createpmin2, pmax2
+* `sweep` requires the vector in `STATS` has the same length as the rows or the columns of the matrix in `x`. In addition, the function in `FUN` has to be one of the pre-defined functions in FlashR (see the section "Generalized operations").
+* `print`: instead of printing the elements in a FlashR vector/matrix, this function prints the basic information of the FlashR object, such as the number of rows or columns.
+* `pmin`, `pmax` requires input arrays to be all FlashR vectors or FlashR matrices. Thess functions do not work on a mix of FlashR vectors/matrices and R vectors/matrices. In addtion, we create `pmin2` and `pmax2` to compute parallel maxima and minima of two input vectors/matrices.
 
 Some of them have slightly different interface and semantics. These slightly different functions always start with "fm." to indicate that they are actually FlashR functions. In the future, we will provide implementations with exactly the same interface and semantics as the original R functions.
 
-* `fm.table`
+* `fm.table`: builds a contingency table of the counts of unique elements in the input vector. It currently only works for FlashR vectors and factor vectors. It outputs a list with two FlashR vectors: `val` and `Freq`. `val` contains the unique values in the input vector and `Freq` contains the counts of the unique values.
 
-## Generalized operators
+## Generalized operations
 
 FlashR has two sets of programming API. It provides users a set of generalized operators, with which users can implement varieties of data mining and machine learning algorithms. On top of them, FlashR implements many R functions in the base package with the generalized operators to mimic the original R programming environment.
 Generalized operators
