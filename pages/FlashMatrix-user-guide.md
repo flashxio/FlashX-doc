@@ -55,7 +55,7 @@ The following functions have exactly the same interface as the original R functi
 * change matrix shape: `t`
 * element-wise unary: `abs`, `sqrt`, `ceiling`, `floor`, `round`, `log`, `log2`, `log10`, `exp`, `!`, `-`
 * inner product: `%*%`, `crossprod`, `tcrossprod`
-* aggregation: `sum`, `min`, `max`, `range`, `all`, `any`, `mean`, `rowSums`, `colSums`, `rowMeans`, `colMeans`, `sd`, `cov`, `cov.wt`
+* aggregation: `sum`, `min`, `max`, `range`, `all`, `any`, `mean`, `rowSums`, `colSums`, `rowMeans`, `colMeans`
 * type cast: `as.integer`, `as.numeric`
 * extract element: `[]`, `head`, `tail`
 * element selection: `ifelse`
@@ -70,12 +70,56 @@ Many operations have exactly the same interface as the original R functions but 
 Some of them have slightly different interface and semantics. These slightly different functions always start with "fm." to indicate that they are actually FlashR functions. In the future, we will provide implementations with exactly the same interface and semantics as the original R functions.
 
 * `fm.table`: similar to [`table`](https://stat.ethz.ch/R-manual/R-devel/library/base/html/table.html) in R, builds a contingency table of the counts of unique elements in the input vector. It currently only works for FlashR vectors and factor vectors. It outputs a list with two FlashR vectors: `val` and `Freq`. `val` contains the unique values in the input vector and `Freq` contains the counts of the unique values.
+* `fm.summary` computes the summary of a FlashMatrix vector/matrix. For a matrix, this function computes the summary of each column. It computes min, max, mean, L1 norm, L2 norm and the number of non-zero values.
+* `fm.eigen`: 
+* `fm.svd`: 
+* `fm.rbind` and `fm.cbind`: 
 
-## "stat" R functions
+## "stats" R functions
+
+* `sd`, `cov`, `cor`, `cov.wt`
+* `fm.KMeans`
 
 ## Generalized operations
 
-In addition to the basic functions above, FlashR provides a set of generalized operations (GenOps) to increase the generality of FlashR. With these GenOps, users can implement more computations efficiently, required by many data mining and machine learning algorithms. The "Base" R functions shown above are also implemented with the GenOps.
+In addition to the basic functions above, FlashR provides a set of generalized operations (GenOps) to increase the generality of FlashR. With these GenOps, users can implement more computations efficiently, required by many data mining and machine learning algorithms. Most of the "Base" and "stats" R functions shown above are also implemented with the GenOps.
+
+Binary operator:
+fm.bo.add
+fm.bo.sub
+fm.bo.mul
+fm.bo.div
+fm.bo.min
+fm.bo.max
+fm.bo.pow
+fm.bo.eq
+fm.bo.neq
+fm.bo.gt
+fm.bo.ge
+fm.bo.lt
+fm.bo.le
+fm.bo.or
+fm.bo.and
+
+What do we do with these?
+fm.bo.count
+fm.bo.which.max
+fm.bo.which.min
+fm.bo.euclidean
+
+Unary operators:
+fm.buo.neg
+fm.buo.sqrt
+fm.buo.abs
+fm.buo.not
+fm.buo.ceil
+fm.buo.floor
+fm.buo.log
+fm.buo.log2
+fm.buo.log10
+fm.buo.round
+fm.buo.as.int
+fm.buo.as.numeric
 
 Generalized operators (GenOp) are the core of FlashR. There are a very small number of GenOps in FlashR. Each operator accepts a user-defined operator (UDO) or the name of a UDO to perform users' tasks. Currently, there are four GenOps, but some of them have multiple forms. There are many UDOs in FlashR such as addition and subtraction (see `?fm.basic.op` for details). Below lists all GenOps currently supported by FlashR.
 
