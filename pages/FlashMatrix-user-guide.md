@@ -1,17 +1,15 @@
 ---
-title: The User Guide of FlashR
+title: The User Guide of FlashR/FlashMatrix
 keywords: tutorial
 last_updated: Nov 3, 2016
 tags: [tutorial]
-summary: "The User Guide of FlashR"
+summary: "The User Guide of FlashR/FlashMatrix"
 sidebar: mydoc_sidebar
 permalink: FlashMatrix-user-guide.html
 folder: mydoc
 ---
 
-FlashR extends the R programming framework for large-scale data analysis. It executes R code in parallel automatically and utilizes disks to scale R to large datasets. The core of FlashR is a small set of generalized matrix operations to perform computation in an array-oriented fashion. In addition, FlashR reimplements many commonly used R functions in the [base](https://stat.ethz.ch/R-manual/R-devel/library/base/html/00Index.html) and [stats](https://stat.ethz.ch/R-manual/R-devel/library/stats/html/00Index.html) packages to provide users a familiar R programming environment to reduce the learning curve. FlashR is completely implemented as an R package.
-
-Although FlashR tries to provide a familiar environment for R users, some operations in the R framework are not supported in FlashR. The biggest difference is that FlashR does not allow users to modify individual elements in a vector or a matrix. FlashR intentionally chooses so for the sake of performance. FlashR stores vectors and matrices on SSDs. Modifying individual elements results in read-modify-write to SSDs, which causes many small random I/O. It causes efficiency issues and these operations are harmful to SSDs. By forbidding modifying individual elements, FlashR advocates array-oriented programming to achieve superior efficiency.
+FlashR is the main programming interface of FlashMatrix. By utilizing the powerful matrix computation in FlashMatrix, FlashR extends the R programming framework for large-scale data analysis. It executes R code in parallel automatically and utilizes disks to scale R to large datasets. FlashR mimics the programming interface of the R framework. It reimplements many commonly used R functions in the [base](https://stat.ethz.ch/R-manual/R-devel/library/base/html/00Index.html) and [stats](https://stat.ethz.ch/R-manual/R-devel/library/stats/html/00Index.html) packages to provide users a familiar R programming environment to reduce the learning curve. In addition, FlashR provides a set of generalized matrix operations that extend the R framework to implement more computations efficiently. FlashR is completely implemented as an R package.
 
 ## How to start
 
@@ -230,7 +228,9 @@ FlashR has the following functions to test if an object is a FlashR vector or ma
 
 FlashR gains performance by lazily evaluating most of the matrix operations and merging them into a single execution. As such, most of the matrices output from a matrix operation do not contain actual computation results. By default, only the operations that output an R scalar value perform actual computation when the function is called. The computation can also be triggered when a user wants to convert FlashR vectors/matrices to R vectors/matrices. Users can also explicitly force FlashR to perform computation by invoking `fm.materialize` and `fm.materialize.list`. In addition, users can set a flag on a matrix to notify FlashR to save the materialized results.
 
-## Requirements for FlashR users
+## Requirements for FlashR programmers
+
+Although FlashR tries to provide a familiar environment for R users, some operations in the R framework are not supported in FlashR. The biggest difference is that FlashR does not allow users to modify individual elements in a vector or a matrix. FlashR intentionally chooses so for the sake of performance. FlashR stores vectors and matrices on SSDs. Modifying individual elements results in read-modify-write to SSDs, which causes many small random I/O. It causes efficiency issues and these operations are harmful to SSDs. By forbidding modifying individual elements, FlashR advocates array-oriented programming to achieve superior efficiency.
 
 There are two requirements for FlashR users to get the best performance out of FlashR:
 
