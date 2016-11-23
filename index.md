@@ -15,8 +15,9 @@ to large datasets in a single machine. It has two main components:
 programming interface for large-scale graph analysis. FlashGraph is able to
 scale to billion-node graphs in a single machine and significantly outperforms
 state-of-art distributed graph analysis frameworks at this scale.
-* FlashMatrix is a matrix computation engine that provides a small set of
-generalized matrix operations to express varieties of data mining and machine
+* FlashMatrix is a matrix computation engine that provides generalized matrix
+operations (GenOps). FlashMatrix uses a small set of GenOps to support a large
+variety of matrix operations and express varieties of data mining and machine
 learning algorithms. It keeps matrices on SSDs to scale to very large datasets.
 
 FlashX provides the R programming interface to process datasets at a scale of
@@ -24,20 +25,16 @@ terabytes with the speed of optimized parallel C code. It provides
 users with a familiar R programming environment to express many machine learning
 algorithms completely in R.
 
-![Architecture](http://www.cs.jhu.edu/~zhengda/FlashGraph/arch.png)
+![Architecture](https://flashxio.github.io/FlashX-doc/images/flashmatrix.png)
 
-## Quick Start
+## [Quick Start](https://flashxio.github.io/FlashX-doc/FlashX-Quick-Start-Guide.html)
 
 We provide instructions to install FlashR, the R programming interface
-for FlashX.
+for FlashX, and use some simple examples to show how to use FlashR for computation.
 
-### Installation
+## [User Guide](https://flashxio.github.io/FlashX-doc/FlashMatrix-user-guide.html)
 
-### A simple example of using FlashR
-
-## User Guide
-
-This lists all of the functions.
+This documentation provides detailed description of the FlashR functions.
 
 ## Tutorials
 

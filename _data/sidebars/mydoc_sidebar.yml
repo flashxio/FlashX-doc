@@ -28,14 +28,6 @@ entries:
       output: web, pdf
       type: homepage
 
-    - title: About the theme author
-      url: /mydoc_about.html
-      output: web, pdf
-
-    - title: Support
-      url: /mydoc_support.html
-      output: web, pdf
-
   - title: User Guide
     output: web, pdf
     folderitems:
@@ -75,13 +67,4 @@ entries:
     - title: R
       external_url: http://flashx.io/docs/FlashR/
       output: web
-
-  - title: Troubleshooting
-    output: web, pdf
-
-    folderitems:
-
-    - title: Troubleshooting
-      url: /mydoc_troubleshooting.html
-      output: web, pdf
 
