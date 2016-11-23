@@ -1,9 +1,9 @@
 ---
-title: The User Guide of FlashMatrix
+title: The User Guide of FlashR
 keywords: tutorial
 last_updated: Nov 3, 2016
 tags: [tutorial]
-summary: "The User Guide of FlashMatrix"
+summary: "The User Guide of FlashR"
 sidebar: mydoc_sidebar
 permalink: FlashMatrix-user-guide.html
 folder: mydoc
