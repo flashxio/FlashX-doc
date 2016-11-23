@@ -78,7 +78,7 @@ Some of them have slightly different interface and semantics. These slightly dif
 ## "stats" R functions
 
 * `sd`, `cov`, `cor`, `cov.wt`
-* `fm.KMeans`
+* `fm.kmeans`
 
 ## Generalized operations
 
