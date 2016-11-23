@@ -43,7 +43,7 @@ The following functions load data outside the FlashR environment.
 * `fm.load.dense.matrix.bin`: load a dense matrix from a binary file. The binary file can store data in row-major or column-major order. In this function, users have to specify all information of the dense matrix, such as the number of rows, the number of columns, the element type and the data layout (row-major or column-major). e.g., `fm.load.dense.matrix.bin("/mnt/data/matrix.bin", in.mem=TRUE, nrow=1000, ncol=10, byrow=FALSE, ele.type="I")` loads a dense matrix of integers with 1000 rows and 10 columns, stored in column-major order.
 * `fm.load.sparse.matrix`: load a sparse matrix in the FlashMatrix format from the Linux filesystem. The sparse matrix has to be formatted in advance. For a symmetric matrix, users only need to specify the sparse matrix file and the index file of the sparse matrix. For an asymmetric matrix, users need to specify four files: the sparse matrix file, the index file of the sparse matrix, the transpose of the sparse matrix, the index file for the transpose of the sparse matrix.
 
-## "Base" R functions
+## "Base" functions
 
 FlashR implements many R functions in the base package to mimic the existing R programming environment. Although we have a goal of having these functions as similar as possible to the original R functions, we do not provide 100% compatibility with the original R version for some functions for the sake of performance. Below shows a list of R functions in the base package currently supported by FlashR. More functions will be provided in the future.
 
@@ -73,7 +73,9 @@ Some of them have slightly different interface and semantics. These slightly dif
 * `fm.eigen` is an eigensolver to solve a very large eigenvalue problem. By default, it uses `eigs` from the RSpectra package to compute eigenvalues. This eigensolver has a limit on the size of an eigenvalue problem and does not parallelize all computation in eigensolving. To solve an even larger eigenvalue problem, users need to compile FlashR with the [Anasazi eigensolvers](https://trilinos.org/packages/anasazi/) from the Trilinos project (see more instructions [here](https://flashxio.github.io/FlashX-doc/FlashX-with-anasazi.html)). To compute eigenvalues, users define a function for matrix multiplication and pass the function as the first argument. e.g., `fm.eigen(function(x, args) mat %*% x, 10, nrow(mat))` computes 10 eigenvalues on the matrix `mat`. The function that defines matrix multiplication must return a FlashR matrix or vector.
 * `fm.svd` performs singular-value decomposition on a large matrix. e.g., `fm.svd(mat, 10, 0)` computes 10 left singular vectors on the input matrix.
 
-## "stats" R functions
+## "stats functions
+
+FlashR also implements some `stats` functions. They perform the same computation as the ones in the original "stats" package.
 
 * [`sd`](https://stat.ethz.ch/R-manual/R-devel/library/stats/html/sd.html) computes standard deviation. 
 * [`cov`, `cor`](https://stat.ethz.ch/R-manual/R-patched/library/stats/html/cor.html) computes covariance and correlation.
@@ -133,15 +135,17 @@ The table lists aggregation operators defined in FlashR:
 | "which.max" | fm.bo.which.max |
 | "which.min" | fm.bo.which.min |
 
-fm.bo.euclidean
-
-FlashR allows users to define their own element operators. Currently, a new element operator has to be defined in C.
-
+FlashR allows users to define their own element operators. Currently, a new element operator has to be defined in C/C++. More instructions of adding new element operators are shown [here](https://flashxio.github.io/FlashX-doc/FlashR-extension.html).
 
 ### The list of GenOps in FlashR
 
 **Inner product**: a generalized matrix multiplication. It replaces multiplication and addition in matrix multiplication with two element operators, respectively. As such, we can define many operations with inner product. For example, we can use inner product to compute various pair-wise distance matrics of data points such as Euclidean distance and Hamming distance.
-e.g., `fm.inner.prod(data, t(data), fm.bo.euclidean, fm.bo.add)` computes the Euclidean distance between every pair of data points.
+
+Example: computes the Euclidean distance between every pair of data points. `fm.bo.euclidean` is added to FlashR with FlashR extension.
+
+```R
+fm.inner.prod(data, t(data), fm.bo.euclidean, fm.bo.add)
+```
 
 **Apply**: a generalized form of element-wise operations and has multiple variants.
 
@@ -155,6 +159,7 @@ Example 1: compute m1 + m2
 
 ```R
 fm.mapply2(m1, m2, fm.bo.add)
+fm.mapply2(m1, m2, "+")
 ```
 
 Example 2: compute m1 + v2 (in this case, the vector v2 must have the same length as the columns of the matrix m1)
