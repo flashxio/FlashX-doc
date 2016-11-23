@@ -90,22 +90,21 @@ Binary operator:
 
 | name | R object |
 | :---| :--- |
-| "+" | fm.bo.add |
-
-fm.bo.sub
-fm.bo.mul
-fm.bo.div
-fm.bo.min
-fm.bo.max
-fm.bo.pow
-fm.bo.eq
-fm.bo.neq
-fm.bo.gt
-fm.bo.ge
-fm.bo.lt
-fm.bo.le
-fm.bo.or
-fm.bo.and
+| "+" or "add" | fm.bo.add |
+| "-" or "sub" | fm.bo.sub |
+| "*" or "mul" | fm.bo.mul |
+| "/" or "div" | fm.bo.div |
+| "min" | fm.bo.min |
+| "max" | fm.bo.max |
+| "pow" | fm.bo.pow |
+| "==" or "eq" | fm.bo.eq |
+| "!=" or "neq" | fm.bo.neq |
+| ">" or "gt" | fm.bo.gt |
+| ">=" or "ge" | fm.bo.ge |
+| "<" or "lt" | fm.bo.lt |
+| "<=" or "le" | fm.bo.le |
+| "|" or "or" | fm.bo.or |
+| "&" or "and" | fm.bo.and |
 
 What do we do with these?
 fm.bo.count
