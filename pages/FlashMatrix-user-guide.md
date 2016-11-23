@@ -94,21 +94,21 @@ The table lists all binary operators:
 
 | name | R object | Computation semantics |
 | :---| :--- | :--- |
-| "+" or "add" | fm.bo.add | sum two elements. e.g., `2+1=3` |
-| "-" or "sub" | fm.bo.sub | subtract the second element from the first one. e.g, `2-1=1` |
-| "*" or "mul" | fm.bo.mul | `2*3=6` |
-| "/" or "div" | fm.bo.div | `6/2=3` |
-| "min" | fm.bo.min | `min(1, 2)=1` |
-| "max" | fm.bo.max | `max(1, 2)=2` |
-| "pow" | fm.bo.pow | `pow(2, 3)=8` |
-| "==" or "eq" | fm.bo.eq | `2 == 3 = FALSE` |
-| "!=" or "neq" | fm.bo.neq | `2 != 3 = TRUE` |
-| ">" or "gt" | fm.bo.gt | `2 > 3 = FALSE` |
-| ">=" or "ge" | fm.bo.ge | `2 >= 3 = FALSE` |
-| "<" or "lt" | fm.bo.lt | `2 < 3 = TRUE` |
-| "<=" or "le" | fm.bo.le | `2 <= 3 = TRUE` |
-| "\|" or "or" | fm.bo.or | `TRUE | FALSE = TRUE` |
-| "&" or "and" | fm.bo.and | `TRUE & FALSE = FALSE` |
+| "+" or "add" | fm.bo.add | numeric addition. e.g., `2+1=3` |
+| "-" or "sub" | fm.bo.sub | numeric subtraction. e.g, `2-1=1` |
+| "*" or "mul" | fm.bo.mul | numeric multiplication. e.g, `2*3=6` |
+| "/" or "div" | fm.bo.div | numeric division. e.g., `6/2=3` |
+| "min" | fm.bo.min | minimum of two elements. e.g., `min(1, 2)=1` |
+| "max" | fm.bo.max | maximum of two elements. e.g., `max(1, 2)=2` |
+| "pow" | fm.bo.pow | raise to power of. e.g., `pow(2, 3)=8` |
+| "==" or "eq" | fm.bo.eq | equal. e.g., `2 == 3 = FALSE` |
+| "!=" or "neq" | fm.bo.neq | not equal. e.g., `2 != 3 = TRUE` |
+| ">" or "gt" | fm.bo.gt | larger than. e.g., `2 > 3 = FALSE` |
+| ">=" or "ge" | fm.bo.ge | larger than or equal to. e.g., `2 >= 3 = FALSE` |
+| "<" or "lt" | fm.bo.lt | less than. e.g., `2 < 3 = TRUE` |
+| "<=" or "le" | fm.bo.le | less than or equal to. e.g., `2 <= 3 = TRUE` |
+| "\|" or "or" | fm.bo.or | logical or. e.g., `TRUE | FALSE = TRUE` |
+| "&" or "and" | fm.bo.and | logical and. e.g., `TRUE & FALSE = FALSE` |
 
 The table lists all unary operators:
 
