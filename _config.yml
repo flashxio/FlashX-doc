@@ -97,7 +97,7 @@ sidebars:
 - product2_sidebar
 - other
 
-description: "This provides the documentation of the FlashX project."
+description: "This provides documentation for the FlashX project."
 # the description is used in the feed.xml file
 
 # needed for sitemap.xml file only
