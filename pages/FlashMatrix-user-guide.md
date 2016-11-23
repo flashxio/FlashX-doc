@@ -141,7 +141,7 @@ FlashR allows users to define their own element operators. Currently, a new elem
 
 ### The list of GenOps in FlashR
 
-**Inner product**: a generalized matrix multiplication. It replaces multiplication and addition in matrix multiplication with two element operators, respectively. As such, we can define many operations with inner product. For example, we can use inner product to compute various pair-wise distance matrics of data points such as Euclidean distance and Hamming distance.
+**Inner product** is a generalized matrix multiplication. It replaces multiplication and addition in matrix multiplication with two element operators, respectively. As such, we can define many operations with inner product. For example, we can use inner product to compute various pair-wise distance matrics of data points such as Euclidean distance and Hamming distance.
 
 Example: computes the Euclidean distance between every pair of data points. `fm.bo.euclidean` is added to FlashR with FlashR extension.
 
@@ -149,7 +149,7 @@ Example: computes the Euclidean distance between every pair of data points. `fm.
 fm.inner.prod(data, t(data), fm.bo.euclidean, fm.bo.add)
 ```
 
-**Apply**: a generalized form of element-wise operations and has multiple variants.
+**Apply** is a generalized form of element-wise operations and has multiple variants.
 
 * `fm.sapply(o, FUN)`:  a generalized element-wise unary operation whose element operator takes one element at a time from a vector or a matrix and outputs an element. As such, the output matrix of this function has the same shape as the input matrix.
 * `fm.mapply2(o1, o2, FUN)`: a generalized element-wise binary operation whose element operator takes an element from each vector or matrix and outputs an element. The output matrix of this function has the same shape as the input matrices.
