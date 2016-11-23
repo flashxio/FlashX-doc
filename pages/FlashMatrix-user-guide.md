@@ -189,8 +189,9 @@ fm.agg.mat(x, 1, fm.bo.add)
 Again, both `sum()` and `rowSums()` have been implemented with aggregation in FlashR.
 
 **Groupby** is similar to groupby in SQL. It groups multiple elements by their values and perform some computation on the elements. Currently, the function passed to a groupby function has to aggregate values.
-`fm.sgroupby(o, FUN)`:  groups elements by their values in a vector and invokes UDO on the elements associated with the same value. It outputs a vector.
-`fm.groupby(fm, margin, factor, FUN)`: takes a matrix and a vector of categorical values, groups rows/columns of the matrix based on the corresponding categorical value and runs UDO on the rows/columns with the same categorical value. It outputs a matrix.
+
+* `fm.sgroupby(o, FUN)`:  groups elements by their values in a vector and invokes UDO on the elements associated with the same value. It outputs a vector.
+* `fm.groupby(fm, margin, factor, FUN)`: takes a matrix and a vector of categorical values, groups rows/columns of the matrix based on the corresponding categorical value and runs UDO on the rows/columns with the same categorical value. It outputs a matrix.
 
 In practice, groupby requires an aggregation operation over some of the original elements in a group and combine operation over the aggregation results. The reason is that groupby runs in parallel and each time it can only aggregate over some of the elements in a group. Essentially, the combine operation is an aggregation. Usually, it is sufficient to pass a UDO to a groupby function because a UDO can work as both aggregation and combine. In some cases, however, we need these operations to be different. As such, users can pass an aggregation operator to groupby. A user can create an aggregation operator themselves by calling fm.create.agg.op() and specify two UDOs for the aggregation and combine operation.
 fm.create.agg.op(agg, combine, name)
