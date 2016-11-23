@@ -143,7 +143,7 @@ FlashR allows users to define their own element operators. Currently, a new elem
 
 **Inner product** is a generalized matrix multiplication. It replaces multiplication and addition in matrix multiplication with two element operators, respectively. As such, we can define many operations with inner product. For example, we can use inner product to compute various pair-wise distance matrics of data points such as Euclidean distance and Hamming distance.
 
-Example: computes the Euclidean distance between every pair of data points. `fm.bo.euclidean` is added to FlashR with FlashR extension.
+Example: computes the Euclidean distance between every pair of data points. `fm.bo.euclidean` is registered to FlashR as a new binary operator. Essentially, it computes the square of the difference of two elements. `euclidean(x, y)=(x - y)^2`
 
 ```R
 fm.inner.prod(data, t(data), fm.bo.euclidean, fm.bo.add)
