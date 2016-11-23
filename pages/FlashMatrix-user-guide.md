@@ -153,44 +153,44 @@ Many matrix operations in FlashR are implemented with `fm.sapply` and `fm.mapply
 
 Example 1: compute m1 + m2
 
-`fm.mapply2(m1, m2, fm.bo.add)`
+```R
+fm.mapply2(m1, m2, fm.bo.add)
+```
 
 Example 2: compute m1 + v2 (in this case, the vector v2 must have the same length as the columns of the matrix m1)
 
-`fm.mapply.col(m1, v2, fm.bo.add)`
+```R
+fm.mapply.col(m1, v2, fm.bo.add)
+```
 
 Example 3: compute -m1
 
-`fm.sapply(m1, fm.buo.neg)`
+```R
+fm.sapply(m1, fm.buo.neg)
+```
 
 **Aggregation** takes multiple elements and outputs a single element.
 
-* `fm.agg`: aggregates over the entire vector or matrix.
-* `fm.agg.mat`: aggregates over each individual row or column of a matrix and outputs a vector.
-
-```
-fm.agg(fm, FUN)
-fm.agg.mat(fm, margin, FUN)
-```
+* `fm.agg(fm, FUN)`: aggregates over the entire vector or matrix.
+* `fm.agg.mat(fm, margin, FUN)`: aggregates over each individual row or column of a matrix and outputs a vector.
 
 Example 1: compute sum(m)
 
-`fm.agg(x, fm.bo.add)`
+```R
+fm.agg(x, fm.bo.add)
+```
 
 Example 2: compute rowSums(m)
 
-`fm.agg.mat(x, 1, fm.bo.add)`
+```R
+fm.agg.mat(x, 1, fm.bo.add)
+```
 
 Again, both `sum()` and `rowSums()` have been implemented with aggregation in FlashR.
 
 **Groupby** is similar to groupby in SQL. It groups multiple elements by their values and perform some computation on the elements. Currently, the function passed to a groupby function has to aggregate values.
-`fm.sgroupby`:  groups elements by their values in a vector and invokes UDO on the elements associated with the same value. It outputs a vector.
-`fm.groupby`: takes a matrix and a vector of categorical values, groups rows/columns of the matrix based on the corresponding categorical value and runs UDO on the rows/columns with the same categorical value. It outputs a matrix.
-
-```
-fm.sgroupby(o, FUN)
-fm.groupby(fm, margin, factor, FUN)
-```
+`fm.sgroupby(o, FUN)`:  groups elements by their values in a vector and invokes UDO on the elements associated with the same value. It outputs a vector.
+`fm.groupby(fm, margin, factor, FUN)`: takes a matrix and a vector of categorical values, groups rows/columns of the matrix based on the corresponding categorical value and runs UDO on the rows/columns with the same categorical value. It outputs a matrix.
 
 In practice, groupby requires an aggregation operation over some of the original elements in a group and combine operation over the aggregation results. The reason is that groupby runs in parallel and each time it can only aggregate over some of the elements in a group. Essentially, the combine operation is an aggregation. Usually, it is sufficient to pass a UDO to a groupby function because a UDO can work as both aggregation and combine. In some cases, however, we need these operations to be different. As such, users can pass an aggregation operator to groupby. A user can create an aggregation operator themselves by calling fm.create.agg.op() and specify two UDOs for the aggregation and combine operation.
 fm.create.agg.op(agg, combine, name)
