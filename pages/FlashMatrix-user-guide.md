@@ -87,6 +87,7 @@ In addition to the basic functions above, FlashR provides a set of generalized o
 Each GenOp accepts a user-defined operator to perform actual computation. There are many user-defined operators in FlashR such as addition and subtraction (see `?fm.basic.op` for details). Below lists all of the operators currently supported by FlashR.
 
 Binary operator:
+
 | name | R object |
 | :---| :--- |
 | "+" | fm.bo.add |
