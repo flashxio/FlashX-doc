@@ -5,7 +5,7 @@ last_updated: Nov 3, 2016
 tags: [tutorial]
 summary: "The User Guide of FlashR"
 sidebar: mydoc_sidebar
-permalink: FlashMatrix-user-guide.html
+permalink: FlashR-user-guide.html
 folder: mydoc
 ---
 
