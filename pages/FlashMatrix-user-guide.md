@@ -94,8 +94,8 @@ The table lists all binary operators:
 
 | name | R object | Computation semantics |
 | :---| :--- | :--- |
-| "+" or "add" | fm.bo.add | `2+1=3` |
-| "-" or "sub" | fm.bo.sub | `2-1=1` |
+| "+" or "add" | fm.bo.add | sum two elements. e.g., `2+1=3` |
+| "-" or "sub" | fm.bo.sub | subtract the second element from the first one. e.g, `2-1=1` |
 | "*" or "mul" | fm.bo.mul | `2*3=6` |
 | "/" or "div" | fm.bo.div | `6/2=3` |
 | "min" | fm.bo.min | `min(1, 2)=1` |
