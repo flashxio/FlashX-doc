@@ -132,8 +132,10 @@ The table lists aggregation operators defined in FlashR:
 | name | R object | Computation semantics |
 | :---| :--- | :--- |
 | "count" | fm.bo.count | count the length of an array. e.g., `count(1, 2, 1)=3` |
-| "which.max" | fm.bo.which.max | compute the index of the maximal value (0-based). e.g., `which.max(1, 2, 1)=1` |
-| "which.min" | fm.bo.which.min | compute the index of the minimal value (0-based). e.g., `which.max(1, 2, 1)=0` |
+| "which.max" | fm.bo.which.max | compute the index of the maximal value. e.g., `which.max(1, 2, 1)=2` |
+| "which.min" | fm.bo.which.min | compute the index of the minimal value. e.g., `which.max(1, 2, 1)=1` |
+
+All of the binary operators with the same input and output element type can be used as aggregation operators. The common ones are "+", "*", "min", "max".
 
 FlashR allows users to define their own element operators. Currently, a new element operator has to be defined in C/C++. More instructions of adding new element operators are shown [here](https://flashxio.github.io/FlashX-doc/FlashR-extension.html).
 
@@ -176,7 +178,7 @@ fm.sapply(m1, fm.buo.neg)
 fm.sapply(m1, "neg")
 ```
 
-**Aggregation** takes multiple elements and outputs a single element.
+**Aggregation** takes multiple elements and outputs a single element. These functions require aggregation element operators as shown above, but can also take any binary operators with the same input and output element type.
 
 * `fm.agg(fm, FUN)`: aggregates over the entire vector or matrix.
 * `fm.agg.mat(fm, margin, FUN)`: aggregates over each individual row or column of a matrix and outputs a vector.
@@ -195,10 +197,10 @@ fm.agg.mat(m, 1, fm.bo.add)
 fm.agg.mat(m, 1, "+")
 ```
 
-**Groupby** is similar to groupby in SQL. It groups multiple elements by their values and perform some computation on the elements. Currently, the function passed to a groupby function has to aggregate values.
+**Groupby** is similar to groupby in SQL. It groups multiple elements by their values and perform aggregation on the elements.
 
-* `fm.sgroupby(fm, FUN)`:  groups elements by their values in a vector and invokes UDO on the elements associated with the same value. It outputs a vector.
-* `fm.groupby(fm, margin, factor, FUN)`: takes a matrix and a vector of categorical values, groups rows/columns of the matrix based on the corresponding categorical value and runs UDO on the rows/columns with the same categorical value. It outputs a matrix.
+* `fm.sgroupby(fm, FUN)`:  groups elements by their values in a vector and invokes FUN on the elements associated with the same value. It outputs a list with two fields `val` and `agg`. `val` is a FlashR vector with unique values in the original input vector; `agg` is a FlashR vector that stores the aggregation results for each unique value.
+* `fm.groupby(fm, margin, factor, FUN)`: takes a matrix and a factor vector, groups rows/columns of the matrix based on the factor vector and runs FUN on the rows/columns with the same factor. If we group rows, `fm.groupby` outputs a matrix that has the number of rows equal to the maximal number of levels.
 
 In practice, groupby requires an aggregation operation over some of the original elements in a group and combine operation over the aggregation results. The reason is that groupby runs in parallel and each time it can only aggregate over some of the elements in a group. Essentially, the combine operation is an aggregation. Usually, it is sufficient to pass a UDO to a groupby function because a UDO can work as both aggregation and combine. In some cases, however, we need these operations to be different. As such, users can pass an aggregation operator to groupby. A user can create an aggregation operator themselves by calling fm.create.agg.op() and specify two UDOs for the aggregation and combine operation.
 fm.create.agg.op(agg, combine, name)
