@@ -82,13 +82,11 @@ Some of them have slightly different interface and semantics. These slightly dif
 
 ## Generalized operations
 
-In addition to the basic functions above, FlashR provides a set of generalized operations (GenOps) to increase the generality of FlashR. With these GenOps, users can implement more computations efficiently, required by many data mining and machine learning algorithms. Most of the "Base" and "stats" R functions shown above are also implemented with the GenOps.
-
-Each GenOp accepts an element operator to perform actual computation. There are many element operators in FlashR such as addition and subtraction (see `?fm.basic.op` for details). Below lists all of the operators currently supported by FlashR.
+In addition to the basic functions above, FlashR provides a set of generalized operations (GenOps) to increase the generality of FlashR. A GenOp takes some matrices and an element operator, which defines the operation on elements, to perform actual computation. FlashR defines only four GenOps and many element operators to cover computations required by many data mining and machine learning algorithms. Most of the "Base" and "stats" R functions shown above are also implemented with the GenOps.
 
 ### Element operators:
 
-Binary operators:
+FlashR defines many element computors. Some operators take two elements and output one element (binary operators); the others take only one element and output one element (unary operators). Below list all of the binary and unary operators supported by FlashR.
 
 | name | R object |
 | :---| :--- |
@@ -108,13 +106,13 @@ Binary operators:
 | "\|" or "or" | fm.bo.or |
 | "&" or "and" | fm.bo.and |
 
+Binary operators:
+
 What do we do with these?
 fm.bo.count
 fm.bo.which.max
 fm.bo.which.min
 fm.bo.euclidean
-
-Unary operators:
 
 | name | R object |
 | :---| :--- |
@@ -130,6 +128,10 @@ Unary operators:
 | "round" | fm.buo.round |
 | "as.int" | fm.buo.as.int |
 | "as.numeric" | fm.buo.as.numeric |
+
+Unary operators:
+
+### The list of GenOps in FlashR
 
 **Inner product**: a generalized matrix multiplication. It replaces multiplication and addition in matrix multiplication with two UDOs, respectively. As such, we can define many operations with inner product. For example, we can use inner product to compute various pair-wise distance matrics of data points such as Euclidean distance and Hamming distance.
 
