@@ -27,19 +27,19 @@ algorithms completely in R.
 
 ![Architecture](https://flashxio.github.io/FlashX-doc/images/flashmatrix.png)
 
-## [Quick Start](https://flashxio.github.io/FlashX-doc/FlashX-Quick-Start-Guide.html)
+# [Quick Start](https://flashxio.github.io/FlashX-doc/FlashX-Quick-Start-Guide.html)
 
 We provide instructions to install FlashR, the R programming interface
 for FlashX, and use some simple examples to show how to use FlashR for computation.
 
-## [User Guide](https://flashxio.github.io/FlashX-doc/FlashMatrix-user-guide.html)
+# [User Guide](https://flashxio.github.io/FlashX-doc/FlashMatrix-user-guide.html)
 
 This documentation provides detailed description of the FlashR functions.
 
-## Tutorials
+# Tutorials
 
 This lists specific applications and shows how to solve them with FlashX.
 
-## Contributing
+# Contributing
 
-## API
+# API
