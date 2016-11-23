@@ -84,8 +84,13 @@ Some of them have slightly different interface and semantics. These slightly dif
 
 In addition to the basic functions above, FlashR provides a set of generalized operations (GenOps) to increase the generality of FlashR. With these GenOps, users can implement more computations efficiently, required by many data mining and machine learning algorithms. Most of the "Base" and "stats" R functions shown above are also implemented with the GenOps.
 
+Each GenOp accepts a user-defined operator to perform actual computation. There are many user-defined operators in FlashR such as addition and subtraction (see `?fm.basic.op` for details). Below lists all of the operators currently supported by FlashR.
+
 Binary operator:
-fm.bo.add
+| name | R object |
+| :---| :--- |
+| "+" | fm.bo.add |
+
 fm.bo.sub
 fm.bo.mul
 fm.bo.div
@@ -120,8 +125,6 @@ fm.buo.log10
 fm.buo.round
 fm.buo.as.int
 fm.buo.as.numeric
-
-Generalized operators (GenOp) are the core of FlashR. There are a very small number of GenOps in FlashR. Each operator accepts a user-defined operator (UDO) or the name of a UDO to perform users' tasks. Currently, there are four GenOps, but some of them have multiple forms. There are many UDOs in FlashR such as addition and subtraction (see `?fm.basic.op` for details). Below lists all GenOps currently supported by FlashR.
 
 **Inner product**: a generalized matrix multiplication. It replaces multiplication and addition in matrix multiplication with two UDOs, respectively. As such, we can define many operations with inner product. For example, we can use inner product to compute various pair-wise distance matrics of data points such as Euclidean distance and Hamming distance.
 
