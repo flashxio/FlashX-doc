@@ -86,7 +86,9 @@ In addition to the basic functions above, FlashR provides a set of generalized o
 
 ### Element operators:
 
-FlashR defines many element computors. Some operators take two elements and output one element (binary operators); the others take only one element and output one element (unary operators). Below list all of the binary and unary operators supported by FlashR.
+FlashR defines many element computors. Some operators take two elements and output one element (binary operators); the others take only one element and output one element (unary operators). Below list all of the binary and unary operators supported by FlashR. The two tables lists the name and the corresponding R object for an element operator. Users can pass an element operator to a GenOp by using either its name or its R object.
+
+The table lists all binary operators:
 
 | name | R object |
 | :---| :--- |
@@ -106,13 +108,7 @@ FlashR defines many element computors. Some operators take two elements and outp
 | "\|" or "or" | fm.bo.or |
 | "&" or "and" | fm.bo.and |
 
-Binary operators:
-
-What do we do with these?
-fm.bo.count
-fm.bo.which.max
-fm.bo.which.min
-fm.bo.euclidean
+The table lists all unary operators:
 
 | name | R object |
 | :---| :--- |
@@ -129,48 +125,45 @@ fm.bo.euclidean
 | "as.int" | fm.buo.as.int |
 | "as.numeric" | fm.buo.as.numeric |
 
-Unary operators:
+The table lists aggregation operators defined in FlashR:
+
+| name | R object |
+| :---| :--- |
+| "count" | fm.bo.count |
+| "which.max" | fm.bo.which.max |
+| "which.min" | fm.bo.which.min |
+
+fm.bo.euclidean
+
+FlashR allows users to define their own element operators. Currently, a new element operator has to be defined in C.
+
 
 ### The list of GenOps in FlashR
 
-**Inner product**: a generalized matrix multiplication. It replaces multiplication and addition in matrix multiplication with two UDOs, respectively. As such, we can define many operations with inner product. For example, we can use inner product to compute various pair-wise distance matrics of data points such as Euclidean distance and Hamming distance.
-
-```
-fm.inner.prod(fm, mat, FUN1, FUN2)
-```
-
-One example of using `fm.inner.prod` is to compute a pair-wise distance between every data point. `fm.bo.euclidean` and `fm.bo.add` are some UDOs written in C++. `fm.bo.euclidean` computes `(x-y)*(x-y)`. `fm.bo.add` computes `x + y`.
-`fm.inner.prod(data, t(data), fm.bo.euclidean, fm.bo.add)`
+**Inner product**: a generalized matrix multiplication. It replaces multiplication and addition in matrix multiplication with two element operators, respectively. As such, we can define many operations with inner product. For example, we can use inner product to compute various pair-wise distance matrics of data points such as Euclidean distance and Hamming distance.
+e.g., `fm.inner.prod(data, t(data), fm.bo.euclidean, fm.bo.add)` computes the Euclidean distance between every pair of data points.
 
 **Apply**: a generalized form of element-wise operations and has multiple variants.
 
-* `fm.sapply`:  a generalized element-wise unary operation whose UDO takes an element in a vector or a matrix at a time and outputs an element.
-* `fm.mapply2`: a generalized element-wise binary operation whose UDO takes an element from each vector or matrix and outputs an element.
-* `fm.mapply.row` and `fm.mapply.col` are two variants of `fm.mapply2`. They are similar to `sweep()` in R and the broadcasting mechanism in Numpy. They are equivalent to mapply2 on every row or column of the matrix (in the first argument) with the vector (in the second argument). Currently, `fm.mapply.row` and `fm.mapply.col` only accept the cases that the vector has the same length as a row or a column of the matrix.
-
-```
-fm.sapply(o, FUN)
-fm.mapply2(o1, o2, FUN)
-fm.mapply.row(o1, o2, FUN)
-fm.mapply.col(o1, o2, FUN)
-```
-
-`fm.multiply`
-
-lazy evaluation.
+* `fm.sapply(o, FUN)`:  a generalized element-wise unary operation whose element operator takes one element at a time from a vector or a matrix and outputs an element. As such, the output matrix of this function has the same shape as the input matrix.
+* `fm.mapply2(o1, o2, FUN)`: a generalized element-wise binary operation whose element operator takes an element from each vector or matrix and outputs an element. The output matrix of this function has the same shape as the input matrices.
+* `fm.mapply.row(o1, o2, FUN)` and `fm.mapply.col(o1, o2, FUN)` perform mapply2 on every row or column of the matrix (in the first argument) with the vector (in the second argument). Currently, `fm.mapply.row` and `fm.mapply.col` only accept the cases that the vector has the same length as a row or a column of the matrix.
 
 Many matrix operations in FlashR are implemented with `fm.sapply` and `fm.mapply2`.
+
 Example 1: compute m1 + m2
 
-`fm.mapply2.fm(m1, m2, fm.bo.add)`
+`fm.mapply2(m1, m2, fm.bo.add)`
 
-Example 2: compute -m1
+Example 2: compute m1 + v2 (in this case, the vector v2 must have the same length as the columns of the matrix m1)
+
+`fm.mapply.col(m1, v2, fm.bo.add)`
+
+Example 3: compute -m1
 
 `fm.sapply(m1, fm.buo.neg)`
 
-These are some examples of using `fm.sapply` and `fm.mapply2`. Both matrix addition and matrix negation have been implemented in FlashR.
-
-Aggregation takes multiple elements and outputs a single element.
+**Aggregation** takes multiple elements and outputs a single element.
 
 * `fm.agg`: aggregates over the entire vector or matrix.
 * `fm.agg.mat`: aggregates over each individual row or column of a matrix and outputs a vector.
@@ -190,7 +183,7 @@ Example 2: compute rowSums(m)
 
 Again, both `sum()` and `rowSums()` have been implemented with aggregation in FlashR.
 
-Groupby is similar to groupby in SQL. It groups multiple elements by their values and perform some computation on the elements. Currently, the function passed to a groupby function has to aggregate values.
+**Groupby** is similar to groupby in SQL. It groups multiple elements by their values and perform some computation on the elements. Currently, the function passed to a groupby function has to aggregate values.
 `fm.sgroupby`:  groups elements by their values in a vector and invokes UDO on the elements associated with the same value. It outputs a vector.
 `fm.groupby`: takes a matrix and a vector of categorical values, groups rows/columns of the matrix based on the corresponding categorical value and runs UDO on the rows/columns with the same categorical value. It outputs a matrix.
 
