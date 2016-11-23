@@ -103,7 +103,7 @@ Binary operator:
 | ">=" or "ge" | fm.bo.ge |
 | "<" or "lt" | fm.bo.lt |
 | "<=" or "le" | fm.bo.le |
-| "|" or "or" | fm.bo.or |
+| "\|" or "or" | fm.bo.or |
 | "&" or "and" | fm.bo.and |
 
 What do we do with these?
