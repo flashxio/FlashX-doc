@@ -92,23 +92,23 @@ FlashR defines many element computors. Some operators take two elements and outp
 
 The table lists all binary operators:
 
-| name | R object |
-| :---| :--- |
-| "+" or "add" | fm.bo.add |
-| "-" or "sub" | fm.bo.sub |
-| "*" or "mul" | fm.bo.mul |
-| "/" or "div" | fm.bo.div |
-| "min" | fm.bo.min |
-| "max" | fm.bo.max |
-| "pow" | fm.bo.pow |
-| "==" or "eq" | fm.bo.eq |
-| "!=" or "neq" | fm.bo.neq |
-| ">" or "gt" | fm.bo.gt |
-| ">=" or "ge" | fm.bo.ge |
-| "<" or "lt" | fm.bo.lt |
-| "<=" or "le" | fm.bo.le |
-| "\|" or "or" | fm.bo.or |
-| "&" or "and" | fm.bo.and |
+| name | R object | Computation semantics |
+| :---| :--- | :--- |
+| "+" or "add" | fm.bo.add | `2+1=3` |
+| "-" or "sub" | fm.bo.sub | `2-1=1` |
+| "*" or "mul" | fm.bo.mul | `2*3=6` |
+| "/" or "div" | fm.bo.div | `6/2=3` |
+| "min" | fm.bo.min | `min(1, 2)=1` |
+| "max" | fm.bo.max | `max(1, 2)=2` |
+| "pow" | fm.bo.pow | `pow(2, 3)=8` |
+| "==" or "eq" | fm.bo.eq | `2 == 3 = FALSE` |
+| "!=" or "neq" | fm.bo.neq | `2 != 3 = TRUE` |
+| ">" or "gt" | fm.bo.gt | `2 > 3 = FALSE` |
+| ">=" or "ge" | fm.bo.ge | `2 >= 3 = FALSE` |
+| "<" or "lt" | fm.bo.lt | `2 < 3 = TRUE` |
+| "<=" or "le" | fm.bo.le | `2 <= 3 = TRUE` |
+| "\|" or "or" | fm.bo.or | `TRUE | FALSE = TRUE` |
+| "&" or "and" | fm.bo.and | `TRUE & FALSE = FALSE` |
 
 The table lists all unary operators:
 
@@ -155,7 +155,7 @@ fm.inner.prod(data, t(data), fm.bo.euclidean, fm.bo.add)
 
 Many matrix operations in FlashR are implemented with `fm.sapply` and `fm.mapply2`.
 
-Example 1: compute m1 + m2
+Example 1: compute m1 + m2.
 
 ```R
 fm.mapply2(m1, m2, fm.bo.add)
@@ -166,12 +166,14 @@ Example 2: compute m1 + v2 (in this case, the vector v2 must have the same lengt
 
 ```R
 fm.mapply.col(m1, v2, fm.bo.add)
+fm.mapply.col(m1, v2, "+")
 ```
 
 Example 3: compute -m1
 
 ```R
 fm.sapply(m1, fm.buo.neg)
+fm.sapply(m1, "neg")
 ```
 
 **Aggregation** takes multiple elements and outputs a single element.
@@ -179,23 +181,23 @@ fm.sapply(m1, fm.buo.neg)
 * `fm.agg(fm, FUN)`: aggregates over the entire vector or matrix.
 * `fm.agg.mat(fm, margin, FUN)`: aggregates over each individual row or column of a matrix and outputs a vector.
 
-Example 1: compute sum(m)
+Example 1: compute `sum(m)`
 
 ```R
-fm.agg(x, fm.bo.add)
+fm.agg(m, fm.bo.add)
+fm.agg(m, "+")
 ```
 
-Example 2: compute rowSums(m)
+Example 2: compute `rowSums(m)`
 
 ```R
-fm.agg.mat(x, 1, fm.bo.add)
+fm.agg.mat(m, 1, fm.bo.add)
+fm.agg.mat(m, 1, "+")
 ```
-
-Again, both `sum()` and `rowSums()` have been implemented with aggregation in FlashR.
 
 **Groupby** is similar to groupby in SQL. It groups multiple elements by their values and perform some computation on the elements. Currently, the function passed to a groupby function has to aggregate values.
 
-* `fm.sgroupby(o, FUN)`:  groups elements by their values in a vector and invokes UDO on the elements associated with the same value. It outputs a vector.
+* `fm.sgroupby(fm, FUN)`:  groups elements by their values in a vector and invokes UDO on the elements associated with the same value. It outputs a vector.
 * `fm.groupby(fm, margin, factor, FUN)`: takes a matrix and a vector of categorical values, groups rows/columns of the matrix based on the corresponding categorical value and runs UDO on the rows/columns with the same categorical value. It outputs a matrix.
 
 In practice, groupby requires an aggregation operation over some of the original elements in a group and combine operation over the aggregation results. The reason is that groupby runs in parallel and each time it can only aggregate over some of the elements in a group. Essentially, the combine operation is an aggregation. Usually, it is sufficient to pass a UDO to a groupby function because a UDO can work as both aggregation and combine. In some cases, however, we need these operations to be different. As such, users can pass an aggregation operator to groupby. A user can create an aggregation operator themselves by calling fm.create.agg.op() and specify two UDOs for the aggregation and combine operation.
