@@ -112,28 +112,28 @@ The table lists all binary operators:
 
 The table lists all unary operators:
 
-| name | R object |
-| :---| :--- |
-| "neg" | fm.buo.neg |
-| "sqrt" | fm.buo.sqrt |
-| "abs" | fm.buo.abs |
-| "not" | fm.buo.not |
-| "ceil" | fm.buo.ceil |
-| "floor" | fm.buo.floor |
-| "log" | fm.buo.log |
-| "log2" | fm.buo.log2 |
-| "log10" | fm.buo.log10 |
-| "round" | fm.buo.round |
-| "as.int" | fm.buo.as.int |
-| "as.numeric" | fm.buo.as.numeric |
+| name | R object | Computation semantics |
+| :---| :--- | :--- |
+| "neg" | fm.buo.neg | negate. e.g., `neg(1)=-1` |
+| "sqrt" | fm.buo.sqrt | sqare root. e.g., `sqrt(9)=3` |
+| "abs" | fm.buo.abs | absolute value. e.g., `abs(-1)=1` |
+| "not" | fm.buo.not | logical not. e.g., `not(TRUE)=FALSE` |
+| "ceil" | fm.buo.ceil | ceiling of a numeric value. e.g., `ceil(1.1)=2` |
+| "floor" | fm.buo.floor | floor of a numeric value. e.g., `floor(1.1)=1` |
+| "log" | fm.buo.log | the natural logarithm. e.g., `log(10)=2.302585` |
+| "log2" | fm.buo.log2 | the logarithm base 2. e.g., `log2(4)=2` |
+| "log10" | fm.buo.log10 | the logarithm base 10. e.g., `log10(100)=2` |
+| "round" | fm.buo.round | round a value to 0 decimal place. e.g., `round(1.1)=1` |
+| "as.int" | fm.buo.as.int | cast a value to an integer |
+| "as.numeric" | fm.buo.as.numeric | cast a value to a floating-point number |
 
 The table lists aggregation operators defined in FlashR:
 
-| name | R object |
-| :---| :--- |
-| "count" | fm.bo.count |
-| "which.max" | fm.bo.which.max |
-| "which.min" | fm.bo.which.min |
+| name | R object | Computation semantics |
+| :---| :--- | :--- |
+| "count" | fm.bo.count | count the length of an array. e.g., `count(1, 2, 1)=3` |
+| "which.max" | fm.bo.which.max | compute the index of the maximal value (0-based). e.g., `which.max(1, 2, 1)=1` |
+| "which.min" | fm.bo.which.min | compute the index of the minimal value (0-based). e.g., `which.max(1, 2, 1)=0` |
 
 FlashR allows users to define their own element operators. Currently, a new element operator has to be defined in C/C++. More instructions of adding new element operators are shown [here](https://flashxio.github.io/FlashX-doc/FlashR-extension.html).
 
