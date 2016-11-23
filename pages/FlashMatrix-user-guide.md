@@ -84,9 +84,11 @@ Some of them have slightly different interface and semantics. These slightly dif
 
 In addition to the basic functions above, FlashR provides a set of generalized operations (GenOps) to increase the generality of FlashR. With these GenOps, users can implement more computations efficiently, required by many data mining and machine learning algorithms. Most of the "Base" and "stats" R functions shown above are also implemented with the GenOps.
 
-Each GenOp accepts a user-defined operator to perform actual computation. There are many user-defined operators in FlashR such as addition and subtraction (see `?fm.basic.op` for details). Below lists all of the operators currently supported by FlashR.
+Each GenOp accepts an element operator to perform actual computation. There are many element operators in FlashR such as addition and subtraction (see `?fm.basic.op` for details). Below lists all of the operators currently supported by FlashR.
 
-Binary operator:
+### Element operators:
+
+Binary operators:
 
 | name | R object |
 | :---| :--- |
@@ -113,18 +115,21 @@ fm.bo.which.min
 fm.bo.euclidean
 
 Unary operators:
-fm.buo.neg
-fm.buo.sqrt
-fm.buo.abs
-fm.buo.not
-fm.buo.ceil
-fm.buo.floor
-fm.buo.log
-fm.buo.log2
-fm.buo.log10
-fm.buo.round
-fm.buo.as.int
-fm.buo.as.numeric
+
+| name | R object |
+| :---| :--- |
+| "neg" | fm.buo.neg |
+| "sqrt" | fm.buo.sqrt |
+| "abs" | fm.buo.abs |
+| "not" | fm.buo.not |
+| "ceil" | fm.buo.ceil |
+| "floor" | fm.buo.floor |
+| "log" | fm.buo.log |
+| "log2" | fm.buo.log2 |
+| "log10" | fm.buo.log10 |
+| "round" | fm.buo.round |
+| "as.int" | fm.buo.as.int |
+| "as.numeric" | fm.buo.as.numeric |
 
 **Inner product**: a generalized matrix multiplication. It replaces multiplication and addition in matrix multiplication with two UDOs, respectively. As such, we can define many operations with inner product. For example, we can use inner product to compute various pair-wise distance matrics of data points such as Euclidean distance and Hamming distance.
 
