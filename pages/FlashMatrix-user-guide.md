@@ -231,8 +231,6 @@ FlashR currently provides a limited number of linear algebra routines. As such, 
 * `fm.as.factor`: convert a FlashR vector to a factor vector. The current implementation only supports converting an integer vector. By default, this function determines the number of levels in the factor vector automatically. Users can also provide a maximal number of levels. Right now, FlashR factor vectors are used by `fm.sgroupby` and `fm.groupby`.
 * [`as.vector`](https://stat.ethz.ch/R-manual/R-devel/library/base/html/vector.html): convert a FlashR vector/matrix to a R vector.
 * [`as.matrix`](https://stat.ethz.ch/R-manual/R-devel/library/base/html/matrix.html): convert a FlashR vector/matrix to a R matrix.
-* `fm.conv.FM2R`: convert a FlashR vector or matrix to an R vector or matrix respectively.
-* `fm.conv.R2FM`: convert an R vector or matrix to a FlashR vector or matrix respectively.
 
 FlashR has the following functions to test if an object is a FlashR vector or matrix.
 
@@ -249,7 +247,23 @@ Sometimes, users need to tune FlashR to get better performance or use disks to s
 
 ## Lazy evaluation and matrix materialization
 
-FlashR gains performance by lazily evaluating most of the matrix operations and merging them into a single execution. As such, most of the matrices output from a matrix operation do not contain actual computation results. By default, only the operations that output an R scalar value perform actual computation when the function is called. The computation can also be triggered when a user wants to convert FlashR vectors/matrices to R vectors/matrices. Users can also explicitly force FlashR to perform computation by invoking `fm.materialize` and `fm.materialize.list`. In addition, users can set a flag on a matrix to notify FlashR to save the materialized results.
+FlashR gains performance by lazily evaluating most of the matrix operations and merging them into a single execution. As such, most of the matrices output from a matrix operation do not contain actual computation results. 
+
+```R
+> mat1 <- fm.runif.matrix(1000, 10)
+> mat2 <- fm.runif.matrix(1000, 10)
+> mat <- mat1 + mat2
+> fm.print.mat.info(mat)
+dense matrix with 1000 rows and 10 cols in col-major order
+dense matrix is stored on 4 NUMA nodes
+matrix store: vmat-11=ifelse2_op(vmat-10=cast_bool2int(vmat-9=||(vmat-6=cast_bool2int(vmat-5=isna_only(mem_mat-1(1000,10))), vmat-8=cast_bool2int(vmat-7=isna_only(mem_mat-3(1000,10))))), vmat-4=+(mem_mat-1(1000,10), mem_mat-3(1000,10)))
+```
+
+FlashR materializes matrices in the following three cases:
+
+* The operations that output an R scalar value perform actual computation when the function is called.
+* The computation can also be triggered when a user wants to convert FlashR vectors/matrices to R vectors/matrices. Users can also explicitly force FlashR to perform computation by invoking `fm.materialize` and `fm.materialize.list`.
+* In addition, users can set a flag on a matrix to notify FlashR to save the materialized results.
 
 ## Requirements for FlashR programmers
 
