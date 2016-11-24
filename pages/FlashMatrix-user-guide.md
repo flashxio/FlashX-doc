@@ -137,6 +137,9 @@ The table lists aggregation operators defined in FlashR:
 
 All of the binary operators with the same input and output element type can be used as aggregation operators. The common ones are "+", "*", "min", "max".
 
+In practice, groupby requires an aggregation operation over some of the original elements in a group and combine operation over the aggregation results. The reason is that groupby runs in parallel and each time it can only aggregate over some of the elements in a group. Essentially, the combine operation is an aggregation. Usually, it is sufficient to pass a UDO to a groupby function because a UDO can work as both aggregation and combine. In some cases, however, we need these operations to be different. As such, users can pass an aggregation operator to groupby. A user can create an aggregation operator themselves by calling fm.create.agg.op() and specify two UDOs for the aggregation and combine operation.
+fm.create.agg.op(agg, combine, name)
+
 FlashR allows users to define their own element operators. Currently, a new element operator has to be defined in C/C++. More instructions of adding new element operators are shown [here](https://flashxio.github.io/FlashX-doc/FlashR-extension.html).
 
 ### The list of GenOps in FlashR
@@ -200,10 +203,21 @@ fm.agg.mat(m, 1, "+")
 **Groupby** is similar to groupby in SQL. It groups multiple elements by their values and perform aggregation on the elements.
 
 * `fm.sgroupby(fm, FUN)`:  groups elements by their values in a vector and invokes FUN on the elements associated with the same value. It outputs a list with two fields `val` and `agg`. `val` is a FlashR vector with unique values in the original input vector; `agg` is a FlashR vector that stores the aggregation results for each unique value.
-* `fm.groupby(fm, margin, factor, FUN)`: takes a matrix and a factor vector, groups rows/columns of the matrix based on the factor vector and runs FUN on the rows/columns with the same factor. If we group rows, `fm.groupby` outputs a matrix that has the number of rows equal to the maximal number of levels.
+* `fm.groupby(fm, margin, factor, FUN)`: takes a matrix and a factor vector, groups rows/columns of the matrix based on the factor vector and runs aggregation FUN on the rows/columns within the same group to generate a single row/column. If we group rows, `fm.groupby` outputs a matrix with the number of rows equal to the maximal number of levels and the number of columns equal to the number of columns in the input matrix; if we group columns, `fm.groupby` outputs a matrix with the number of columns equal to the maximal number of levels and the number of rows equals to the number of rows in the input matrix.
 
-In practice, groupby requires an aggregation operation over some of the original elements in a group and combine operation over the aggregation results. The reason is that groupby runs in parallel and each time it can only aggregate over some of the elements in a group. Essentially, the combine operation is an aggregation. Usually, it is sufficient to pass a UDO to a groupby function because a UDO can work as both aggregation and combine. In some cases, however, we need these operations to be different. As such, users can pass an aggregation operator to groupby. A user can create an aggregation operator themselves by calling fm.create.agg.op() and specify two UDOs for the aggregation and combine operation.
-fm.create.agg.op(agg, combine, name)
+Example 1: count the occurence of unique values in a vector.
+
+```R
+fm.sgroupby(vec, "count")
+```
+
+Example 2: group rows based on the labels and compute means within each group.
+
+```R
+g.sums <- fm.groupby(mat, 1, labels, "+")
+cnts <- fm.sgroupby(labels, "count")
+g.means <- fm.mapply.col(g.sums, cnts, "/")
+```
 
 ## Interact with native R
 
