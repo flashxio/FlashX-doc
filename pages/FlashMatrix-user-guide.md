@@ -139,7 +139,8 @@ In addition to binary and unary operators, FlashR also needs aggregation operato
 
 FlashR also provides `fm.create.agg.op(agg, combine, name)`, which turns binary operators into aggregation operators.
 
-* For many aggregations, such as summation, product, minimum and maximum, we can provide the same binary operators ("+", "*", "min", "max") as both `agg` and `combine`, because these binary operators have the same input and output element type. * For some aggregations, `agg` and `combine` takes different binary operators. For example, counting is defined as `fm.create.agg.op("count", "+", "count")` because "count" always outputs integers regardless of the input element type.
+* For many aggregations, such as summation, product, minimum and maximum, we can provide the same binary operators ("+", "*", "min", "max") as both `agg` and `combine`, because these binary operators have the same input and output element type.
+* For some aggregations, `agg` and `combine` takes different binary operators. For example, counting is defined as `fm.create.agg.op("count", "+", "count")` because "count" always outputs integers regardless of the input element type.
 * For some aggregations, `combine` is not applicable. The examples are "which.min" and "which.max".
 
 FlashR allows users to define their own element operators. Currently, a new element operator has to be defined in C/C++. More instructions of adding new element operators are shown [here](https://flashxio.github.io/FlashX-doc/FlashR-extension.html).
