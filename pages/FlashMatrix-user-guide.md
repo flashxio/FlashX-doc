@@ -224,7 +224,7 @@ g.means <- fm.mapply.col(g.sums, cnts, "/")
 
 ## Interact with native R
 
-FlashR currently provides a limited number of linear algebra routines. As such, users still need to rely on the linear algebra routines, such as linear solver and Choleski factorization in R for their machine learning algorithm. FlashR provides functions for users to interact with the original R system.
+FlashR currently provides a limited number of linear algebra routines. As such, users still need to rely on the ones in R, such as linear solver and Choleski factorization, for their machine learning algorithms. FlashR provides functions for users to interact with the original R system.
 
 * `fm.as.vector`: convert an R vector/matrix and a FlashR matrix to a FlashR vector. The current implementation only supports converting from a one-column FlashR matrix to a FlashR vector.
 * `fm.as.matrix`: convert an R vector/matrix and a FlashR vector to a FlashR matrix. A vector is converted into a one-column matrix.
@@ -239,18 +239,13 @@ FlashR has the following functions to test if an object is a FlashR vector or ma
 * `fm.is.vector`: test if an object is a FlashR vector.
 * `fm.is.matrix`: test if an object is a FlashR matrix.
 
-## FlashR object information
-
-* `fm.is.sym`
-* `fm.matrix.layout`
-* `fm.is.sparse`
-* `fm.is.sink`
-* `fm.in.mem`
-
 ## FlashR configuration
 
-* `fm.print.features`
-* `fm.set.conf`
+Sometimes, users need to tune FlashR to get better performance or use disks to scale computation to larger datasets.
+
+* `fm.set.conf`: users can pass a configuration file to tune the parameters in FlashR. The details of the parameters in FlashR is shown [here](https://flashxio.github.io/FlashX-doc/FlashX-conf.html).
+* `fm.print.conf` prints the current parameters in FlashR.
+* `fm.print.features` prints the featurs that have been compiled into FlashR when FlashR is installed.
 
 ## Lazy evaluation and matrix materialization
 
