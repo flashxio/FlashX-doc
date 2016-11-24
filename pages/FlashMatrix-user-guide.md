@@ -110,6 +110,14 @@ The table lists all binary operators:
 | "\|" or "or" | fm.bo.or | logical or. e.g., `TRUE | FALSE = TRUE` |
 | "&" or "and" | fm.bo.and | logical and. e.g., `TRUE & FALSE = FALSE` |
 
+The table lists some special binary operators mainly used for aggregation:
+
+| name | R object | Computation semantics |
+| :---| :--- | :--- |
+| "count" | fm.bo.count | count the length of an array. e.g., `count(1, 2, 1)=3` |
+| "which.max" | fm.bo.which.max | compute the index of the maximal value. e.g., `which.max(1, 2, 1)=2` |
+| "which.min" | fm.bo.which.min | compute the index of the minimal value. e.g., `which.max(1, 2, 1)=1` |
+
 The table lists all unary operators:
 
 | name | R object | Computation semantics |
@@ -127,18 +135,12 @@ The table lists all unary operators:
 | "as.int" | fm.buo.as.int | cast a value to an integer |
 | "as.numeric" | fm.buo.as.numeric | cast a value to a floating-point number |
 
-The table lists aggregation operators defined in FlashR:
+In addition to binary and unary operators, FlashR also needs aggregation operators to perform aggregation, such as `fm.agg` and `fm.groupby` (see below for more details), on matrices. An aggregation operator has two parts: `agg` and `combine`. `agg` and `combine` are binary operators. `agg` runs on (part of) the input array and outputs aggregation results; `combine` is optional, which runs on the partial aggregation results from `agg` and combines them to generate the final aggregation result. For many aggregation operators, `agg` and `combine` are the same.
 
-| name | R object | Computation semantics |
-| :---| :--- | :--- |
-| "count" | fm.bo.count | count the length of an array. e.g., `count(1, 2, 1)=3` |
-| "which.max" | fm.bo.which.max | compute the index of the maximal value. e.g., `which.max(1, 2, 1)=2` |
-| "which.min" | fm.bo.which.min | compute the index of the minimal value. e.g., `which.max(1, 2, 1)=1` |
+FlashR also provides `fm.create.agg.op(agg, combine, name)`, which turns binary operators into aggregation operators.
 
-All of the binary operators with the same input and output element type can be used as aggregation operators. The common ones are "+", "*", "min", "max".
-
-In practice, groupby requires an aggregation operation over some of the original elements in a group and combine operation over the aggregation results. The reason is that groupby runs in parallel and each time it can only aggregate over some of the elements in a group. Essentially, the combine operation is an aggregation. Usually, it is sufficient to pass a UDO to a groupby function because a UDO can work as both aggregation and combine. In some cases, however, we need these operations to be different. As such, users can pass an aggregation operator to groupby. A user can create an aggregation operator themselves by calling fm.create.agg.op() and specify two UDOs for the aggregation and combine operation.
-fm.create.agg.op(agg, combine, name)
+* For many aggregations, such as summation, product, minimum and maximum, we can provide the same binary operators ("+", "*", "min", "max") as both `agg` and `combine`, because these binary operators have the same input and output element type. * For some aggregations, `agg` and `combine` takes different binary operators. For example, counting is defined as `fm.create.agg.op("count", "+", "count")` because "count" always outputs integers regardless of the input element type.
+* For some aggregations, `combine` is not applicable. The examples are "which.min" and "which.max".
 
 FlashR allows users to define their own element operators. Currently, a new element operator has to be defined in C/C++. More instructions of adding new element operators are shown [here](https://flashxio.github.io/FlashX-doc/FlashR-extension.html).
 
@@ -181,7 +183,7 @@ fm.sapply(m1, fm.buo.neg)
 fm.sapply(m1, "neg")
 ```
 
-**Aggregation** takes multiple elements and outputs a single element. These functions require aggregation element operators as shown above, but can also take any binary operators with the same input and output element type.
+**Aggregation** (`fm.agg` and `fm.agg.mat`) takes an array and an aggregation operator, and outputs a single element or a vector. If these functions gets a binary operator, it will try to construct an aggregation operator with `fm.create.agg.op`. 
 
 * `fm.agg(fm, FUN)`: aggregates over the entire vector or matrix.
 * `fm.agg.mat(fm, margin, FUN)`: aggregates over each individual row or column of a matrix and outputs a vector.
@@ -200,7 +202,7 @@ fm.agg.mat(m, 1, fm.bo.add)
 fm.agg.mat(m, 1, "+")
 ```
 
-**Groupby** is similar to groupby in SQL. It groups multiple elements by their values and perform aggregation on the elements.
+**Groupby** is similar to groupby in SQL. It groups multiple elements by their values and perform aggregation on the elements. Like aggregation functions, groupby functions also accept binary operators.
 
 * `fm.sgroupby(fm, FUN)`:  groups elements by their values in a vector and invokes FUN on the elements associated with the same value. It outputs a list with two fields `val` and `agg`. `val` is a FlashR vector with unique values in the original input vector; `agg` is a FlashR vector that stores the aggregation results for each unique value.
 * `fm.groupby(fm, margin, factor, FUN)`: takes a matrix and a factor vector, groups rows/columns of the matrix based on the factor vector and runs aggregation FUN on the rows/columns within the same group to generate a single row/column. If we group rows, `fm.groupby` outputs a matrix with the number of rows equal to the maximal number of levels and the number of columns equal to the number of columns in the input matrix; if we group columns, `fm.groupby` outputs a matrix with the number of columns equal to the maximal number of levels and the number of rows equals to the number of rows in the input matrix.
