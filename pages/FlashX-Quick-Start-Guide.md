@@ -111,61 +111,50 @@ R code with little modification. Here we show an example of creating a mixture
 of multivariant Gaussian and running
 [k-means](https://github.com/flashxio/FlashX/blob/release/Rpkg/R/KMeans.R) on it.
 
-First, we create `fm.rmvnorm`, adapted from
-[mvtnorm](https://cran.r-project.org/web/packages/mvtnorm/index.html)
-to create multivariant normal distribution and use it to create 10 distributions
-with different means. Then we combine the 10 datasets and run k-means on it.
+First, we create `mvrnorm`, adapted from mvrnorm in the 
+[MASS](https://cran.r-project.org/web/packages/MASS/index.html) package
+to create multivariant normal distribution. As shown
+[here](https://github.com/flashxio/FlashR-learn/commit/7143368ecfd8426cdb2197ffa1b2226fd435a024?diff=split),
+we only need to modify two small places to run the function in FlashR.
+
+We use this function to create 10 distributions with different means and combine
+them to construct a dataset under a mixture of Gaussian distributions. In the last line,
+we run k-means on the dataset to cluster data points into 10 clusters.
 
 ```R
-fm.rmvnorm <- function (n, mean = rep(0, nrow(sigma)), sigma = diag(length(mean)),
-                        method = c("eigen", "svd", "chol"), pre0.9_9994 = FALSE,
-                        in.mem=TRUE, name="")
+mvrnorm <-
+    function(n = 1, mu, Sigma, tol=1e-6, empirical = FALSE, EISPACK = FALSE)
 {
-    if (!isSymmetric(sigma, tol = sqrt(.Machine$double.eps),
-                     check.attributes = FALSE)) {
-        stop("sigma must be a symmetric matrix")
+    p <- length(mu)
+    if(!all(dim(Sigma) == c(p,p))) stop("incompatible arguments")
+    if(EISPACK) stop("'EISPACK' is no longer supported by R", domain = NA)
+    eS <- eigen(Sigma, symmetric = TRUE)
+    ev <- eS$values
+    if(!all(ev >= -tol*abs(ev[1L]))) stop("'Sigma' is not positive definite")
+    X <- fm.rnorm.matrix(n, p)
+    if(empirical) {
+        X <- scale(X, TRUE, FALSE) # remove means
+        X <- X %*% fm.svd(X, nu = 0)$v # rotate to PCs
+        X <- scale(X, FALSE, TRUE) # rescale PCs to unit variance
     }
-    if (length(mean) != nrow(sigma))
-        stop("mean and sigma have non-conforming size")
-    method <- match.arg(method)
-    R <- if (method == "eigen") {
-        ev <- eigen(sigma, symmetric = TRUE)
-        if (!all(ev$values >= -sqrt(.Machine$double.eps) * abs(ev$values[1]))) {
-            warning("sigma is numerically not positive definite")
-        }
-        t(ev$vectors %*% (t(ev$vectors) * sqrt(ev$values)))
-    }
-    else if (method == "svd") {
-        s. <- svd(sigma)
-        if (!all(s.$d >= -sqrt(.Machine$double.eps) * abs(s.$d[1]))) {
-            warning("sigma is numerically not positive definite")
-        }
-        t(s.$v %*% (t(s.$u) * sqrt(s.$d)))
-    }
-    else if (method == "chol") {
-        R <- chol(sigma, pivot = TRUE)
-        R[, order(attr(R, "pivot"))]
-    }
-
-    retval <- fm.rnorm.matrix(nrow = n, ncol=ncol(sigma), in.mem=in.mem,
-                              name=name) %*% R
-    # , byrow = !pre0.9_9994
-    retval <- sweep(retval, 2, mean, "+")
-    colnames(retval) <- names(mean)
-    retval
+    X <- drop(mu) + eS$vectors %*% diag(sqrt(pmax(ev, 0)), p) %*% t(X)
+    nm <- names(mu)
+    if(is.null(nm) && !is.null(dn <- dimnames(Sigma))) nm <- dn[[1L]]
+    dimnames(X) <- list(nm, NULL)
+    if(n == 1) drop(X) else t(X)
 }
 
-mat1 <- fm.rmvnorm(1000000, runif(10), in.mem = TRUE)
-mat2 <- fm.rmvnorm(1000000, runif(10), in.mem = TRUE)
-mat3 <- fm.rmvnorm(1000000, runif(10), in.mem = TRUE)
-mat4 <- fm.rmvnorm(1000000, runif(10), in.mem = TRUE)
-mat5 <- fm.rmvnorm(1000000, runif(10), in.mem = TRUE)
-mat6 <- fm.rmvnorm(1000000, runif(10), in.mem = TRUE)
-mat7 <- fm.rmvnorm(1000000, runif(10), in.mem = TRUE)
-mat8 <- fm.rmvnorm(1000000, runif(10), in.mem = TRUE)
-mat9 <- fm.rmvnorm(1000000, runif(10), in.mem = TRUE)
-mat10 <- fm.rmvnorm(1000000, runif(10), in.mem = TRUE)
-
+mat1 <- fm.rmvnorm(1000000, runif(10), diag(runif(10)))
+mat2 <- fm.rmvnorm(1000000, runif(10), diag(runif(10)))
+mat3 <- fm.rmvnorm(1000000, runif(10), diag(runif(10)))
+mat4 <- fm.rmvnorm(1000000, runif(10), diag(runif(10)))
+mat5 <- fm.rmvnorm(1000000, runif(10), diag(runif(10)))
+mat6 <- fm.rmvnorm(1000000, runif(10), diag(runif(10)))
+mat7 <- fm.rmvnorm(1000000, runif(10), diag(runif(10)))
+mat8 <- fm.rmvnorm(1000000, runif(10), diag(runif(10)))
+mat9 <- fm.rmvnorm(1000000, runif(10), diag(runif(10)))
+mat10 <- fm.rmvnorm(1000000, runif(10), diag(runif(10)))
 mat <- fm.rbind(mat1, mat2, mat3, mat4, mat5, mat6, mat7, mat8, mat9, mat10)
+
 res <- fm.KMeans(mat, 10)
 ```
