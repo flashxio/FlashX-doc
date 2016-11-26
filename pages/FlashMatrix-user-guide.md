@@ -43,7 +43,7 @@ In addition, FlashR provides a set of functions load data from other data source
 * `fm.load.dense.matrix.bin`: load a dense matrix from a binary file that stores data in row-major or column-major order. In this function, users have to specify all information of the dense matrix, such as the number of rows, the number of columns, the element type and the data layout (row-major or column-major). e.g., `fm.load.dense.matrix.bin("/mnt/data/matrix.bin", in.mem=TRUE, nrow=1000, ncol=10, byrow=FALSE, ele.type="I")` loads a dense matrix of integers with 1000 rows and 10 columns, stored in column-major order.
 * `fm.load.sparse.matrix`: load a sparse matrix in the [FlashMatrix format](https://scholar.google.ca/citations?view_op=view_citation&hl=en&user=b1PYJN0AAAAJ&citation_for_view=b1PYJN0AAAAJ:Wp0gIr-vW9MC) from the Linux filesystem. The sparse matrix has to be formatted in advance. For a symmetric matrix, users only need to specify the sparse matrix file and the index file of the sparse matrix. For an asymmetric matrix, users need to specify four files: the sparse matrix file, the index file of the sparse matrix, the transpose of the sparse matrix, the index file for the transpose of the sparse matrix.
 
-All of the functions have the argument `name`. If a user creates a vector/matrix stored on SSDs with a name, the vector/matrix will be persistent on SSDs. That is, even if the user exits from the R framework, the vector/matrix is still on SSDs and the user can load the vector/matrix to FlashR with the same name for further computation. To load a dense vector/matrix, a user can use `fm.get.dense.matrix`.
+Some of the functions (`fm.load.dense.matrix`, `fm.load.dense.matrix.bin`, `fm.runif`, `fm.rnorm`, `fm.runif.matrix` and `fm.rnorm.matrix`) have the argument `name`. If a user creates a vector/matrix stored on SSDs with a user-specified name, the vector/matrix will be persistent on SSDs. That is, even if the user exits from the R framework, the vector/matrix is still on SSDs and the user can load the vector/matrix to FlashR with the same name for further computation. To load a dense vector/matrix, a user can use `fm.get.dense.matrix`.
 
 ## "Base" functions
 
@@ -149,15 +149,15 @@ FlashR allows users to define their own element operators. Currently, a new elem
 
 ### The list of GenOps in FlashR
 
-**Inner product** is a generalized matrix multiplication. It replaces multiplication and addition in matrix multiplication with two element operators, respectively. As such, we can define many operations with inner product. For example, we can use inner product to compute various pair-wise distance matrics of data points such as Euclidean distance and Hamming distance.
+**Inner product** is a generalized matrix multiplication. It replaces multiplication and addition in matrix multiplication with two element operators, respectively. As such, we can define many operations with inner product. For example, we can use inner product to compute various pair-wise distance matrics of data points, such as Euclidean distance and Hamming distance.
 
-Example: computes the Euclidean distance between every pair of data points. `fm.bo.euclidean` is registered to FlashR as a new binary operator. Essentially, it computes the square of the difference of two elements. `euclidean(x, y)=(x - y)^2`
+Example: compute the Euclidean distance between every pair of data points. We create a special binary operator `fm.bo.euclidean`, which computes the square of the difference of two elements: `euclidean(x, y)=(x - y)^2`, and register it to FlashR.
 
 ```R
-fm.inner.prod(data, t(data), fm.bo.euclidean, fm.bo.add)
+dist <- fm.inner.prod(data, t(data), fm.bo.euclidean, fm.bo.add)
 ```
 
-**Apply** is a generalized form of element-wise operations and has multiple variants.
+**Apply** is an element-wise operation and has multiple variants.
 
 * `fm.sapply(o, FUN)`:  a generalized element-wise unary operation whose element operator takes one element at a time from a vector or a matrix and outputs an element. As such, the output matrix of this function has the same shape as the input matrix.
 * `fm.mapply2(o1, o2, FUN)`: a generalized element-wise binary operation whose element operator takes an element from each vector or matrix and outputs an element. The output matrix of this function has the same shape as the input matrices.
