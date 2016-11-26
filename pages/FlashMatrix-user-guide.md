@@ -298,9 +298,9 @@ Lazy evaluation can potentially increase the computation overhead in some cases.
 > fm.materialize(res3)
 ```
 
-To reduce computation overhead while still keeping small memory consumption, FlashR only keeps the computation results in small matrices. In the example above, materializing `res2` triggers the computation in `sum` and `prod`, and FlashR saves the computation result in `prod` in memory by default. However, the computation result of `sum` is not saved because `sum` is a very large matrix. The [paper](https://scholar.google.ca/citations?view_op=view_citation&hl=en&user=b1PYJN0AAAAJ&citation_for_view=b1PYJN0AAAAJ:mVmsd5A6BfQC) describes the policy of identifying small matrices in R code.
+To reduce computation overhead while still keeping small memory consumption, FlashR stores the computation results of small matrices in memory when their computation results are generated. In the example above, materializing `res2` triggers the computation in `sum` and `prod`, and FlashR saves the computation result in `prod` in memory by default. However, the computation result of `sum` is not saved because `sum` is a very large matrix. The [paper](https://scholar.google.ca/citations?view_op=view_citation&hl=en&user=b1PYJN0AAAAJ&citation_for_view=b1PYJN0AAAAJ:mVmsd5A6BfQC) describes the policy of identifying small matrices in R code.
 
-* Matrices that have the `cached` flag can also 
+However, in some cases, FlashR needs programmers to provide some hints on saving computation results of large matrices. Programmers can call `fm.set.cached` to hint FlashR to save the computation result of a matrix and where (in memory or on disks) to save the computation result.
 
 ### Array-oriented programming
 
