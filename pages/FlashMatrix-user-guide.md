@@ -86,13 +86,13 @@ FlashR also implements some `stats` functions. They perform the same computation
 
 ## Generalized operations
 
-In addition to the basic functions above, FlashR provides a set of generalized operations (GenOps) to increase the generality of FlashR. A GenOp takes some matrices and an element operator, which defines the operation on elements, to perform actual computation. FlashR defines only four GenOps and many element operators to cover computations required by many data mining and machine learning algorithms. Most of the "Base" and "stats" R functions shown above are also implemented with the GenOps.
+In addition to the basic functions above, FlashR provides a set of generalized operations (GenOps) to increase the generality of FlashR. A GenOp takes some matrices and an element operator, which defines the computation on elements, to perform actual computation. FlashR defines only four GenOps and many element operators to cover computations required by many data mining and machine learning algorithms. Most of the "Base" and "stats" R functions shown above are also implemented with the GenOps.
 
 ### Element operators:
 
-FlashR defines many element computors. Some operators take two elements and output one element (binary operators); the others take only one element and output one element (unary operators). Below list all of the binary and unary operators supported by FlashR. The two tables lists the name and the corresponding R object for an element operator. Users can pass an element operator to a GenOp by using either its name or its R object.
+FlashR defines three types of element operators. Some operators take two elements and output one element (binary operators); some take only one element and output one element (unary operators); the others take multiple elements and output one element (aggregation operators). The tables below list the name and the corresponding R object for an element operator. Users can pass an element operator to a GenOp by using either its name or its R object.
 
-The table lists all binary operators:
+The table lists common binary operators in FlashR:
 
 | name | R object | Computation semantics |
 | :---| :--- | :--- |
@@ -120,7 +120,7 @@ The table lists some special binary operators mainly used for aggregation:
 | "which.max" | fm.bo.which.max | compute the index of the maximal value. e.g., `which.max(1, 2, 1)=2` |
 | "which.min" | fm.bo.which.min | compute the index of the minimal value. e.g., `which.max(1, 2, 1)=1` |
 
-The table lists all unary operators:
+The table lists common unary operators in FlashR:
 
 | name | R object | Computation semantics |
 | :---| :--- | :--- |
@@ -137,9 +137,9 @@ The table lists all unary operators:
 | "as.int" | fm.buo.as.int | cast a value to an integer |
 | "as.numeric" | fm.buo.as.numeric | cast a value to a floating-point number |
 
-In addition to binary and unary operators, FlashR also needs aggregation operators to perform aggregation, such as `fm.agg` and `fm.groupby` (see below for more details), on matrices. An aggregation operator has two parts: `agg` and `combine`. `agg` and `combine` are binary operators. `agg` runs on (part of) the input array and outputs aggregation results; `combine` is optional, which runs on the partial aggregation results from `agg` and combines them to generate the final aggregation result. For many aggregation operators, `agg` and `combine` are the same.
+In addition to binary and unary operators, FlashR also needs aggregation operators to perform aggregation, such as `fm.agg` and `fm.groupby` (see below for more details), on matrices. An aggregation operator has two parts: `agg` and `combine`, both of which are binary operators themselves. `agg` runs on (part of) an input array and outputs an aggregation result; `combine` is optional, which runs on partial aggregation results from `agg` and combines them to generate the final aggregation result. For many aggregation operators, `agg` and `combine` are the same.
 
-FlashR also provides `fm.create.agg.op(agg, combine, name)`, which turns binary operators into aggregation operators.
+FlashR provides `fm.create.agg.op(agg, combine, name)` to construct an aggregation operator from binary operators.
 
 * For many aggregations, such as summation, product, minimum and maximum, we can provide the same binary operators ("+", "*", "min", "max") as both `agg` and `combine`, because these binary operators have the same input and output element type.
 * For some aggregations, `agg` and `combine` takes different binary operators. For example, counting is defined as `fm.create.agg.op("count", "+", "count")` because "count" always outputs integers regardless of the input element type.
