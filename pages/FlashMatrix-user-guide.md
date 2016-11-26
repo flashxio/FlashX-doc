@@ -304,4 +304,4 @@ However, in some cases, FlashR needs programmers to provide some hints on saving
 
 ### Array-oriented programming
 
-### Space & computation complexity
+Although FlashR allows programmers to access individual elements in a vector or a matrix, it is highly recommended to **avoid** accessing elements individually as much as possible. Instead, FlashR advocates array-oriented programming. Programmers should use the "base" vector/matrix operations if possible. In addition, programmers can use generalized matrix operations to cover many more computations.
