@@ -154,7 +154,7 @@ mat7 <- mvrnorm(1000000, runif(10), diag(runif(10)))
 mat8 <- mvrnorm(1000000, runif(10), diag(runif(10)))
 mat9 <- mvrnorm(1000000, runif(10), diag(runif(10)))
 mat10 <- mvrnorm(1000000, runif(10), diag(runif(10)))
-mat <- fm.rbind(mat1, mat2, mat3, mat4, mat5, mat6, mat7, mat8, mat9, mat10)
+mat <- rbind(mat1, mat2, mat3, mat4, mat5, mat6, mat7, mat8, mat9, mat10)
 
 res <- fm.KMeans(mat, 10)
 ```
