@@ -247,9 +247,15 @@ Sometimes, users need to tune FlashR to get better performance or use disks to s
 * `fm.print.conf` prints the current parameters in FlashR.
 * `fm.print.features` prints the featurs that have been compiled into FlashR when FlashR is installed.
 
+## Guidelines for FlashR programmers
+
+Although FlashR tries to provide a familiar environment for R users, there is some difference between R and FlashR. The biggest difference is that FlashR does not allow users to modify individual elements in a vector or a matrix. FlashR intentionally chooses so for the sake of performance. FlashR stores vectors and matrices on SSDs. Modifying individual elements results in read-modify-write to SSDs, which causes many small random I/O. It causes efficiency issues and these operations are harmful to SSDs. By forbidding modifying individual elements, FlashR advocates array-oriented programming to achieve superior efficiency.
+
 ### Lazy evaluation and matrix materialization
 
-FlashR gains performance by lazily evaluating most of the matrix operations and merging them into a single execution. As such, the matrices output from most of the matrix operations (all generalized matrix operations and most of the "base" functions) do not contain actual computation results. In a simple example of `mat1 + mat2`, the output of this operation stores the computation and the input matrices, instead of actual computation results.
+FlashR gains performance by lazily evaluating most of the matrix operations and merging them into a single execution. As such, the matrices output from most of the matrix operations (all generalized matrix operations and most of the "base" functions) do not contain actual computation results. This strategy dramatically improves performance for most of computation, but it may have some cost in some cases. As such, programmers sometimes need to provide FlashR some hints to achieve the maximal performance.
+
+In a simple example of `mat1 + mat2`, the output of this operation stores the computation and the input matrices, instead of actual computation results.
 
 ```R
 > mat1 <- fm.runif.matrix(1000, 10)
@@ -269,30 +275,32 @@ dense matrix is stored on 4 NUMA nodes
 matrix store: vmat-11=ifelse2_op(vmat-10=cast_bool2int(vmat-9=||(vmat-6=cast_bool2int(vmat-5=isna_only(mem_mat-1(1000,10))), vmat-8=cast_bool2int(vmat-7=isna_only(mem_mat-3(1000,10))))), vmat-4=+(mem_mat-1(1000,10), mem_mat-3(1000,10)))
 ```
 
-However, FlashR needs to perform some computation to interact with R and return users the final computation results. For example, R needs actual values for its `if` conditions and `while` loops. FlashR performs computation in the following cases:
+However, FlashR needs to perform some computation to interact with R and return users the final computation results. For example, R needs actual values for its `if` conditions and `while` loops. FlashR performs actual computation in the following cases:
 
 * The aggregation functions that output an R scalar value perform actual computation when the functions are called. Such functions include `sum`, `min`, `max`, `any`, `all`.
 * The functions that access part of a matrix can also trigger computation. Such functions include `[]`, `head`, `tail`. 
 * The functions that convert FlashR vectors/matrices to R vectors/matrices can also trigger the computation. Such functions include `as.vector` and `as.matrix`.
 * `fm.materialize` and `fm.materialize.list` explicitly materialize the input matrices.
 
-Lazy evaluation dramatically improves performance for most of computation, but it may have some cost. Take the following code for example,
+Lazy evaluation can potentially increase the computation overhead in some cases. We use the code below to illustrate the problem. In this example, `sum` and `prod` do not store actual computation results. Materializing `res2` and `res3` trigger the computation in `sum` and `prod`. Because we materialize `res2` and `res3` separately, FlashR potentially has to perform the computation in `sum` and `prod` twice.
+
 
 ```R
+> mat0 <- fm.runif.matrix(1000, 10)
 > mat1 <- fm.runif.matrix(1000, 10)
-> mat2 <- fm.runif.matrix(10, 10)
-> mat <- mat1 %*% mat2
-> 
+> sum <- mat0 + mat1
+> prod <- crossprod(sum)
+> mat2 <- fm.runif.matrix(1000, 10)
+> mat3 <- fm.runif.matrix(1000, 10)
+> res2 <- mat2 %*% prod
+> fm.materialize(res2)
+> res3 <- mat3 %*% prod
+> fm.materialize(res3)
 ```
 
-Which matrices store computation results internally.
+To reduce computation overhead while still keeping small memory consumption, FlashR only keeps the computation results in small matrices. In the example above, materializing `res2` triggers the computation in `sum` and `prod`, and FlashR saves the computation result in `prod` in memory by default. However, the computation result of `sum` is not saved because `sum` is a very large matrix. The [paper](https://scholar.google.ca/citations?view_op=view_citation&hl=en&user=b1PYJN0AAAAJ&citation_for_view=b1PYJN0AAAAJ:mVmsd5A6BfQC) describes the policy of identifying small matrices in R code.
 
 * Matrices that have the `cached` flag can also 
-* In addition, users can set a flag on a matrix to notify FlashR to save the materialized results.
-
-## Guidelines for FlashR programmers
-
-Although FlashR tries to provide a familiar environment for R users, there is some difference between R and FlashR. The biggest difference is that FlashR does not allow users to modify individual elements in a vector or a matrix. FlashR intentionally chooses so for the sake of performance. FlashR stores vectors and matrices on SSDs. Modifying individual elements results in read-modify-write to SSDs, which causes many small random I/O. It causes efficiency issues and these operations are harmful to SSDs. By forbidding modifying individual elements, FlashR advocates array-oriented programming to achieve superior efficiency.
 
 ### Array-oriented programming
 
