@@ -37,13 +37,13 @@ The functions for creating FlashR matrices:
 * `fm.runif.matrix`: create a matrix filled with random numbers under uniform distribution. e.g., `fm.runif.matrix(10, 2, 0, 1, in.mem=TRUE)` creates a 10x2 FlashR matrix with 20 random values uniformly between 0 and 1, stored in memory.
 * `fm.rnorm.matrix`: create a matrix filled with random numbers under normal distribution. e.g., `fm.rnorm.matrix(10, 2, 0, 1, in.mem=TRUE)` creats a 10x2 FlashR matrix with 20 random values following normal distribution with mean 0 and standard deviation 1, and stores data in memory.
 
-In addition, FlashR provides a set of functions load data from other data sources.
+In addition, FlashR provides a set of functions load data from other data sources to the FlashR environment.
 
 * `fm.load.dense.matrix`: load a dense matrix from a text file. Each line in the text file stores a row of the dense matrix. Users need to specify a delimiter and the function assumes "," by default. Users can also specify the element type and by default the function assumes floating-point. The available element types are "D" for floating-point values, "I" for integers, "L" for logical values. Users can also specify the number of columns in the dense matrix. If not, the function will try to determine the number of columns itself. e.g., `fm.load.dense.matrix("/mnt/data/matrix.csv", in.mem=TRUE, ele.type="I", delim=",", ncol=10)` loads a dense matrix of integers with 10 columns from a CSV file.
 * `fm.load.dense.matrix.bin`: load a dense matrix from a binary file that stores data in row-major or column-major order. In this function, users have to specify all information of the dense matrix, such as the number of rows, the number of columns, the element type and the data layout (row-major or column-major). e.g., `fm.load.dense.matrix.bin("/mnt/data/matrix.bin", in.mem=TRUE, nrow=1000, ncol=10, byrow=FALSE, ele.type="I")` loads a dense matrix of integers with 1000 rows and 10 columns, stored in column-major order.
 * `fm.load.sparse.matrix`: load a sparse matrix in the [FlashMatrix format](https://scholar.google.ca/citations?view_op=view_citation&hl=en&user=b1PYJN0AAAAJ&citation_for_view=b1PYJN0AAAAJ:Wp0gIr-vW9MC) from the Linux filesystem. The sparse matrix has to be formatted in advance. For a symmetric matrix, users only need to specify the sparse matrix file and the index file of the sparse matrix. For an asymmetric matrix, users need to specify four files: the sparse matrix file, the index file of the sparse matrix, the transpose of the sparse matrix, the index file for the transpose of the sparse matrix.
 
-We can make vectors and matrices persistent on SSDs even if R is closed.
+All of the functions have the argument `name`. If a user creates a vector/matrix stored on SSDs with a name, the vector/matrix will be persistent on SSDs. That is, even if the user exits from the R framework, the vector/matrix is still on SSDs and the user can load the vector/matrix to FlashR with the same name for further computation. To load a dense vector/matrix, a user can use `fm.get.dense.matrix`.
 
 ## "Base" functions
 
