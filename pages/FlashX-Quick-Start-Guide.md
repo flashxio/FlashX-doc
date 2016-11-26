@@ -83,7 +83,8 @@ and the number of CPU cores in a machine. We configure FlashR with
 shows an example of the configuration file. To set the number of processors and
 the number of threads, the important parameters here are `num_nodes` and `num_threads`.
 For example, a machine with 4 processors and each with 12 CPU cores, we should
-set `num_nodes=4` and `num_threads=48`.
+set `num_nodes=4` and `num_threads=48`. A complete list of parameters of FlashR can be
+found [here](https://flashxio.github.io/FlashX-doc/FlashX-conf.html).
 
 ```R
 > fm.set.conf("path/to/conf/file")
@@ -100,8 +101,8 @@ and give the path to `root_conf`. For example, if the SSDs are mounted on
 `/mnt/ssd` and we want to store FlashR data in `/mnt/ssd/FlashR_data`, we set
 `root_conf=/mnt/ssd/FlashR_data`.
 
-Please check [here]() for more advanced configuration
-of a large SSD array on a large parallel machine.
+Please check [here](https://flashxio.github.io/FlashX-doc/FlashX-conf.html) for
+more advanced configuration of a large SSD array on a large parallel machine.
 
 **NOTE: to run FlashR with SSDs, it is mandatory to install FlashR with `libaio`.**
 
