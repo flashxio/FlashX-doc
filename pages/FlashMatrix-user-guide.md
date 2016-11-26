@@ -159,61 +159,61 @@ dist <- fm.inner.prod(data, t(data), fm.bo.euclidean, fm.bo.add)
 
 **Apply** is an element-wise operation and has multiple variants.
 
-* `fm.sapply(o, FUN)`:  a generalized element-wise unary operation whose element operator takes one element at a time from a vector or a matrix and outputs an element. As such, the output matrix of this function has the same shape as the input matrix.
-* `fm.mapply2(o1, o2, FUN)`: a generalized element-wise binary operation whose element operator takes an element from each vector or matrix and outputs an element. The output matrix of this function has the same shape as the input matrices.
-* `fm.mapply.row(o1, o2, FUN)` and `fm.mapply.col(o1, o2, FUN)` perform mapply2 on every row or column of the matrix (in the first argument) with the vector (in the second argument). Currently, `fm.mapply.row` and `fm.mapply.col` only accept the cases that the vector has the same length as a row or a column of the matrix.
+* `fm.sapply(o, FUN)`:  an element-wise unary operation that applies a unary element operator to individual elements in an array. The output array of this function has the same shape as the input array.
+* `fm.mapply2(o1, o2, FUN)`: an element-wise binary operation that applies a binary element operator to the two input arrays. The two input arrays and the output array must have the same shape.
+* `fm.mapply.row(o1, o2, FUN)` and `fm.mapply.col(o1, o2, FUN)` perform element-wise operations on every row or column of the matrix (in the first argument) with the vector (in the second argument). Currently, `fm.mapply.row` and `fm.mapply.col` only accept the cases that the vector has the same length as a row or a column of the matrix. The output matrix has the same shape as the input matrix.
 
-Many matrix operations in FlashR are implemented with `fm.sapply` and `fm.mapply2`.
+The examples below illustrate how the "base" matrix operations in FlashR are implemented with `fm.sapply` and `fm.mapply2`.
 
 Example 1: compute m1 + m2.
 
 ```R
-fm.mapply2(m1, m2, fm.bo.add)
-fm.mapply2(m1, m2, "+")
+sum <- fm.mapply2(m1, m2, fm.bo.add)
+sum <- fm.mapply2(m1, m2, "+")
 ```
 
 Example 2: compute m1 + v2 (in this case, the vector v2 must have the same length as the columns of the matrix m1)
 
 ```R
-fm.mapply.col(m1, v2, fm.bo.add)
-fm.mapply.col(m1, v2, "+")
+sum <- fm.mapply.col(m1, v2, fm.bo.add)
+sum <- fm.mapply.col(m1, v2, "+")
 ```
 
 Example 3: compute -m1
 
 ```R
-fm.sapply(m1, fm.buo.neg)
-fm.sapply(m1, "neg")
+neg <- fm.sapply(m1, fm.buo.neg)
+neg <- fm.sapply(m1, "neg")
 ```
 
 **Aggregation** (`fm.agg` and `fm.agg.mat`) takes an array and an aggregation operator, and outputs a single element or a vector. If these functions gets a binary operator, it will try to construct an aggregation operator with `fm.create.agg.op`. 
 
-* `fm.agg(fm, FUN)`: aggregates over the entire vector or matrix.
+* `fm.agg(fm, FUN)`: aggregates over the entire array.
 * `fm.agg.mat(fm, margin, FUN)`: aggregates over each individual row or column of a matrix and outputs a vector.
 
 Example 1: compute `sum(m)`
 
 ```R
-fm.agg(m, fm.bo.add)
-fm.agg(m, "+")
+sum <- fm.agg(m, fm.bo.add)
+sum <- fm.agg(m, "+")
 ```
 
 Example 2: compute `rowSums(m)`
 
 ```R
-fm.agg.mat(m, 1, fm.bo.add)
-fm.agg.mat(m, 1, "+")
+rs <- fm.agg.mat(m, 1, fm.bo.add)
+rs <- fm.agg.mat(m, 1, "+")
 ```
 
-**Groupby** is similar to groupby in SQL. It groups multiple elements by their values and perform aggregation on the elements. Like aggregation functions, groupby functions also accept binary operators.
+**Groupby** is similar to groupby in SQL. It groups multiple elements and perform aggregation on the elements within groups. Like aggregation functions, groupby functions also accept binary operators.
 
-* `fm.sgroupby(fm, FUN)`:  groups elements by their values in a vector and invokes FUN on the elements associated with the same value. It outputs a list with two fields `val` and `agg`. `val` is a FlashR vector with unique values in the original input vector; `agg` is a FlashR vector that stores the aggregation results for each unique value.
+* `fm.sgroupby(fm, FUN)`:  groups elements by their own values in a vector and invokes FUN on the elements associated with the same value. It outputs a list with two fields `val` and `agg`. `val` is a FlashR vector with unique values in the original input vector; `agg` is a FlashR vector that stores the aggregation results for each unique value.
 * `fm.groupby(fm, margin, factor, FUN)`: takes a matrix and a factor vector, groups rows/columns of the matrix based on the factor vector and runs aggregation FUN on the rows/columns within the same group to generate a single row/column. If we group rows, `fm.groupby` outputs a matrix with the number of rows equal to the maximal number of levels and the number of columns equal to the number of columns in the input matrix; if we group columns, `fm.groupby` outputs a matrix with the number of columns equal to the maximal number of levels and the number of rows equals to the number of rows in the input matrix.
 
 Example 1: count the occurence of unique values in a vector.
 
 ```R
-fm.sgroupby(vec, "count")
+cnt <- fm.sgroupby(vec, "count")
 ```
 
 Example 2: group rows based on the labels and compute means within each group.
@@ -226,13 +226,13 @@ g.means <- fm.mapply.col(g.sums, cnts, "/")
 
 ## Interact with native R
 
-FlashR currently provides a limited number of linear algebra routines. As such, users still need to rely on the ones in R, such as linear solver and Choleski factorization, for their machine learning algorithms. FlashR provides functions for users to interact with the original R system.
+FlashR currently provides a limited number of linear algebra routines. As such, users still need to rely on the ones in R, such as linear solver and Choleski factorization, for many machine learning algorithms. FlashR provides functions for users to interact with the original R system.
 
-* `fm.as.vector`: convert an R vector/matrix and a FlashR matrix to a FlashR vector. The current implementation only supports converting from a one-column FlashR matrix to a FlashR vector.
-* `fm.as.matrix`: convert an R vector/matrix and a FlashR vector to a FlashR matrix. A vector is converted into a one-column matrix.
+* `fm.as.vector`: convert an R vector/matrix or a FlashR matrix to a FlashR vector. The current implementation only supports converting from a one-column FlashR matrix to a FlashR vector.
+* `fm.as.matrix`: convert an R vector/matrix or a FlashR vector to a FlashR matrix. A vector is converted into a one-column matrix.
 * `fm.as.factor`: convert a FlashR vector to a factor vector. The current implementation only supports converting an integer vector. By default, this function determines the number of levels in the factor vector automatically. Users can also provide a maximal number of levels. Right now, FlashR factor vectors are used by `fm.sgroupby` and `fm.groupby`.
-* [`as.vector`](https://stat.ethz.ch/R-manual/R-devel/library/base/html/vector.html): convert a FlashR vector/matrix to a R vector.
-* [`as.matrix`](https://stat.ethz.ch/R-manual/R-devel/library/base/html/matrix.html): convert a FlashR vector/matrix to a R matrix.
+* [`as.vector`](https://stat.ethz.ch/R-manual/R-devel/library/base/html/vector.html): convert a FlashR vector/matrix to an R vector.
+* [`as.matrix`](https://stat.ethz.ch/R-manual/R-devel/library/base/html/matrix.html): convert a FlashR vector/matrix to an R matrix.
 
 FlashR has the following functions to test if an object is a FlashR vector or matrix.
 
@@ -249,7 +249,13 @@ Sometimes, users need to tune FlashR to get better performance or use SSDs to sc
 
 ## Guidelines for FlashR programmers
 
-Although FlashR tries to provide a familiar environment for R users, there is some difference between R and FlashR. The biggest difference is that FlashR does not allow users to modify individual elements in a vector or a matrix. FlashR intentionally chooses so for the sake of performance. FlashR stores vectors and matrices on SSDs. Modifying individual elements results in read-modify-write to SSDs, which causes many small random I/O. It causes efficiency issues and these operations are harmful to SSDs. By forbidding modifying individual elements, FlashR advocates array-oriented programming to achieve superior efficiency.
+Although FlashR tries to provide a familiar environment for R users, it sacrifices full compatibility for performance. As such, there is some difference between R and FlashR that FlashR programmers need to take into consideration when implementing a new algorithm in FlashR.
+
+### Array-oriented programming
+
+The biggest difference between R and FlashR is that FlashR does not allow users to modify individual elements in a vector or a matrix. FlashR intentionally chooses so for the sake of performance. FlashR stores vectors and matrices on SSDs. Modifying individual elements results in read-modify-write to SSDs, which causes many small random I/O. It causes efficiency issues and is harmful to SSDs.
+
+Although FlashR allows programmers to read individual elements in a vector or a matrix, it is highly recommended to **avoid** reading them individually as much as possible. FlashR advocates array-oriented programming to achieve superior efficiency. Programmers should use the "base" array operations if possible. In addition, programmers should use generalized matrix operations to cover many more computations.
 
 ### Lazy evaluation and matrix materialization
 
@@ -301,7 +307,3 @@ Lazy evaluation can potentially increase the computation overhead in some cases.
 To reduce computation overhead while still keeping small memory consumption, FlashR stores the computation results of small matrices in memory when their computation results are generated. In the example above, materializing `res2` triggers the computation in `sum` and `prod`, and FlashR saves the computation result in `prod` in memory by default. However, the computation result of `sum` is not saved because `sum` is a very large matrix. The [paper](https://scholar.google.ca/citations?view_op=view_citation&hl=en&user=b1PYJN0AAAAJ&citation_for_view=b1PYJN0AAAAJ:mVmsd5A6BfQC) describes the policy of identifying small matrices in R code.
 
 However, in some cases, FlashR needs programmers to provide some hints on saving computation results of large matrices. Programmers can call `fm.set.cached` to hint FlashR to save the computation result of a matrix and where (in memory or on SSDs) to save the computation result.
-
-### Array-oriented programming
-
-Although FlashR allows programmers to access individual elements in a vector or a matrix, it is highly recommended to **avoid** accessing elements individually as much as possible. Instead, FlashR advocates array-oriented programming. Programmers should use the "base" vector/matrix operations if possible. In addition, programmers can use generalized matrix operations to cover many more computations.
