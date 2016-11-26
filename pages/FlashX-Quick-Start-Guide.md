@@ -116,10 +116,12 @@ First, we create `mvrnorm`, adapted from mvrnorm in the
 to create multivariant normal distribution. As shown
 [here](https://github.com/flashxio/FlashR-learn/commit/7143368ecfd8426cdb2197ffa1b2226fd435a024?diff=split),
 we only need to modify two small places to run the function in FlashR.
-
 We use this function to create 10 distributions with different means and combine
-them to construct a dataset under a mixture of Gaussian distributions. In the last line,
-we run k-means on the dataset to cluster data points into 10 clusters.
+them to construct a dataset under a mixture of Gaussian distributions.
+
+We run k-means on the dataset to cluster data points into 10 clusters. `fm.kmeans`
+outputs a vector, each of whose elements indicates the cluster id of a data point.
+We run `fm.table` to count the number of data points in each cluster.
 
 ```R
 mvrnorm <-
@@ -144,17 +146,23 @@ mvrnorm <-
     if(n == 1) drop(X) else t(X)
 }
 
-mat1 <- mvrnorm(1000000, runif(10), diag(runif(10)))
-mat2 <- mvrnorm(1000000, runif(10), diag(runif(10)))
-mat3 <- mvrnorm(1000000, runif(10), diag(runif(10)))
-mat4 <- mvrnorm(1000000, runif(10), diag(runif(10)))
-mat5 <- mvrnorm(1000000, runif(10), diag(runif(10)))
-mat6 <- mvrnorm(1000000, runif(10), diag(runif(10)))
-mat7 <- mvrnorm(1000000, runif(10), diag(runif(10)))
-mat8 <- mvrnorm(1000000, runif(10), diag(runif(10)))
-mat9 <- mvrnorm(1000000, runif(10), diag(runif(10)))
-mat10 <- mvrnorm(1000000, runif(10), diag(runif(10)))
-mat <- rbind(mat1, mat2, mat3, mat4, mat5, mat6, mat7, mat8, mat9, mat10)
+> mat1 <- mvrnorm(1000000, runif(10), diag(runif(10)))
+> mat2 <- mvrnorm(1000000, runif(10), diag(runif(10)))
+> mat3 <- mvrnorm(1000000, runif(10), diag(runif(10)))
+> mat4 <- mvrnorm(1000000, runif(10), diag(runif(10)))
+> mat5 <- mvrnorm(1000000, runif(10), diag(runif(10)))
+> mat6 <- mvrnorm(1000000, runif(10), diag(runif(10)))
+> mat7 <- mvrnorm(1000000, runif(10), diag(runif(10)))
+> mat8 <- mvrnorm(1000000, runif(10), diag(runif(10)))
+> mat9 <- mvrnorm(1000000, runif(10), diag(runif(10)))
+> mat10 <- mvrnorm(1000000, runif(10), diag(runif(10)))
+> mat <- rbind(mat1, mat2, mat3, mat4, mat5, mat6, mat7, mat8, mat9, mat10)
 
-res <- fm.kmeans(mat, 10)
+> res <- fm.kmeans(mat, 10, max.iters=100)
+> cnt <- fm.table(res)
+> as.vector(cnt$val)
+ [1] 0 1 2 3 4 5 6 7 8 9
+> as.vector(cnt$Freq)
+ [1]  914957 1000803  982197 1058306  907314  957551 1060443 1101763 1065113
+[10]  951553
 ```
