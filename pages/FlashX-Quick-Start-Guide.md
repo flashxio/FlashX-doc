@@ -37,7 +37,7 @@ We rely on `devtools` to install the FlashR package in R. Users can install
 `devtools` as follows:
 
 ```shell
-$ sudo apt-get install -y libcurl4-openssl-dev libssl-dev
+sudo apt-get install -y libcurl4-openssl-dev libssl-dev
 ```
 
 and
