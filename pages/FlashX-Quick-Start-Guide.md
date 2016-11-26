@@ -116,8 +116,10 @@ First, we create `mvrnorm`, adapted from mvrnorm in the
 to create multivariant normal distribution. As shown
 [here](https://github.com/flashxio/FlashR-learn/commit/7143368ecfd8426cdb2197ffa1b2226fd435a024?diff=split),
 we only need to modify two small places to run the function in FlashR.
-We use this function to create 10 distributions with different means and combine
-them to construct a dataset under a mixture of Gaussian distributions.
+We use this function to create the function `mix.mvrnorm` that constructs
+a dataset under a mixture of Gaussian distributions. `mix.mvrnorm` creates `m`
+normal distributions with different means and diagnoal covariance matrices and
+combine them to construct a dataset.
 
 We run k-means on the dataset to cluster data points into 10 clusters. `fm.kmeans`
 outputs a vector, each of whose elements indicates the cluster id of a data point.
@@ -146,18 +148,15 @@ mvrnorm <-
     if(n == 1) drop(X) else t(X)
 }
 
-> mat1 <- mvrnorm(1000000, runif(10), diag(runif(10)))
-> mat2 <- mvrnorm(1000000, runif(10), diag(runif(10)))
-> mat3 <- mvrnorm(1000000, runif(10), diag(runif(10)))
-> mat4 <- mvrnorm(1000000, runif(10), diag(runif(10)))
-> mat5 <- mvrnorm(1000000, runif(10), diag(runif(10)))
-> mat6 <- mvrnorm(1000000, runif(10), diag(runif(10)))
-> mat7 <- mvrnorm(1000000, runif(10), diag(runif(10)))
-> mat8 <- mvrnorm(1000000, runif(10), diag(runif(10)))
-> mat9 <- mvrnorm(1000000, runif(10), diag(runif(10)))
-> mat10 <- mvrnorm(1000000, runif(10), diag(runif(10)))
-> mat <- rbind(mat1, mat2, mat3, mat4, mat5, mat6, mat7, mat8, mat9, mat10)
+mix.mvrnorm <- function(n, p, m)
+{
+    mats <- list()
+    for (i in 1:m)
+        mats <- c(mats, mvrnorm(n, runif(p), diag(runif(p))))
+    fm.rbind.list(mats)
+}
 
+> mat <- mix.mvrnorm(1000000, 10, 10)
 > res <- fm.kmeans(mat, 10, max.iters=100)
 > cnt <- fm.table(res)
 > as.vector(cnt$val)
