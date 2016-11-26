@@ -9,7 +9,7 @@ permalink: FlashMatrix-user-guide.html
 folder: mydoc
 ---
 
-FlashR is the main programming interface of FlashMatrix. By utilizing the powerful matrix computation in FlashMatrix, FlashR extends the R programming framework for large-scale data analysis. It executes R code in parallel automatically and utilizes disks to scale R to large datasets. FlashR mimics the programming interface of the R framework. It reimplements many commonly used R functions in the [base](https://stat.ethz.ch/R-manual/R-devel/library/base/html/00Index.html) and [stats](https://stat.ethz.ch/R-manual/R-devel/library/stats/html/00Index.html) packages to provide users a familiar R programming environment to reduce the learning curve. In addition, FlashR provides a set of generalized matrix operations that extend the R framework to implement more computations efficiently. FlashR is completely implemented as an R package.
+FlashR is the main programming interface of FlashMatrix. By utilizing the powerful matrix computation in FlashMatrix, FlashR extends the R programming framework for large-scale data analysis. It executes R code in parallel automatically and utilizes SSDs (solid-state drives), a type of fast disks that commonly exist in laptops and in the cloud, to scale R to large datasets. FlashR mimics the programming interface of the R framework. It reimplements many commonly used R functions in the [base](https://stat.ethz.ch/R-manual/R-devel/library/base/html/00Index.html) and [stats](https://stat.ethz.ch/R-manual/R-devel/library/stats/html/00Index.html) packages to provide users a familiar R programming environment to reduce the learning curve. In addition, FlashR provides a set of generalized matrix operations that extend the R framework to implement more computations efficiently. FlashR is completely implemented as an R package.
 
 ## How to start
 
@@ -27,8 +27,8 @@ The following functions generate FlashR vectors:
 
 * `fm.rep.int`: create a vector with replicated elements. e.g., `fm.rep.int(1, 10)` creates a FlashR vector with 10 elements and each element is 1.
 * `fm.seq.int`: create a vector with a sequence of numbers. e.g., `fm.seq.int(1, 10, 1)` creates a FlashR vector with a sequence of numbers between [1:10].
-* `fm.runif`: create a vector with uniformly random numbers. e.g., `fm.runif(10, 0, 1, in.mem=TRUE)` creates a FlashR vector with 10 uniformly random values between 0 and 1, stored in memory. `in.mem` instructs FlashR to store data in memory or on disks.
-* `fm.rnorm`: create a vector under normal distribution. e.g., `fm.rnorm(10, 0, 1, in.mem=TRUE)` creates a FlashR vector with 10 random values following normal distribution with mean 0 and standard deviation 1 and stores data in memory. Like the one in `fm.runif`, `in.mem` instructs FlashR to store data in memory or on disks.
+* `fm.runif`: create a vector with uniformly random numbers. e.g., `fm.runif(10, 0, 1, in.mem=TRUE)` creates a FlashR vector with 10 uniformly random values between 0 and 1, stored in memory. `in.mem` instructs FlashR to store data in memory or on SSDs.
+* `fm.rnorm`: create a vector under normal distribution. e.g., `fm.rnorm(10, 0, 1, in.mem=TRUE)` creates a FlashR vector with 10 random values following normal distribution with mean 0 and standard deviation 1 and stores data in memory. Like the one in `fm.runif`, `in.mem` instructs FlashR to store data in memory or on SSDs.
 
 The following functions generate FlashR matrices:
 
@@ -43,7 +43,7 @@ The following functions load data outside the FlashR environment.
 * `fm.load.dense.matrix.bin`: load a dense matrix from a binary file. The binary file can store data in row-major or column-major order. In this function, users have to specify all information of the dense matrix, such as the number of rows, the number of columns, the element type and the data layout (row-major or column-major). e.g., `fm.load.dense.matrix.bin("/mnt/data/matrix.bin", in.mem=TRUE, nrow=1000, ncol=10, byrow=FALSE, ele.type="I")` loads a dense matrix of integers with 1000 rows and 10 columns, stored in column-major order.
 * `fm.load.sparse.matrix`: load a sparse matrix in the FlashMatrix format from the Linux filesystem. The sparse matrix has to be formatted in advance. For a symmetric matrix, users only need to specify the sparse matrix file and the index file of the sparse matrix. For an asymmetric matrix, users need to specify four files: the sparse matrix file, the index file of the sparse matrix, the transpose of the sparse matrix, the index file for the transpose of the sparse matrix.
 
-We can make vectors and matrices persistent on disks even if R is closed.
+We can make vectors and matrices persistent on SSDs even if R is closed.
 
 ## "Base" functions
 
@@ -241,7 +241,7 @@ FlashR has the following functions to test if an object is a FlashR vector or ma
 
 ## FlashR configuration
 
-Sometimes, users need to tune FlashR to get better performance or use disks to scale computation to larger datasets.
+Sometimes, users need to tune FlashR to get better performance or use SSDs to scale computation to larger datasets.
 
 * `fm.set.conf`: users can pass a configuration file to tune the parameters in FlashR. The details of the parameters in FlashR is shown [here](https://flashxio.github.io/FlashX-doc/FlashX-conf.html).
 * `fm.print.conf` prints the current parameters in FlashR.
@@ -300,7 +300,7 @@ Lazy evaluation can potentially increase the computation overhead in some cases.
 
 To reduce computation overhead while still keeping small memory consumption, FlashR stores the computation results of small matrices in memory when their computation results are generated. In the example above, materializing `res2` triggers the computation in `sum` and `prod`, and FlashR saves the computation result in `prod` in memory by default. However, the computation result of `sum` is not saved because `sum` is a very large matrix. The [paper](https://scholar.google.ca/citations?view_op=view_citation&hl=en&user=b1PYJN0AAAAJ&citation_for_view=b1PYJN0AAAAJ:mVmsd5A6BfQC) describes the policy of identifying small matrices in R code.
 
-However, in some cases, FlashR needs programmers to provide some hints on saving computation results of large matrices. Programmers can call `fm.set.cached` to hint FlashR to save the computation result of a matrix and where (in memory or on disks) to save the computation result.
+However, in some cases, FlashR needs programmers to provide some hints on saving computation results of large matrices. Programmers can call `fm.set.cached` to hint FlashR to save the computation result of a matrix and where (in memory or on SSDs) to save the computation result.
 
 ### Array-oriented programming
 
