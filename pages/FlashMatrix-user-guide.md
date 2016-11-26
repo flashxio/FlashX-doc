@@ -9,11 +9,11 @@ permalink: FlashMatrix-user-guide.html
 folder: mydoc
 ---
 
-FlashR is the main programming interface of FlashMatrix. By utilizing the powerful matrix computation in FlashMatrix, FlashR extends the R programming framework for large-scale data analysis. It executes R code in parallel automatically and utilizes SSDs (solid-state drives), a type of fast disks that commonly exist in laptops and in the cloud, to scale R to large datasets. FlashR mimics the programming interface of the R framework. It reimplements many commonly used R functions in the [base](https://stat.ethz.ch/R-manual/R-devel/library/base/html/00Index.html) and [stats](https://stat.ethz.ch/R-manual/R-devel/library/stats/html/00Index.html) packages to provide users a familiar R programming environment to reduce the learning curve. In addition, FlashR provides a set of generalized matrix operations that extend the R framework to implement more computations efficiently. FlashR is completely implemented as an R package.
+FlashR is the main programming interface of FlashMatrix. By utilizing the powerful matrix computation in FlashMatrix, FlashR extends the R programming framework for large-scale data analysis. It executes R code in parallel automatically and utilizes SSDs (solid-state drives), a type of fast disks that commonly exist in laptops and in the cloud, to scale R to large datasets. FlashR mimics the programming interface of the R framework. It reimplements many commonly used R functions in the [base](https://stat.ethz.ch/R-manual/R-devel/library/base/html/00Index.html) and [stats](https://stat.ethz.ch/R-manual/R-devel/library/stats/html/00Index.html) packages to provide users a familiar R programming environment to reduce the learning curve. In addition, FlashR provides a set of generalized matrix operations that extend the R framework to implement more computations efficiently. FlashR is currently implemented as an R package.
 
 ## How to start
 
-Users can follow the [instructions](https://flashxio.github.io/FlashX-doc/FlashX-Quick-Start-Guide.html) to install FlashR in Ubuntu. To load FlashR to R, run
+Users can follow the [instructions](https://flashxio.github.io/FlashX-doc/FlashX-Quick-Start-Guide.html) to install FlashR in Ubuntu. To load the FlashR package, run
 
 ```R
 > library(FlashR)
@@ -21,27 +21,27 @@ Users can follow the [instructions](https://flashxio.github.io/FlashX-doc/FlashX
 
 ## Construct FlashR vectors and matrices
 
-FlashR provides a set of functions to generate FlashR vectors and matrices. These functions have similar interface to the R counterparts.
+FlashR provides a set of functions to create FlashR vectors and matrices. These functions have the interfaces similar to the R counterparts.
 
-The following functions generate FlashR vectors:
+The functions for creating FlashR vectors:
 
 * `fm.rep.int`: create a vector with replicated elements. e.g., `fm.rep.int(1, 10)` creates a FlashR vector with 10 elements and each element is 1.
 * `fm.seq.int`: create a vector with a sequence of numbers. e.g., `fm.seq.int(1, 10, 1)` creates a FlashR vector with a sequence of numbers between [1:10].
-* `fm.runif`: create a vector with uniformly random numbers. e.g., `fm.runif(10, 0, 1, in.mem=TRUE)` creates a FlashR vector with 10 uniformly random values between 0 and 1, stored in memory. `in.mem` instructs FlashR to store data in memory or on SSDs.
-* `fm.rnorm`: create a vector under normal distribution. e.g., `fm.rnorm(10, 0, 1, in.mem=TRUE)` creates a FlashR vector with 10 random values following normal distribution with mean 0 and standard deviation 1 and stores data in memory. Like the one in `fm.runif`, `in.mem` instructs FlashR to store data in memory or on SSDs.
+* `fm.runif`: create a vector with random numbers under uniform distribution. e.g., `fm.runif(10, 0, 1, in.mem=TRUE)` creates a FlashR vector with 10 random values uniformly between 0 and 1, stored in memory. `in.mem` instructs FlashR to store data in memory or on SSDs.
+* `fm.rnorm`: create a vector with random numbers under normal distribution. e.g., `fm.rnorm(10, 0, 1, in.mem=TRUE)` creates a FlashR vector with 10 random values following normal distribution with mean 0 and standard deviation 1 and stores data in memory. Like the one in `fm.runif`, `in.mem` instructs FlashR to store data in memory or on SSDs.
 
-The following functions generate FlashR matrices:
+The functions for creating FlashR matrices:
 
 * `fm.matrix`: create a matrix filled with repeated values from an R object. e.g., `fm.matrix(0, 10, 2)` creates a 10x2 FlashR matrix with 0.
 * `fm.seq.matrix`: create a matrix filled with sequence numbers. e.g., `fm.seq.matrix(0, 20, 10, 2)` creates a 10x2 FlashR matrix with columns filled with 1:20.
-* `fm.runif.matrix`: create a matrix filled with uniform random numbers. e.g., `fm.runif.matrix(10, 2, 0, 1, in.mem=TRUE)` creates a 10x2 FlashR matrix with 20 uniformly random values between 0 and 1, stored in memory.
-* `fm.rnorm.matrix`: create a matrix filled under normal distribution. e.g., `fm.rnorm.matrix(10, 2, 0, 1, in.mem=TRUE)` creats a 10x2 FlashR matrix with 20 random values following normal distribution with mean 0 and standard deviation 1, and stores data in memory.
+* `fm.runif.matrix`: create a matrix filled with random numbers under uniform distribution. e.g., `fm.runif.matrix(10, 2, 0, 1, in.mem=TRUE)` creates a 10x2 FlashR matrix with 20 random values uniformly between 0 and 1, stored in memory.
+* `fm.rnorm.matrix`: create a matrix filled with random numbers under normal distribution. e.g., `fm.rnorm.matrix(10, 2, 0, 1, in.mem=TRUE)` creats a 10x2 FlashR matrix with 20 random values following normal distribution with mean 0 and standard deviation 1, and stores data in memory.
 
-The following functions load data outside the FlashR environment.
+In addition, FlashR provides a set of functions load data from other data sources.
 
 * `fm.load.dense.matrix`: load a dense matrix from a text file. Each line in the text file stores a row of the dense matrix. Users need to specify a delimiter and the function assumes "," by default. Users can also specify the element type and by default the function assumes floating-point. The available element types are "D" for floating-point values, "I" for integers, "L" for logical values. Users can also specify the number of columns in the dense matrix. If not, the function will try to determine the number of columns itself. e.g., `fm.load.dense.matrix("/mnt/data/matrix.csv", in.mem=TRUE, ele.type="I", delim=",", ncol=10)` loads a dense matrix of integers with 10 columns from a CSV file.
-* `fm.load.dense.matrix.bin`: load a dense matrix from a binary file. The binary file can store data in row-major or column-major order. In this function, users have to specify all information of the dense matrix, such as the number of rows, the number of columns, the element type and the data layout (row-major or column-major). e.g., `fm.load.dense.matrix.bin("/mnt/data/matrix.bin", in.mem=TRUE, nrow=1000, ncol=10, byrow=FALSE, ele.type="I")` loads a dense matrix of integers with 1000 rows and 10 columns, stored in column-major order.
-* `fm.load.sparse.matrix`: load a sparse matrix in the FlashMatrix format from the Linux filesystem. The sparse matrix has to be formatted in advance. For a symmetric matrix, users only need to specify the sparse matrix file and the index file of the sparse matrix. For an asymmetric matrix, users need to specify four files: the sparse matrix file, the index file of the sparse matrix, the transpose of the sparse matrix, the index file for the transpose of the sparse matrix.
+* `fm.load.dense.matrix.bin`: load a dense matrix from a binary file that stores data in row-major or column-major order. In this function, users have to specify all information of the dense matrix, such as the number of rows, the number of columns, the element type and the data layout (row-major or column-major). e.g., `fm.load.dense.matrix.bin("/mnt/data/matrix.bin", in.mem=TRUE, nrow=1000, ncol=10, byrow=FALSE, ele.type="I")` loads a dense matrix of integers with 1000 rows and 10 columns, stored in column-major order.
+* `fm.load.sparse.matrix`: load a sparse matrix in the [FlashMatrix format](https://scholar.google.ca/citations?view_op=view_citation&hl=en&user=b1PYJN0AAAAJ&citation_for_view=b1PYJN0AAAAJ:Wp0gIr-vW9MC) from the Linux filesystem. The sparse matrix has to be formatted in advance. For a symmetric matrix, users only need to specify the sparse matrix file and the index file of the sparse matrix. For an asymmetric matrix, users need to specify four files: the sparse matrix file, the index file of the sparse matrix, the transpose of the sparse matrix, the index file for the transpose of the sparse matrix.
 
 We can make vectors and matrices persistent on SSDs even if R is closed.
 
