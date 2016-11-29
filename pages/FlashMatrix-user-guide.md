@@ -9,11 +9,11 @@ permalink: FlashMatrix-user-guide.html
 folder: mydoc
 ---
 
-FlashR is the main programming interface of FlashMatrix. By utilizing the powerful matrix computation in FlashMatrix, FlashR extends the R programming framework for large-scale data analysis. It executes R code in parallel automatically and utilizes SSDs (solid-state drives), a type of fast disks that commonly exist in laptops and in the cloud, to scale R to large datasets. FlashR mimics the programming interface of the R framework. It reimplements many commonly used R functions in the [base](https://stat.ethz.ch/R-manual/R-devel/library/base/html/00Index.html) and [stats](https://stat.ethz.ch/R-manual/R-devel/library/stats/html/00Index.html) packages to provide users a familiar R programming environment to reduce the learning curve. In addition, FlashR provides a set of generalized matrix operations that extend the R framework to implement more computations efficiently. FlashR is currently implemented as an R package.
+FlashR is the main programming interface for FlashMatrix. By utilizing the powerful matrix computation in FlashMatrix, FlashR extends the R programming framework for large-scale data analysis. It executes R code in parallel automatically and utilizes one or many SSDs (solid-state drives), a type of fast disk that commonly exists in laptops and in the cloud, to scale R to large datasets. FlashR mimics the programming interface of the R framework. It reimplements many commonly used R functions in the [base](https://stat.ethz.ch/R-manual/R-devel/library/base/html/00Index.html) and [stats](https://stat.ethz.ch/R-manual/R-devel/library/stats/html/00Index.html) packages to provide users a familiar R programming environment to reduce the learning curve. In addition, FlashR provides a set of generalized matrix operations that extend the R framework to implement more computations efficiently. FlashR is currently implemented as an R package.
 
 ## How to start
 
-Users can follow the [instructions](https://flashxio.github.io/FlashX-doc/FlashX-Quick-Start-Guide.html) to install FlashR in Ubuntu. To load the FlashR package, run
+Users can follow these [instructions](https://flashxio.github.io/FlashX-doc/FlashX-Quick-Start-Guide.html) to install FlashR in Ubuntu. To load the FlashR package, run
 
 ```R
 > library(FlashR)
@@ -21,7 +21,7 @@ Users can follow the [instructions](https://flashxio.github.io/FlashX-doc/FlashX
 
 ## Construct FlashR vectors and matrices
 
-FlashR provides a set of functions to create FlashR vectors and matrices. These functions have the interfaces similar to the R counterparts.
+FlashR provides a set of functions to create FlashR vectors and matrices. These functions have interfaces similar to their R counterparts.
 
 The functions for creating FlashR vectors:
 
@@ -30,24 +30,25 @@ The functions for creating FlashR vectors:
 * `fm.runif`: create a vector with random numbers under uniform distribution. e.g., `fm.runif(10, 0, 1, in.mem=TRUE)` creates a FlashR vector with 10 random values uniformly between 0 and 1, stored in memory. `in.mem` instructs FlashR to store data in memory or on SSDs.
 * `fm.rnorm`: create a vector with random numbers under normal distribution. e.g., `fm.rnorm(10, 0, 1, in.mem=TRUE)` creates a FlashR vector with 10 random values following normal distribution with mean 0 and standard deviation 1 and stores data in memory. Like the one in `fm.runif`, `in.mem` instructs FlashR to store data in memory or on SSDs.
 
-The functions for creating FlashR matrices:
+### Functions for creating FlashR matrices:
 
-* `fm.matrix`: create a matrix filled with repeated values from an R object. e.g., `fm.matrix(0, 10, 2)` creates a 10x2 FlashR matrix with 0.
+* `fm.matrix`: create a matrix filled with repeated values from an R object or numeric. e.g., `fm.matrix(0, 10, 2)` creates a 10x2 FlashR matrix with all entries set to 0.
 * `fm.seq.matrix`: create a matrix filled with sequence numbers. e.g., `fm.seq.matrix(0, 20, 10, 2)` creates a 10x2 FlashR matrix with columns filled with 1:20.
 * `fm.runif.matrix`: create a matrix filled with random numbers under uniform distribution. e.g., `fm.runif.matrix(10, 2, 0, 1, in.mem=TRUE)` creates a 10x2 FlashR matrix with 20 random values uniformly between 0 and 1, stored in memory.
-* `fm.rnorm.matrix`: create a matrix filled with random numbers under normal distribution. e.g., `fm.rnorm.matrix(10, 2, 0, 1, in.mem=TRUE)` creats a 10x2 FlashR matrix with 20 random values following normal distribution with mean 0 and standard deviation 1, and stores data in memory.
+* `fm.rnorm.matrix`: create a matrix filled with random numbers under normal distribution. e.g., `fm.rnorm.matrix(10, 2, 0, 1, in.mem=TRUE)` creates a 10x2 FlashR matrix with 20 random values following normal distribution with mean 0 and standard deviation 1, and stores data in memory.
 
-In addition, FlashR provides a set of functions load data from other data sources to the FlashR environment.
+In addition, FlashR provides a set of functions to load data from other data sources
+to the FlashR environment.
 
-* `fm.load.dense.matrix`: load a dense matrix from a text file. Each line in the text file stores a row of the dense matrix. Users need to specify a delimiter and the function assumes "," by default. Users can also specify the element type and by default the function assumes floating-point. The available element types are "D" for floating-point values, "I" for integers, "L" for logical values. Users can also specify the number of columns in the dense matrix. If not, the function will try to determine the number of columns itself. e.g., `fm.load.dense.matrix("/mnt/data/matrix.csv", in.mem=TRUE, ele.type="I", delim=",", ncol=10)` loads a dense matrix of integers with 10 columns from a CSV file.
-* `fm.load.dense.matrix.bin`: load a dense matrix from a binary file that stores data in row-major or column-major order. In this function, users have to specify all information of the dense matrix, such as the number of rows, the number of columns, the element type and the data layout (row-major or column-major). e.g., `fm.load.dense.matrix.bin("/mnt/data/matrix.bin", in.mem=TRUE, nrow=1000, ncol=10, byrow=FALSE, ele.type="I")` loads a dense matrix of integers with 1000 rows and 10 columns, stored in column-major order.
-* `fm.load.sparse.matrix`: load a sparse matrix in the [FlashMatrix format](https://scholar.google.ca/citations?view_op=view_citation&hl=en&user=b1PYJN0AAAAJ&citation_for_view=b1PYJN0AAAAJ:Wp0gIr-vW9MC) from the Linux filesystem. The sparse matrix has to be formatted in advance. For a symmetric matrix, users only need to specify the sparse matrix file and the index file of the sparse matrix. For an asymmetric matrix, users need to specify four files: the sparse matrix file, the index file of the sparse matrix, the transpose of the sparse matrix, the index file for the transpose of the sparse matrix.
+* `fm.load.dense.matrix`: load a dense matrix from a text file. Each line in the text file stores a row of the dense matrix. Users may choose to specify a delimiter as the function assumes `","` by default. Users can also specify the element type; by default the function assumes floating-point. The available element types are `"D"` for floating-point values, `"I"` for integers, `"L"` for logical values. Users can also specify the number of columns in the dense matrix. If not, the function will try to determine the number of columns itself. e.g., `fm.load.dense.matrix("matrix.csv", in.mem=TRUE, ele.type="I", delim=",", ncol=10)` loads a dense matrix of integers with 10 columns from a CSV file.
+* `fm.load.dense.matrix.bin`: load a dense matrix from a binary file that stores data in row-major or column-major order. In this function, users have to specify all information of the dense matrix, such as the number of rows, the number of columns, the element type and the data layout (row-major or column-major). e.g., `fm.load.dense.matrix.bin("matrix.bin", in.mem=TRUE, nrow=1000, ncol=10, byrow=FALSE, ele.type="I")` loads a dense matrix of integers with 1000 rows and 10 columns, stored in column-major order.
+* `fm.load.sparse.matrix`: load a sparse matrix in the [FlashMatrix format](https://scholar.google.ca/citations?view_op=view_citation&hl=en&user=b1PYJN0AAAAJ&citation_for_view=b1PYJN0AAAAJ:Wp0gIr-vW9MC) from the **Linux filesystem**. The sparse matrix has to be formatted in advance. For a symmetric matrix, users only need to specify the sparse matrix file and the index file of the sparse matrix. For an asymmetric matrix, users need to specify four files: the sparse matrix file, the index file of the sparse matrix, the transpose of the sparse matrix, the index file for the transpose of the sparse matrix.
 
 Some of the functions (`fm.load.dense.matrix`, `fm.load.dense.matrix.bin`, `fm.runif`, `fm.rnorm`, `fm.runif.matrix` and `fm.rnorm.matrix`) have the argument `name`. If a user creates a vector/matrix stored on SSDs with a user-specified name, the vector/matrix will be persistent on SSDs. That is, even if the user exits from the R framework, the vector/matrix is still on SSDs and the user can load the vector/matrix to FlashR with the same name for further computation. To load a dense vector/matrix, a user can use `fm.get.dense.matrix`.
 
 ## "Base" functions
 
-FlashR implements many R functions in the base package to mimic the existing R programming environment. Although we have a goal of having these functions as similar as possible to the original R functions, we do not provide 100% compatibility with R for some of the functions for the sake of performance. Below shows a list of R functions in the base package currently supported by FlashR. More functions will be provided in the future.
+FlashR implements many R functions in the base package to mimic the existing R programming environment. Although we aim to have these functions as similar as possible to the original R functions, we do not provide 100% compatibility with R for some functions, for the sake of performance. Below is the list of **ever increasing** R functions in the base package currently supported by FlashR.
 
 The following functions have exactly the same interface as the original R function.
 
@@ -65,8 +66,8 @@ Many operations have exactly the same interface as the original R functions but 
 * binary operations: [`+`, `-`, `*`, `/`, `^`](https://stat.ethz.ch/R-manual/R-devel/library/base/html/Arithmetic.html), [`==`, `!=`, `>`, `>=`, `<`, `<=`](https://stat.ethz.ch/R-manual/R-devel/library/base/html/Comparison.html), [`|`, `&`](https://stat.ethz.ch/R-manual/R-devel/library/base/html/Logic.html). When they are applied to a matrix and a vector, it requires the vector has the same length as the columns of the matrix.
 * [`sweep`](http://stat.ethz.ch/R-manual/R-patched/library/base/html/sweep.html) requires the vector in `STATS` has the same length as the rows or the columns of the matrix in `x`. In addition, the function in `FUN` has to be one of the pre-defined element operators in FlashR (see the section "Generalized operations").
 * [`print`](https://stat.ethz.ch/R-manual/R-devel/library/base/html/print.html): instead of printing the elements in a FlashR vector/matrix, this function prints the basic information of the FlashR object, such as the number of rows or columns.
-* [`pmin`, `pmax`](https://stat.ethz.ch/R-manual/R-devel/library/base/html/Extremes.html) requires input arrays to be all FlashR vectors or FlashR matrices. These functions do not work on a mix of FlashR vectors/matrices and R vectors/matrices. In addtion, we create `pmin2` and `pmax2` to compute parallel maxima and minima of two input vectors/matrices.
-* [`rbind` and `cbind`](https://stat.ethz.ch/R-manual/R-devel/library/base/html/cbind.html) work almost exactly the same as the ones in the R framework. Currently, it doesn't support `deparse.level`.
+* [`pmin`, `pmax`](https://stat.ethz.ch/R-manual/R-devel/library/base/html/Extremes.html) requires input arrays to be all FlashR vectors or FlashR matrices. These functions do not work on a mix of FlashR vectors/matrices and R vectors/matrices. In addition, we create `pmin2` and `pmax2` to compute parallel maxima and minima of two input vectors/matrices.
+* [`rbind` and `cbind`](https://stat.ethz.ch/R-manual/R-devel/library/base/html/cbind.html) work almost exactly the same as the ones in the R framework. Currently, we don't support `deparse.level`.
 
 Some of them have slightly different interface and semantics. These slightly different functions always start with "fm." to indicate that they are actually FlashR functions. In the future, we will provide implementations with exactly the same interface and semantics as the original R functions.
 
@@ -75,7 +76,7 @@ Some of them have slightly different interface and semantics. These slightly dif
 * `fm.eigen` is an eigensolver to solve a very large eigenvalue problem. By default, it uses `eigs` from the RSpectra package to compute eigenvalues. This eigensolver has a limit on the size of an eigenvalue problem and does not parallelize all computation in eigensolving. To solve an even larger eigenvalue problem, users need to compile FlashR with the [Anasazi eigensolvers](https://trilinos.org/packages/anasazi/) from the Trilinos project (see more instructions [here](https://flashxio.github.io/FlashX-doc/FlashX-with-anasazi.html)). To compute eigenvalues, users define a function for matrix multiplication and pass the function as the first argument. e.g., `fm.eigen(function(x, args) mat %*% x, 10, nrow(mat))` computes 10 eigenvalues on the matrix `mat`. The function that defines matrix multiplication must return a FlashR matrix or vector.
 * `fm.svd` performs singular-value decomposition on a large matrix. e.g., `fm.svd(mat, 10, 0)` computes 10 left singular vectors on the input matrix.
 
-## "stats functions
+## "Stats" functions
 
 FlashR also implements some `stats` functions. They perform the same computation as the ones in the original "stats" package.
 
@@ -84,15 +85,15 @@ FlashR also implements some `stats` functions. They perform the same computation
 * [`cov.wt`](https://stat.ethz.ch/R-manual/R-devel/library/stats/html/cov.wt.html) computes the weighted covariance matrix
 * `fm.kmeans` computes k-means with the Lloyd algorithm and random initialization.
 
-## Generalized operations
+## Generalized operations (GenOps)
 
-In addition to the basic functions above, FlashR provides a set of generalized operations (GenOps) to increase the generality of FlashR. A GenOp takes some matrices and an element operator, which defines the computation on elements, to perform actual computation. FlashR defines only four GenOps and many element operators to cover computations required by many data mining and machine learning algorithms. Most of the "Base" and "stats" R functions shown above are also implemented with the GenOps.
+In addition to the basic functions above, FlashR provides a set of generalized operations to increase the generality of FlashR. A GenOp takes some matrices and an element operator, which defines the computation on elements, to perform actual computation. FlashR defines only four GenOps and many element operators to cover computations required by many data mining and machine learning algorithms. Most of the "Base" and "stats" R functions shown above are also implemented with the GenOps.
 
 ### Element operators:
 
 FlashR defines three types of element operators. Some operators take two elements and output one element (binary operators); some take only one element and output one element (unary operators); the others take multiple elements and output one element (aggregation operators). The tables below list the name and the corresponding R object for an element operator. Users can pass an element operator to a GenOp by using either its name or its R object.
 
-The table lists common binary operators in FlashR:
+#### Binary operators in FlashR
 
 | name | R object | Computation semantics |
 | :---| :--- | :--- |
@@ -112,7 +113,7 @@ The table lists common binary operators in FlashR:
 | "\|" or "or" | fm.bo.or | logical or. e.g., `TRUE | FALSE = TRUE` |
 | "&" or "and" | fm.bo.and | logical and. e.g., `TRUE & FALSE = FALSE` |
 
-The table lists some special binary operators mainly used for aggregation:
+#### Special binary operators mainly used for aggregation
 
 | name | R object | Computation semantics |
 | :---| :--- | :--- |
@@ -120,7 +121,7 @@ The table lists some special binary operators mainly used for aggregation:
 | "which.max" | fm.bo.which.max | compute the index of the maximal value. e.g., `which.max(1, 2, 1)=2` |
 | "which.min" | fm.bo.which.min | compute the index of the minimal value. e.g., `which.max(1, 2, 1)=1` |
 
-The table lists common unary operators in FlashR:
+#### Common unary operators in FlashR
 
 | name | R object | Computation semantics |
 | :---| :--- | :--- |
@@ -147,7 +148,7 @@ FlashR provides `fm.create.agg.op(agg, combine, name)` to construct an aggregati
 
 FlashR allows users to define their own element operators. Currently, a new element operator has to be defined in C/C++. More instructions of adding new element operators are shown [here](https://flashxio.github.io/FlashX-doc/FlashR-extension.html).
 
-### The list of GenOps in FlashR
+### GenOps in FlashR
 
 **Inner product** is a generalized matrix multiplication. It replaces multiplication and addition in matrix multiplication with two element operators, respectively. As such, we can define many operations with inner product. For example, we can use inner product to compute various pair-wise distance matrics of data points, such as Euclidean distance and Hamming distance.
 
@@ -186,7 +187,7 @@ neg <- fm.sapply(m1, fm.buo.neg)
 neg <- fm.sapply(m1, "neg")
 ```
 
-**Aggregation** (`fm.agg` and `fm.agg.mat`) takes an array and an aggregation operator, and outputs a single element or a vector. If these functions gets a binary operator, it will try to construct an aggregation operator with `fm.create.agg.op`. 
+**Aggregation** (`fm.agg` and `fm.agg.mat`) take an array and an aggregation operator, and outputs a single element or a vector. If these functions get a binary operator, they will try to construct an aggregation operator with `fm.create.agg.op`.
 
 * `fm.agg(fm, FUN)`: aggregates over the entire array.
 * `fm.agg.mat(fm, margin, FUN)`: aggregates over each individual row or column of a matrix and outputs a vector.
@@ -205,12 +206,12 @@ rs <- fm.agg.mat(m, 1, fm.bo.add)
 rs <- fm.agg.mat(m, 1, "+")
 ```
 
-**Groupby** is similar to groupby in SQL. It groups multiple elements and perform aggregation on the elements within groups. Like aggregation functions, groupby functions also accept binary operators.
+**Groupby** is similar to groupby in SQL. It groups multiple elements and performs aggregation on the elements within groups. Like aggregation functions, groupby functions also accept binary operators.
 
 * `fm.sgroupby(fm, FUN)`:  groups elements by their own values in a vector and invokes FUN on the elements associated with the same value. It outputs a list with two fields `val` and `agg`. `val` is a FlashR vector with unique values in the original input vector; `agg` is a FlashR vector that stores the aggregation results for each unique value.
 * `fm.groupby(fm, margin, factor, FUN)`: takes a matrix and a factor vector, groups rows/columns of the matrix based on the factor vector and runs aggregation FUN on the rows/columns within the same group to generate a single row/column. If we group rows, `fm.groupby` outputs a matrix with the number of rows equal to the maximal number of levels and the number of columns equal to the number of columns in the input matrix; if we group columns, `fm.groupby` outputs a matrix with the number of columns equal to the maximal number of levels and the number of rows equals to the number of rows in the input matrix.
 
-Example 1: count the occurence of unique values in a vector.
+Example 1: count the occurrence of unique values in a vector.
 
 ```R
 cnt <- fm.sgroupby(vec, "count")
@@ -243,23 +244,23 @@ FlashR has the following functions to test if an object is a FlashR vector or ma
 
 Sometimes, users need to tune FlashR to get better performance or use SSDs to scale computation to larger datasets.
 
-* `fm.set.conf`: users can pass a configuration file to tune the parameters in FlashR. The details of the parameters in FlashR is shown [here](https://flashxio.github.io/FlashX-doc/FlashX-conf.html).
+* `fm.set.conf`: users can pass a configuration file to tune the parameters in FlashR. The details of the parameters in FlashR are shown [here](https://flashxio.github.io/FlashX-doc/FlashX-conf.html).
 * `fm.print.conf` prints the current parameters in FlashR.
-* `fm.print.features` prints the featurs that have been compiled into FlashR when FlashR is installed.
+* `fm.print.features` prints the features that have been compiled into FlashR when FlashR is installed.
 
 ## Guidelines for FlashR programmers
 
-Although FlashR tries to provide a familiar environment for R users, it sacrifices full compatibility for performance. As such, there is some difference between R and FlashR that FlashR programmers need to take into consideration when implementing a new algorithm in FlashR.
+Although FlashR tries to provide a familiar environment for R users, it sacrifices full compatibility for performance. As such, there is some differences between R and FlashR that FlashR programmers need to take into consideration when implementing a new algorithm in FlashR.
 
 ### Array-oriented programming
 
-The biggest difference between R and FlashR is that FlashR does not allow users to modify individual elements in a vector or a matrix. FlashR intentionally chooses so for the sake of performance. FlashR stores vectors and matrices on SSDs. Modifying individual elements results in read-modify-write to SSDs, which causes many small random I/O. It causes efficiency issues and is harmful to SSDs.
+The biggest difference between R and FlashR is that FlashR does not allow users to modify individual elements in a vector or a matrix. FlashR intentionally chooses so for the sake of performance. FlashR stores vectors and matrices on SSDs. Modifying individual elements results in read-modify-write to SSDs, causes many small random I/Os, loss of efficiency and potential harm to SSDs.
 
-Although FlashR allows programmers to read individual elements in a vector or a matrix, it is highly recommended to **avoid** reading them individually as much as possible. FlashR advocates array-oriented programming to achieve superior efficiency. Programmers should use the "base" array operations if possible. In addition, programmers should use generalized matrix operations to cover many more computations.
+Although FlashR allows programmers to read individual elements in a vector or a matrix, it is highly recommended to **avoid** reading them individually as much as possible. FlashR advocates array-oriented programming to achieve optimal performance. Programmers should use the "base" array operations if possible. In addition, programmers should use generalized matrix operations to cover many more computation patterns.
 
 ### Lazy evaluation and matrix materialization
 
-FlashR gains performance by lazily evaluating most of the matrix operations and merging them into a single execution. As such, the matrices output from most of the matrix operations (all generalized matrix operations and most of the "base" functions) do not contain actual computation results. This strategy dramatically improves performance for most of computation, but it may have some cost in some cases. As such, programmers sometimes need to provide FlashR some hints to achieve the maximal performance.
+FlashR gains performance by lazily evaluating most of the matrix operations and merging them into a single execution. As such, the matrices output from most of the matrix operations (all generalized matrix operations and most of the "base" functions) do not contain actual computation results. This strategy dramatically improves performance for most computation, but it *may* lead to overhead in rare cases. As such, programmers sometimes need to provide FlashR some hints to achieve the maximal performance.
 
 In a simple example of `mat1 + mat2`, the output of this operation stores the computation and the input matrices, instead of actual computation results.
 
@@ -288,7 +289,7 @@ However, FlashR needs to perform some computation to interact with R and return 
 * The functions that convert FlashR vectors/matrices to R vectors/matrices can also trigger the computation. Such functions include `as.vector` and `as.matrix`.
 * `fm.materialize` and `fm.materialize.list` explicitly materialize the input matrices.
 
-Lazy evaluation can potentially increase the computation overhead in some cases. We use the code below to illustrate the problem. In this example, `sum` and `prod` do not store actual computation results. Materializing `res2` and `res3` trigger the computation in `sum` and `prod`. Because we materialize `res2` and `res3` separately, FlashR potentially has to perform the computation in `sum` and `prod` twice.
+Lazy evaluation can potentially increase the computation overhead in rare cases. We use the code below to illustrate an example. Here, `sum` and `prod` do not store actual computation results. Materializing `res2` and `res3` trigger the computation in `sum` and `prod`. Because we materialize `res2` and `res3` separately, FlashR potentially has to perform the computation in `sum` and `prod` twice.
 
 
 ```R
