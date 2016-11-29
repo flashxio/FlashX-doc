@@ -48,7 +48,7 @@ Some of the functions (`fm.load.dense.matrix`, `fm.load.dense.matrix.bin`, `fm.r
 
 ## "Base" functions
 
-FlashR implements many R functions in the base package to mimic the existing R programming environment. Although we have a goal of having these functions as similar as possible to the original R functions, we do not provide 100% compatibility with R for some of the functions for the sake of performance. Below shows a list of R functions in the base package currently supported by FlashR. More functions will be provided in the future.
+FlashR implements many R functions in the base package to mimic the existing R programming environment. Although we aim to have these functions as similar as possible to the original R functions, we do not provide 100% compatibility with R for some functions, for the sake of performance. Below is the list of **ever increasing** R functions in the base package currently supported by FlashR.
 
 The following functions have exactly the same interface as the original R function.
 
@@ -66,8 +66,8 @@ Many operations have exactly the same interface as the original R functions but 
 * binary operations: [`+`, `-`, `*`, `/`, `^`](https://stat.ethz.ch/R-manual/R-devel/library/base/html/Arithmetic.html), [`==`, `!=`, `>`, `>=`, `<`, `<=`](https://stat.ethz.ch/R-manual/R-devel/library/base/html/Comparison.html), [`|`, `&`](https://stat.ethz.ch/R-manual/R-devel/library/base/html/Logic.html). When they are applied to a matrix and a vector, it requires the vector has the same length as the columns of the matrix.
 * [`sweep`](http://stat.ethz.ch/R-manual/R-patched/library/base/html/sweep.html) requires the vector in `STATS` has the same length as the rows or the columns of the matrix in `x`. In addition, the function in `FUN` has to be one of the pre-defined element operators in FlashR (see the section "Generalized operations").
 * [`print`](https://stat.ethz.ch/R-manual/R-devel/library/base/html/print.html): instead of printing the elements in a FlashR vector/matrix, this function prints the basic information of the FlashR object, such as the number of rows or columns.
-* [`pmin`, `pmax`](https://stat.ethz.ch/R-manual/R-devel/library/base/html/Extremes.html) requires input arrays to be all FlashR vectors or FlashR matrices. These functions do not work on a mix of FlashR vectors/matrices and R vectors/matrices. In addtion, we create `pmin2` and `pmax2` to compute parallel maxima and minima of two input vectors/matrices.
-* [`rbind` and `cbind`](https://stat.ethz.ch/R-manual/R-devel/library/base/html/cbind.html) work almost exactly the same as the ones in the R framework. Currently, it doesn't support `deparse.level`.
+* [`pmin`, `pmax`](https://stat.ethz.ch/R-manual/R-devel/library/base/html/Extremes.html) requires input arrays to be all FlashR vectors or FlashR matrices. These functions do not work on a mix of FlashR vectors/matrices and R vectors/matrices. In addition, we create `pmin2` and `pmax2` to compute parallel maxima and minima of two input vectors/matrices.
+* [`rbind` and `cbind`](https://stat.ethz.ch/R-manual/R-devel/library/base/html/cbind.html) work almost exactly the same as the ones in the R framework. Currently, we don't support `deparse.level`.
 
 Some of them have slightly different interface and semantics. These slightly different functions always start with "fm." to indicate that they are actually FlashR functions. In the future, we will provide implementations with exactly the same interface and semantics as the original R functions.
 
@@ -76,7 +76,7 @@ Some of them have slightly different interface and semantics. These slightly dif
 * `fm.eigen` is an eigensolver to solve a very large eigenvalue problem. By default, it uses `eigs` from the RSpectra package to compute eigenvalues. This eigensolver has a limit on the size of an eigenvalue problem and does not parallelize all computation in eigensolving. To solve an even larger eigenvalue problem, users need to compile FlashR with the [Anasazi eigensolvers](https://trilinos.org/packages/anasazi/) from the Trilinos project (see more instructions [here](https://flashxio.github.io/FlashX-doc/FlashX-with-anasazi.html)). To compute eigenvalues, users define a function for matrix multiplication and pass the function as the first argument. e.g., `fm.eigen(function(x, args) mat %*% x, 10, nrow(mat))` computes 10 eigenvalues on the matrix `mat`. The function that defines matrix multiplication must return a FlashR matrix or vector.
 * `fm.svd` performs singular-value decomposition on a large matrix. e.g., `fm.svd(mat, 10, 0)` computes 10 left singular vectors on the input matrix.
 
-## "stats functions
+## "Stats" functions
 
 FlashR also implements some `stats` functions. They perform the same computation as the ones in the original "stats" package.
 
@@ -211,7 +211,7 @@ rs <- fm.agg.mat(m, 1, "+")
 * `fm.sgroupby(fm, FUN)`:  groups elements by their own values in a vector and invokes FUN on the elements associated with the same value. It outputs a list with two fields `val` and `agg`. `val` is a FlashR vector with unique values in the original input vector; `agg` is a FlashR vector that stores the aggregation results for each unique value.
 * `fm.groupby(fm, margin, factor, FUN)`: takes a matrix and a factor vector, groups rows/columns of the matrix based on the factor vector and runs aggregation FUN on the rows/columns within the same group to generate a single row/column. If we group rows, `fm.groupby` outputs a matrix with the number of rows equal to the maximal number of levels and the number of columns equal to the number of columns in the input matrix; if we group columns, `fm.groupby` outputs a matrix with the number of columns equal to the maximal number of levels and the number of rows equals to the number of rows in the input matrix.
 
-Example 1: count the occurence of unique values in a vector.
+Example 1: count the occurrence of unique values in a vector.
 
 ```R
 cnt <- fm.sgroupby(vec, "count")
@@ -246,7 +246,7 @@ Sometimes, users need to tune FlashR to get better performance or use SSDs to sc
 
 * `fm.set.conf`: users can pass a configuration file to tune the parameters in FlashR. The details of the parameters in FlashR is shown [here](https://flashxio.github.io/FlashX-doc/FlashX-conf.html).
 * `fm.print.conf` prints the current parameters in FlashR.
-* `fm.print.features` prints the featurs that have been compiled into FlashR when FlashR is installed.
+* `fm.print.features` prints the features that have been compiled into FlashR when FlashR is installed.
 
 ## Guidelines for FlashR programmers
 
