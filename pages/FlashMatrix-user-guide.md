@@ -33,7 +33,7 @@ The functions for creating FlashR vectors:
 ### Functions for creating FlashR matrices:
 
 * `fm.matrix`: create a matrix filled with repeated values from an R object or numeric. e.g., `fm.matrix(0, 10, 2)` creates a 10x2 FlashR matrix with all entries set to 0.
-* `fm.seq.matrix`: create a matrix filled with sequence numbers. e.g., `fm.seq.matrix(0, 20, 10, 2)` creates a 10x2 FlashR matrix with columns filled with 1:20.
+* `fm.seq.matrix`: create a matrix filled with sequence numbers. e.g., `fm.seq.matrix(1, 20, 10, 2)` creates a 10x2 FlashR matrix with columns filled with 1:20.
 * `fm.runif.matrix`: create a matrix filled with random numbers under uniform distribution. e.g., `fm.runif.matrix(10, 2, 0, 1, in.mem=TRUE)` creates a 10x2 FlashR matrix with 20 random values uniformly between 0 and 1, stored in memory.
 * `fm.rnorm.matrix`: create a matrix filled with random numbers under normal distribution. e.g., `fm.rnorm.matrix(10, 2, 0, 1, in.mem=TRUE)` creates a 10x2 FlashR matrix with 20 random values following normal distribution with mean 0 and standard deviation 1, and stores data in memory.
 
