@@ -150,7 +150,7 @@ FlashR allows users to define their own element operators. Currently, a new elem
 
 ### GenOps in FlashR
 
-**Inner product** is a generalized matrix multiplication. It replaces multiplication and addition in matrix multiplication with two element operators, respectively. As such, we can define many operations with inner product. For example, we can use inner product to compute various pair-wise distance matrics of data points, such as Euclidean distance and Hamming distance.
+**Inner product** (`fm.inner.prod(mat1, mat2, FUN1, FUN2, lazy.wide=FALSE)`) is a generalized matrix multiplication. It replaces multiplication and addition in matrix multiplication with two element operators, respectively. As such, we can define many operations with inner product. For example, we can use inner product to compute various pair-wise distance matrics of data points, such as Euclidean distance and Hamming distance.
 
 Example: compute the Euclidean distance between every pair of data points. We create a special binary operator `fm.bo.euclidean`, which computes the square of the difference of two elements: `euclidean(x, y)=(x - y)^2`, and register it to FlashR.
 
@@ -160,9 +160,11 @@ dist <- fm.inner.prod(data, t(data), fm.bo.euclidean, fm.bo.add)
 
 **Apply** is an element-wise operation and has multiple variants.
 
-* `fm.sapply(o, FUN)`:  an element-wise unary operation that applies a unary element operator to individual elements in an array. The output array of this function has the same shape as the input array.
-* `fm.mapply2(o1, o2, FUN)`: an element-wise binary operation that applies a binary element operator to the two input arrays. The two input arrays and the output array must have the same shape.
-* `fm.mapply.row(o1, o2, FUN)` and `fm.mapply.col(o1, o2, FUN)` perform element-wise operations on every row or column of the matrix (in the first argument) with the vector (in the second argument). Currently, `fm.mapply.row` and `fm.mapply.col` only accept the cases that the vector has the same length as a row or a column of the matrix. The output matrix has the same shape as the input matrix.
+* `fm.sapply(o, FUN, set.na)`:  an element-wise unary operation that applies a unary element operator to individual elements in an array. The output array of this function has the same shape as the input array.
+* `fm.mapply2(o1, o2, FUN, set.na)`: an element-wise binary operation that applies a binary element operator to the two input arrays. The two input arrays and the output array must have the same shape.
+* `fm.mapply.row(o1, o2, FUN, set.na)` and `fm.mapply.col(o1, o2, FUN, set.na)` perform element-wise operations on every row or column of the matrix (in the first argument) with the vector (in the second argument). Currently, `fm.mapply.row` and `fm.mapply.col` only accept the cases that the vector has the same length as a row or a column of the matrix. The output matrix has the same shape as the input matrix.
+
+All of these element-wise functions have the argument `set.na`. When `set.na` is `TRUE`, the `NA` values will propogate in the computation. That is, if one of the elements in the input array is `NA`, the element in the corresponding location of the output array will be set to `NA`. The default value of `set.na` is `TRUE`.
 
 The examples below illustrate how the "base" matrix operations in FlashR are implemented with `fm.sapply` and `fm.mapply2`.
 
