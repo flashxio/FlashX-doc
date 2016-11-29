@@ -138,7 +138,7 @@ FlashR defines three types of element operators. Some operators take two element
 | "as.int" | fm.buo.as.int | cast a value to an integer |
 | "as.numeric" | fm.buo.as.numeric | cast a value to a floating-point number |
 
-In addition to binary and unary operators, FlashR also needs aggregation operators to perform aggregation, such as `fm.agg` and `fm.groupby` (see [below](#genops-in-flashr) for more details), on matrices. An aggregation operator has two parts: `agg` and `combine`, both of which are binary operators themselves. `agg` runs on (part of) an input array and outputs an aggregation result; `combine` is optional, which runs on partial aggregation results from `agg` and combines them to generate the final aggregation result. For many aggregation operators, `agg` and `combine` are the same.
+In addition to binary and unary operators, FlashR also needs aggregation operators to perform aggregation, such as `fm.agg` and `fm.groupby` (see [Section "GenOps in FlashR"](#genops-in-flashr) for more details), on matrices. An aggregation operator has two parts: `agg` and `combine`, both of which are binary operators themselves. `agg` runs on (part of) an input array and outputs an aggregation result; `combine` is optional, which runs on partial aggregation results from `agg` and combines them to generate the final aggregation result. For many aggregation operators, `agg` and `combine` are the same.
 
 FlashR provides `fm.create.agg.op(agg, combine, name)` to construct an aggregation operator from binary operators.
 
