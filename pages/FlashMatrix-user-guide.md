@@ -19,7 +19,7 @@ Users can follow these [instructions](https://flashxio.github.io/FlashX-doc/Flas
 > library(FlashR)
 ```
 
-## Construct FlashR vectors and matrices
+## FlashR array construction functions
 
 FlashR provides a set of functions to create FlashR vectors and matrices. These functions have interfaces similar to their R counterparts.
 
