@@ -154,6 +154,8 @@ FlashR allows users to define their own element operators. Currently, a new elem
 Example: compute the Euclidean distance between every pair of data points. We create a special binary operator `fm.bo.euclidean`, which computes the square of the difference of two elements: `euclidean(x, y)=(x - y)^2`, and register it to FlashR.
 
 ```R
+data <- fm.runif.matrix(10000, 10)
+# This computes a 10000x10000 distance matrix.
 dist <- fm.inner.prod(data, t(data), fm.bo.euclidean, fm.bo.add)
 ```
 
@@ -170,6 +172,8 @@ The examples below illustrate how the "base" matrix operations in FlashR are imp
 Example 1: compute m1 + m2.
 
 ```R
+m1 <- fm.runif(100)
+m2 <- fm.runif(100)
 sum <- fm.mapply2(m1, m2, fm.bo.add)
 sum <- fm.mapply2(m1, m2, "+")
 ```
@@ -177,6 +181,8 @@ sum <- fm.mapply2(m1, m2, "+")
 Example 2: compute m1 + v2 (in this case, the vector v2 must have the same length as the columns of the matrix m1)
 
 ```R
+m1 <- fm.runif.matrix(100, 10)
+v2 <- fm.runif(100)
 sum <- fm.mapply.col(m1, v2, fm.bo.add)
 sum <- fm.mapply.col(m1, v2, "+")
 ```
@@ -184,6 +190,7 @@ sum <- fm.mapply.col(m1, v2, "+")
 Example 3: compute -m1
 
 ```R
+m1 <- fm.runif(100)
 neg <- fm.sapply(m1, fm.buo.neg)
 neg <- fm.sapply(m1, "neg")
 ```
@@ -196,6 +203,7 @@ neg <- fm.sapply(m1, "neg")
 Example 1: compute `sum(m)`
 
 ```R
+m <- fm.runif(100)
 sum <- fm.agg(m, fm.bo.add)
 sum <- fm.agg(m, "+")
 ```
@@ -203,6 +211,7 @@ sum <- fm.agg(m, "+")
 Example 2: compute `rowSums(m)`
 
 ```R
+m <- fm.runif.matrix(1000, 10)
 rs <- fm.agg.mat(m, 1, fm.bo.add)
 rs <- fm.agg.mat(m, 1, "+")
 ```
@@ -215,15 +224,18 @@ rs <- fm.agg.mat(m, 1, "+")
 Example 1: count the occurrence of unique values in a vector.
 
 ```R
+vec <- as.integer(fm.runif(1000) * 100)
 cnt <- fm.sgroupby(vec, "count")
 ```
 
 Example 2: group rows based on the labels and compute means within each group.
 
 ```R
-g.sums <- fm.groupby(mat, 1, labels, "+")
+mat <- fm.runif.matrix(1000, 10)
+labels <- fm.as.factor(fm.runif(1000)*10)
+g.sums <- fm.groupby(mat, 2, labels, "+")
 cnts <- fm.sgroupby(labels, "count")
-g.means <- fm.mapply.col(g.sums, cnts, "/")
+g.means <- fm.mapply.col(g.sums, cnts$agg, "/")
 ```
 
 ## Interact with native R
