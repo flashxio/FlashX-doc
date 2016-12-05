@@ -9,7 +9,9 @@ permalink: FlashMatrix-user-guide.html
 folder: mydoc
 ---
 
-FlashR is the main programming interface for FlashMatrix. By utilizing the powerful matrix computation in FlashMatrix, FlashR extends the R programming framework for large-scale data analysis. It executes R code in parallel automatically and utilizes one or many SSDs (solid-state drives), a type of fast disk that commonly exists in laptops and in the cloud, to scale R to large datasets. FlashR mimics the programming interface of the R framework. It reimplements many commonly used R functions in the [base](https://stat.ethz.ch/R-manual/R-devel/library/base/html/00Index.html) and [stats](https://stat.ethz.ch/R-manual/R-devel/library/stats/html/00Index.html) packages to provide users a familiar R programming environment to reduce the learning curve. In addition, FlashR provides a set of generalized matrix operations that extend the R framework to implement more computations efficiently. FlashR is currently implemented as an R package.
+FlashR is the R programming interface for FlashMatrix. By utilizing the powerful matrix computation in FlashMatrix, FlashR extends the R programming framework for large-scale data analysis. It executes R code in parallel automatically and utilizes one or many SSDs (solid-state drives), a type of fast disk that commonly exists in laptops and in the cloud, to scale R to large datasets. 
+
+FlashR mimics the programming interface of the R framework. It reimplements many commonly used R functions in the [base](https://stat.ethz.ch/R-manual/R-devel/library/base/html/00Index.html) and [stats](https://stat.ethz.ch/R-manual/R-devel/library/stats/html/00Index.html) packages to provide users a familiar R programming environment to reduce the learning curve. In addition, FlashR provides a set of generalized matrix operations that extend the R framework to implement more computations efficiently. FlashR is currently implemented as an R package.
 
 ## How to start
 
@@ -19,9 +21,9 @@ Users can follow these [instructions](https://flashxio.github.io/FlashX-doc/Flas
 > library(FlashR)
 ```
 
-## FlashR array construction functions
+## FlashR arrays
 
-FlashR provides a set of functions to create FlashR vectors and matrices. These functions have interfaces similar to their R counterparts.
+FlashR currently supports vectors and matrices of three types: logical, integer and floating-point. FlashR chooses to co-exist with R matrices. Instead of overiding the existing matrix construction functions in R, FlashR provides a set of functions to create FlashR vectors and matrices explicitly. These functions have interfaces similar to their R counterparts. FlashR provides a set of functions to interact with R. As such, users can utilize the R functions for small matrix computation.
 
 ### Functions for creating FlashR vectors:
 
@@ -44,6 +46,21 @@ FlashR provides a set of functions to create FlashR vectors and matrices. These 
 * `fm.load.sparse.matrix`: load a sparse matrix in the [FlashMatrix format](https://scholar.google.ca/citations?view_op=view_citation&hl=en&user=b1PYJN0AAAAJ&citation_for_view=b1PYJN0AAAAJ:Wp0gIr-vW9MC) from the **Linux filesystem**. The sparse matrix has to be formatted in advance. For a symmetric matrix, users only need to specify the sparse matrix file and the index file of the sparse matrix. For an asymmetric matrix, users need to specify four files: the sparse matrix file, the index file of the sparse matrix, the transpose of the sparse matrix, the index file for the transpose of the sparse matrix.
 
 Some of the functions (`fm.load.dense.matrix`, `fm.load.dense.matrix.bin`, `fm.runif`, `fm.rnorm`, `fm.runif.matrix` and `fm.rnorm.matrix`) have the argument `name`. If a user creates a vector/matrix stored on SSDs with a user-specified name, the vector/matrix will be persistent on SSDs. That is, even if the user exits from the R framework, the vector/matrix is still on SSDs and the user can load the vector/matrix to FlashR with the same name for further computation. To load a dense vector/matrix, a user can use `fm.get.dense.matrix`.
+
+### Interact with native R
+
+FlashR currently provides a limited number of linear algebra routines. As such, users still need to rely on the ones in R, such as linear solver and Choleski factorization, for many machine learning algorithms. FlashR provides functions for users to interact with the original R system.
+
+* `fm.as.vector`: convert an R vector/matrix or a FlashR matrix to a FlashR vector. The current implementation only supports converting from a one-column FlashR matrix to a FlashR vector.
+* `fm.as.matrix`: convert an R vector/matrix or a FlashR vector to a FlashR matrix. A vector is converted into a one-column matrix.
+* `fm.as.factor`: convert a FlashR vector to a factor vector. The current implementation only supports converting an integer vector. By default, this function determines the number of levels in the factor vector automatically. Users can also provide a maximal number of levels. Right now, FlashR factor vectors are used by `fm.sgroupby` and `fm.groupby`.
+* [`as.vector`](https://stat.ethz.ch/R-manual/R-devel/library/base/html/vector.html): convert a FlashR vector/matrix to an R vector.
+* [`as.matrix`](https://stat.ethz.ch/R-manual/R-devel/library/base/html/matrix.html): convert a FlashR vector/matrix to an R matrix.
+
+FlashR has the following functions to test if an object is a FlashR vector or matrix.
+
+* `fm.is.vector`: test if an object is a FlashR vector.
+* `fm.is.matrix`: test if an object is a FlashR matrix.
 
 ## "Base" functions
 
@@ -237,21 +254,6 @@ g.sums <- fm.groupby(mat, 2, labels, "+")
 cnts <- fm.sgroupby(labels, "count")
 g.means <- fm.mapply.col(g.sums, cnts$agg, "/")
 ```
-
-## Interact with native R
-
-FlashR currently provides a limited number of linear algebra routines. As such, users still need to rely on the ones in R, such as linear solver and Choleski factorization, for many machine learning algorithms. FlashR provides functions for users to interact with the original R system.
-
-* `fm.as.vector`: convert an R vector/matrix or a FlashR matrix to a FlashR vector. The current implementation only supports converting from a one-column FlashR matrix to a FlashR vector.
-* `fm.as.matrix`: convert an R vector/matrix or a FlashR vector to a FlashR matrix. A vector is converted into a one-column matrix.
-* `fm.as.factor`: convert a FlashR vector to a factor vector. The current implementation only supports converting an integer vector. By default, this function determines the number of levels in the factor vector automatically. Users can also provide a maximal number of levels. Right now, FlashR factor vectors are used by `fm.sgroupby` and `fm.groupby`.
-* [`as.vector`](https://stat.ethz.ch/R-manual/R-devel/library/base/html/vector.html): convert a FlashR vector/matrix to an R vector.
-* [`as.matrix`](https://stat.ethz.ch/R-manual/R-devel/library/base/html/matrix.html): convert a FlashR vector/matrix to an R matrix.
-
-FlashR has the following functions to test if an object is a FlashR vector or matrix.
-
-* `fm.is.vector`: test if an object is a FlashR vector.
-* `fm.is.matrix`: test if an object is a FlashR matrix.
 
 ## FlashR configuration
 
