@@ -9,7 +9,10 @@ summary:
 
 FlashX performs data analytics in the form of graphs and matrices. It runs
 on a variety of hardware and can utilize solid-state drives (SSDs) to scale
-to large datasets in a single machine. It has two main components:
+to large datasets in a single machine. The goal of FlashX is process massive
+datasets more efficiently in a single machine.
+
+FlashX has two main components:
 
 * FlashGraph is a general-purpose programming framework with a vertex-centric
 programming interface for large-scale graph analysis. FlashGraph is able to
