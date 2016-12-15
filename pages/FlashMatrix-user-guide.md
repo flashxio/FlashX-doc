@@ -322,4 +322,21 @@ Lazy evaluation can potentially increase the computation overhead in rare cases.
 
 To reduce computation overhead while still having small memory consumption, FlashR stores the computation results of small matrices in memory when their computation results are generated. In the example above, materializing `res2` triggers the computation in `sum` and `prod`, and FlashR saves the computation result in `prod` in memory by default. However, the computation result of `sum` is not saved because `sum` is potentially a very large matrix. The [paper](https://scholar.google.ca/citations?view_op=view_citation&hl=en&user=b1PYJN0AAAAJ&citation_for_view=b1PYJN0AAAAJ:mVmsd5A6BfQC) describes the policy of identifying small matrices in R code.
 
-However, in some cases, FlashR needs programmers to provide some hints on saving computation results of large matrices. Programmers can call `fm.set.cached` to hint FlashR to save the computation result of a matrix and where (in memory or on SSDs) to save the computation result.
+However, in some cases, FlashR needs programmers to provide some hints on saving computation results of large matrices. Programmers can call `fm.set.cached` to hint FlashR to save the computation result of a matrix and where (in memory or on SSDs) to save the computation result. The code below, which computes k-means, shows an example of using `fm.set.cached` to save computation. Each iteration first compute computes the distance of a data point to every cluster center and store the closest cluster Id to a data point in `parts`. If we don't cache the materialized result of `parts`, each access to `parts` triggers the expensive the distance computation and almost double the entire k-means computation. As such, we notify FlashR to save `parts` in memory whenever its elements are accessed.
+
+```R
+    while (iter < max.iters) {
+        centers <- new.centers
+        old.parts <- parts
+        m <- fm.inner.prod(data, t(centers), "euclidean", "+")
+
+        parts <- as.integer(fm.agg.mat(m, 1, agg.which.min) - 1)
+        # Have the vector materialized during the computation.
+        fm.set.cached(parts, TRUE, TRUE)
+
+        new.centers <- cal.centers(data, fm.as.factor(parts, num.centers))
+        if (!is.null(old.parts))
+            num.moves <- sum(as.numeric(old.parts != parts))
+        iter <- iter + 1
+    }
+```
