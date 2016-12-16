@@ -32,6 +32,7 @@ TODO list for additional machine learning algorithms
 * random forest
 * gradient boosting
 * isomap and many other manifold learning algorithms
+* stochastic gradient descent
 * deep neural network
 
 Explore more advanced/experimental machine learning algorithms
