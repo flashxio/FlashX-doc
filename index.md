@@ -25,7 +25,7 @@ terabytes with the speed of optimized parallel C code. It provides
 users with a familiar R programming environment to express many machine learning
 algorithms completely in R.
 
-![Architecture](https://flashxio.github.io/FlashX-doc/images/flashmatrix.png)
+![Architecture](https://flashxio.github.io/FlashX-doc/images/arch.jpg)
 
 # [Quick Start](https://flashxio.github.io/FlashX-doc/FlashX-Quick-Start-Guide.html)
 
