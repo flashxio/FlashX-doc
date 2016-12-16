@@ -41,4 +41,5 @@ TODO list for the FlashX framework
 
 * Implement an R compiler to translate the R code in user-defined functions passed to generalized matrix operations.
 The generalized matrix operations require user-defined functions to perform actual matrix computation on matrices. Currently, the user-defined functions have to be implemented in C++. We need to allow users to implement the user-defined functions in R and compile them into low-level representations that run in the underlying system of FlashR. The goal is to improve generality of the FlashR framework and still achieve very high performance (close to the efficient C implementations).
-
+* Test FlashX on different Linux distributions.
+* Port FlashX to Mac and Windows.
