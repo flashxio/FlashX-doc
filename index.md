@@ -9,8 +9,9 @@ summary:
 
 FlashX performs data analytics in the form of graphs and matrices. It runs
 on a variety of hardware and can utilize solid-state drives (SSDs) to scale
-to large datasets in a single machine. The goal of FlashX is process massive
-datasets more efficiently in a single machine.
+to large datasets in a single machine. The goal of FlashX is to process massive
+datasets with extreme efficiency in a single machine. Right now, FlashX
+provides the R programming interface.
 
 FlashX has three main components:
 
@@ -31,8 +32,7 @@ code.
 
 # [Quick Start](https://flashxio.github.io/FlashX-doc/FlashX-Quick-Start-Guide.html)
 
-We provide instructions to install FlashR, the R programming interface
-for FlashX, and use some simple examples to show how to use FlashR for computation.
+We provide instructions to install FlashX and use some simple examples to show how to use FlashR for computation.
 
 # [User Guide](https://flashxio.github.io/FlashX-doc/FlashMatrix-user-guide.html)
 
@@ -42,6 +42,6 @@ This documentation provides detailed description of the FlashR functions.
 
 This lists specific applications and shows how to solve them with FlashX.
 
-# Contributing
+# [Contributing](https://flashxio.github.io/FlashX-doc/Contributing.html)
 
 # API
