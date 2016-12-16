@@ -12,7 +12,7 @@ on a variety of hardware and can utilize solid-state drives (SSDs) to scale
 to large datasets in a single machine. The goal of FlashX is process massive
 datasets more efficiently in a single machine.
 
-FlashX has two main components:
+FlashX has three main components:
 
 * FlashGraph is a general-purpose programming framework with a vertex-centric
 programming interface for large-scale graph analysis. FlashGraph is able to
@@ -22,11 +22,10 @@ state-of-art distributed graph analysis frameworks at this scale.
 operations (GenOps). FlashMatrix uses a small set of GenOps to support a large
 variety of matrix operations and express varieties of data mining and machine
 learning algorithms. It keeps matrices on SSDs to scale to very large datasets.
-
-FlashX provides the R programming interface to process datasets at a scale of
-terabytes with the speed of optimized parallel C code. It provides
-users with a familiar R programming environment to express many machine learning
-algorithms completely in R.
+* FlashR reimplements matrix operations in the R framework with GenOps of
+FlashMatrix. With the help of FlashR, R users can execute existing R code to
+process datasets at a scale of terabytes with the speed of optimized parallel C
+code.
 
 ![Architecture](https://flashxio.github.io/FlashX-doc/images/flashmatrix.png)
 
