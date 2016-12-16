@@ -11,18 +11,27 @@ folder: mydoc
 
 TODO list for the R interface
 
-* Port R packages (MASS, e1071 and caret) to FlashR.
+* Port R packages ([MASS](https://cran.r-project.org/web/packages/MASS/index.html), [e1071](https://cran.r-project.org/web/packages/e1071/index.html), [caret](http://topepo.github.io/caret/index.html), [NMF](https://cran.r-project.org/web/packages/NMF/index.html)) to FlashR.
+* Implement [dplyr](https://cran.r-project.org/web/packages/dplyr/index.html).
+* Implement and port mclust
 
 TODO list for the Python interface
 
-* Implement NumPy interface with FlashMatrix.
-* Port SciPy, scikit-learn and pandas to FlashX.
+* Implement [NumPy](http://www.numpy.org/) interface with FlashMatrix.
+* Port [SciPy](https://www.scipy.org/), [scikit-learn](http://scikit-learn.org/) and [pandas](http://pandas.pydata.org/) to FlashX.
 
-TODO list for Additional machine learning algorithms
+TODO list for additional graph analysis algorithms
+
+* Louvain clustering
+* very efficient shortest path search
+
+TODO list for additional machine learning algorithms
 
 * SVM
+* elastic nets
 * random forest
 * gradient boosting
+* isomap and many other manifold learning algorithms
 
 Explore more advanced/experimental machine learning algorithms
 
