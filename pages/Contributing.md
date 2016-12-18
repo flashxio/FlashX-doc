@@ -45,7 +45,7 @@ TODO list for the FlashX framework
 The generalized matrix operations require user-defined functions to perform actual matrix computation on matrices. Currently, the user-defined functions have to be implemented in C++. We need to allow users to implement the user-defined functions in R and compile them into low-level representations that run in the underlying system of FlashR. The goal is to improve generality of the FlashR framework and still achieve very high performance (close to the efficient C implementations).
 * Test FlashX on different Linux distributions.
 * Port FlashX to Mac and Windows.
-* Measure the performance of FlashX in different hardware (laptop/desktop/servers with RAM/disks/SSDS/NVM, cloud instance with SSDs).
 * Implement external-memory parallel sorting
 * Re-implement libaio functions with non-blocking I/O.
 * Implement data loading functions from different data sources (local files, S3, URL) and different formats (cvs, binary, csr, edge list, GraphML, etc).
+* Measure the performance of FlashX in different hardware (laptop/desktop/servers with RAM/disks/SSDS/NVM, cloud instance with SSDs).
