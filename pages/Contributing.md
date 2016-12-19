@@ -46,6 +46,7 @@ The generalized matrix operations require user-defined functions to perform actu
 * Test FlashX on different Linux distributions.
 * Port FlashX to Mac and Windows.
 * Implement external-memory parallel sorting
+* Optimize most of matrix operations on sparse matrices.
 * Re-implement libaio functions with non-blocking I/O.
 * Implement data loading functions from different data sources (local files, S3, URL) and different formats (cvs, binary, csr, edge list, GraphML, etc).
 * Measure the performance of FlashX in different hardware (laptop/desktop/servers with RAM/disks/SSDS/NVM, cloud instance with SSDs).
