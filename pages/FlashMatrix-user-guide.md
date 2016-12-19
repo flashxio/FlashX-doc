@@ -9,7 +9,7 @@ permalink: FlashMatrix-user-guide.html
 folder: mydoc
 ---
 
-FlashR is the R programming interface for FlashMatrix. By utilizing the powerful matrix computation in FlashMatrix, FlashR extends the R programming framework for large-scale data analysis. It executes R code in parallel automatically and utilizes one or many SSDs (solid-state drives), a type of fast disk that commonly exists in laptops and in the cloud, to scale R to large datasets. 
+FlashR extends the R programming framework for large-scale data analysis, by utilizing the powerful matrix computation in FlashMatrix. It executes R code in parallel automatically and utilizes one or many SSDs (solid-state drives), a type of fast disk that commonly exists in laptops and in the cloud, to scale R to large datasets. 
 
 FlashR mimics the programming interface of the R framework. It reimplements many commonly used R functions in the [base](https://stat.ethz.ch/R-manual/R-devel/library/base/html/00Index.html) and [stats](https://stat.ethz.ch/R-manual/R-devel/library/stats/html/00Index.html) packages to provide users a familiar R programming environment to reduce the learning curve. In addition, FlashR provides a set of generalized matrix operations that extend the R framework to implement more computations efficiently. FlashR is currently implemented as an R package.
 
