@@ -53,7 +53,7 @@ FlashR currently provides a limited number of linear algebra routines. As such, 
 
 * [`fm.as.vector`](FlashR-API/vector.Rd.html): convert an R vector/matrix or a FlashR matrix to a FlashR vector. The current implementation only supports converting from a one-column FlashR matrix to a FlashR vector.
 * [`fm.as.matrix`](FlashR-API/matrix.Rd.html): convert an R vector/matrix or a FlashR vector to a FlashR matrix. A vector is converted into a one-column matrix.
-* [`fm.as.factor`](FlashR-API/fm.as.factor.html): convert a FlashR vector to a factor vector. The current implementation only supports converting an integer vector. By default, this function determines the number of levels in the factor vector automatically. Users can also provide a maximal number of levels. Right now, FlashR factor vectors are used by `fm.sgroupby` and `fm.groupby`.
+* [`fm.as.factor`](FlashR-API/fm.as.factor.Rd.html): convert a FlashR vector to a factor vector. The current implementation only supports converting an integer vector. By default, this function determines the number of levels in the factor vector automatically. Users can also provide a maximal number of levels. Right now, FlashR factor vectors are used by `fm.sgroupby` and `fm.groupby`.
 * [`as.vector`](FlashR-API/vector.Rd.html): convert a FlashR vector/matrix to an R vector.
 * [`as.matrix`](FlashR-API/matrix.Rd.html): convert a FlashR vector/matrix to an R matrix.
 
@@ -68,8 +68,8 @@ FlashR implements many R functions in the base package to mimic the existing R p
 
 The following functions have exactly the same interface as the original R function.
 
-* matrix info: [`dim`](FlashR-API/dim.Rd.html), [`nrow`]](FlashR-API/nrow.Rd.html), [`ncol`]](FlashR-API/nrow.Rd.html), [`length`]](FlashR-API/length.Rd.html), [`typeof`]](FlashR-API/typeof.Rd.html)
-* change matrix shape: [`t`]](FlashR-API/transpose.Rd.html)
+* matrix info: [`dim`](FlashR-API/dim.Rd.html), [`nrow`](FlashR-API/nrow.Rd.html), [`ncol`](FlashR-API/nrow.Rd.html), [`length`](FlashR-API/length.Rd.html), [`typeof`](FlashR-API/typeof.Rd.html)
+* change matrix shape: [`t`](FlashR-API/transpose.Rd.html)
 * element-wise unary operations: [`abs`, `sqrt`](FlashR-API/MathFun.Rd.html), [`ceiling`, `floor`, `round`](FlashR-API/round.Rd.html), [`log`, `log2`, `log10`, `exp`](FlashR-API/log.Rd.html), [`!`](FlashR-API/Logic.Rd.html), [`-`](FlashR-API/Arithmetic.Rd.html)
 * matrix multiplication: [`%*%`](FlashR-API/matmult.Rd.html), [`crossprod`, `tcrossprod`](FlashR-API/crossprod.Rd.html)
 * aggregation: [`sum`](FlashR-API/sum.Rd.html), [`min`, `max`](FlashR-API/Extremes.Rd.html), [`range`](FlashR-API/range.Rd.html), [`all`](FlashR-API/all.Rd.html), [`any`](FlashR-API/any.Rd.html), [`mean`](FlashR-API/mean.Rd.html), [`rowSums`, `colSums`, `rowMeans`, `colMeans](FlashR-API/colSums.Rd.html)`
@@ -179,7 +179,7 @@ dist <- fm.inner.prod(data, t(data), fm.bo.euclidean, fm.bo.add)
 **Apply** is an element-wise operation and has multiple variants.
 
 * [`fm.sapply`](FlashR-API/fm.sapply.Rd.html):  an element-wise unary operation that applies a unary element operator to individual elements in an array. The output array of this function has the same shape as the input array.
-* [`fm.mapply2`]](FlashR-API/fm.mapply2.Rd.html): an element-wise binary operation that applies a binary element operator to the two input arrays. The two input arrays and the output array must have the same shape.
+* [`fm.mapply2`](FlashR-API/fm.mapply2.Rd.html): an element-wise binary operation that applies a binary element operator to the two input arrays. The two input arrays and the output array must have the same shape.
 * [`fm.mapply.row`](FlashR-API/fm.mapply2.Rd.html) and [`fm.mapply.col`](FlashR-API/fm.mapply2.Rd.html) perform element-wise operations on every row or column of the matrix (in the first argument) with the vector (in the second argument). Currently, `fm.mapply.row` and `fm.mapply.col` only accept the cases that the vector has the same length as a row or a column of the matrix. The output matrix has the same shape as the input matrix.
 
 All of these element-wise functions have the argument `set.na`. When `set.na` is `TRUE`, the `NA` values will propogate in the computation. That is, if one of the elements in the input array is `NA`, the element in the corresponding location of the output array will be set to `NA`. The default value of `set.na` is `TRUE`.
