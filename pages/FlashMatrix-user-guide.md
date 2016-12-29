@@ -68,38 +68,38 @@ FlashR implements many R functions in the base package to mimic the existing R p
 
 The following functions have exactly the same interface as the original R function.
 
-* matrix info: `dim`, `nrow`, `ncol`, `length`, `typeof`
-* change matrix shape: `t`
-* element-wise unary operations: `abs`, `sqrt`, `ceiling`, `floor`, `round`, `log`, `log2`, `log10`, `exp`, `!`, `-`
-* matrix multiplication: `%*%`, `crossprod`, `tcrossprod`
-* aggregation: `sum`, `min`, `max`, `range`, `all`, `any`, `mean`, `rowSums`, `colSums`, `rowMeans`, `colMeans`
-* type cast: `as.integer`, `as.numeric`
-* element extraction: `[]`, `head`, `tail`
-* element selection: `ifelse`
+* matrix info: [`dim`](FlashR-API/dim.Rd.html), [`nrow`]](FlashR-API/nrow.Rd.html), [`ncol`]](FlashR-API/nrow.Rd.html), [`length`]](FlashR-API/length.Rd.html), [`typeof`]](FlashR-API/typeof.Rd.html)
+* change matrix shape: [`t`]](FlashR-API/transpose.Rd.html)
+* element-wise unary operations: [`abs`, `sqrt`](FlashR-API/MathFun.Rd.html), [`ceiling`, `floor`, `round`](FlashR-API/round.Rd.html), [`log`, `log2`, `log10`, `exp`](FlashR-API/log.Rd.html), [`!`](FlashR-API/Logic.Rd.html), [`-`](FlashR-API/Arithmetic.Rd.html)
+* matrix multiplication: [`%*%`](FlashR-API/matmult.Rd.html), [`crossprod`, `tcrossprod`](FlashR-API/crossprod.Rd.html)
+* aggregation: [`sum`](FlashR-API/sum.Rd.html), [`min`, `max`](FlashR-API/Extremes.Rd.html), [`range`](FlashR-API/range.Rd.html), [`all`](FlashR-API/all.Rd.html), [`any`](FlashR-API/any.Rd.html), [`mean`](FlashR-API/mean.Rd.html), [`rowSums`, `colSums`, `rowMeans`, `colMeans](FlashR-API/colSums.Rd.html)`
+* type cast: [`as.integer`](FlashR-API/integer.Rd.html), [`as.numeric`](FlashR-API/numeric.Rd.html)
+* element extraction: [`[]`](FlashR-API/Extract.Rd.html), [`head`, `tail`](FlashR-API/head.Rd.html)
+* element selection: [`ifelse`](FlashR-API/ifelse.Rd.html)
 
 Many operations have exactly the same interface as the original R functions but perform computation slightly differently in certain cases.
 
-* binary operations: [`+`, `-`, `*`, `/`, `^`](https://stat.ethz.ch/R-manual/R-devel/library/base/html/Arithmetic.html), [`==`, `!=`, `>`, `>=`, `<`, `<=`](https://stat.ethz.ch/R-manual/R-devel/library/base/html/Comparison.html), [`|`, `&`](https://stat.ethz.ch/R-manual/R-devel/library/base/html/Logic.html). When they are applied to a matrix and a vector, it requires the vector has the same length as the columns of the matrix.
-* [`sweep`](http://stat.ethz.ch/R-manual/R-patched/library/base/html/sweep.html) requires the vector in `STATS` has the same length as the rows or the columns of the matrix in `x`. In addition, the function in `FUN` has to be one of the pre-defined element operators in FlashR (see the section "Generalized operations").
-* [`print`](https://stat.ethz.ch/R-manual/R-devel/library/base/html/print.html): instead of printing the elements in a FlashR vector/matrix, this function prints the basic information of the FlashR object, such as the number of rows or columns.
-* [`pmin`, `pmax`](https://stat.ethz.ch/R-manual/R-devel/library/base/html/Extremes.html) requires input arrays to be all FlashR vectors or FlashR matrices. These functions do not work on a mix of FlashR vectors/matrices and R vectors/matrices. In addition, we create `pmin2` and `pmax2` to compute parallel maxima and minima of two input vectors/matrices.
-* [`rbind` and `cbind`](https://stat.ethz.ch/R-manual/R-devel/library/base/html/cbind.html) work almost exactly the same as the ones in the R framework. Currently, we don't support `deparse.level`.
+* binary operations: [`+`, `-`, `*`, `/`, `^`](FlashR-API/Arithmetic.Rd.html), [`==`, `!=`, `>`, `>=`, `<`, `<=`](FlashR-API/Comparison.Rd.html), [`|`, `&`](FlashR-API/Logic.Rd.html). When they are applied to a matrix and a vector, it requires the vector has the same length as the columns of the matrix.
+* [`sweep`](FlashR-API/sweep.Rd.html) requires the vector in `STATS` has the same length as the rows or the columns of the matrix in `x`. In addition, the function in `FUN` has to be one of the pre-defined element operators in FlashR (see the section "Generalized operations").
+* [`print`](FlashR-API/print.Rd.html): instead of printing the elements in a FlashR vector/matrix, this function prints the basic information of the FlashR object, such as the number of rows or columns.
+* [`pmin`, `pmax`](FlashR-API/Extremes.Rd.html) requires input arrays to be all FlashR vectors or FlashR matrices. These functions do not work on a mix of FlashR vectors/matrices and R vectors/matrices. In addition, we create `pmin2` and `pmax2` to compute parallel maxima and minima of two input vectors/matrices.
+* [`rbind` and `cbind`](FlashR-API/cbind.html) work almost exactly the same as the ones in the R framework. Currently, we don't support `deparse.level`.
 
 Some of them have slightly different interface and semantics. These slightly different functions always start with "fm." to indicate that they are actually FlashR functions. In the future, we will provide implementations with exactly the same interface and semantics as the original R functions.
 
-* `fm.table`: similar to [`table`](https://stat.ethz.ch/R-manual/R-devel/library/base/html/table.html) in R, builds a contingency table of the counts of unique elements in the input vector. It currently only works for FlashR vectors and factor vectors. It outputs a list with two FlashR vectors: `val` and `Freq`. `val` contains the unique values in the input vector and `Freq` contains the counts of the unique values.
-* `fm.summary` computes the summary of a FlashMatrix vector/matrix. For a matrix, this function computes the summary of each column. It computes min, max, mean, L1 norm, L2 norm and the number of non-zero values.
-* `fm.eigen` is an eigensolver to solve a very large eigenvalue problem. By default, it uses `eigs` from the RSpectra package to compute eigenvalues. This eigensolver has a limit on the size of an eigenvalue problem and does not parallelize all computation in eigensolving. To solve an even larger eigenvalue problem, users need to compile FlashR with the [Anasazi eigensolvers](https://trilinos.org/packages/anasazi/) from the Trilinos project (see more instructions [here](https://flashxio.github.io/FlashX-doc/FlashX-with-anasazi.html)). To compute eigenvalues, users define a function for matrix multiplication and pass the function as the first argument. e.g., `fm.eigen(function(x, args) mat %*% x, 10, nrow(mat))` computes 10 eigenvalues on the matrix `mat`. The function that defines matrix multiplication must return a FlashR matrix or vector.
-* `fm.svd` performs singular-value decomposition on a large matrix. e.g., `fm.svd(mat, 10, 0)` computes 10 left singular vectors on the input matrix.
+* [`fm.table`](FlashR-API/fm.table.Rd.html): similar to [`table`](https://stat.ethz.ch/R-manual/R-devel/library/base/html/table.html) in R, builds a contingency table of the counts of unique elements in the input vector. It currently only works for FlashR vectors and factor vectors. It outputs a list with two FlashR vectors: `val` and `Freq`. `val` contains the unique values in the input vector and `Freq` contains the counts of the unique values.
+* [`fm.summary`](FlashR-API/fm.summary.Rd.html) computes the summary of a FlashMatrix vector/matrix. For a matrix, this function computes the summary of each column. It computes min, max, mean, L1 norm, L2 norm and the number of non-zero values.
+* [`fm.eigen`](FlashR-API/fm.eigen.Rd.html) is an eigensolver to solve a very large eigenvalue problem. By default, it uses `eigs` from the RSpectra package to compute eigenvalues. This eigensolver has a limit on the size of an eigenvalue problem and does not parallelize all computation in eigensolving. To solve an even larger eigenvalue problem, users need to compile FlashR with the [Anasazi eigensolvers](https://trilinos.org/packages/anasazi/) from the Trilinos project (see more instructions [here](https://flashxio.github.io/FlashX-doc/FlashX-with-anasazi.html)). To compute eigenvalues, users define a function for matrix multiplication and pass the function as the first argument. e.g., `fm.eigen(function(x, args) mat %*% x, 10, nrow(mat))` computes 10 eigenvalues on the matrix `mat`. The function that defines matrix multiplication must return a FlashR matrix or vector.
+* [`fm.svd`](FlashR-API/fm.svd.Rd.html) performs singular-value decomposition on a large matrix. e.g., `fm.svd(mat, 10, 0)` computes 10 left singular vectors on the input matrix.
 
 ## "Stats" functions
 
 FlashR also implements some `stats` functions. They perform the same computation as the ones in the original "stats" package.
 
-* [`sd`](https://stat.ethz.ch/R-manual/R-devel/library/stats/html/sd.html) computes standard deviation. 
-* [`cov`, `cor`](https://stat.ethz.ch/R-manual/R-patched/library/stats/html/cor.html) computes covariance and correlation.
-* [`cov.wt`](https://stat.ethz.ch/R-manual/R-devel/library/stats/html/cov.wt.html) computes the weighted covariance matrix
-* `fm.kmeans` computes k-means with the Lloyd algorithm and random initialization.
+* [`sd`](FlashR-API/sd.Rd.html) computes standard deviation. 
+* [`cov`, `cor`](FlashR-API/cor.Rd.html) computes covariance and correlation.
+* [`cov.wt`](FlashR-API/cov.wt-fm-method.Rd.html) computes the weighted covariance matrix
+* [`fm.kmeans`](FlashR-API/fm.kmeans.Rd.html) computes k-means with the Lloyd algorithm and random initialization.
 
 ## Generalized operations (GenOps)
 
@@ -166,7 +166,7 @@ FlashR allows users to define their own element operators. Currently, a new elem
 
 ### GenOps in FlashR
 
-**Inner product** (`fm.inner.prod(mat1, mat2, FUN1, FUN2, lazy.wide=FALSE)`) is a generalized matrix multiplication. It replaces multiplication and addition in matrix multiplication with two element operators, respectively. As such, we can define many operations with inner product. For example, we can use inner product to compute various pair-wise distance matrics of data points, such as Euclidean distance and Hamming distance.
+**Inner product** ([`fm.inner.prod`](FlashR-API/fm.inner.prod.Rd.html)) is a generalized matrix multiplication. It replaces multiplication and addition in matrix multiplication with two element operators, respectively. As such, we can define many operations with inner product. For example, we can use inner product to compute various pair-wise distance matrics of data points, such as Euclidean distance and Hamming distance.
 
 Example: compute the Euclidean distance between every pair of data points. We create a special binary operator `fm.bo.euclidean`, which computes the square of the difference of two elements: `euclidean(x, y)=(x - y)^2`, and register it to FlashR.
 
@@ -178,9 +178,9 @@ dist <- fm.inner.prod(data, t(data), fm.bo.euclidean, fm.bo.add)
 
 **Apply** is an element-wise operation and has multiple variants.
 
-* `fm.sapply(o, FUN, set.na)`:  an element-wise unary operation that applies a unary element operator to individual elements in an array. The output array of this function has the same shape as the input array.
-* `fm.mapply2(o1, o2, FUN, set.na)`: an element-wise binary operation that applies a binary element operator to the two input arrays. The two input arrays and the output array must have the same shape.
-* `fm.mapply.row(o1, o2, FUN, set.na)` and `fm.mapply.col(o1, o2, FUN, set.na)` perform element-wise operations on every row or column of the matrix (in the first argument) with the vector (in the second argument). Currently, `fm.mapply.row` and `fm.mapply.col` only accept the cases that the vector has the same length as a row or a column of the matrix. The output matrix has the same shape as the input matrix.
+* [`fm.sapply`](FlashR-API/fm.sapply.Rd.html):  an element-wise unary operation that applies a unary element operator to individual elements in an array. The output array of this function has the same shape as the input array.
+* [`fm.mapply2`]](FlashR-API/fm.mapply2.Rd.html): an element-wise binary operation that applies a binary element operator to the two input arrays. The two input arrays and the output array must have the same shape.
+* [`fm.mapply.row`](FlashR-API/fm.mapply2.Rd.html) and [`fm.mapply.col`](FlashR-API/fm.mapply2.Rd.html) perform element-wise operations on every row or column of the matrix (in the first argument) with the vector (in the second argument). Currently, `fm.mapply.row` and `fm.mapply.col` only accept the cases that the vector has the same length as a row or a column of the matrix. The output matrix has the same shape as the input matrix.
 
 All of these element-wise functions have the argument `set.na`. When `set.na` is `TRUE`, the `NA` values will propogate in the computation. That is, if one of the elements in the input array is `NA`, the element in the corresponding location of the output array will be set to `NA`. The default value of `set.na` is `TRUE`.
 
