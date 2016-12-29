@@ -72,7 +72,7 @@ The following functions have exactly the same interface as the original R functi
 * change matrix shape: [`t`](FlashR-API/transpose.Rd.html)
 * element-wise unary operations: [`abs`, `sqrt`](FlashR-API/MathFun.Rd.html), [`ceiling`, `floor`, `round`](FlashR-API/round.Rd.html), [`log`, `log2`, `log10`, `exp`](FlashR-API/log.Rd.html), [`!`](FlashR-API/Logic.Rd.html), [`-`](FlashR-API/Arithmetic.Rd.html)
 * matrix multiplication: [`%*%`](FlashR-API/matmult.Rd.html), [`crossprod`, `tcrossprod`](FlashR-API/crossprod.Rd.html)
-* aggregation: [`sum`](FlashR-API/sum.Rd.html), [`min`, `max`](FlashR-API/Extremes.Rd.html), [`range`](FlashR-API/range.Rd.html), [`all`](FlashR-API/all.Rd.html), [`any`](FlashR-API/any.Rd.html), [`mean`](FlashR-API/mean.Rd.html), [`rowSums`, `colSums`, `rowMeans`, `colMeans](FlashR-API/colSums.Rd.html)`
+* aggregation: [`sum`](FlashR-API/sum.Rd.html), [`min`, `max`](FlashR-API/Extremes.Rd.html), [`range`](FlashR-API/range.Rd.html), [`all`](FlashR-API/all.Rd.html), [`any`](FlashR-API/any.Rd.html), [`mean`](FlashR-API/mean.Rd.html), [`rowSums`, `colSums`, `rowMeans`, `colMeans`](FlashR-API/colSums.Rd.html)
 * type cast: [`as.integer`](FlashR-API/integer.Rd.html), [`as.numeric`](FlashR-API/numeric.Rd.html)
 * element extraction: [`[]`](FlashR-API/Extract.Rd.html), [`head`, `tail`](FlashR-API/head.Rd.html)
 * element selection: [`ifelse`](FlashR-API/ifelse.Rd.html)
@@ -80,10 +80,10 @@ The following functions have exactly the same interface as the original R functi
 Many operations have exactly the same interface as the original R functions but perform computation slightly differently in certain cases.
 
 * binary operations: [`+`, `-`, `*`, `/`, `^`](FlashR-API/Arithmetic.Rd.html), [`==`, `!=`, `>`, `>=`, `<`, `<=`](FlashR-API/Comparison.Rd.html), [`|`, `&`](FlashR-API/Logic.Rd.html). When they are applied to a matrix and a vector, it requires the vector has the same length as the columns of the matrix.
-* [`sweep`](FlashR-API/sweep.Rd.html) requires the vector in `STATS` has the same length as the rows or the columns of the matrix in `x`. In addition, the function in `FUN` has to be one of the pre-defined element operators in FlashR (see the section "Generalized operations").
+* [`sweep`](FlashR-API/sweep-fm-method.Rd.html) requires the vector in `STATS` has the same length as the rows or the columns of the matrix in `x`. In addition, the function in `FUN` has to be one of the pre-defined element operators in FlashR (see the section "Generalized operations").
 * [`print`](FlashR-API/print.Rd.html): instead of printing the elements in a FlashR vector/matrix, this function prints the basic information of the FlashR object, such as the number of rows or columns.
 * [`pmin`, `pmax`](FlashR-API/Extremes.Rd.html) requires input arrays to be all FlashR vectors or FlashR matrices. These functions do not work on a mix of FlashR vectors/matrices and R vectors/matrices. In addition, we create `pmin2` and `pmax2` to compute parallel maxima and minima of two input vectors/matrices.
-* [`rbind` and `cbind`](FlashR-API/cbind.html) work almost exactly the same as the ones in the R framework. Currently, we don't support `deparse.level`.
+* [`rbind`, `cbind`](FlashR-API/fm.bind.Rd.html) work almost exactly the same as the ones in the R framework. Currently, we don't support `deparse.level`.
 
 Some of them have slightly different interface and semantics. These slightly different functions always start with "fm." to indicate that they are actually FlashR functions. In the future, we will provide implementations with exactly the same interface and semantics as the original R functions.
 
