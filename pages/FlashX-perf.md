@@ -19,6 +19,7 @@ However, most people may not possess such powerful hardware, so we also evaluate
 | #CPU cores | 4         | 32         | 32     | 48     |
 | RAM (GB)   | 30        | 244        | 512    | 1024   |
 | #SSDs      | 1         | 8          | 15     | 24     |
+
 Table 1. The hardware configuration where FlashGraph is evaluated.
 
 |          | i2.xlarge | i2.8xlarge | HW1    | HW2    |
@@ -28,6 +29,7 @@ Table 1. The hardware configuration where FlashGraph is evaluated.
 | WCC      | 58.90     | 7.91       | 7.91   | 5.03   |
 | Triangle | 4747.07   | 830.08     | 532.21 | 442.65 |
 | SCC      | 141.62    | 22.39      | N/A    | 12.06  |
+
 Table 2. The runtime (seconds) of FlashGraph on different hardware with 1GB page cache.
 
 We evaluate the performance of FlashGraph on the Twitter graph with 42 millions vertices and 1.5 billion edges (Table 2). The reason that we choose the Twitter graph is that this graph is used by many graph processing frameworks for performance evaluation. We run multiple graph algorithms: breadth-first search, triangle counting, weakly connected components and pagerank.
