@@ -1,0 +1,64 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd"><html xmlns="http://www.w3.org/1999/xhtml"><head><title>R: KMeans clustering</title>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<link rel="stylesheet" type="text/css" href="R.css" />
+</head><body>
+
+<table width="100%" summary="page for fm.kmeans"><tr><td>fm.kmeans</td><td style="text-align: right;">R Documentation</td></tr></table>
+
+<h2>KMeans clustering</h2>
+
+<h3>Description</h3>
+
+<p>Perform k-means clustering on a data matrix.
+</p>
+
+
+<h3>Usage</h3>
+
+<pre>
+fm.kmeans(data, centers, max.iters = 10, debug = FALSE, use.blas = FALSE)
+</pre>
+
+
+<h3>Arguments</h3>
+
+<table summary="R argblock">
+<tr valign="top"><td><code>data</code></td>
+<td>
+<p>the input data matrix where each row is a data point.</p>
+</td></tr>
+<tr valign="top"><td><code>centers</code></td>
+<td>
+<p>either the number of clusters, say k, or a set of
+initial (distinct) cluster centers. If a number, a random set
+of (distinct) rows in &lsquo;x&rsquo; is chosen as the initial centers.</p>
+</td></tr>
+<tr valign="top"><td><code>max.iters</code></td>
+<td>
+<p>the maximal number of iterations.</p>
+</td></tr>
+<tr valign="top"><td><code>debug</code></td>
+<td>
+<p>This indicates whether to print debug info.</p>
+</td></tr>
+<tr valign="top"><td><code>use.blas</code></td>
+<td>
+<p>a logical value indicating whether to use BLAS to
+compute Euclidean distance.</p>
+</td></tr>
+</table>
+
+
+<h3>Value</h3>
+
+<p>a vector that contains cluster Ids for each data point.
+</p>
+
+
+<h3>Author(s)</h3>
+
+<p>Da Zheng &lt;dzheng5@jhu.edu&gt;
+</p>
+
+
+</body></html>

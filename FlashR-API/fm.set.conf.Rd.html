@@ -1,0 +1,59 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd"><html xmlns="http://www.w3.org/1999/xhtml"><head><title>R: Reconfigure FlashMatrix</title>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<link rel="stylesheet" type="text/css" href="R.css" />
+</head><body>
+
+<table width="100%" summary="page for fm.set.conf"><tr><td>fm.set.conf</td><td style="text-align: right;">R Documentation</td></tr></table>
+
+<h2>Reconfigure FlashMatrix</h2>
+
+<h3>Description</h3>
+
+<p><code>fm.set.conf</code> reconfigures FlashMatrix with the settings in
+the configuration file. <code>fm.print.conf</code> prints the current configurations.
+<code>fm.set.log.level</code> sets what levels of messages should be logged.
+<code>fm.print.features</code> prints the features compiled into FlashR.
+</p>
+
+
+<h3>Usage</h3>
+
+<pre>
+fm.set.conf(conf.file)
+
+fm.set.log.level(level)
+
+fm.print.conf()
+
+fm.print.features()
+</pre>
+
+
+<h3>Arguments</h3>
+
+<table summary="R argblock">
+<tr valign="top"><td><code>conf.file</code></td>
+<td>
+<p>The configuration file.</p>
+</td></tr>
+<tr valign="top"><td><code>level</code></td>
+<td>
+<p>a string, including &quot;debug&quot;, &quot;info&quot;, &quot;warning&quot;, &quot;error&quot;, &quot;fatal&quot;.</p>
+</td></tr>
+</table>
+
+
+<h3>Details</h3>
+
+<p>The configuration file contains a list of key-value pairs. Each line in
+the file is a key-value pair in the form of &quot;key_name=value&quot;.
+</p>
+
+
+<h3>Author(s)</h3>
+
+<p>Da Zheng &lt;dzheng5@jhu.edu&gt;
+</p>
+
+
+</body></html>

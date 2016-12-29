@@ -1,0 +1,59 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd"><html xmlns="http://www.w3.org/1999/xhtml"><head><title>R: Sum of Vector Elements</title>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<link rel="stylesheet" type="text/css" href="R.css" />
+</head><body>
+
+<table width="100%" summary="page for sum"><tr><td>sum</td><td style="text-align: right;">R Documentation</td></tr></table>
+
+<h2>Sum of Vector Elements</h2>
+
+<h3>Description</h3>
+
+<p><code>sum</code> returns the sum of all the values in its arguments.
+<code>fm.sum</code> returns the sum of all the values in the input object. It can
+evaluate the summation lazily.
+</p>
+
+
+<h3>Usage</h3>
+
+<pre>
+fm.sum(x, lazy = FALSE)
+
+## S4 method for signature 'fm'
+sum(x, ..., na.rm = FALSE)
+
+## S4 method for signature 'fmV'
+sum(x, ..., na.rm = FALSE)
+</pre>
+
+
+<h3>Arguments</h3>
+
+<table summary="R argblock">
+<tr valign="top"><td><code>x</code></td>
+<td>
+<p>a FlashMatrix vector or matrix.</p>
+</td></tr>
+<tr valign="top"><td><code>lazy</code></td>
+<td>
+<p>indicates whether or not to evaluate it lazily.</p>
+</td></tr>
+<tr valign="top"><td><code>...</code></td>
+<td>
+<p>zero or more vectors or matrices.</p>
+</td></tr>
+<tr valign="top"><td><code>na.rm</code></td>
+<td>
+<p>logical. Should missing values (including <code>NaN</code>) be removed?</p>
+</td></tr>
+</table>
+
+
+<h3>Value</h3>
+
+<p>The sum.
+</p>
+
+
+</body></html>

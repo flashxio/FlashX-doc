@@ -1,0 +1,59 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd"><html xmlns="http://www.w3.org/1999/xhtml"><head><title>R: Are All Values True?</title>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<link rel="stylesheet" type="text/css" href="R.css" />
+</head><body>
+
+<table width="100%" summary="page for all"><tr><td>all</td><td style="text-align: right;">R Documentation</td></tr></table>
+
+<h2>Are All Values True?</h2>
+
+<h3>Description</h3>
+
+<p><code>all</code> tests whether all of the values in a set of logical vectors are
+true? <code>fm.all</code> tests whether all values in a single vector are true.
+<code>fm.all</code> can evaluate it lazily.
+</p>
+
+
+<h3>Usage</h3>
+
+<pre>
+fm.all(x, lazy = FALSE)
+
+## S4 method for signature 'fm'
+all(x, ..., na.rm = FALSE)
+
+## S4 method for signature 'fmV'
+all(x, ..., na.rm = FALSE)
+</pre>
+
+
+<h3>Arguments</h3>
+
+<table summary="R argblock">
+<tr valign="top"><td><code>x</code></td>
+<td>
+<p>a logical FlashMatrix vector.</p>
+</td></tr>
+<tr valign="top"><td><code>lazy</code></td>
+<td>
+<p>indicates whether or not to evaluate it lazily.</p>
+</td></tr>
+<tr valign="top"><td><code>...</code></td>
+<td>
+<p>zero or more logical vectors.</p>
+</td></tr>
+<tr valign="top"><td><code>na.rm</code></td>
+<td>
+<p>a logical indicating whether missing values should be removed.</p>
+</td></tr>
+</table>
+
+
+<h3>Value</h3>
+
+<p>The value is a logical vector of length one.
+</p>
+
+
+</body></html>

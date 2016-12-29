@@ -1,0 +1,60 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd"><html xmlns="http://www.w3.org/1999/xhtml"><head><title>R: Vector</title>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<link rel="stylesheet" type="text/css" href="R.css" />
+</head><body>
+
+<table width="100%" summary="page for vector"><tr><td>vector</td><td style="text-align: right;">R Documentation</td></tr></table>
+
+<h2>Vector</h2>
+
+<h3>Description</h3>
+
+<p><code>fm.as.vector</code> converts an object to a FlashMatrix vector.
+<code>as.vector</code> converts a FlashMatrix vector to an R vector.
+<code>fm.is.vector</code> test whether the input argument is a FlashMatrix vector.
+</p>
+
+
+<h3>Usage</h3>
+
+<pre>
+fm.as.vector(obj)
+
+## S4 method for signature 'fmV'
+as.vector(x)
+
+## S4 method for signature 'fm'
+as.vector(x)
+
+fm.is.vector(x)
+</pre>
+
+
+<h3>Arguments</h3>
+
+<table summary="R argblock">
+<tr valign="top"><td><code>obj</code></td>
+<td>
+<p>an object</p>
+</td></tr>
+<tr valign="top"><td><code>x</code></td>
+<td>
+<p>a FlashMatrix vector</p>
+</td></tr>
+</table>
+
+
+<h3>Details</h3>
+
+<p>Right now, <code>fm.as.vector</code> can only convert a matrix with only one row
+or one column. Otherwise, the function returns NULL.
+</p>
+
+
+<h3>Value</h3>
+
+<p>a FlashMatrix vector
+</p>
+
+
+</body></html>

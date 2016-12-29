@@ -1,0 +1,188 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd"><html xmlns="http://www.w3.org/1999/xhtml"><head><title>R: Arithmetic Operators</title>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<link rel="stylesheet" type="text/css" href="R.css" />
+</head><body>
+
+<table width="100%" summary="page for Arithmetic"><tr><td>Arithmetic</td><td style="text-align: right;">R Documentation</td></tr></table>
+
+<h2>Arithmetic Operators</h2>
+
+<h3>Description</h3>
+
+<p>Perform unary or binary arithmetic operations on FlashMatrix objects.
+</p>
+
+
+<h3>Usage</h3>
+
+<pre>
+## S4 method for signature 'fm,missing'
+e1 - e2
+
+## S4 method for signature 'fmV,missing'
+e1 - e2
+
+## S4 method for signature 'fm,fm'
+e1 + e2
+
+## S4 method for signature 'fmV,fmV'
+e1 + e2
+
+## S4 method for signature 'fm,fmV'
+e1 + e2
+
+## S4 method for signature 'fmV,fm'
+e1 + e2
+
+## S4 method for signature 'fm,matrix'
+e1 + e2
+
+## S4 method for signature 'matrix,fm'
+e1 + e2
+
+## S4 method for signature 'fm,ANY'
+e1 + e2
+
+## S4 method for signature 'ANY,fm'
+e1 + e2
+
+## S4 method for signature 'fmV,ANY'
+e1 + e2
+
+## S4 method for signature 'ANY,fmV'
+e1 + e2
+
+## S4 method for signature 'fm,fm'
+e1 - e2
+
+## S4 method for signature 'fmV,fmV'
+e1 - e2
+
+## S4 method for signature 'fm,fmV'
+e1 - e2
+
+## S4 method for signature 'fmV,fm'
+e1 - e2
+
+## S4 method for signature 'fm,matrix'
+e1 - e2
+
+## S4 method for signature 'matrix,fm'
+e1 - e2
+
+## S4 method for signature 'fm,ANY'
+e1 - e2
+
+## S4 method for signature 'ANY,fm'
+e1 - e2
+
+## S4 method for signature 'fmV,ANY'
+e1 - e2
+
+## S4 method for signature 'ANY,fmV'
+e1 - e2
+
+## S4 method for signature 'fm,fm'
+e1 * e2
+
+## S4 method for signature 'fmV,fmV'
+e1 * e2
+
+## S4 method for signature 'fm,fmV'
+e1 * e2
+
+## S4 method for signature 'fmV,fm'
+e1 * e2
+
+## S4 method for signature 'fm,matrix'
+e1 * e2
+
+## S4 method for signature 'matrix,fm'
+e1 * e2
+
+## S4 method for signature 'fm,ANY'
+e1 * e2
+
+## S4 method for signature 'ANY,fm'
+e1 * e2
+
+## S4 method for signature 'fmV,ANY'
+e1 * e2
+
+## S4 method for signature 'ANY,fmV'
+e1 * e2
+
+## S4 method for signature 'fm,fm'
+e1 / e2
+
+## S4 method for signature 'fmV,fmV'
+e1 / e2
+
+## S4 method for signature 'fm,fmV'
+e1 / e2
+
+## S4 method for signature 'fmV,fm'
+e1 / e2
+
+## S4 method for signature 'fm,matrix'
+e1 / e2
+
+## S4 method for signature 'matrix,fm'
+e1 / e2
+
+## S4 method for signature 'fm,ANY'
+e1 / e2
+
+## S4 method for signature 'ANY,fm'
+e1 / e2
+
+## S4 method for signature 'fmV,ANY'
+e1 / e2
+
+## S4 method for signature 'ANY,fmV'
+e1 / e2
+
+## S4 method for signature 'fm,fm'
+e1 ^ e2
+
+## S4 method for signature 'fmV,fmV'
+e1 ^ e2
+
+## S4 method for signature 'fm,fmV'
+e1 ^ e2
+
+## S4 method for signature 'fm,matrix'
+e1 ^ e2
+
+## S4 method for signature 'matrix,fm'
+e1 ^ e2
+
+## S4 method for signature 'ANY,fmV'
+e1 ^ e2
+
+## S4 method for signature 'fm,ANY'
+e1 ^ e2
+
+## S4 method for signature 'fmV,ANY'
+e1 ^ e2
+</pre>
+
+
+<h3>Arguments</h3>
+
+<table summary="R argblock">
+<tr valign="top"><td><code>e1,e2</code></td>
+<td>
+<p>One of the operands need to be a FlashMatrix object. If one operand
+is a matrix and the other is a vector, we perform the arithmetic operation
+on the vector and every column of the matrix. If one operand is a scalar,
+we perform the operation on the scalar with every element in the matrix or
+the vector.
+</p>
+<p>There are a few exceptions. For example, the left operand of &quot;^&quot; has to be
+a FlashMatrix object and the right operand has to be a scalar.</p>
+</td></tr>
+</table>
+
+
+</body></html>

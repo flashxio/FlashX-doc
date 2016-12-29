@@ -1,0 +1,83 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd"><html xmlns="http://www.w3.org/1999/xhtml"><head><title>R: Scaling and Centering of Matrix</title>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<link rel="stylesheet" type="text/css" href="R.css" />
+</head><body>
+
+<table width="100%" summary="page for scale,fm-method"><tr><td>scale,fm-method</td><td style="text-align: right;">R Documentation</td></tr></table>
+
+<h2>Scaling and Centering of Matrix</h2>
+
+<h3>Description</h3>
+
+<p><code>scale</code> centers and/or scales the columns of a FlashMatrix matrix.
+</p>
+
+
+<h3>Usage</h3>
+
+<pre>
+## S4 method for signature 'fm'
+scale(x, center = TRUE, scale = TRUE)
+</pre>
+
+
+<h3>Arguments</h3>
+
+<table summary="R argblock">
+<tr valign="top"><td><code>x</code></td>
+<td>
+<p>a FlashMatrix matrix</p>
+</td></tr>
+<tr valign="top"><td><code>center</code></td>
+<td>
+<p>either a logical value or a numeric vector of length equal to
+the number of columns of <code>x</code>.</p>
+</td></tr>
+<tr valign="top"><td><code>sclae</code></td>
+<td>
+<p>either a logical value or a numeric vector of length equal to
+the number of columns of <code>x</code>.</p>
+</td></tr>
+</table>
+
+
+<h3>Details</h3>
+
+<p>The value of <code>center</code> determines how column centering is
+performed.  If <code>center</code> is a numeric vector with length equal to
+the number of columns of <code>x</code>, then each column of <code>x</code> has the
+corresponding value from <code>center</code> subtracted from it.  If <code>center</code>
+is <code>TRUE</code> then centering is done by subtracting the column means
+(omitting <code>NA</code>s) of <code>x</code> from their corresponding columns, and if
+<code>center</code> is <code>FALSE</code>, no centering is done.
+</p>
+<p>The value of <code>scale</code> determines how column scaling is performed
+(after centering).  If <code>scale</code> is a numeric vector with length
+equal to the number of columns of <code>x</code>, then each column of <code>x</code> is
+divided by the corresponding value from <code>scale</code>.  If <code>scale</code> is
+<code>TRUE</code> then scaling is done by dividing the (centered) columns of
+<code>x</code> by their standard deviations if <code>center</code> is <code>TRUE</code>,
+and the root mean square otherwise.  If <code>scale</code> is <code>FALSE</code>,
+no scaling is done.
+</p>
+<p>The root-mean-square for a (possibly centered) column is defined
+as sqrt(sum(x^2)/(n-1)), where x is a vector of the non-missing
+values and n is the number of non-missing values.  In the case
+<code>center = TRUE</code>, this is the same as the standard deviation, but
+in general it is not.
+</p>
+
+
+<h3>Value</h3>
+
+<p>a FlashMatrix matrix.
+</p>
+
+
+<h3>Author(s)</h3>
+
+<p>Da Zheng &lt;dzheng5@jhu.edu&gt;
+</p>
+
+
+</body></html>

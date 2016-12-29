@@ -1,0 +1,77 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd"><html xmlns="http://www.w3.org/1999/xhtml"><head><title>R: The Normal Distribution</title>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<link rel="stylesheet" type="text/css" href="R.css" />
+</head><body>
+
+<table width="100%" summary="page for fm.rnorm"><tr><td>fm.rnorm</td><td style="text-align: right;">R Documentation</td></tr></table>
+
+<h2>The Normal Distribution</h2>
+
+<h3>Description</h3>
+
+<p><code>fm.rnorm</code> creates a FlashMatrix vector with random numbers from
+normal distribution.
+<code>fm.rnorm.matrix</code> creates a FlashMatrix matrix with random numbers from
+normal distribution.
+</p>
+
+
+<h3>Usage</h3>
+
+<pre>
+fm.rnorm(n, mean = 0, sd = 1, in.mem = TRUE, name = "")
+
+fm.rnorm.matrix(nrow, ncol, mean = 0, sd = 1, in.mem = TRUE, name = "")
+</pre>
+
+
+<h3>Arguments</h3>
+
+<table summary="R argblock">
+<tr valign="top"><td><code>n</code></td>
+<td>
+<p>the number of random numbers to be generated.</p>
+</td></tr>
+<tr valign="top"><td><code>mean</code></td>
+<td>
+<p>the mean of the distribution.</p>
+</td></tr>
+<tr valign="top"><td><code>sd</code></td>
+<td>
+<p>the standard deviation of the distribution.</p>
+</td></tr>
+<tr valign="top"><td><code>in.mem</code></td>
+<td>
+<p>whether the vector is stored in memory.</p>
+</td></tr>
+<tr valign="top"><td><code>name</code></td>
+<td>
+<p>the name of the matrix. It's stored on disks, it's used as
+the file name.</p>
+</td></tr>
+<tr valign="top"><td><code>nrow</code></td>
+<td>
+<p>the number of rows in the generated matrix.</p>
+</td></tr>
+<tr valign="top"><td><code>ncol</code></td>
+<td>
+<p>the number of columns in the generated matrix.</p>
+</td></tr>
+</table>
+
+
+<h3>Details</h3>
+
+<p>If a user provides <code>name</code> and <code>in.mem</code> is <code>TRUE</code>, the created
+vector/matrix will be kept on disks persistently. That is, even if a user
+exits from R, the vector/matrix will still be kept on disks.
+</p>
+
+
+<h3>Author(s)</h3>
+
+<p>Da Zheng &lt;dzheng5@jhu.edu&gt;
+</p>
+
+
+</body></html>

@@ -1,0 +1,58 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd"><html xmlns="http://www.w3.org/1999/xhtml"><head><title>R: Matrix multiplication</title>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<link rel="stylesheet" type="text/css" href="R.css" />
+</head><body>
+
+<table width="100%" summary="page for matmult"><tr><td>matmult</td><td style="text-align: right;">R Documentation</td></tr></table>
+
+<h2>Matrix multiplication</h2>
+
+<h3>Description</h3>
+
+<p>Multiplies two matrices, if they are conformable. If one argument is
+a vector, it will be promoted to either a row or column matrix to make
+the two arguments conformable.
+</p>
+
+
+<h3>Usage</h3>
+
+<pre>
+## S4 method for signature 'fm,fm'
+x %*% y
+
+## S4 method for signature 'fm,fmV'
+x %*% y
+
+## S4 method for signature 'fmV,fm'
+x %*% y
+
+## S4 method for signature 'fm,ANY'
+x %*% y
+
+## S4 method for signature 'ANY,fm'
+x %*% y
+</pre>
+
+
+<h3>Arguments</h3>
+
+<table summary="R argblock">
+<tr valign="top"><td><code>x</code></td>
+<td>
+<p>a FlashMatrix matrix.</p>
+</td></tr>
+<tr valign="top"><td><code>y</code></td>
+<td>
+<p>can be a FlashMatrix vector or matrix, an R vector or matrix.</p>
+</td></tr>
+</table>
+
+
+<h3>Value</h3>
+
+<p>a FlashMatrix matrix.
+</p>
+
+
+</body></html>

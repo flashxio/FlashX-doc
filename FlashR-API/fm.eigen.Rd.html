@@ -1,0 +1,125 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd"><html xmlns="http://www.w3.org/1999/xhtml"><head><title>R: Eigensolver</title>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<link rel="stylesheet" type="text/css" href="R.css" />
+</head><body>
+
+<table width="100%" summary="page for fm.eigen"><tr><td>fm.eigen</td><td style="text-align: right;">R Documentation</td></tr></table>
+
+<h2>Eigensolver</h2>
+
+<h3>Description</h3>
+
+<p><code>fm.eigen</code> computes eigenvalues/vectors of a square matrix.
+<code>fm.cal.residul</code> computes the residual of the eigenvalues.
+</p>
+
+
+<h3>Usage</h3>
+
+<pre>
+fm.eigen(mul, k, n, which = "LM", sym = TRUE, options = NULL,
+  env = parent.frame())
+
+fm.cal.residul(mul, values, vectors)
+</pre>
+
+
+<h3>Arguments</h3>
+
+<table summary="R argblock">
+<tr valign="top"><td><code>mul</code></td>
+<td>
+<p>The function to perform the matrix-vector multiplication.</p>
+</td></tr>
+<tr valign="top"><td><code>k</code></td>
+<td>
+<p>Integer. The number of eigenvalues to compute.</p>
+</td></tr>
+<tr valign="top"><td><code>which</code></td>
+<td>
+<p>String. Selection criteria.</p>
+</td></tr>
+<tr valign="top"><td><code>sym</code></td>
+<td>
+<p>Logical scalar, whether the input matrix is symmetric.</p>
+</td></tr>
+<tr valign="top"><td><code>options</code></td>
+<td>
+<p>List. Additional options to the eigensolver.</p>
+</td></tr>
+<tr valign="top"><td><code>env</code></td>
+<td>
+<p>The environment in which <code>mul</code> will bevaluated.</p>
+</td></tr>
+<tr valign="top"><td><code>values</code></td>
+<td>
+<p>The eigenvalues</p>
+</td></tr>
+<tr valign="top"><td><code>vectors</code></td>
+<td>
+<p>The eigenvectors
+</p>
+<p>The <code>options</code> argument specifies what kind of computation to perform.
+It is a list with the following members, which correspond directly to
+Anasazi parameters:
+</p>
+<p>solver String. The name of the eigensolver to solve the eigenproblems.
+Currently, it supports three eigensolvers: KrylovSchur,
+Davidson and LOBPCG. KrylovSchur is the default eigensolver.
+</p>
+<p>tol Numeric scalar. Stopping criterion: the relative accuracy of
+the Ritz value is considered acceptable if its error is less
+than <code>tol</code> times its estimated value.
+</p>
+<p>block_size Numeric scalar. The eigensolvers use a block extension of an
+eigensolver algorithm. The block size determines the number
+of the vectors that operate together.
+</p>
+<p>num_blocks Numeric scalar. The number of blocks to compute eigenpairs.</p>
+</td></tr>
+</table>
+
+
+<h3>Details</h3>
+
+<p><code>fm.eigen</code> uses Anasazi package of Trilinos, if Anasazi is compiled
+into FlashR, or eigs to compute eigenvalues.
+</p>
+<p>The <code>which</code> specify which eigenvalues/vectors to compute, character
+constant with exactly two characters. Possible values for symmetric input
+matrices:
+</p>
+
+<ul>
+<li><p>&quot;LA&quot;Compute <code>nev</code> largest (algebraic) eigenvalues.
+</p>
+</li>
+<li><p>&quot;SA&quot;Compute <code>nev</code> smallest (algebraic) eigenvalues.
+</p>
+</li>
+<li><p>&quot;LM&quot;Compute <code>nev</code> largest (in magnitude) eigenvalues.
+</p>
+</li>
+<li><p>&quot;SM&quot;Compute <code>nev</code> smallest (in magnitude) eigenvalues.
+</p>
+</li></ul>
+
+
+
+<h3>Value</h3>
+
+<p><code>fm.eigen</code> returns a named list with the following members:
+values: Numeric vector, the desired eigenvalues.
+vectors: Numeric matrix, the desired eigenvectors as columns.
+<code>fm.cal.residul</code> returns the corresponding residuals for
+the eigenvalues.
+</p>
+
+
+<h3>Author(s)</h3>
+
+<p>Da Zheng &lt;dzheng5@jhu.edu&gt;
+</p>
+
+
+</body></html>

@@ -1,0 +1,301 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd"><html xmlns="http://www.w3.org/1999/xhtml"><head><title>R: The basic operators supported by FlashMatrix.</title>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<link rel="stylesheet" type="text/css" href="R.css" />
+</head><body>
+
+<table width="100%" summary="page for fm.basic.op"><tr><td>fm.basic.op</td><td style="text-align: right;">R Documentation</td></tr></table>
+
+<h2>The basic operators supported by FlashMatrix.</h2>
+
+<h3>Description</h3>
+
+<p>The basic operators are mainly used by the FlashMatrix functions that
+accept operators as arguments. Such a function includes <code>fm.mapply</code>,
+<code>fm.inner.prod</code>, etc.
+</p>
+<p>This function accepts a basic operator and perform aggregation on
+the FlashMatrix object with the basic operator.
+</p>
+
+
+<h3>Usage</h3>
+
+<pre>
+fm.get.basic.op(name)
+
+fm.get.basic.uop(name)
+
+fm.bo.add
+
+fm.bo.sub
+
+fm.bo.mul
+
+fm.bo.div
+
+fm.bo.min
+
+fm.bo.max
+
+fm.bo.pow
+
+fm.bo.eq
+
+fm.bo.neq
+
+fm.bo.gt
+
+fm.bo.ge
+
+fm.bo.lt
+
+fm.bo.le
+
+fm.bo.or
+
+fm.bo.and
+
+fm.bo.count
+
+fm.bo.which.max
+
+fm.bo.which.min
+
+fm.bo.euclidean
+
+fm.buo.neg
+
+fm.buo.sqrt
+
+fm.buo.abs
+
+fm.buo.not
+
+fm.buo.ceil
+
+fm.buo.floor
+
+fm.buo.log
+
+fm.buo.log2
+
+fm.buo.log10
+
+fm.buo.round
+
+fm.buo.as.int
+
+fm.buo.as.numeric
+
+fm.init.basic.op()
+
+fm.agg(fm, op)
+
+fm.agg.lazy(fm, op)
+
+fm.agg.mat(fm, margin, op)
+
+fm.agg.mat.lazy(fm, margin, op)
+</pre>
+
+
+<h3>Arguments</h3>
+
+<table summary="R argblock">
+<tr valign="top"><td><code>name</code></td>
+<td>
+<p>the name of the basic operator.</p>
+</td></tr>
+<tr valign="top"><td><code>fm</code></td>
+<td>
+<p>a FlashMatrix object</p>
+</td></tr>
+<tr valign="top"><td><code>op</code></td>
+<td>
+<p>the reference or the name of a predefined basic operator or
+the reference to an aggregation operator returned by
+<code>fm.create.agg.op</code>.</p>
+</td></tr>
+<tr valign="top"><td><code>margin</code></td>
+<td>
+<p>the subscript which the function will be applied over.</p>
+</td></tr>
+</table>
+
+
+<h3>Format</h3>
+
+<pre> NULL
+</pre>
+
+<h3>Details</h3>
+
+<p><code>fm.get.basic.op</code> gets the predefined basic binary operator specified by a user.
+The supported basic binary operators are:
+</p>
+
+<ul>
+<li><p>&quot;add&quot; or &quot;+&quot;compute addition.
+</p>
+</li>
+<li><p>&quot;sub&quot; or &quot;-&quot;compute subtraction;
+</p>
+</li>
+<li><p>&quot;mul&quot; or &quot;*&quot;compute multiplication;
+</p>
+</li>
+<li><p>&quot;div&quot; or &quot;/&quot;compute division;
+</p>
+</li>
+<li><p>&quot;min&quot; and &quot;max&quot;compute minimum and maximum, respectively;
+</p>
+</li>
+<li><p>&quot;pow&quot;compute exponential;
+</p>
+</li>
+<li><p>&quot;eq&quot; or &quot;==&quot;compute equality;
+</p>
+</li>
+<li><p>&quot;gt&quot; or &quot;&gt;&quot;compute greater than;
+</p>
+</li>
+<li><p>&quot;ge&quot; or &quot;&gt;=&quot;compute greater than or equal to;
+</p>
+</li>
+<li><p>&quot;lt&quot; or &quot;&lt;&quot;compute less than;
+</p>
+</li>
+<li><p>&quot;le&quot; or &quot;&lt;=&quot;compute less than or equal to;
+</p>
+</li></ul>
+
+<p><code>fm.get.basic.uop</code> gets the predefined basic unary operator specified by a user.
+The supported basic unary operators are:
+</p>
+
+<ul>
+<li><p>&quot;neg&quot;compute negate;
+</p>
+</li>
+<li><p>&quot;sqrt&quot;compute square root;
+</p>
+</li>
+<li><p>&quot;abs&quot;compute absolute value;
+</p>
+</li>
+<li><p>&quot;not&quot;compute logical NOT;
+</p>
+</li>
+<li><p>&quot;ceil&quot; and &quot;floor&quot;compute a ceiling and a floor, respectively;
+</p>
+</li>
+<li><p>&quot;log&quot;, &quot;log2&quot; and &quot;log10&quot;compute log with different bases;
+</p>
+</li>
+<li><p>&quot;round&quot;round a number;
+</p>
+</li>
+<li><p>&quot;as.int&quot; and &quot;as.numeric&quot;cast a number to an integer and a numeric
+value, respectively.
+</p>
+</li></ul>
+
+<p><code>fm.init.basic.op</code> initializes the following basic operators.
+</p>
+
+<ul>
+<li><p><code>fm.bo.add</code>the predifined basic binary operator for addition.
+</p>
+</li>
+<li><p><code>fm.bo.sub</code>the predifined basic binary operator for subtraction.
+</p>
+</li>
+<li><p><code>fm.bo.mul</code>the predifined basic binary operator for multiplication.
+</p>
+</li>
+<li><p><code>fm.bo.div</code>the predifined basic binary operator for division.
+</p>
+</li>
+<li><p><code>fm.bo.min</code>the predifined basic binary operator for computing minimum.
+</p>
+</li>
+<li><p><code>fm.bo.max</code>the predifined basic binary operator for computing maximum.
+</p>
+</li>
+<li><p><code>fm.bo.pow</code>the predifined basic binary operator for computing exponential.
+</p>
+</li>
+<li><p><code>fm.bo.eq</code>, <code>fm.bo.neq</code>, <code>fm.bo.gt</code>, <code>fm.bo.ge</code>,
+<code>fm.bo.lt</code> and <code>fm.bo.le</code>
+the predefined basic logical operators to compare two elements: ==, &gt;, &gt;=, &lt;, &lt;=.
+</p>
+</li>
+<li><p><code>fm.buo.neg</code>the predefined basic unary operator for negate.
+</p>
+</li>
+<li><p><code>fm.buo.sqrt</code>the predefined basic unary operator for square root.
+</p>
+</li>
+<li><p><code>fm.buo.abs</code>the predefined basic unary operator for absolute value.
+</p>
+</li>
+<li><p><code>fm.buo.not</code>the predefined logical NOT operator.
+</p>
+</li>
+<li><p><code>fm.buo.ceil</code>the predefined basic unary operator of computing
+a ceiling of a number.
+</p>
+</li>
+<li><p><code>fm.buo.floor</code>the predefined basic unary operator of computing
+a floor of a number.
+</p>
+</li>
+<li><p><code>fm.buo.log</code>, <code>fm.buo.log2</code> and <code>fm.buo.log10</code>
+the predefined basic unary operators of computing log with different
+bases.
+</p>
+</li>
+<li><p><code>fm.buo.round</code>the predefined basic unary operator of rounding
+a value.
+</p>
+</li>
+<li><p><code>fm.buo.as.int</code>the predefined basic unary operator of casting
+a numeric value to an integer.
+</p>
+</li>
+<li><p><code>fm.buo.as.numeric</code>the predefined basic unary operator of
+casting an integer to a numeric value.
+</p>
+</li></ul>
+
+<p><code>fm.agg</code> aggregates over the entire object.
+</p>
+<p><code>fm.agg.lazy</code> aggregates over the entire object, but it performs
+aggregation lazily.
+</p>
+<p><code>fm.agg.mat</code> aggregates on the rows or columns of a matrix. It performs
+aggregation on the shorter dimension lazily, but on the longer dimension
+immediately.
+</p>
+<p><code>fm.agg.mat.lazy</code> aggregates on the rows or columns of a matrix and
+performs aggregation lazily regardless the dimension.
+</p>
+
+
+<h3>Value</h3>
+
+<p>a reference to the specified basic operator.
+</p>
+<p><code>fm.agg</code> returns a scalar, <code>fm.agg.mat</code> returns
+a FlashMatrix vector, <code>fm.agg.lazy</code> and <code>fm.agg.mat.lazy</code>
+return a FlashMatrix sink matrix.
+</p>
+
+
+<h3>Author(s)</h3>
+
+<p>Da Zheng &lt;dzheng5@jhu.edu&gt;
+</p>
+
+
+</body></html>

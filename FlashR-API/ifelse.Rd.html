@@ -1,0 +1,68 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd"><html xmlns="http://www.w3.org/1999/xhtml"><head><title>R: Conditional Element Selection</title>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<link rel="stylesheet" type="text/css" href="R.css" />
+</head><body>
+
+<table width="100%" summary="page for ifelse"><tr><td>ifelse</td><td style="text-align: right;">R Documentation</td></tr></table>
+
+<h2>Conditional Element Selection</h2>
+
+<h3>Description</h3>
+
+<p><code>ifelse</code> returns a value with the same shape as <code>test</code> which is
+filled with elements selected from either <code>yes</code> or <code>no</code> depending
+on whether the element of <code>test</code> is <code>TRUE</code> or <code>FALSE</code>.
+</p>
+
+
+<h3>Usage</h3>
+
+<pre>
+## S4 method for signature 'fm,fm,ANY'
+ifelse(test, yes, no)
+
+## S4 method for signature 'fm,ANY,fm'
+ifelse(test, yes, no)
+
+## S4 method for signature 'fmV,fmV,ANY'
+ifelse(test, yes, no)
+
+## S4 method for signature 'fmV,ANY,fmV'
+ifelse(test, yes, no)
+</pre>
+
+
+<h3>Arguments</h3>
+
+<table summary="R argblock">
+<tr valign="top"><td><code>test</code></td>
+<td>
+<p>a logical FlashMatrix vector or matrix.</p>
+</td></tr>
+<tr valign="top"><td><code>yes</code></td>
+<td>
+<p>a FlashMatrix vector or matrix or an R scalar.</p>
+</td></tr>
+<tr valign="top"><td><code>no</code></td>
+<td>
+<p>a FlashMatrix vector or matrix or an R scalar.</p>
+</td></tr>
+</table>
+
+
+<h3>Details</h3>
+
+<p>The current implementation requires either <code>yes</code> or <code>no</code> to be
+a scalar value.
+</p>
+
+
+<h3>Value</h3>
+
+<p>A FlashMatrix vector or matrix of the same size and attributes
+(including dimensions) as <code>test</code> and data values from the values
+of <code>yes</code> or <code>no</code>.
+</p>
+
+
+</body></html>

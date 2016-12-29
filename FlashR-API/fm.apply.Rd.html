@@ -1,0 +1,55 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd"><html xmlns="http://www.w3.org/1999/xhtml"><head><title>R: Apply Functions Over Array Margins</title>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<link rel="stylesheet" type="text/css" href="R.css" />
+</head><body>
+
+<table width="100%" summary="page for fm.apply"><tr><td>fm.apply</td><td style="text-align: right;">R Documentation</td></tr></table>
+
+<h2>Apply Functions Over Array Margins</h2>
+
+<h3>Description</h3>
+
+<p>Apply a predefined function on rows/columns of a FlashMatrix matrix.
+The predefined function always output a vector of the same length. Thus,
+the output of <code>fm.apply</code> is a matrix.
+</p>
+
+
+<h3>Usage</h3>
+
+<pre>
+fm.apply(x, margin, FUN)
+</pre>
+
+
+<h3>Arguments</h3>
+
+<table summary="R argblock">
+<tr valign="top"><td><code>x</code></td>
+<td>
+<p>a FlashMatrix matrix.</p>
+</td></tr>
+<tr valign="top"><td><code>margin</code></td>
+<td>
+<p>an integer. <code>1</code> indicates rows and <code>2</code> indicates columns.</p>
+</td></tr>
+<tr valign="top"><td><code>FUN</code></td>
+<td>
+<p>a string that indicates the name of the predefined function.</p>
+</td></tr>
+</table>
+
+
+<h3>Details</h3>
+
+<p>Currently, the predefined functions include <code>"rank"</code> and
+</p>
+
+
+<h3>Value</h3>
+
+<p>a FlashMatrix matrix.
+</p>
+
+
+</body></html>

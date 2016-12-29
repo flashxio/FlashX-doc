@@ -1,0 +1,119 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd"><html xmlns="http://www.w3.org/1999/xhtml"><head><title>R: Load a matrix to FlashR.</title>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<link rel="stylesheet" type="text/css" href="R.css" />
+</head><body>
+
+<table width="100%" summary="page for fm.get.matrix"><tr><td>fm.get.matrix</td><td style="text-align: right;">R Documentation</td></tr></table>
+
+<h2>Load a matrix to FlashR.</h2>
+
+<h3>Description</h3>
+
+<p>There are many different ways of loading a matrix to FlashR.
+<code>fm.load.dense.matrix</code> loads a dense matrix in the text format from
+the Linux filesystem.
+<code>fm.load.dense.matrix.bin</code> loads a dense matrix in the binary format
+from the Linux filesystem.
+<code>fm.load.sparse.matrix</code> loads a FlashMatrix sparse matrix from files.
+The matrix in the file is in the FlashMatrix format.
+<code>fm.get.dense.matrix</code> returns a named dense matrix that has already
+been loaded to FlashR.
+</p>
+
+
+<h3>Usage</h3>
+
+<pre>
+fm.get.dense.matrix(name)
+
+fm.load.dense.matrix(src.file, in.mem, ele.type = "D", delim = ",",
+  ncol = .Machine$integer.max, name = "")
+
+fm.load.dense.matrix.bin(src.file, in.mem, nrow, ncol, byrow, ele.type,
+  name = "")
+
+fm.load.sparse.matrix(spm, spm.idx, t.spm = NULL, t.spm.idx = NULL,
+  in.mem = TRUE)
+</pre>
+
+
+<h3>Arguments</h3>
+
+<table summary="R argblock">
+<tr valign="top"><td><code>name</code></td>
+<td>
+<p>a string indicating the name of the dense matrix after being
+loaded to FlashR.</p>
+</td></tr>
+<tr valign="top"><td><code>src.file</code></td>
+<td>
+<p>a string that indicates the file in the Linux filesystem
+that stores data to be loaded to FlashR.</p>
+</td></tr>
+<tr valign="top"><td><code>in.mem</code></td>
+<td>
+<p>Determine the loaded matrix is stored in memory or on SAFS.</p>
+</td></tr>
+<tr valign="top"><td><code>ele.type</code></td>
+<td>
+<p>The element type in a matrix.</p>
+</td></tr>
+<tr valign="top"><td><code>delim</code></td>
+<td>
+<p>The delimiter of separating elements in the text format.</p>
+</td></tr>
+<tr valign="top"><td><code>ncol</code></td>
+<td>
+<p>the number of columns in the binary dense matrix.</p>
+</td></tr>
+<tr valign="top"><td><code>nrow</code></td>
+<td>
+<p>the number of rows in the binary dense matrix.</p>
+</td></tr>
+<tr valign="top"><td><code>byrow</code></td>
+<td>
+<p>a logical value indicating if the data in the binary matrix
+is stored by rows.</p>
+</td></tr>
+<tr valign="top"><td><code>spm</code></td>
+<td>
+<p>The file that stores the sparse matrix.</p>
+</td></tr>
+<tr valign="top"><td><code>spm.idx</code></td>
+<td>
+<p>The file that stores the index of the sparse matrix.</p>
+</td></tr>
+<tr valign="top"><td><code>t.spm</code></td>
+<td>
+<p>The file that stores the transpose of the sparse matrix.</p>
+</td></tr>
+<tr valign="top"><td><code>t.spm.idx</code></td>
+<td>
+<p>The file that stores the index of the transpose of the sparse matrix.</p>
+</td></tr>
+</table>
+
+
+<h3>Details</h3>
+
+<p>If a user provides <code>name</code> and <code>in.mem</code> is <code>TRUE</code>, the created
+vector/matrix will be kept on disks persistently. That is, even if a user
+exits from R, the vector/matrix will still be kept on disks. A user can
+access to the dense matrix with <code>fm.get.dense.matrix</code> the next time
+when he/she opens FlashR.
+</p>
+
+
+<h3>Value</h3>
+
+<p>a FlashMatrix matrix.
+</p>
+
+
+<h3>Author(s)</h3>
+
+<p>Da Zheng &lt;dzheng5@jhu.edu&gt;
+</p>
+
+
+</body></html>

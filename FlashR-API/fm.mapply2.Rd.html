@@ -1,0 +1,103 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd"><html xmlns="http://www.w3.org/1999/xhtml"><head><title>R: Apply a Function to two FlashMatrix vectors/matrices.</title>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<link rel="stylesheet" type="text/css" href="R.css" />
+</head><body>
+
+<table width="100%" summary="page for fm.mapply2"><tr><td>fm.mapply2</td><td style="text-align: right;">R Documentation</td></tr></table>
+
+<h2>Apply a Function to two FlashMatrix vectors/matrices.</h2>
+
+<h3>Description</h3>
+
+<p><code>fm.mapply2</code> applies <code>FUN</code> to the first elements of each
+vector/matrix, the second elements, the third elements, and so on.
+Two vectors/matrices should have the same shape. Currently,
+<code>fm.mapply2</code> only accepts predefined basic operators returned
+by <code>fm.get.basic.op</code>.
+</p>
+
+
+<h3>Usage</h3>
+
+<pre>
+fm.mapply.row(o1, o2, FUN, set.na = TRUE)
+
+fm.mapply.col(o1, o2, FUN, set.na = TRUE)
+
+## S4 method for signature 'fm,fm'
+fm.mapply2(o1, o2, FUN, set.na = TRUE)
+
+## S4 method for signature 'fmV,fmV'
+fm.mapply2(o1, o2, FUN, set.na = TRUE)
+
+## S4 method for signature 'fm,fmV'
+fm.mapply2(o1, o2, FUN, set.na = TRUE)
+
+## S4 method for signature 'fmV,fm'
+fm.mapply2(o1, o2, FUN, set.na = TRUE)
+
+## S4 method for signature 'fm,matrix'
+fm.mapply2(o1, o2, FUN, set.na = TRUE)
+
+## S4 method for signature 'matrix,fm'
+fm.mapply2(o1, o2, FUN, set.na = TRUE)
+
+## S4 method for signature 'fm,ANY'
+fm.mapply2(o1, o2, FUN, set.na = TRUE)
+
+## S4 method for signature 'ANY,fm'
+fm.mapply2(o1, o2, FUN, set.na = TRUE)
+
+## S4 method for signature 'fmV,ANY'
+fm.mapply2(o1, o2, FUN, set.na = TRUE)
+
+## S4 method for signature 'ANY,fmV'
+fm.mapply2(o1, o2, FUN, set.na = TRUE)
+</pre>
+
+
+<h3>Arguments</h3>
+
+<table summary="R argblock">
+<tr valign="top"><td><code>o1,o2</code></td>
+<td>
+<p>a FlashMatrix vector/matrix.</p>
+</td></tr>
+<tr valign="top"><td><code>FUN</code></td>
+<td>
+<p>the reference or the name of one of the predefined basic binary
+operators.</p>
+</td></tr>
+<tr valign="top"><td><code>set.na</code></td>
+<td>
+<p>a logical value indicating whether to set the value in
+the output matrix to NA if the value in the corresponding
+location of the input matrix is NA.</p>
+</td></tr>
+</table>
+
+
+<h3>Details</h3>
+
+<p><code>fm.mapply.row</code> and <code>fm.mapply.col</code> applies to a matrix and
+a vector. <code>fm.mapply.row</code> applies <code>FUN</code> element-wise to
+each row of the matrix in the left argument and the vector in the right
+argument. <code>fm.mapply.col</code> applies <code>FUN</code> element-wise to
+each column of the matrix in the left argument and the vector in the right
+argument.
+</p>
+
+
+<h3>Value</h3>
+
+<p>a FlashMatrix vector/matrix.
+</p>
+
+
+<h3>Author(s)</h3>
+
+<p>Da Zheng &lt;dzheng5@jhu.edu&gt;
+</p>
+
+
+</body></html>

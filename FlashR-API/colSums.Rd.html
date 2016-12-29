@@ -1,0 +1,62 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd"><html xmlns="http://www.w3.org/1999/xhtml"><head><title>R: Form Row and Column Sums and Means</title>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<link rel="stylesheet" type="text/css" href="R.css" />
+</head><body>
+
+<table width="100%" summary="page for colSums"><tr><td>colSums</td><td style="text-align: right;">R Documentation</td></tr></table>
+
+<h2>Form Row and Column Sums and Means</h2>
+
+<h3>Description</h3>
+
+<p>Form row and column sums and means for numeric arrays.
+</p>
+
+
+<h3>Usage</h3>
+
+<pre>
+fm.rowSums(x, lazy = FALSE)
+
+fm.colSums(x, lazy = FALSE)
+
+## S4 method for signature 'fm'
+rowSums(x, na.rm)
+
+## S4 method for signature 'fm'
+colSums(x, na.rm)
+
+## S4 method for signature 'fm'
+rowMeans(x, na.rm)
+
+## S4 method for signature 'fm'
+colMeans(x, na.rm)
+</pre>
+
+
+<h3>Arguments</h3>
+
+<table summary="R argblock">
+<tr valign="top"><td><code>x</code></td>
+<td>
+<p>a FlashMatrix matrix.</p>
+</td></tr>
+<tr valign="top"><td><code>lazy</code></td>
+<td>
+<p>logical. indicates whether to evaluate the expression lazily.</p>
+</td></tr>
+<tr valign="top"><td><code>na.rm</code></td>
+<td>
+<p>logical. Should missing values (including NaN) be omitted
+from the calculations?</p>
+</td></tr>
+</table>
+
+
+<h3>Value</h3>
+
+<p>a FlashMatrix vector.
+</p>
+
+
+</body></html>

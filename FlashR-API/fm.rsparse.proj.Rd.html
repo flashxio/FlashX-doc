@@ -1,0 +1,59 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd"><html xmlns="http://www.w3.org/1999/xhtml"><head><title>R: Create a sparse projection matrix.</title>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<link rel="stylesheet" type="text/css" href="R.css" />
+</head><body>
+
+<table width="100%" summary="page for fm.rsparse.proj"><tr><td>fm.rsparse.proj</td><td style="text-align: right;">R Documentation</td></tr></table>
+
+<h2>Create a sparse projection matrix.</h2>
+
+<h3>Description</h3>
+
+<p><code>fm.rsparse.proj</code> creates a sparse projection matrix stored in memory.
+</p>
+
+
+<h3>Usage</h3>
+
+<pre>
+fm.rsparse.proj(nrow, ncol, density, name = "")
+</pre>
+
+
+<h3>Arguments</h3>
+
+<table summary="R argblock">
+<tr valign="top"><td><code>nrow</code></td>
+<td>
+<p>the number of rows in the generated matrix.</p>
+</td></tr>
+<tr valign="top"><td><code>ncol</code></td>
+<td>
+<p>the number of columns in the generated matrix.</p>
+</td></tr>
+<tr valign="top"><td><code>density</code></td>
+<td>
+<p>the ratio of non-zero entries to the total number of elements.</p>
+</td></tr>
+<tr valign="top"><td><code>name</code></td>
+<td>
+<p>the name of the matrix. It's stored on disks, it's used as
+the file name.</p>
+</td></tr>
+</table>
+
+
+<h3>Details</h3>
+
+<p>The non-zero values in the sparse projection matrix are either 1 or -1.
+Their values are uniformly randomly chosen to be 1 or -1.
+</p>
+
+
+<h3>Value</h3>
+
+<p>a FlashMatrix matrix.
+</p>
+
+
+</body></html>

@@ -1,0 +1,76 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd"><html xmlns="http://www.w3.org/1999/xhtml"><head><title>R: Logarithms and Exponentials</title>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<link rel="stylesheet" type="text/css" href="R.css" />
+</head><body>
+
+<table width="100%" summary="page for log"><tr><td>log</td><td style="text-align: right;">R Documentation</td></tr></table>
+
+<h2>Logarithms and Exponentials</h2>
+
+<h3>Description</h3>
+
+<p><code>log</code> computes logarithms, by default natural logarithms, <code>log10</code>
+computes common (i.e., base 10) logarithms, and <code>log2</code> computes binary
+(i.e., base 2) logarithms. The general form log(x, base) computes logarithms
+with <code>base</code>.
+</p>
+
+
+<h3>Usage</h3>
+
+<pre>
+## S4 method for signature 'fm'
+log10(x)
+
+## S4 method for signature 'fmV'
+log10(x)
+
+## S4 method for signature 'fm'
+log2(x)
+
+## S4 method for signature 'fmV'
+log2(x)
+
+## S4 method for signature 'fm'
+exp(x)
+
+## S4 method for signature 'fmV'
+exp(x)
+
+## S4 method for signature 'fm'
+log(x, base = exp(1))
+
+## S4 method for signature 'fmV'
+log(x, base = exp(1))
+</pre>
+
+
+<h3>Arguments</h3>
+
+<table summary="R argblock">
+<tr valign="top"><td><code>x</code></td>
+<td>
+<p>a numeric vector.</p>
+</td></tr>
+<tr valign="top"><td><code>base</code></td>
+<td>
+<p>a positive number.</p>
+</td></tr>
+</table>
+
+
+<h3>Details</h3>
+
+<p><code>exp</code> computes the exponential function.
+</p>
+
+
+<h3>Value</h3>
+
+<p>A vector of the same length as <code>x</code> containing the transformed
+values. <code>log(0)</code> gives <code>-Inf</code>, and <code>log(x)</code> for negative
+values of <code>x</code> is <code>NaN</code>.  <code>exp(-Inf)</code> is 0.
+</p>
+
+
+</body></html>

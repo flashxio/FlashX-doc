@@ -1,0 +1,63 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd"><html xmlns="http://www.w3.org/1999/xhtml"><head><title>R: Compute PageRank on a graph.</title>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<link rel="stylesheet" type="text/css" href="R.css" />
+</head><body>
+
+<table width="100%" summary="page for fm.PageRank"><tr><td>fm.PageRank</td><td style="text-align: right;">R Documentation</td></tr></table>
+
+<h2>Compute PageRank on a graph.</h2>
+
+<h3>Description</h3>
+
+<p>This function assumes a graph is stored in a sparse matrix and computes
+exact PageRank with a sequence of sparse matrix multiplication.
+</p>
+
+
+<h3>Usage</h3>
+
+<pre>
+fm.PageRank(A, d = 0.15, max.niters = 30, epsilon = 0.01,
+  verbose = FALSE)
+</pre>
+
+
+<h3>Arguments</h3>
+
+<table summary="R argblock">
+<tr valign="top"><td><code>A</code></td>
+<td>
+<p>a sparse matrix that stores the graph.</p>
+</td></tr>
+<tr valign="top"><td><code>d</code></td>
+<td>
+<p>a damping factor.</p>
+</td></tr>
+<tr valign="top"><td><code>max.niters</code></td>
+<td>
+<p>the maximal number of iterations.</p>
+</td></tr>
+<tr valign="top"><td><code>epsilon</code></td>
+<td>
+<p>determines the precision of PageRank values.</p>
+</td></tr>
+<tr valign="top"><td><code>verbose</code></td>
+<td>
+<p>indicates whether to print extra information.</p>
+</td></tr>
+</table>
+
+
+<h3>Value</h3>
+
+<p>a vector that contains the PageRank value for each vertex.
+</p>
+
+
+<h3>Author(s)</h3>
+
+<p>Da Zheng &lt;dzheng5@jhu.edu&gt;
+</p>
+
+
+</body></html>

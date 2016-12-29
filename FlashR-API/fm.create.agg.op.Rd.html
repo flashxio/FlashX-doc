@@ -1,0 +1,68 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd"><html xmlns="http://www.w3.org/1999/xhtml"><head><title>R: Create an aggregate operator</title>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<link rel="stylesheet" type="text/css" href="R.css" />
+</head><body>
+
+<table width="100%" summary="page for fm.create.agg.op"><tr><td>fm.create.agg.op</td><td style="text-align: right;">R Documentation</td></tr></table>
+
+<h2>Create an aggregate operator</h2>
+
+<h3>Description</h3>
+
+<p>This function creates an aggregate operator for aggregation operations
+on a FlashMatrix object.
+</p>
+
+
+<h3>Usage</h3>
+
+<pre>
+fm.create.agg.op(agg, combine, name)
+</pre>
+
+
+<h3>Arguments</h3>
+
+<table summary="R argblock">
+<tr valign="top"><td><code>agg</code></td>
+<td>
+<p>a <code>fm.basic.op</code> operator that computes partial aggregation
+results.</p>
+</td></tr>
+<tr valign="top"><td><code>combine</code></td>
+<td>
+<p>a <code>fm.basic.op</code> operator that computes the final result.</p>
+</td></tr>
+<tr valign="top"><td><code>name</code></td>
+<td>
+<p>a string indicating the name of the aggregation operator.</p>
+</td></tr>
+</table>
+
+
+<h3>Details</h3>
+
+<p>An Aggregate operator has two parts. <code>agg</code> computes partial
+aggregation results and <code>combine</code> combines the partial aggregation
+results to compute the final result. Both <code>agg</code> and <code>combine</code>
+are the type of <code>fm.basic.op</code>.
+</p>
+<p>The main reason of using two operators is for parallelization. Each thread
+computes aggregation on part of the object. Eventually, we need an operator
+to combine all partial aggregation results.
+</p>
+<p>For many aggregation operations, <code>agg</code> and <code>combine</code> are the same.
+For example, in the case of summation, both <code>agg</code> and <code>combine</code>
+are simply <code>+</code>. In some cases, these two operators can be different.
+For example, when counting the occurences of unique values, <code>agg</code>
+is <code>count</code> and <code>combine</code> is <code>+</code>.
+</p>
+
+
+<h3>Value</h3>
+
+<p>a <code>fm.agg.op</code> operator.
+</p>
+
+
+</body></html>

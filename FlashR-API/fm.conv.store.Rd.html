@@ -1,0 +1,57 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd"><html xmlns="http://www.w3.org/1999/xhtml"><head><title>R: Convert the Storage of an Object.</title>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<link rel="stylesheet" type="text/css" href="R.css" />
+</head><body>
+
+<table width="100%" summary="page for fm.conv.store"><tr><td>fm.conv.store</td><td style="text-align: right;">R Documentation</td></tr></table>
+
+<h2>Convert the Storage of an Object.</h2>
+
+<h3>Description</h3>
+
+<p>This function converts the storage of a FlashMatrix vector/matrix.
+The storage can be memory or disks.
+</p>
+
+
+<h3>Usage</h3>
+
+<pre>
+fm.conv.store(fm, in.mem, name = "")
+</pre>
+
+
+<h3>Arguments</h3>
+
+<table summary="R argblock">
+<tr valign="top"><td><code>fm</code></td>
+<td>
+<p>a FlashMatrix object.</p>
+</td></tr>
+<tr valign="top"><td><code>in.mem</code></td>
+<td>
+<p>a logical value indicating whether to store the FlashMatrix
+object in memory.</p>
+</td></tr>
+<tr valign="top"><td><code>name</code></td>
+<td>
+<p>a string to indicate the name of the new FlashMatrix object.</p>
+</td></tr>
+</table>
+
+
+<h3>Details</h3>
+
+<p>If a user provides <code>name</code> and <code>in.mem</code> is <code>TRUE</code>,
+the vector/matrix will be kept on disks persistently. That is, even if a user
+exits from R, the vector/matrix will still be kept on disks.
+</p>
+
+
+<h3>Value</h3>
+
+<p>a new FlashMatrix object with data stored in specified storage.
+</p>
+
+
+</body></html>

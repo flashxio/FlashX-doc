@@ -1,0 +1,73 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd"><html xmlns="http://www.w3.org/1999/xhtml"><head><title>R: Groupby on a FlashMatrix vector.</title>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<link rel="stylesheet" type="text/css" href="R.css" />
+</head><body>
+
+<table width="100%" summary="page for fm.groupby"><tr><td>fm.groupby</td><td style="text-align: right;">R Documentation</td></tr></table>
+
+<h2>Groupby on a FlashMatrix vector.</h2>
+
+<h3>Description</h3>
+
+<p><code>fm.sgroupby</code> groups elements in a vector based on corresponding
+<code>labels</code> and applies <code>FUN</code> to the elements in each group.
+<code>FUN</code> is an aggregation operator.
+</p>
+
+
+<h3>Usage</h3>
+
+<pre>
+fm.sgroupby(obj, FUN)
+
+fm.groupby(obj, margin, factor, FUN)
+</pre>
+
+
+<h3>Arguments</h3>
+
+<table summary="R argblock">
+<tr valign="top"><td><code>obj</code></td>
+<td>
+<p>a FlashMatrix vector or matrix</p>
+</td></tr>
+<tr valign="top"><td><code>FUN</code></td>
+<td>
+<p>an aggregation operator returned by <code>fm.create.agg.op</code>.</p>
+</td></tr>
+<tr valign="top"><td><code>margin</code></td>
+<td>
+<p>the subscript which the function will be applied over.
+E.g., for a matrix, <code>1</code> indicates rows, <code>2</code> indicates columns.</p>
+</td></tr>
+<tr valign="top"><td><code>factor</code></td>
+<td>
+<p>a FlashMatrix factor vector that indicates how rows/columns
+in a matrix should be grouped.</p>
+</td></tr>
+</table>
+
+
+<h3>Details</h3>
+
+<p><code>fm.groupby</code> groups rows/columns of a matrix based on corresponding
+<code>labels</code> and applies <code>FUN</code> to the rows/columns in each group.
+<code>FUN</code> is an aggregation operator.
+</p>
+
+
+<h3>Value</h3>
+
+<p><code>fm.sgroupby</code> returns a data frame, where the column <code>val</code>
+stores all of the unique values in the original data container, and the column
+<code>agg</code> stores the aggregate result of the corresponding value.
+</p>
+
+
+<h3>Author(s)</h3>
+
+<p>Da Zheng &lt;dzheng5@jhu.edu&gt;
+</p>
+
+
+</body></html>

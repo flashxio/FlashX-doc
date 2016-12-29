@@ -1,0 +1,65 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd"><html xmlns="http://www.w3.org/1999/xhtml"><head><title>R: Correlation, Variance and Covariance (Matrices)</title>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<link rel="stylesheet" type="text/css" href="R.css" />
+</head><body>
+
+<table width="100%" summary="page for cor"><tr><td>cor</td><td style="text-align: right;">R Documentation</td></tr></table>
+
+<h2>Correlation, Variance and Covariance (Matrices)</h2>
+
+<h3>Description</h3>
+
+<p><code>cov</code> and <code>cor</code> compute the covariance or correlation of <code>x</code>
+and <code>y</code> if these are vectors.  If <code>x</code>
+and <code>y</code> are matrices then the covariances (or correlations) between
+the columns of <code>x</code> and the columns of <code>y</code> are computed.
+</p>
+
+
+<h3>Usage</h3>
+
+<pre>
+## S4 method for signature 'fm'
+var(x, y = NULL, na.rm = FALSE, use)
+
+## S4 method for signature 'fm'
+cor(x, y = NULL, use = "everything", method = c("pearson",
+  "kendall", "spearman"))
+
+## S4 method for signature 'fm'
+cov(x, y = NULL, use = "everything", method = c("pearson",
+  "kendall", "spearman"))
+</pre>
+
+
+<h3>Arguments</h3>
+
+<table summary="R argblock">
+<tr valign="top"><td><code>x</code></td>
+<td>
+<p>a numeric vector or matrix</p>
+</td></tr>
+<tr valign="top"><td><code>y</code></td>
+<td>
+<p><code>NULL</code> (default) or a vector or matrix with compatible
+dimensions to <code>x</code>. The default is equivalent to <code>y=x</code>.</p>
+</td></tr>
+<tr valign="top"><td><code>use</code></td>
+<td>
+<p>an optional character string giving a method for computing
+covariances in the presence of missing values.  This must be
+(an abbreviation of) one of the strings <code>"everything"</code>,
+<code>"all.obs"</code>, <code>"complete.obs"</code>, <code>"na.or.complete"</code>, or
+<code>"pairwise.complete.obs"</code>.</p>
+</td></tr>
+<tr valign="top"><td><code>method</code></td>
+<td>
+<p>a character string indicating which correlation coefficient
+(or covariance) is to be computed.  One of <code>"pearson"</code>
+(default), <code>"kendall"</code>, or <code>"spearman"</code>: can be abbreviated.
+Right now this argument isn't used.</p>
+</td></tr>
+</table>
+
+
+</body></html>

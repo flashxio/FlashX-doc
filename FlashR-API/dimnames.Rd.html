@@ -1,0 +1,54 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd"><html xmlns="http://www.w3.org/1999/xhtml"><head><title>R: Dimnames of an Object</title>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<link rel="stylesheet" type="text/css" href="R.css" />
+</head><body>
+
+<table width="100%" summary="page for dimnames"><tr><td>dimnames</td><td style="text-align: right;">R Documentation</td></tr></table>
+
+<h2>Dimnames of an Object</h2>
+
+<h3>Description</h3>
+
+<p>Retrieve or set the dimnames of a matrix.
+</p>
+
+
+<h3>Usage</h3>
+
+<pre>
+## S4 method for signature 'fm'
+dimnames(x)
+
+## S4 method for signature 'fmV'
+dimnames(x)
+
+## S4 replacement method for signature 'fm,list'
+dimnames(x) &lt;- value
+
+## S4 replacement method for signature 'fmV,list'
+dimnames(x) &lt;- value
+</pre>
+
+
+<h3>Arguments</h3>
+
+<table summary="R argblock">
+<tr valign="top"><td><code>x</code></td>
+<td>
+<p>a FlashMatrix matrix.</p>
+</td></tr>
+<tr valign="top"><td><code>value</code></td>
+<td>
+<p>a list that provides values for dimension names.</p>
+</td></tr>
+</table>
+
+
+<h3>Value</h3>
+
+<p><code>dimnames</code> return NULL if there aren't dimension names.
+Otherwise, return the dimension names.
+</p>
+
+
+</body></html>

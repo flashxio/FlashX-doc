@@ -1,0 +1,67 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd"><html xmlns="http://www.w3.org/1999/xhtml"><head><title>R: Combine FlashR Vectors/Matrices by Rows or Columns</title>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<link rel="stylesheet" type="text/css" href="R.css" />
+</head><body>
+
+<table width="100%" summary="page for fm.bind"><tr><td>fm.bind</td><td style="text-align: right;">R Documentation</td></tr></table>
+
+<h2>Combine FlashR Vectors/Matrices by Rows or Columns</h2>
+
+<h3>Description</h3>
+
+<p>Take a list of FlashR vectors/matrices and combine them by Columns or rows
+respectively.
+</p>
+
+
+<h3>Usage</h3>
+
+<pre>
+fm.rbind.list(objs)
+
+fm.cbind.list(objs)
+
+## S4 method for signature 'fm'
+rbind(..., deparse.level = 1)
+
+## S4 method for signature 'fmV'
+rbind(..., deparse.level = 1)
+
+## S4 method for signature 'fm'
+cbind(..., deparse.level = 1)
+
+## S4 method for signature 'fmV'
+cbind(..., deparse.level = 1)
+</pre>
+
+
+<h3>Arguments</h3>
+
+<table summary="R argblock">
+<tr valign="top"><td><code>objs</code></td>
+<td>
+<p>A list of FlashR matrices.
+</p>
+<p>All arguments for <code>rbind</code> and <code>cbind</code> have to be either all
+vectors or all matrices.</p>
+</td></tr>
+<tr valign="top"><td><code>...</code></td>
+<td>
+<p>A list of FlashR matrices.</p>
+</td></tr>
+</table>
+
+
+<h3>Value</h3>
+
+<p>A FlashR matrix.
+</p>
+
+
+<h3>Author(s)</h3>
+
+<p>Da Zheng &lt;dzheng5@jhu.edu&gt;
+</p>
+
+
+</body></html>
