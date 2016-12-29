@@ -28,22 +28,22 @@ FlashR currently supports vectors and matrices of three types: logical, integer 
 ### Functions for creating FlashR vectors:
 
 * [`fm.rep.int`](FlashR-API/fm.rep.int.Rd.html): create a vector with replicated elements. e.g., `fm.rep.int(1, 10)` creates a FlashR vector with 10 elements and each element is 1.
-* [`fm.seq.int`](FlashR-API/fm.seq.int.Rd.html): create a vector with a sequence of numbers. e.g., `fm.seq.int(1, 10, 1)` creates a FlashR vector with a sequence of numbers between [1:10].
+* [`fm.seq.int`](FlashR-API/fm.seq.Rd.html): create a vector with a sequence of numbers. e.g., `fm.seq.int(1, 10, 1)` creates a FlashR vector with a sequence of numbers between [1:10].
 * [`fm.runif`](FlashR-API/fm.runif.Rd.html): create a vector with random numbers under uniform distribution. e.g., `fm.runif(10, 0, 1, in.mem=TRUE)` creates a FlashR vector with 10 random values uniformly between 0 and 1, stored in memory. `in.mem` instructs FlashR to store data in memory or on SSDs.
 * [`fm.rnorm`](FlashR-API/fm.rnorm.Rd.html): create a vector with random numbers under normal distribution. e.g., `fm.rnorm(10, 0, 1, in.mem=TRUE)` creates a FlashR vector with 10 random values following normal distribution with mean 0 and standard deviation 1 and stores data in memory. Like the one in `fm.runif`, `in.mem` instructs FlashR to store data in memory or on SSDs.
 
 ### Functions for creating FlashR matrices:
 
-* [`fm.matrix`](FlashR-API/fm.matrix.Rd.html): create a matrix filled with repeated values from an R object or numeric. e.g., `fm.matrix(0, 10, 2)` creates a 10x2 FlashR matrix with all entries set to 0.
-* [`fm.seq.matrix`](FlashR-API/fm.seq.matrix.Rd.html): create a matrix filled with sequence numbers. e.g., `fm.seq.matrix(1, 20, 10, 2)` creates a 10x2 FlashR matrix with columns filled with 1:20.
-* [`fm.runif.matrix`](FlashR-API/fm.runif.matrix.Rd.html): create a matrix filled with random numbers under uniform distribution. e.g., `fm.runif.matrix(10, 2, 0, 1, in.mem=TRUE)` creates a 10x2 FlashR matrix with 20 random values uniformly between 0 and 1, stored in memory.
-* [`fm.rnorm.matrix`](FlashR-API/fm.rnorm.matrix.Rd.html): create a matrix filled with random numbers under normal distribution. e.g., `fm.rnorm.matrix(10, 2, 0, 1, in.mem=TRUE)` creates a 10x2 FlashR matrix with 20 random values following normal distribution with mean 0 and standard deviation 1, and stores data in memory.
+* [`fm.matrix`](FlashR-API/matrix.Rd.html): create a matrix filled with repeated values from an R object or numeric. e.g., `fm.matrix(0, 10, 2)` creates a 10x2 FlashR matrix with all entries set to 0.
+* [`fm.seq.matrix`](FlashR-API/fm.seq.Rd.html): create a matrix filled with sequence numbers. e.g., `fm.seq.matrix(1, 20, 10, 2)` creates a 10x2 FlashR matrix with columns filled with 1:20.
+* [`fm.runif.matrix`](FlashR-API/fm.runif.Rd.html): create a matrix filled with random numbers under uniform distribution. e.g., `fm.runif.matrix(10, 2, 0, 1, in.mem=TRUE)` creates a 10x2 FlashR matrix with 20 random values uniformly between 0 and 1, stored in memory.
+* [`fm.rnorm.matrix`](FlashR-API/fm.rnorm.Rd.html): create a matrix filled with random numbers under normal distribution. e.g., `fm.rnorm.matrix(10, 2, 0, 1, in.mem=TRUE)` creates a 10x2 FlashR matrix with 20 random values following normal distribution with mean 0 and standard deviation 1, and stores data in memory.
 
 ### Functions for loading data from other data sources:
 
-* [`fm.load.dense.matrix`](FlashR-API/fm.load.dense.matrix.Rd.html): load a dense matrix from a text file. Each line in the text file stores a row of the dense matrix. Users may choose to specify a delimiter as the function assumes `","` by default. Users can also specify the element type; by default the function assumes floating-point. The available element types are `"D"` for floating-point values, `"I"` for integers, `"L"` for logical values. Users can also specify the number of columns in the dense matrix. If not, the function will try to determine the number of columns itself. e.g., `fm.load.dense.matrix("matrix.csv", in.mem=TRUE, ele.type="I", delim=",", ncol=10)` loads a dense matrix of integers with 10 columns from a CSV file.
-* [`fm.load.dense.matrix.bin`](FlashR-API/fm.load.dense.matrix.bin.Rd.html): load a dense matrix from a binary file that stores data in row-major or column-major order. In this function, users have to specify all information of the dense matrix, such as the number of rows, the number of columns, the element type and the data layout (row-major or column-major). e.g., `fm.load.dense.matrix.bin("matrix.bin", in.mem=TRUE, nrow=1000, ncol=10, byrow=FALSE, ele.type="I")` loads a dense matrix of integers with 1000 rows and 10 columns, stored in column-major order.
-* [`fm.load.sparse.matrix`](FlashR-API/fm.load.sparse.matrix.Rd.html): load a sparse matrix in the [FlashMatrix format](https://scholar.google.ca/citations?view_op=view_citation&hl=en&user=b1PYJN0AAAAJ&citation_for_view=b1PYJN0AAAAJ:Wp0gIr-vW9MC) from the **Linux filesystem**. The sparse matrix has to be formatted in advance. For a symmetric matrix, users only need to specify the sparse matrix file and the index file of the sparse matrix. For an asymmetric matrix, users need to specify four files: the sparse matrix file, the index file of the sparse matrix, the transpose of the sparse matrix, the index file for the transpose of the sparse matrix.
+* [`fm.load.dense.matrix`](FlashR-API/fm.get.matrix.Rd.html): load a dense matrix from a text file. Each line in the text file stores a row of the dense matrix. Users may choose to specify a delimiter as the function assumes `","` by default. Users can also specify the element type; by default the function assumes floating-point. The available element types are `"D"` for floating-point values, `"I"` for integers, `"L"` for logical values. Users can also specify the number of columns in the dense matrix. If not, the function will try to determine the number of columns itself. e.g., `fm.load.dense.matrix("matrix.csv", in.mem=TRUE, ele.type="I", delim=",", ncol=10)` loads a dense matrix of integers with 10 columns from a CSV file.
+* [`fm.load.dense.matrix.bin`](FlashR-API/fm.get.matrix.bin.Rd.html): load a dense matrix from a binary file that stores data in row-major or column-major order. In this function, users have to specify all information of the dense matrix, such as the number of rows, the number of columns, the element type and the data layout (row-major or column-major). e.g., `fm.load.dense.matrix.bin("matrix.bin", in.mem=TRUE, nrow=1000, ncol=10, byrow=FALSE, ele.type="I")` loads a dense matrix of integers with 1000 rows and 10 columns, stored in column-major order.
+* [`fm.load.sparse.matrix`](FlashR-API/fm.get.matrix.Rd.html): load a sparse matrix in the [FlashMatrix format](https://scholar.google.ca/citations?view_op=view_citation&hl=en&user=b1PYJN0AAAAJ&citation_for_view=b1PYJN0AAAAJ:Wp0gIr-vW9MC) from the **Linux filesystem**. The sparse matrix has to be formatted in advance. For a symmetric matrix, users only need to specify the sparse matrix file and the index file of the sparse matrix. For an asymmetric matrix, users need to specify four files: the sparse matrix file, the index file of the sparse matrix, the transpose of the sparse matrix, the index file for the transpose of the sparse matrix.
 
 Some of the functions (`fm.load.dense.matrix`, `fm.load.dense.matrix.bin`, `fm.runif`, `fm.rnorm`, `fm.runif.matrix` and `fm.rnorm.matrix`) have the argument `name`. If a user creates a vector/matrix stored on SSDs with a user-specified name, the vector/matrix will be persistent on SSDs. That is, even if the user exits from the R framework, the vector/matrix is still on SSDs and the user can load the vector/matrix to FlashR with the same name for further computation. To load a dense vector/matrix, a user can use `fm.get.dense.matrix`.
 
@@ -51,16 +51,16 @@ Some of the functions (`fm.load.dense.matrix`, `fm.load.dense.matrix.bin`, `fm.r
 
 FlashR currently provides a limited number of linear algebra routines. As such, users still need to rely on the ones in R, such as linear solver and Choleski factorization, for many machine learning algorithms. FlashR provides functions for users to interact with the original R system.
 
-* [`fm.as.vector`](FlashR-API/fm.as.vector.Rd.html): convert an R vector/matrix or a FlashR matrix to a FlashR vector. The current implementation only supports converting from a one-column FlashR matrix to a FlashR vector.
-* [`fm.as.matrix`](FlashR-API/fm.as.matrix.Rd.html): convert an R vector/matrix or a FlashR vector to a FlashR matrix. A vector is converted into a one-column matrix.
+* [`fm.as.vector`](FlashR-API/vector.Rd.html): convert an R vector/matrix or a FlashR matrix to a FlashR vector. The current implementation only supports converting from a one-column FlashR matrix to a FlashR vector.
+* [`fm.as.matrix`](FlashR-API/matrix.Rd.html): convert an R vector/matrix or a FlashR vector to a FlashR matrix. A vector is converted into a one-column matrix.
 * `fm.as.factor`: convert a FlashR vector to a factor vector. The current implementation only supports converting an integer vector. By default, this function determines the number of levels in the factor vector automatically. Users can also provide a maximal number of levels. Right now, FlashR factor vectors are used by `fm.sgroupby` and `fm.groupby`.
-* [`as.vector`](FlashR-API/as.vector.Rd.html): convert a FlashR vector/matrix to an R vector.
-* [`as.matrix`](FlashR-API/as.matrix.Rd.html): convert a FlashR vector/matrix to an R matrix.
+* [`as.vector`](FlashR-API/vector.Rd.html): convert a FlashR vector/matrix to an R vector.
+* [`as.matrix`](FlashR-API/matrix.Rd.html): convert a FlashR vector/matrix to an R matrix.
 
 FlashR has the following functions to test if an object is a FlashR vector or matrix.
 
-* [`fm.is.vector`](FlashR-API/fm.is.vector.Rd.html): test if an object is a FlashR vector.
-* [`fm.is.matrix`](FlashR-API/fm.is.matrix.Rd.html): test if an object is a FlashR matrix.
+* [`fm.is.vector`](FlashR-API/vector.Rd.html): test if an object is a FlashR vector.
+* [`fm.is.matrix`](FlashR-API/matrix.Rd.html): test if an object is a FlashR matrix.
 
 ## "Base" functions
 
