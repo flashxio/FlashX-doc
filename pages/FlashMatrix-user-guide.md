@@ -260,8 +260,8 @@ g.means <- fm.mapply.col(g.sums, cnts$agg, "/")
 Sometimes, users need to tune FlashR to get better performance or use SSDs to scale computation to larger datasets.
 
 * [`fm.set.conf`](FlashR-API/fm.set.conf.Rd.html): users can pass a configuration file to tune the parameters in FlashR. The details of the parameters in FlashR are shown [here](https://flashxio.github.io/FlashX-doc/FlashX-conf.html).
-* `fm.print.conf` prints the current parameters in FlashR.
-* `fm.print.features` prints the features that have been compiled into FlashR when FlashR is installed.
+* [`fm.print.conf`](FlashR-API/fm.set.conf.Rd.html) prints the current parameters in FlashR.
+* [`fm.print.features`](FlashR-API/fm.set.conf.Rd.html) prints the features that have been compiled into FlashR when FlashR is installed.
 
 ## Guidelines for FlashR programmers
 
