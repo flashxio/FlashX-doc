@@ -212,10 +212,10 @@ neg <- fm.sapply(m1, fm.buo.neg)
 neg <- fm.sapply(m1, "neg")
 ```
 
-**Aggregation** (`fm.agg` and `fm.agg.mat`) take an array and an aggregation operator, and outputs a single element or a vector. If these functions get a binary operator, they will try to construct an aggregation operator with `fm.create.agg.op`.
+**Aggregation** ([`fm.agg`](FlashR-API/fm.agg.Rd.html) and [`fm.agg.mat`](FlashR-API/fm.agg.Rd.html)) take an array and an aggregation operator, and outputs a single element or a vector. If these functions get a binary operator, they will try to construct an aggregation operator with `fm.create.agg.op`.
 
-* `fm.agg(fm, FUN)`: aggregates over the entire array.
-* `fm.agg.mat(fm, margin, FUN)`: aggregates over each individual row or column of a matrix and outputs a vector.
+* [`fm.agg`](FlashR-API/fm.agg.Rd.html) aggregates over the entire array.
+* [`fm.agg.mat`](FlashR-API/fm.agg.Rd.html) aggregates over each individual row or column of a matrix and outputs a vector.
 
 Example 1: compute `sum(m)`
 
@@ -235,8 +235,8 @@ rs <- fm.agg.mat(m, 1, "+")
 
 **Groupby** is similar to groupby in SQL. It groups multiple elements and performs aggregation on the elements within groups. Like aggregation functions, groupby functions also accept binary operators.
 
-* `fm.sgroupby(fm, FUN)`:  groups elements by their own values in a vector and invokes FUN on the elements associated with the same value. It outputs a list with two fields `val` and `agg`. `val` is a FlashR vector with unique values in the original input vector; `agg` is a FlashR vector that stores the aggregation results for each unique value.
-* `fm.groupby(fm, margin, factor, FUN)`: takes a matrix and a factor vector, groups rows/columns of the matrix based on the factor vector and runs aggregation FUN on the rows/columns within the same group to generate a single row/column. If we group rows, `fm.groupby` outputs a matrix with the number of rows equal to the number of groups and the number of columns equal to the number of columns in the input matrix; if we group columns, `fm.groupby` outputs a matrix with the number of columns equal to the number of groups and the number of rows equals to the number of rows in the input matrix.
+* [`fm.sgroupby`](FlashR-API/fm.groupby.Rd.html) groups elements by their own values in a vector and invokes FUN on the elements associated with the same value. It outputs a list with two fields `val` and `agg`. `val` is a FlashR vector with unique values in the original input vector; `agg` is a FlashR vector that stores the aggregation results for each unique value.
+* [`fm.groupby`](FlashR-API/fm.groupby.Rd.html) takes a matrix and a factor vector, groups rows/columns of the matrix based on the factor vector and runs aggregation FUN on the rows/columns within the same group to generate a single row/column. If we group rows, `fm.groupby` outputs a matrix with the number of rows equal to the number of groups and the number of columns equal to the number of columns in the input matrix; if we group columns, `fm.groupby` outputs a matrix with the number of columns equal to the number of groups and the number of rows equals to the number of rows in the input matrix.
 
 Example 1: count the occurrence of unique values in a vector.
 
@@ -259,7 +259,7 @@ g.means <- fm.mapply.col(g.sums, cnts$agg, "/")
 
 Sometimes, users need to tune FlashR to get better performance or use SSDs to scale computation to larger datasets.
 
-* `fm.set.conf`: users can pass a configuration file to tune the parameters in FlashR. The details of the parameters in FlashR are shown [here](https://flashxio.github.io/FlashX-doc/FlashX-conf.html).
+* [`fm.set.conf`](FlashR-API/fm.set.conf.Rd.html): users can pass a configuration file to tune the parameters in FlashR. The details of the parameters in FlashR are shown [here](https://flashxio.github.io/FlashX-doc/FlashX-conf.html).
 * `fm.print.conf` prints the current parameters in FlashR.
 * `fm.print.features` prints the features that have been compiled into FlashR when FlashR is installed.
 
