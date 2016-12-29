@@ -9,10 +9,7 @@ permalink: FlashX-perf.html
 folder: mydoc
 ---
 
-## FlashGraph performance
-
-FlashGraph was designed for specialized hardware (a large parallel machine with many SSDs).
-However, most people may not possess such powerful hardware, so we also evaluate its performance in the Amazon cloud. Table 1 shows the hardware configurations where FlashGraph is evaluated. We demonstrate that FlashGraph is able to outperform other well-known graph processing frameworks in both specialized hardware and Amazon cloud.
+FlashX is designed for a large parallel machine with fast SSDs, but it also runs efficiently in the cloud environment. Here we evaluate the performance of FlashX in both high-end servers and the Amazon cloud. Table 1 shows the hardware configurations where FlashX is evaluated.
 
 |            | i2.xlarge | i2.8xlarge | HW1    | HW2    |
 | ---------- |:---------:| ----------:|-------:|-------:|
@@ -20,7 +17,11 @@ However, most people may not possess such powerful hardware, so we also evaluate
 | RAM (GB)   | 30        | 244        | 512    | 1024   |
 | #SSDs      | 1         | 8          | 15     | 24     |
 
-Table 1. The hardware configuration where FlashGraph is evaluated.
+Table 1. The hardware configuration where FlashX is evaluated.
+
+## Speed of FlashX
+
+We demonstrate that FlashGraph is able to outperform other well-known graph processing frameworks in both specialized hardware and Amazon cloud.
 
 |          | i2.xlarge | i2.8xlarge | HW1    | HW2    |
 | -------- |:---------:| ----------:|-------:|-------:|
