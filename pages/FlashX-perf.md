@@ -21,6 +21,8 @@ Table 1. The hardware configuration where FlashX is evaluated.
 
 ## Speed of FlashX
 
+### FlashGraph vs. Giraph, GraphX and PowerGraph
+
 We demonstrate that FlashGraph is able to outperform other well-known graph processing frameworks in both specialized hardware and Amazon cloud.
 
 |          | i2.xlarge | i2.8xlarge | HW1    | HW2    |
@@ -48,7 +50,10 @@ Given such performance results, we can further demonstrate that FlashGraph is mu
 
 Figure 2. The runtime dollars of FlashGraph vs. distributed graph engines.
 
-## FlashR performance
+### FlashR vs. R and RRO
+
+### FlashR vs. Spark
+
 FlashR provides [R matrix operations](https://github.com/zheng-da/FlashX/wiki/FlashR-programming-tutorial#base-r-functions) for users to express data analysis algorithms and is able to execute them both in memory and on SSDs. We evaluates the performance of these dense matrix operations with five statistics and machine learning algorithms: statistics summary, correlation, SVD, k-means, GMM, completely implemented in R. We compare these implementations with the ones in the R framework and Spark MLlib. The implementations in the R framework is written in C/FORTRAN and can only run in a single thread. As such, for a fair comparison, we run the FlashR implementations in a single thread when comparing with the C/FORTRAN implementations in the R framework. We evaluate the implementations in machine HW2.
 
 The FlashR implementations outperform the ones in R even with a single thread (Figure 3) and outperform the ones in Spark MLlib by almost an order of magnitude in the parallel machine (Figure 4). Furthermore, FlashR supports both in-memory and external-memory execution. Given fast SSDs, FlashR executes these implementations on SSDs with the speed comparable to in-memory execution. Given the small memory consumption of FlashR in the external-memory mode (Figure 5), we demonstrate that FlashR can scale to very large datasets easily.
@@ -65,7 +70,7 @@ Figure 4. The runtime of FlashR vs. Spark MLlib in a large parallel machine with
 
 Figure 5. The memory consumption of FlashR vs. Spark MLlib on a dataset with 1 billion data points and 32 features.
 
-## FlashGraph scalability
+## Scalability of FlashX
 
 FlashGraph enables us to process very large graphs in a single machine. Here we demonstrate that FlashGraph can process a real-world [hyperlink page graph](http://webdatacommons.org/hyperlinkgraph/) (3.4B vertices and 129B edges) in a single machine. The table below shows the performance of the same graph applications as above. It also includes the performance of Betweenness centrality (BC) from a single vertex.
 
