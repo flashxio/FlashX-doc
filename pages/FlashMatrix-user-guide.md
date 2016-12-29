@@ -27,7 +27,7 @@ FlashR currently supports vectors and matrices of three types: logical, integer 
 
 ### Functions for creating FlashR vectors:
 
-* `fm.rep.int`: create a vector with replicated elements. e.g., `fm.rep.int(1, 10)` creates a FlashR vector with 10 elements and each element is 1.
+* [`fm.rep.int`](FlashR-API/fm.rep.int.Rd.html): create a vector with replicated elements. e.g., `fm.rep.int(1, 10)` creates a FlashR vector with 10 elements and each element is 1.
 * `fm.seq.int`: create a vector with a sequence of numbers. e.g., `fm.seq.int(1, 10, 1)` creates a FlashR vector with a sequence of numbers between [1:10].
 * `fm.runif`: create a vector with random numbers under uniform distribution. e.g., `fm.runif(10, 0, 1, in.mem=TRUE)` creates a FlashR vector with 10 random values uniformly between 0 and 1, stored in memory. `in.mem` instructs FlashR to store data in memory or on SSDs.
 * `fm.rnorm`: create a vector with random numbers under normal distribution. e.g., `fm.rnorm(10, 0, 1, in.mem=TRUE)` creates a FlashR vector with 10 random values following normal distribution with mean 0 and standard deviation 1 and stores data in memory. Like the one in `fm.runif`, `in.mem` instructs FlashR to store data in memory or on SSDs.
