@@ -13,9 +13,6 @@
 accept operators as arguments. Such a function includes <code>fm.mapply</code>,
 <code>fm.inner.prod</code>, etc.
 </p>
-<p>This function accepts a basic operator and perform aggregation on
-the FlashMatrix object with the basic operator.
-</p>
 
 
 <h3>Usage</h3>
@@ -88,14 +85,6 @@ fm.buo.as.int
 fm.buo.as.numeric
 
 fm.init.basic.op()
-
-fm.agg(fm, op)
-
-fm.agg.lazy(fm, op)
-
-fm.agg.mat(fm, margin, op)
-
-fm.agg.mat.lazy(fm, margin, op)
 </pre>
 
 
@@ -105,20 +94,6 @@ fm.agg.mat.lazy(fm, margin, op)
 <tr valign="top"><td><code>name</code></td>
 <td>
 <p>the name of the basic operator.</p>
-</td></tr>
-<tr valign="top"><td><code>fm</code></td>
-<td>
-<p>a FlashMatrix object</p>
-</td></tr>
-<tr valign="top"><td><code>op</code></td>
-<td>
-<p>the reference or the name of a predefined basic operator or
-the reference to an aggregation operator returned by
-<code>fm.create.agg.op</code>.</p>
-</td></tr>
-<tr valign="top"><td><code>margin</code></td>
-<td>
-<p>the subscript which the function will be applied over.</p>
 </td></tr>
 </table>
 
@@ -268,27 +243,11 @@ casting an integer to a numeric value.
 </p>
 </li></ul>
 
-<p><code>fm.agg</code> aggregates over the entire object.
-</p>
-<p><code>fm.agg.lazy</code> aggregates over the entire object, but it performs
-aggregation lazily.
-</p>
-<p><code>fm.agg.mat</code> aggregates on the rows or columns of a matrix. It performs
-aggregation on the shorter dimension lazily, but on the longer dimension
-immediately.
-</p>
-<p><code>fm.agg.mat.lazy</code> aggregates on the rows or columns of a matrix and
-performs aggregation lazily regardless the dimension.
-</p>
 
 
 <h3>Value</h3>
 
 <p>a reference to the specified basic operator.
-</p>
-<p><code>fm.agg</code> returns a scalar, <code>fm.agg.mat</code> returns
-a FlashMatrix vector, <code>fm.agg.lazy</code> and <code>fm.agg.mat.lazy</code>
-return a FlashMatrix sink matrix.
 </p>
 
 

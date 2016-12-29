@@ -1,0 +1,74 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd"><html xmlns="http://www.w3.org/1999/xhtml"><head><title>R: Aggregation on a FlashMatrix object.</title>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<link rel="stylesheet" type="text/css" href="R.css" />
+</head><body>
+
+<table width="100%" summary="page for fm.agg"><tr><td>fm.agg</td><td style="text-align: right;">R Documentation</td></tr></table>
+
+<h2>Aggregation on a FlashMatrix object.</h2>
+
+<h3>Description</h3>
+
+<p>This function accepts a basic operator and perform aggregation on
+the FlashMatrix object with the basic operator.
+</p>
+
+
+<h3>Usage</h3>
+
+<pre>
+fm.agg(fm, op)
+
+fm.agg.lazy(fm, op)
+
+fm.agg.mat(fm, margin, op)
+
+fm.agg.mat.lazy(fm, margin, op)
+</pre>
+
+
+<h3>Arguments</h3>
+
+<table summary="R argblock">
+<tr valign="top"><td><code>fm</code></td>
+<td>
+<p>a FlashMatrix object</p>
+</td></tr>
+<tr valign="top"><td><code>op</code></td>
+<td>
+<p>the reference or the name of a predefined basic operator or
+the reference to an aggregation operator returned by
+<code>fm.create.agg.op</code>.</p>
+</td></tr>
+<tr valign="top"><td><code>margin</code></td>
+<td>
+<p>the subscript which the function will be applied over.</p>
+</td></tr>
+</table>
+
+
+<h3>Details</h3>
+
+<p><code>fm.agg</code> aggregates over the entire object.
+</p>
+<p><code>fm.agg.lazy</code> aggregates over the entire object, but it performs
+aggregation lazily.
+</p>
+<p><code>fm.agg.mat</code> aggregates on the rows or columns of a matrix. It performs
+aggregation on the shorter dimension lazily, but on the longer dimension
+immediately.
+</p>
+<p><code>fm.agg.mat.lazy</code> aggregates on the rows or columns of a matrix and
+performs aggregation lazily regardless the dimension.
+</p>
+
+
+<h3>Value</h3>
+
+<p><code>fm.agg</code> returns a scalar, <code>fm.agg.mat</code> returns
+a FlashMatrix vector, <code>fm.agg.lazy</code> and <code>fm.agg.mat.lazy</code>
+return a FlashMatrix sink matrix.
+</p>
+
+
+</body></html>
