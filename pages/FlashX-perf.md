@@ -75,6 +75,7 @@ FlashGraph enables us to process very large graphs in a single machine. Here we 
 | Triangle    | 7818          | 55          |
 | WCC         | 461           | 47          |
 | PageRank    | 2041          | 46          |
+
 Table 3. The runtime of FlashGraph on the Page graph on HW1.
 
 FlashGraph takes only six minutes to traverse the page graph (3.5B vertices and 128B edges) with a cache size of 4GB.
