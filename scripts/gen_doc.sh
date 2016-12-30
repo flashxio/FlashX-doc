@@ -1,8 +1,16 @@
 #!/bin/bash
 
+if [ $# -lt 1 ];
+then
+	echo "gen_doc.sh man_dir"
+	exit 1
+fi
+
 mandir=$1
 echo $mandir
 
+echo "tools::Rdindex(\"$mandir\", \"/tmp/index.Rd\", width=200)" | R --no-save
+perl scripts/gen_index.pl /tmp/index.Rd pages/FlashR-API.md
 mkdir -p FlashR-API
 for file in `ls $mandir`
 do
