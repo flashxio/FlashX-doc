@@ -33,8 +33,8 @@ sudo apt-get install -y r-base-core
 sudo apt-get install -y libnuma-dev libaio-dev libhwloc-dev
 ```
 
-We rely on `devtools` to install the FlashR package in R. Users can install
-`devtools` as follows:
+Users can use `devtools` or use a URL link to install the FlashR package in R.
+If users choose to use `devtools`, they need to install `devtools` first:
 
 ```shell
 sudo apt-get install -y libcurl4-openssl-dev libssl-dev
@@ -59,6 +59,12 @@ as follows.
 ```R
 > library(devtools)
 > install_github("flashxio/FlashR")
+```
+
+We can also install it with the following link.
+
+```R
+> install.packages("https://github.com/flashxio/FlashR/archive/FlashR-latest.tar.gz", repos=NULL)
 ```
 
 ## Run FlashR.
