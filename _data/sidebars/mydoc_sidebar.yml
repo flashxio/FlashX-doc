@@ -60,11 +60,11 @@ entries:
     output: web, pdf
 
     folderitems:
-    - title: C++
+    - title: FlashX C++ interface
       external_url: http://flashx.io/docs/html/
       output: web
 
-    - title: R
-      external_url: /FlashR-API.html
+    - title: FlashR
+      url: /FlashR-API.html
       output: web
 
