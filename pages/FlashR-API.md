@@ -11,7 +11,7 @@ folder: mydoc
 
 
 | name | comment |
-| ---- |:-------:|
+| :--- | :------ |
 | [all](FlashR-API/all.Rd.html) | Are All Values True? |
 | [any](FlashR-API/any.Rd.html) | Are some Values True? |
 | [Arithmetic](FlashR-API/Arithmetic.Rd.html) | Arithmetic Operators |
