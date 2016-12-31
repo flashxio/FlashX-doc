@@ -9,7 +9,102 @@ permalink: FlashR-tutorials.html
 folder: mydoc
 ---
 
-## Spectral analysis on a median-size graph
+FlashR can perform computation on dense matrices, sparse matrices and graphs.
+In the tutorials, we use examples to illustrate the computations on these data.
+
+## Generate random data under multi-variant normal distribution
+
+```R
+mvrnorm <-
+function(n = 1, mu, Sigma, tol=1e-6, empirical = FALSE, EISPACK = FALSE) {
+	p <- length(mu)
+	if(!all(dim(Sigma) == c(p,p))) stop("incompatible arguments")
+	if(EISPACK) stop("'EISPACK' is no longer supported by R", domain = NA)
+	eS <- eigen(Sigma, symmetric = TRUE)
+	ev <- eS$values
+	if(!all(ev >= -tol*abs(ev[1L]))) stop("'Sigma' is not positive definite")
+	X <- fm.rnorm.matrix(n, p)
+	if(empirical) {
+		X <- scale(X, TRUE, FALSE) # remove means
+		X <- X %*% fm.svd(X, nu = 0)$v # rotate to PCs
+		X <- scale(X, FALSE, TRUE) # rescale PCs to unit variance
+	}
+	X <- drop(mu) + eS$vectors %*% diag(sqrt(pmax(ev, 0)), p) %*% t(X)
+	nm <- names(mu)
+	if(is.null(nm) && !is.null(dn <- dimnames(Sigma))) nm <- dn[[1L]]
+	dimnames(X) <- list(nm, NULL)
+	if(n == 1) drop(X) else t(X)
+}
+```
+
+## k-means
+K-means is a popular clustering algorithm. This algorithm is an example that we have to use [GenOps](FlashR-user-guide.html#generalized-operations-genops)
+to perform computation efficiently.
+
+K-means is an iterative algorithm and each iteration has three steps. Below is the simplified code to illustrate the three steps.
+
+```R
+# Step 1: calculate distances between all data points to all cluster centers.
+m <- fm.inner.prod(data, t(centers), fm.bo.euclidean, fm.bo.add)
+
+# Step 2: find the closest cluster center for each data point.
+parts <- fm.as.integer(fm.agg.mat(m, 1, agg.which.min) - 1)
+```
+
+# Step 3: update all cluster centers.
+centers <- as.matrix(fm.groupby(data, 2, parts, agg.sum))
+cnts <- fm.table(parts)
+centers <- diag(1/cnts$Freq) %*% centers
+```
+
+## PageRank
+
+[PageRank](https://en.wikipedia.org/wiki/PageRank) is the classical algorithm to rank Web pages originally used by Google search engine. PageRank is an iterative algorithm. In each iteration, the PageRank value of a vertex is updated as follow:
+
+![PageRank](https://upload.wikimedia.org/math/8/0/1/80125f33d12ceb608fdb9daec09d9c10.png)
+
+As such, the PageRank algorithm is implemented as follows:
+
+```R
+pr1 <- fm.rep.int(1/N, N)
+converge <- 0
+while (converge < N) {
+ pr2 <- (1-d)/N+d*(A %*% (pr1/out.deg))
+ diff <- abs(pr1-pr2)
+ converge <- sum(diff < epsilon)
+ pr1 <- pr2
+}
+```
+
+## Non-negative Matrix Factorization
+[Non-negative Matrix Factorization](https://en.wikipedia.org/wiki/Non-negative_matrix_factorization) (NMF) factorizes a matrix to two non-negative matrices. The following code implements the algorithm described in the Lee's [paper](http://papers.nips.cc/paper/1861-algorithms-for-non-negative-matrix-factorization.pdf).
+The update rules described in Lee's paper are implemented as follow
+
+```R
+den <- (t(W) %*% W) %*% H
+H <- fm.pmax2(H * t(tA %*% W), eps) / (den + eps)
+den <- W %*% (H %*% t(H))
+W <- fm.pmax2(W * (A %*% t(H)), eps) / (den + eps)
+```
+
+One of the convergence condition is ||A - WH||^2. It is computationally expensive to compute the Frobenius norm of (A-WH) directly. Suppose A is a n×m matrix, W is a n×k matrix and H is a k×m matrix. The computation complexity is O(n×k×m). Therefore, instead of computing the Frobenius norm, we compute trace(t(A-WH)(A-WH)) = trace(t(A)A) -2×trace((t(A)W)H)+trace((t(H)(t(W)W))H). We need to order the matrix multiplication in a certain way to reduce computation complexity. The computation complexity of (t(A)W)H is O(l*k), where l is the number of non-zero entries in A. The computation complexity of (t(H)(t(W)W))H is O(k×k×n+k×k×m).
+
+```R
+# trace of W %*% H
+trace.MM <- function(W, H) {
+ X <- W * t(H)
+ sum(X)
+}
+
+# ||A - W %*% H||^2
+Fnorm <- function(A, W, H) {
+ sum(A*A) - 2 * trace.MM(t(A) %*% W, H) + trace.MM(t(H) %*% (t(W) %*% W), H)
+}
+```
+
+## Spectral analysis
+
+### on a median-size graph
 Here shows the steps of performing spectral analysis on an undirected graph with 4,036,538 vertices and 34,681,189 edges. The graph is downloaded at [SNAP](http://snap.stanford.edu/data/com-LiveJournal.html). Interested users can try this example at Amazon EC2 instance (see the instructions [here](https://github.com/icoming/FlashX/wiki/Run-FlashX-in-the-Amazon-cloud) to set up a FlashX instance) or on a local machine (see the instructions [here](https://github.com/icoming/FlashX/wiki/FlashX-Quick-Start-Guide) to install FlashX locally).
 
 Download the graph.
@@ -83,7 +178,7 @@ res <- fm.eigen(multiply, options=list(n=dim(m)[1], nev=10))
 kmeans.res <- fg.kmeans(as.matrix(res$vecs), k=10, max.iters=100)
 ```
 
-## Spectral analysis on a larger graph
+### On a larger graph
 To compute eigenvalues of a larger graph, users may need to store the graph on SAFS. Here shows the steps of computing eigenvalues of a larger graph, which has 65,608,366 vertices and 1,806,067,135 edges. The text edge list format of the graph can be downloaded at [SNAP](http://snap.stanford.edu/data/com-Friendster.html).
 
 To perform computation on graphs stored on SAFS, users need to construct a graph in FlashGraph format and load it to SAFS in advance. We assume users have followed the steps in shown in [FlashX Quick Start Guide](https://github.com/icoming/FlashX/wiki/FlashX-Quick-Start-Guide) to configure SAFS.
@@ -143,71 +238,4 @@ Run KMeans on the 10 eigenvectors.
 
 ```R
 > kmeans.res <- fg.kmeans(as.matrix(res$vecs), k=10)
-```
-
-### PageRank
-
-[PageRank](https://en.wikipedia.org/wiki/PageRank) is the classical algorithm to rank Web pages originally used by Google search engine. PageRank is an iterative algorithm. In each iteration, the PageRank value of a vertex is updated as follow:
-
-![PageRank](https://upload.wikimedia.org/math/8/0/1/80125f33d12ceb608fdb9daec09d9c10.png)
-
-As such, the PageRank algorithm is implemented as follows:
-
-```R
-pr1 <- fm.rep.int(1/N, N)
-converge <- 0
-while (converge < N) {
- pr2 <- (1-d)/N+d*(A %*% (pr1/out.deg))
- diff <- abs(pr1-pr2)
- converge <- sum(diff < epsilon)
- pr1 <- pr2
-}
-```
-
-### Non-negative Matrix Factorization
-[Non-negative Matrix Factorization](https://en.wikipedia.org/wiki/Non-negative_matrix_factorization) (NMF) factorizes a matrix to two non-negative matrices. The following code implements the algorithm described in the Lee's [paper](http://papers.nips.cc/paper/1861-algorithms-for-non-negative-matrix-factorization.pdf).
-The update rules described in Lee's paper are implemented as follow
-
-```R
-den <- (t(W) %*% W) %*% H
-H <- fm.pmax2(H * t(tA %*% W), eps) / (den + eps)
-den <- W %*% (H %*% t(H))
-W <- fm.pmax2(W * (A %*% t(H)), eps) / (den + eps)
-```
-
-One of the convergence condition is ||A - WH||^2. It is computationally expensive to compute the Frobenius norm of (A-WH) directly. Suppose A is a n×m matrix, W is a n×k matrix and H is a k×m matrix. The computation complexity is O(n×k×m). Therefore, instead of computing the Frobenius norm, we compute trace(t(A-WH)(A-WH)) = trace(t(A)A) -2×trace((t(A)W)H)+trace((t(H)(t(W)W))H). We need to order the matrix multiplication in a certain way to reduce computation complexity. The computation complexity of (t(A)W)H is O(l*k), where l is the number of non-zero entries in A. The computation complexity of (t(H)(t(W)W))H is O(k×k×n+k×k×m).
-
-```R
-# trace of W %*% H
-trace.MM <- function(W, H) {
- X <- W * t(H)
- sum(X)
-}
-
-# ||A - W %*% H||^2
-Fnorm <- function(A, W, H) {
- sum(A*A) - 2 * trace.MM(t(A) %*% W, H) + trace.MM(t(H) %*% (t(W) %*% W), H)
-}
-```
-
-### KMeans
-KMeans is another iterative algorithm that cluster data pointers. In an iteration, it has three steps and below are the steps and the corresponding FlashR code.
-Step 1: calculate distances between all data points to all cluster centers.
-
-```R
-m <- fm.inner.prod(data, t(centers), fm.bo.euclidean, fm.bo.add)
-```
-
-Step 2: find the closest cluster center for each data point.
-
-```R
-parts <- fm.as.integer(fm.agg.mat(m, 1, agg.which.min) - 1)
-```
-
-Step 3: update all cluster centers.
-
-```R
-centers <- as.matrix(fm.groupby(data, 2, parts, agg.sum))
-cnts <- fm.table(parts)
-centers <- diag(1/cnts$Freq) %*% centers
 ```
