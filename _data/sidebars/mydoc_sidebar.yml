@@ -52,9 +52,9 @@ entries:
     output: web, pdf
 
     folderitems:
-    - title: Pages
-      url: /mydoc_pages.html
-      output: web, pdf
+    - title: TODO list
+      url: /Contributing.html
+      output: web
 
   - title: API
     output: web, pdf
@@ -65,6 +65,6 @@ entries:
       output: web
 
     - title: R
-      external_url: http://flashx.io/docs/FlashR/
+      external_url: /FlashR-API.html
       output: web
 
