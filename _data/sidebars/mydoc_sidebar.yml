@@ -36,16 +36,24 @@ entries:
       url: /FlashGraph-user-guide.html
       output: web, pdf
 
+    - title: FlashGraphR
+      url: /FlashGraphR-user-guide.html
+      output: web, pdf
+
     - title: FlashMatrix
       url: /FlashMatrix-user-guide.html
+      output: web, pdf
+
+    - title: FlashR
+      url: /FlashR-user-guide.html
       output: web, pdf
 
   - title: Tutorials
     output: web, pdf
     folderitems:
 
-    - title: FlashMatrix
-      url: /FlashMatrix-programming-tutorial.html
+    - title: FlashR
+      url: /FlashR-tutorials.html
       output: web, pdf
 
   - title: Contributing
