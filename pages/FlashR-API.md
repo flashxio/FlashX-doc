@@ -2,7 +2,8 @@
 title: The performance of FlashX
 keywords: performance
 last_updated: Dec 28, 2016
-tags: [API]summary: "The performance of FlashX"
+tags: [API]
+summary: "The performance of FlashX"
 sidebar: mydoc_sidebar
 permalink: FlashR-API.html
 folder: mydoc
