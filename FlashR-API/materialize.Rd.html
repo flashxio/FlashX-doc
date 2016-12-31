@@ -1,20 +1,20 @@
-<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd"><html xmlns="http://www.w3.org/1999/xhtml"><head><title>R: Materialize virtual FlashMatrix objects.</title>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd"><html xmlns="http://www.w3.org/1999/xhtml"><head><title>R: Materialize virtual FlashR objects.</title>
 <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
 <link rel="stylesheet" type="text/css" href="R.css" />
 </head><body>
 
 <table width="100%" summary="page for materialize"><tr><td>materialize</td><td style="text-align: right;">R Documentation</td></tr></table>
 
-<h2>Materialize virtual FlashMatrix objects.</h2>
+<h2>Materialize virtual FlashR objects.</h2>
 
 <h3>Description</h3>
 
-<p>FlashMatrix lazily evaluates many operations and outputs virtual objects
+<p>FlashR lazily evaluates many operations and outputs virtual objects
 that represent computation results. <code>fm.materialize.list</code> and
 <code>fm.materialize</code> explicitly materialize the virtualized computation
 and save the computation results to memory or disks. Materialization of
 these virtualized computations triggers materialization of other virtualized
-computation. By default, FlashMatrix only saves the computation results
+computation. By default, FlashR only saves the computation results
 specified by the arguments of <code>fm.materialize.list</code> and
 <code>fm.materialize</code>.  <code>fm.set.cached</code> changes the default behavior and
 notifies FlashR to save the materialized computation results of a virtual
@@ -38,15 +38,15 @@ fm.set.cached(fm, cached, in.mem = fm.in.mem(fm))
 <table summary="R argblock">
 <tr valign="top"><td><code>args</code></td>
 <td>
-<p>a list of virtual FlashMatrix objects.</p>
+<p>a list of virtual FlashR objects.</p>
 </td></tr>
 <tr valign="top"><td><code>...</code></td>
 <td>
-<p>a list of virtual FlashMatrix objects.</p>
+<p>a list of virtual FlashR objects.</p>
 </td></tr>
 <tr valign="top"><td><code>fm</code></td>
 <td>
-<p>a FlashMatrix object.</p>
+<p>a FlashR object.</p>
 </td></tr>
 <tr valign="top"><td><code>in.mem</code></td>
 <td>

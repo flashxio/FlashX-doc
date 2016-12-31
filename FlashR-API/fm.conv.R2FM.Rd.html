@@ -1,16 +1,16 @@
-<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd"><html xmlns="http://www.w3.org/1999/xhtml"><head><title>R: Convert a regular R object to a FlashMatrix object.</title>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd"><html xmlns="http://www.w3.org/1999/xhtml"><head><title>R: Convert a regular R object to a FlashR object.</title>
 <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
 <link rel="stylesheet" type="text/css" href="R.css" />
 </head><body>
 
 <table width="100%" summary="page for fm.conv.R2FM"><tr><td>fm.conv.R2FM</td><td style="text-align: right;">R Documentation</td></tr></table>
 
-<h2>Convert a regular R object to a FlashMatrix object.</h2>
+<h2>Convert a regular R object to a FlashR object.</h2>
 
 <h3>Description</h3>
 
 <p>If the R object is a matrix, <code>byrow</code> determines how data in the generated
-FlashMatrix object is organized in memory.
+FlashR object is organized in memory.
 </p>
 
 
@@ -30,15 +30,14 @@ fm.conv.R2FM(obj, byrow = FALSE)
 </td></tr>
 <tr valign="top"><td><code>byrow</code></td>
 <td>
-<p>a logical value to determine the data layout of a FlashMatrix
-matrix.</p>
+<p>a logical value to determine the data layout of a FlashR matrix.</p>
 </td></tr>
 </table>
 
 
 <h3>Value</h3>
 
-<p>a FlashMatrix object. If the input R object has 0 element,
+<p>a FlashR object. If the input R object has 0 element,
 <code>fm.conv.R2FM</code> returns <code>NULL</code>.
 </p>
 

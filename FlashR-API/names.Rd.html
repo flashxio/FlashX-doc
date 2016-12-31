@@ -1,0 +1,61 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd"><html xmlns="http://www.w3.org/1999/xhtml"><head><title>R: The Names of an Object</title>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<link rel="stylesheet" type="text/css" href="R.css" />
+</head><body>
+
+<table width="100%" summary="page for names"><tr><td>names</td><td style="text-align: right;">R Documentation</td></tr></table>
+
+<h2>The Names of an Object</h2>
+
+<h3>Description</h3>
+
+<p>Functions to get or set the names of an object.
+</p>
+
+
+<h3>Usage</h3>
+
+<pre>
+## S4 method for signature 'fm'
+names(x)
+
+## S4 method for signature 'fmV'
+names(x)
+
+## S4 replacement method for signature 'fm,fm'
+names(x) &lt;- value
+
+## S4 replacement method for signature 'fmV,fmV'
+names(x) &lt;- value
+</pre>
+
+
+<h3>Arguments</h3>
+
+<table summary="R argblock">
+<tr valign="top"><td><code>x</code></td>
+<td>
+<p>a FlashR array</p>
+</td></tr>
+<tr valign="top"><td><code>value</code></td>
+<td>
+<p>a FlashR array.</p>
+</td></tr>
+</table>
+
+
+<h3>Details</h3>
+
+<p>Currently, <code>value</code> has to have the same length as <code>x</code> and has
+the same shape. FlashR currently doesn't support character vectors yet.
+</p>
+
+
+<h3>Value</h3>
+
+<p><code>names</code> returns <code>NULL</code> or a FlashR array of the same
+length as <code>x</code>. <code>names&lt;-</code> returns the updated object.
+</p>
+
+
+</body></html>
