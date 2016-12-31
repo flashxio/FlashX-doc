@@ -175,7 +175,7 @@ den <- W %*% (H %*% t(H))
 W <- fm.pmax2(W * (A %*% t(H)), eps) / (den + eps)
 ```
 
-One of the convergence condition is ||A - WH||^2. It is computationally expensive to compute the Frobenius norm of (A-WH) directly. Suppose A is a n×m matrix, W is a n×k matrix and H is a k×m matrix. The computation complexity is O(n×k×m). Therefore, instead of computing the Frobenius norm, we compute trace(t(A-WH)(A-WH)) = trace(t(A)A) -2×trace((t(A)W)H)+trace((t(H)(t(W)W))H). We need to order the matrix multiplication in a certain way to reduce computation complexity. The computation complexity of (t(A)W)H is O(l*k), where l is the number of non-zero entries in A. The computation complexity of (t(H)(t(W)W))H is O(k×k×n+k×k×m).
+One of the convergence condition is `||A - WH||^2`. It is computationally expensive to compute the Frobenius norm of (A-WH) directly. Suppose A is a n×m matrix, W is a n×k matrix and H is a k×m matrix. The computation complexity is O(n×k×m). Therefore, instead of computing the Frobenius norm, we compute `trace(t(A-WH)(A-WH)) = trace(t(A)A) -2×trace((t(A)W)H)+trace((t(H)(t(W)W))H)`. We need to order the matrix multiplication in a certain way to reduce computation complexity. The computation complexity of `(t(A)W)H` is `O(l*k)`, where `l` is the number of non-zero entries in A. The computation complexity of `(t(H)(t(W)W))H` is `O(k×k×n+k×k×m)`.
 
 ```R
 # trace of W %*% H
