@@ -1,3 +1,14 @@
+---
+title: The FlashMatrix User Guide
+keywords: tutorial
+last_updated: Nov 3, 2016
+tags: [tutorial]
+summary: "The FlashMatrix User Guide"
+sidebar: mydoc_sidebar
+permalink: FlashMatrix-user-guide.html
+folder: mydoc
+---
+
 FlashMatrix is a matrix computation engine that provides a small set of generalized matrix operations (GenOps) to express varieties of data mining and machine learning algorithms. It scales to very large datasets by storing matrices on SSDs. It is created as the backend of FlashR but users can program on it directly. FlashMatrix executes the GenOps in parallel and out of core automatically to hide the complexity of parallelization and data access to SSDs. The current implementation of FlashMatrix supports GenOps on dense matrices.
 
 The main programming interface of FlashMatrix is defined in the `dense_matrix` class. `dense_matrix` is immutable and every computation outputs a new matrix.
