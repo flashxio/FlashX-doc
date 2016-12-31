@@ -23,7 +23,7 @@ print $out_fh "permalink: FlashR-API.html\n";
 print $out_fh "folder: mydoc\n";
 print $out_fh "---\n\n\n";
 print $out_fh "| name | comment |\n";
-print $out_fh "| ---- |:-------:|\n";
+print $out_fh "| :--- | :------ |\n";
 
 while (<$in_fh>) {
 	chomp($_);
