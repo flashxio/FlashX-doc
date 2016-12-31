@@ -13,10 +13,10 @@ open(my $in_fh, "<", $ARGV[0]) or die "open $ARGV[0]: $!";
 open(my $out_fh, ">", $ARGV[1]) or die "open $ARGV[1]: $!";
 
 print $out_fh "---\n";
-print $out_fh "title: The performance of FlashX\n";
-print $out_fh "keywords: performance\n";
-print $out_fh "last_updated: Dec 28, 2016";
-print $out_fh "tags: [API]";
+print $out_fh "title: FlashR API\n";
+print $out_fh "keywords: API\n";
+print $out_fh "last_updated: Dec 28, 2016\n";
+print $out_fh "tags: [API]\n";
 print $out_fh "summary: \"The performance of FlashX\"\n";
 print $out_fh "sidebar: mydoc_sidebar\n";
 print $out_fh "permalink: FlashR-API.html\n";
