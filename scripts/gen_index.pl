@@ -17,7 +17,7 @@ print $out_fh "title: FlashR API\n";
 print $out_fh "keywords: API\n";
 print $out_fh "last_updated: Dec 28, 2016\n";
 print $out_fh "tags: [API]\n";
-print $out_fh "summary: \"The performance of FlashX\"\n";
+print $out_fh "summary: \"FlashR API\"\n";
 print $out_fh "sidebar: mydoc_sidebar\n";
 print $out_fh "permalink: FlashR-API.html\n";
 print $out_fh "folder: mydoc\n";

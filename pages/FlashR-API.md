@@ -3,7 +3,7 @@ title: FlashR API
 keywords: API
 last_updated: Dec 28, 2016
 tags: [API]
-summary: "The performance of FlashX"
+summary: "FlashR API"
 sidebar: mydoc_sidebar
 permalink: FlashR-API.html
 folder: mydoc
