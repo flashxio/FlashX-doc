@@ -5,7 +5,7 @@ last_updated: Nov 3, 2016
 tags: [tutorial]
 summary: "The programming tutorials of FlashR"
 sidebar: mydoc_sidebar
-permalink: FlashR-programming-tutorial.html
+permalink: FlashR-tutorials.html
 folder: mydoc
 ---
 
