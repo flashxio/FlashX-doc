@@ -17,7 +17,7 @@ A graph algorithm usually progresses in iterations. In each iteration, the graph
 
 The most commonly way of implementing a graph algorithm in FlashGraph is to define computation vertices by inheriting the `compute_vertex` class . Users define vertex state and implement three `run` methods in the computation vertices, as shown below. FlashGraph executes the `run` method exactly once for each active vertex in an iteration; the order of execution of this method on vertices is subject to scheduling by FlashGraph. The execution of the `run_on_vertex` and `run_on_message` methods is event-driven. FlashGraph executes `run_on_vertex` when the edge list of a vertex requested by the current vertex is ready in the page cache. FlashGraph executes `run_on_message` if the vertex receives messages from other vertices. The `run_on_message` method may be executed even if a vertex is inactive in an iteration. All examples assume `using namespace fg;` is declared.
 
-~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~{.cpp}
+```C++
 class compute_vertex
 {
   // run only on the vertex state.
@@ -29,11 +29,11 @@ class compute_vertex
   // process a message.
   void run_on_message(vertex_program &prog, vertex_message &msg);
 };
-~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+```
 
 Given the programming interface, breadth-first search can be simply expressed as the code below. If a vertex has not been visited, it issues a request to read its neighbor list in `run` and activates its neighbors in `run_on_vertex`. In this example, vertices do not need to send messages to one another so we do not need to implement `run_on_message`.
 
-~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~{.cpp}
+```C++
 class bfs_vertex: public vertex
 {
   bool has_visited;
@@ -60,7 +60,7 @@ class bfs_vertex: public vertex
   void run_on_message(vertex_program &prog, vertex_message &msg) {
   }
 };
-~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+```
 
 ## Initialize vertex state
 
@@ -68,14 +68,14 @@ There are two ways of initializing vertex state. Programmers can initialize vert
 
 In a more complex case, a graph algorithm may require to execute the vertex program multiple times or execute multiple vertex programs. Therefore, it needs to set some vertices to a certain state or reset all vertices. FlashGraph provides another mechanism to initialize vertex state. Programmers need to implement the `vertex_initiator` interface, shown as below. Users can pass a customized vertex initializer to the graph engine by invoking its `init_all_vertices()` or its start function. An example of using a customized vertex initializer can be found in [single source shortest path](https://github.com/icoming/FlashGraph/blob/graph-release/flash-graph/sssp/sssp.cpp).
 
-~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~{.cpp}
+```C++
 class vertex_initiator
 {
 public:
     typedef std::shared_ptr<vertex_initiator> ptr;
     virtual void init(compute_vertex &) = 0;
 };
-~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+```
 
 ## Interaction with other vertices
 
@@ -107,7 +107,7 @@ FlashGraph implements both sequential (Java-style) iterators and traditional STL
 #### Java-style iterators
 The code below shows how the Java-style iterators can be used to iterate an edge list and access a data item in an attributed graph.
 
-~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~{.cpp}
+```C++
 typedef safs::page_byte_array::const_iterator<edge_data_type> data_iterator;
 typedef safs::page_byte_array::seq_const_iterator<edge_count> data_seq_iterator;
 
@@ -127,11 +127,12 @@ void nmf_vertex::run(vertex_program &prog, const page_vertex &vertex) {
                       << e.get_count() << std::endl;
     }
 }
-~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+```
 
 #### STL-style iterators
 The code below shows how the STL-style iterators can be used to iterate an edge list and access a data item in an attributed graph.
-~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~{.cpp}
+
+```C++
 void nmf_vertex::run(vertex_program &prog, const page_vertex &vertex) {
     // Iterator for neighbor IDs
     edge_iterator neigh_it = vertex.get_neigh_begin(edge_type::OUT_EDGE);
@@ -153,19 +154,19 @@ void nmf_vertex::run(vertex_program &prog, const page_vertex &vertex) {
                               << e.get_count() << std::endl;
     }
 }
-~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+```
 
 ## Execute vertex program
 
 The code below executes the BFS program shown above. We create a `graph_index` object that contains the user-defined vertex state for all vertices and create a `graph_engine` object that executes the user code for the graph algorithm. In the case of BFS, the algorithm starts on a single vertex. When a graph engine starts, the user code runs in the worker threads inside the graph engine. We can invoke `wait4complete` to wait the graph algorithm to complete.
 
-~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~{.cpp}
+```C++
 graph_index::ptr index = NUMA_graph_index<bfs_vertex>::create(index_file);
 graph_engine::ptr graph = graph_engine::create(graph_file, index, configs);
 
 graph->start(&start_vertex, 1);
 graph->wait4complete();
-~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+```
 
 ## Synchronous execution
 
