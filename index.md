@@ -48,4 +48,6 @@ This lists specific applications and shows how to solve them with FlashX.
 
 # [Contributing](Contributing.html)
 
-# API
+# [API](FlashX-API.html)
+
+FlashX exposes both C++ interface and R interface.
