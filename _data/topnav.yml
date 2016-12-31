@@ -6,6 +6,9 @@ topnav:
     - title: Source code
       external_url: https://github.com/flashxio/FlashX
 
+    - title: Main page
+      external_url: http://flashx.io/
+
 #Topnav dropdowns
 #topnav_dropdowns:
 #- title: Topnav dropdowns

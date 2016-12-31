@@ -4,7 +4,7 @@ topnav:
 - title: Topnav
   items:
     - title: Source code
-      url: https://github.com/zheng-da/FlashX
+      external_url: https://github.com/flashxio/FlashX
 
 #Topnav dropdowns
 #topnav_dropdowns:
