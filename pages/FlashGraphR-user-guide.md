@@ -5,7 +5,7 @@ last_updated: Nov 3, 2016
 tags: [tutorial]
 summary: "The User Guide of FlashGraphR"
 sidebar: mydoc_sidebar
-permalink: FlashGraph-user-guide.html
+permalink: FlashGraphR-user-guide.html
 folder: mydoc
 ---
 
