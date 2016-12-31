@@ -33,9 +33,6 @@ Once a graph is loaded to FlashGraphR, users can perform graph algorithms on the
 * scan statistics: `fg.topK.scan(g)` and `fg.local.scan(g)`
 * coreness: `fg.coreness(g)`
 * diameter estimation: `fg.diameter(g)`
-* sparse matrix vector multiplication: `fg.multiply(g, input.vec)` and `fg.multiply(g, input.vec, transpose=TRUE)`
-* eigensolver: `fg.eigen(g)`
-* SVD: `fg.SVD(g)`
 * spectral clustering: `fg.spectral.clusters(g, num.clusters, which="adj")`. It supports performing spectral clustering on adjacency matrix, Laplacian matrix and normalized Laplacian matrix.
 
 ## Other functions
