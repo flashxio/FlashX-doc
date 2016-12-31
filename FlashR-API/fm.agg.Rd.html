@@ -71,4 +71,16 @@ return a FlashR sink matrix.
 </p>
 
 
+<h3>Examples</h3>
+
+<pre>
+mat &lt;- fm.runif.matrix(100, 2)
+res &lt;- fm.agg(mat, "+")
+res &lt;- fm.agg(mat, fm.bo.add)
+sum &lt;- fm.create.agg.op(fm.bo.add, fm.bo.add, "sum")
+res &lt;- fm.agg(mat, sum)
+res &lt;- fm.agg.mat(mat, 1, sum)
+</pre>
+
+
 </body></html>

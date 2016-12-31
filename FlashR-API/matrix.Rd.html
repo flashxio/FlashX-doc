@@ -60,4 +60,23 @@ columns, otherwise the matrix is filled by rows.</p>
 </table>
 
 
+<h3>Details</h3>
+
+<p>Currently, <code>fm.matrix</code> takes an R vector or a FlashR vector as input
+and the length of the vector must be the same as the number of rows if
+<code>byrow</code> is <code>FALSE</code> or the same as the number of columns if
+<code>byrow</code> is <code>TRUE</code>.
+</p>
+
+
+<h3>Examples</h3>
+
+<pre>
+mat &lt;- fm.matrix(runif(100), 100, 2)
+mat &lt;- as.matrix(fm.runif.matrix(100, 2))
+mat &lt;- fm.as.matrix(matrix(runif(200), 100, 2))
+res &lt;- fm.is.matrix(mat)
+</pre>
+
+
 </body></html>

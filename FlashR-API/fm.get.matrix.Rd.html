@@ -116,4 +116,13 @@ when he/she opens FlashR.
 </p>
 
 
+<h3>Examples</h3>
+
+<pre>
+mat &lt;- fm.get.dense.matrix("mat123")	# get a dense matrix named "mat123", stored in SAFS.
+mat &lt;- fm.load.dense.matrix("./mat123.cvs", TRUE) # load a dense matrix from a local file "mat123.cvs" to memory.
+mat &lt;- fm.load.sparse.matrix("./spm123.mat", "./spm123.mat_idx") # load a symmetric sparse matrix in FlashMatrix format (whose data is stored in "spm123.mat" and the index is stored in "spm123.mat_idx") to memory.
+</pre>
+
+
 </body></html>

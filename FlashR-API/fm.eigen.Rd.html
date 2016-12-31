@@ -122,4 +122,13 @@ the eigenvalues.
 </p>
 
 
+<h3>Examples</h3>
+
+<pre>
+mat &lt;- fm.load.sparse.matrix("./spm123.mat", "./spm123.mat_idx")
+res &lt;- fm.eigen(mul, 10, nrow(mat))
+fm.cal.residul(mul, res$values, res$vectors)
+</pre>
+
+
 </body></html>

@@ -10,7 +10,7 @@
 <h3>Description</h3>
 
 <p><code>any</code> tests whether some of the values in a set of logical vectors are
-true? <code>fm.all</code> tests whether some of the values in a single vector are
+true? <code>fm.any</code> tests whether some of the values in a single vector are
 true. <code>fm.any</code> can evaluate it lazily.
 </p>
 
@@ -54,6 +54,15 @@ any(x, ..., na.rm = FALSE)
 
 <p>The value is a logical vector of length one.
 </p>
+
+
+<h3>Examples</h3>
+
+<pre>
+mat &lt;- fm.runif.matrix(100, 10) &gt; 0.5
+any(mat)
+fm.any(mat)
+</pre>
 
 
 </body></html>

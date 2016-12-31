@@ -3,13 +3,15 @@
 <link rel="stylesheet" type="text/css" href="R.css" />
 </head><body>
 
-<table width="100%" summary="page for fm.svd"><tr><td>fm.svd</td><td style="text-align: right;">R Documentation</td></tr></table>
+<table width="100%" summary="page for svd"><tr><td>svd</td><td style="text-align: right;">R Documentation</td></tr></table>
 
 <h2>Compute the singular-value decomposition on a large matrix.</h2>
 
 <h3>Description</h3>
 
-<p>The current implementation can only compute the largest eigenvalues.
+<p>The difference between <code>svd</code> and <code>fm.svd</code> is that <code>fm.svd</code>
+allows a user-specified tol. <code>svd</code> computes eigenvalues in machine
+precision.
 </p>
 
 
@@ -17,6 +19,9 @@
 
 <pre>
 fm.svd(x, nu = min(n, p), nv = min(n, p), tol = 1e-08)
+
+## S4 method for signature 'fm'
+svd(x, nu = min(n, p), nv = min(n, p), LINPACK = FALSE)
 </pre>
 
 
@@ -68,6 +73,15 @@ value. If this is set to zero then machine precision is used.</p>
 
 <p>Da Zheng &lt;dzheng5@jhu.edu&gt;
 </p>
+
+
+<h3>Examples</h3>
+
+<pre>
+mat &lt;- fm.runif.matrix(1000, 100)
+res &lt;- fm.svd(mat, nu=10, nv=0)
+res &lt;- svd(mat, nu=10, nv=0)
+</pre>
 
 
 </body></html>

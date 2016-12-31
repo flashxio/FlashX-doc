@@ -1,15 +1,15 @@
-<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd"><html xmlns="http://www.w3.org/1999/xhtml"><head><title>R: Convert a FlashR vector to a FlashR factor vector.</title>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd"><html xmlns="http://www.w3.org/1999/xhtml"><head><title>R: FlashR factor vector.</title>
 <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
 <link rel="stylesheet" type="text/css" href="R.css" />
 </head><body>
 
 <table width="100%" summary="page for fm.as.factor"><tr><td>fm.as.factor</td><td style="text-align: right;">R Documentation</td></tr></table>
 
-<h2>Convert a FlashR vector to a FlashR factor vector.</h2>
+<h2>FlashR factor vector.</h2>
 
 <h3>Description</h3>
 
-<p>Convert a FlashR vector to a FlashR factor vector.
+<p><code>fm.as.factor</code> converts a FlashR vector to a FlashR factor vector.
 </p>
 
 
@@ -34,10 +34,26 @@ fm.as.factor(fm, num.levels = -1)
 </table>
 
 
+<h3>Details</h3>
+
+<p>Currently, this function only works for integer input vectors. If
+the input vector isn't integers, it converts the vector to an integer
+vector. By default, it uses the maximal value as the number of levels
+for the factor.
+</p>
+
+
 <h3>Value</h3>
 
 <p>a FlashR factor vector.
 </p>
+
+
+<h3>Examples</h3>
+
+<pre>
+vec &lt;- fm.as.factor(as.integer(fm.runif(100, min=0, max=100)))
+</pre>
 
 
 </body></html>

@@ -9,7 +9,9 @@
 
 <h3>Description</h3>
 
-<p><code>fm.get.rows</code> gets specified rows in a FM matrix.
+<p><code>fm.get.rows</code> gets specified rows in a FlashR matrix.
+<code>fm.get.cols</code> gets specified columns in a FlashR matrix.
+<code>fm.get.eles.vec</code> gets specified elements from a FlashR vector.
 </p>
 
 
@@ -38,12 +40,6 @@ fm.get.eles.vec(fm, idxs)
 </table>
 
 
-<h3>Details</h3>
-
-<p><code>fm.get.cols</code> gets specified columns in a FM matrix.
-</p>
-
-
 <h3>Value</h3>
 
 <p>a FlashR vector if getting one row or column;
@@ -55,6 +51,17 @@ a FlashR matrix if getting more than one row or column.
 
 <p>Da Zheng &lt;dzheng5@jhu.edu&gt;
 </p>
+
+
+<h3>Examples</h3>
+
+<pre>
+mat &lt;- fm.runif.matrix(100, 10)
+sub &lt;- fm.get.cols(mat, as.integer(runif(5, min=1, max=10)))
+sub &lt;- fm.get.rows(mat, as.integer(runif(5, min=1, max=100)))
+vec &lt;- fm.runif(100)
+sub &lt;- fm.get.eles.vec(vec, as.integer(runif(5, min=1, max=100)))
+</pre>
 
 
 </body></html>
