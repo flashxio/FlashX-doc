@@ -30,7 +30,7 @@ folder: mydoc
 | [fm.apply](FlashR-API/fm.apply.Rd.html) | Apply Functions Over Array Margins |
 | [fm.apply.op-class](FlashR-API/fm.apply.op-class.Rd.html) | An S4 class to represent an apply operator on rows/columns in a matrix. This operator is used in 'fm.apply'. |
 | [fm.ase](FlashR-API/fm.ase.Rd.html) | Spectral embedding |
-| [fm.as.factor](FlashR-API/fm.as.factor.Rd.html) | Convert a FlashR vector to a FlashR factor vector. |
+| [fm.as.factor](FlashR-API/fm.as.factor.Rd.html) | FlashR factor vector. |
 | [fm.basic.op](FlashR-API/fm.basic.op.Rd.html) | The basic operators supported by FlashR. |
 | [fm.bind](FlashR-API/fm.bind.Rd.html) | Combine FlashR Vectors/Matrices by Rows or Columns |
 | [fm.bo-class](FlashR-API/fm.bo-class.Rd.html) | An S4 class to represent a binary operator used in generalized matrix operations. |
@@ -62,7 +62,6 @@ folder: mydoc
 | [fm.seq](FlashR-API/fm.seq.Rd.html) | Sequence Generation |
 | [fm.set.conf](FlashR-API/fm.set.conf.Rd.html) | Reconfigure FlashR |
 | [fm.summary](FlashR-API/fm.summary.Rd.html) | FlashR Summaries |
-| [fm.svd](FlashR-API/fm.svd.Rd.html) | Compute the singular-value decomposition on a large matrix. |
 | [fm.t](FlashR-API/fm.t.Rd.html) | Transpose a FlashR matrix. |
 | [fm.table](FlashR-API/fm.table.Rd.html) | Count the number of elements |
 | [fmV-class](FlashR-API/fmV-class.Rd.html) | An S4 class to represent a FlashR vector. |
@@ -92,6 +91,7 @@ folder: mydoc
 | [scale](FlashR-API/scale.Rd.html) | Scaling and Centering of Matrix |
 | [sd](FlashR-API/sd.Rd.html) | Standard Deviation |
 | [sum](FlashR-API/sum.Rd.html) | Sum of Vector Elements |
+| [svd](FlashR-API/svd.Rd.html) | Compute the singular-value decomposition on a large matrix. |
 | [sweep](FlashR-API/sweep.Rd.html) | Sweep out Array Summaries |
 | [transpose](FlashR-API/transpose.Rd.html) | Matrix Transpose |
 | [typeof](FlashR-API/typeof.Rd.html) | The Type of an Object |
