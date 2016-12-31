@@ -1,15 +1,13 @@
 ---
-title: The programming tutorials of FlashMatrix
+title: The programming tutorials of FlashR
 keywords: tutorial
 last_updated: Nov 3, 2016
 tags: [tutorial]
-summary: "The programming tutorials of FlashMatrix"
+summary: "The programming tutorials of FlashR"
 sidebar: mydoc_sidebar
-permalink: FlashMatrix-programming-tutorial.html
+permalink: FlashR-programming-tutorial.html
 folder: mydoc
 ---
-
-# Examples of using FlashR
 
 ## Spectral analysis on a median-size graph
 Here shows the steps of performing spectral analysis on an undirected graph with 4,036,538 vertices and 34,681,189 edges. The graph is downloaded at [SNAP](http://snap.stanford.edu/data/com-LiveJournal.html). Interested users can try this example at Amazon EC2 instance (see the instructions [here](https://github.com/icoming/FlashX/wiki/Run-FlashX-in-the-Amazon-cloud) to set up a FlashX instance) or on a local machine (see the instructions [here](https://github.com/icoming/FlashX/wiki/FlashX-Quick-Start-Guide) to install FlashX locally).
