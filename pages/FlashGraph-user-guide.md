@@ -9,8 +9,6 @@ permalink: FlashGraph-user-guide.html
 folder: mydoc
 ---
 
-# FlashGraphR programming tutorial
-
 ## Load a graph to FlashGraphR
 
 Before running any graph algorithms on a graph, users need to first load the graph to FlashGraphR. There are multiple ways of loading a graph to FlashGraphR.
@@ -26,6 +24,7 @@ Before running any graph algorithms on a graph, users need to first load the gra
 ## The graph algorithms
 
 Once a graph is loaded to FlashGraphR, users can perform graph algorithms on the graph. The graph applications supported by FlashGraph are listed below:
+
 * weakly connected components: `fg.clusters(g, mode="weak")`
 * strongly connected components: `fg.clusters(g, mode="strong")`
 * graph transitivity: `fg.transitivity(g)`
@@ -34,9 +33,6 @@ Once a graph is loaded to FlashGraphR, users can perform graph algorithms on the
 * scan statistics: `fg.topK.scan(g)` and `fg.local.scan(g)`
 * coreness: `fg.coreness(g)`
 * diameter estimation: `fg.diameter(g)`
-* sparse matrix vector multiplication: `fg.multiply(g, input.vec)` and `fg.multiply(g, input.vec, transpose=TRUE)`
-* eigensolver: `fg.eigen(g)`
-* SVD: `fg.SVD(g)`
 * spectral clustering: `fg.spectral.clusters(g, num.clusters, which="adj")`. It supports performing spectral clustering on adjacency matrix, Laplacian matrix and normalized Laplacian matrix.
 
 ## Other functions
@@ -53,6 +49,7 @@ Once a graph is loaded to FlashGraphR, users can perform graph algorithms on the
 ## Examples of using FlashGraphR
 
 Users can use R to further process the results returned from FlashGraph. Here are some examples how users process the results of the strongly connected components.
+
 ```R
 # Get the strongly connected components.
 # It returns an array whose elements are the component Ids of the vertices.
@@ -71,6 +68,7 @@ sub.fg <- fg.fetch.subgraph(fg, vertices=lcc.v - 1, compress=FALSE)
 Some of the graph algorithms in FlashGraphR are implemented in R by using other graph algorithms in FlashGraphR. Below show two examples of how to use existing graph algorithms in FlashGraphR to implement other graph algorithms.
 
 One example is to compute graph transitivity. The code below computes both global and local graph transitivity for both directed and undirected graphs.
+
 ```R
     deg <- fg.degree(graph)
     if (type == "local") {
