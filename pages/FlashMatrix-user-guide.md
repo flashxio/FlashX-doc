@@ -13,7 +13,7 @@ FlashMatrix is a matrix computation engine that provides a small set of generali
 
 The main programming interface of FlashMatrix is defined in the `dense_matrix` class. `dense_matrix` is immutable and every computation outputs a new matrix.
 
-```C++
+```cpp
 class dense_matrix
 {
 // Create a dense matrix. Users can specify the size (nrow, ncol), the data layout
