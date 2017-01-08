@@ -10,14 +10,14 @@ folder: mydoc
 ---
 
 FlashR can perform computation on dense matrices, sparse matrices and graphs.
-In the tutorials, we use examples to illustrate the computations on these data.
+In the tutorials, we use examples to illustrate the operations on these data.
 We will also illustrate the R base functions overridden by FlashR and
-the [GenOps](FlashR-user-guide.html#generalized-operations-genops). Most
+the [GenOps](FlashR-user-guide.html#generalized-operations-genops). Because most
 computations of machine learning algorithms can be expressed with the R base
-functions. This means many machine learning algorithms written in R can be
+functions, many machine learning algorithms written in R can be
 executed in FlashR without much modification.
 
-## Multi-variant normal distribution
+## Use base R functins to generate multi-variant normal distribution
 In this example, we generate random data under multi-variant normal distribution.
 The code is adapted from mvrnorm in the
 [MASS](https://cran.r-project.org/web/packages/MASS/index.html) package.
@@ -47,9 +47,9 @@ mvrnorm <- function(n = 1, mu, Sigma, tol=1e-6, empirical = FALSE, EISPACK = FAL
 }
 ```
 
-## k-means
-K-means is a simple but popular clustering algorithm. This algorithm is
-an example that we have to use GenOps to perform computation efficiently.
+## Use GenOps to compute k-means
+K-means is a simple but popular clustering algorithm. We use this algorithm
+as an example to illustrate GenOps for efficient computation.
 
 K-means is an iterative algorithm and each iteration has three steps.
 Below is the simplified code to illustrate the three steps. The complete code
@@ -63,12 +63,50 @@ dist <- fm.inner.prod(data, t(centers), fm.bo.euclidean, fm.bo.add)
 parts <- fm.agg.mat(dist, 1, agg.which.min)
 
 # Step 3: update all cluster centers.
-	centers <- as.matrix(fm.groupby(data, 2, parts, agg.sum))
+centers <- as.matrix(fm.groupby(data, 2, parts, agg.sum))
 cnts <- as.vector(fm.table(parts))
-	centers <- diag(1/cnts) %*% centers
+centers <- diag(1/cnts) %*% centers
 ```
 
-## Non-negative Matrix Factorization
+The complete implementation of k-means is shown below. This is a simplified
+version of the [k-means](https://github.com/flashxio/FlashX/blob/dev/Rpkg/R/KMeans.R)
+implementation in FlashR. In the end, we run the k-means implementation
+as shown above on a matrix loaded from a CSV file.
+
+```R
+kmeans <- function(data, k, max.iters)
+{
+	agg.sum <- fm.create.agg.op(fm.bo.add, fm.bo.add, "sum")
+	agg.which.min <- fm.create.agg.op(fm.bo.which.min, NULL, "which.min")
+
+	# randomly select k data points as centers.
+	centers <- data[runif(k, min=1, max=nrow(data)),]
+	iter <- 0
+	while (iter < max.iters) {
+		# Step 1: calculate distances between all data points to all cluster centers.
+		dist <- fm.inner.prod(data, t(centers), fm.bo.euclidean, fm.bo.add)
+
+		# Step 2: find the closest cluster center for each data point.
+		parts <- fm.agg.mat(dist, 1, agg.which.min) - 1
+		# Cache this matrix in memory.
+		fm.set.cached(parts, TRUE, TRUE)
+
+		# Step 3: update all cluster centers.
+		centers <- as.matrix(fm.groupby(data, 2, fm.as.factor(parts, k),
+					agg.sum))
+		cnts <- as.vector(fm.table(parts)@Freq)
+		centers <- diag(1/cnts) %*% centers
+
+		iter++
+	}
+	parts
+}
+
+mat <- fm.load.dense.matrix("./test_mat.csv", ele.type="D", delim=",", in.mem=TRUE)
+kmeans(mat, 5, 10)
+```
+
+## Use FlashR for matrix factorization (Non-negative Matrix Factorization)
 [Non-negative Matrix Factorization](https://en.wikipedia.org/wiki/Non-negative_matrix_factorization)
 (NMF) factorizes a matrix to two non-negative matrices. There are many algorithms
 to factorize a matrix into two non-negative matrices. The following code
@@ -103,7 +141,7 @@ Fnorm <- function(A, W, H) {
 }
 ```
 
-## PageRank
+## Use FlashR for graph algorithms (PageRank)
 We can also use FlashR to compute some classical graph algorithms, such as
 [PageRank](https://en.wikipedia.org/wiki/PageRank). This algorithm is used by
 Google search engine to rank Web pages. PageRank is an iterative algorithm.
@@ -117,17 +155,26 @@ multiplication. The complete code is
 [here](https://github.com/flashxio/FlashX/blob/dev/FlashR-learn/R/graph-algs.R).
 
 ```R
-pr1 <- fm.rep.int(1/N, N)
-converge <- 0
-while (converge < N) {
-	pr2 <- (1-d)/N+d*(graph %*% (pr1/out.deg))
-	diff <- abs(pr1-pr2)
-	converge <- sum(diff < epsilon)
-	pr1 <- pr2
+pagerank <- function(graph, d=0.15, epsilon=1e-2) {
+	N <- nrow(graph)
+	pr1 <- fm.rep.int(1/N, N)
+	out.deg <- graph %*% fm.rep.int(1, N)
+	converge <- 0
+	graph <- t(graph)
+	while (converge < N) {
+		pr2 <- (1-d)/N+d*(graph %*% (pr1/out.deg))
+		diff <- abs(pr1-pr2)
+		converge <- sum(diff < epsilon)
+		pr1 <- pr2
+	}
+	pr1
 }
+
+graph <- fm.load.sparse.matrix("../wiki-Vote.txt", is.sym=FALSE, delim="\t")
+pagerank(graph)
 ```
 
-## Spectral analysis on graphs
+## Use FlashR with FlashGraphR for spectral analysis on graphs
 Another example of using FlashR for graph analysis is spectral analysis.
 This example illustrates how to use FlashR and FlashGraphR together.
 Here shows the steps of performing spectral analysis on an undirected graph
@@ -179,7 +226,7 @@ FlashGraph ./com-lj.ungraph.txt.gz-sub (U): 3997962 34681189
 We compute eigenvalues of the largest connected component.
 
 ```R
-> m <- fm.get.sparse.matrix(lcc)
+> m <- fg.get.sparse.matrix(lcc)
 > multiply <- function(x, extra) m %*% x
 > res <- fm.eigen(multiply, options=list(n=dim(m)[1], nev=10))
 > res$vals
