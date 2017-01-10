@@ -116,11 +116,11 @@ these implementations on SSDs with the speed comparable to in-memory execution.
 Given the small memory consumption of FlashR in the external-memory mode (Figure 5),
 we demonstrate that FlashR can scale to very large datasets easily.
 
-![runtime of FlashR vs. Spark MLlib](http://flashx.io/images/FlashR.vs.MLlib.png)
+![runtime of FlashR vs. Spark MLlib](http://flashxio.github.io/FlashX-doc/images/FlashR-perf.png)
 
 Figure 4. The runtime of FlashR vs. Spark MLlib in a large parallel machine with 48 CPU cores on a dataset with 1 billion data points and 32 features..
 
-![Memory consumption of FlashR vs. Spark MLlib](http://flashx.io/images/FlashR.vs.MLlib.mem.png)
+![Memory consumption of FlashR vs. Spark MLlib](http://flashxio.github.io/FlashX-doc/images/FlashR-mem.png)
 
 Figure 5. The memory consumption of FlashR vs. Spark MLlib on a dataset with 1 billion data points and 32 features.
 
