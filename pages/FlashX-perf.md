@@ -94,20 +94,30 @@ both in-memory and external-memory performance.
 
 #### FlashR vs. R and RRO
 
+The FlashR implementations outperform the ones in R even with a single thread
+(Figure 3).
 The implementations in the R framework is written in C/FORTRAN and can only
 run in a single thread. As such, for a fair
 comparison, we run the FlashR implementations in a single thread when comparing
 with the C/FORTRAN implementations in the R framework. We evaluate
 the implementations in machine HW2.
 
-The FlashR implementations outperform the ones in R even with a single thread
-(Figure 3).
-
-![runtime of FlashR vs. R](http://flashxio.github.io/FlashX-doc/images/FlashR-perf-1T.png)
+![Performance of FlashR vs. R](http://flashxio.github.io/FlashX-doc/images/FlashR-perf-1T.png)
 
 Figure 3. The performance of FlashR vs. R in a single thread on a dataset
 with 65 million data points and 32 features.
 
+We compare the performance of FlashR with RRO with the
+[RRO benchmark](https://mran.revolutionanalytics.com/documents/rro/multithread/)
+and show that FlashR can significantly outperform RRO in HW2. FlashR
+parallelizes all matrix operations, while RRO can only parallelize
+matrix multiplcation with Intel MKL. As such, when the algorithm becomes
+more complex, the speed gap between FlashR and RRO gets larger.
+
+![Performance of FlashR vs. RRO](http://flashxio.github.io/FlashX-doc/images/FlashR.vs.RRO.png)
+
+Figure 3. The performance of FlashR vs. RRO on HW2 on a matrix
+with 1 million rows and 1000 columns.
 
 #### FlashR vs. Spark
 
@@ -119,7 +129,7 @@ these implementations on SSDs with the speed comparable to in-memory execution.
 Given the small memory consumption of FlashR in the external-memory mode (Figure 5),
 we demonstrate that FlashR can scale to very large datasets easily.
 
-![runtime of FlashR vs. Spark MLlib](http://flashxio.github.io/FlashX-doc/images/FlashR-perf.png)
+![Performance of FlashR vs. Spark MLlib](http://flashxio.github.io/FlashX-doc/images/FlashR-perf.png)
 
 Figure 4. The performance of FlashR vs. Spark MLlib in HW2.
 
