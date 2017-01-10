@@ -34,7 +34,7 @@ code.
 
 We provide instructions to install FlashX and use some simple examples to show how to use FlashR for computation.
 
-# [Performance](FlashX-perf.html)
+# [Benchmark](FlashX-perf.html)
 
 We show the lightning speed of FlashX, compared with its main competitors.
 
