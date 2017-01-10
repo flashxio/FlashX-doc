@@ -9,18 +9,19 @@ permalink: FlashX-Quick-Start-Guide.html
 folder: mydoc
 ---
 
-## Install FlashR
+## Install FlashX
 
-FlashR is an R package. The installation steps have been tested in Ubuntu 14.04
-and Ubuntu 16.04.
+This document shows the installation of FlashX with the R programming interfaces.
+Currently, FlashX provides R interfaces: FlashR and FlashGraphR.
+The installation steps have been tested in Ubuntu 14.04 and Ubuntu 16.04.
 
-### Step 0: Library dependency
-FlashR requires the following libraries: `libboost-dev, BLAS, libaio, libnuma, libhwloc`.
+### Library dependency
+FlashX requires the following libraries: `libboost-dev, BLAS, libaio, libnuma, libhwloc`.
 Users need to install these libraries before compiling the code of FlashX.
 Among them, `libaio`, `libnuma` and `libhwloc` are optional. However, `libaio`
 is required to take advantage of SSDs to scale computation to large datasets.
 `libnuma` is required for machines with more than two processor sockets. `libhwloc`
-is required to tune FlashR automatically to achieve the best speed for a given
+is required to tune FlashX automatically to achieve the best speed for a given
 hardware.
 
 In Ubuntu, we install all tools and libraries for compiling FlashX as follows:
@@ -33,7 +34,7 @@ sudo apt-get install -y r-base-core
 sudo apt-get install -y libnuma-dev libaio-dev libhwloc-dev
 ```
 
-Users can use `devtools` or use a URL link to install the FlashR package in R.
+Users can use `devtools` or use a URL link to install FlashR and FlashGraphR in R.
 If users choose to use `devtools`, they need to install `devtools` first:
 
 ```shell
@@ -51,8 +52,8 @@ Ubuntu 14.04 users should follow the instructions
 [here](https://www.digitalocean.com/community/tutorials/how-to-set-up-r-on-ubuntu-14-04)
 to upgrade the R framework before installing `devtools`.
 
-### Step 1: install FlashR
-Currently, FlashR is uploaded to a [Github](https://github.com/flashxio/FlashR) repo.
+### Install FlashR
+FlashR is uploaded to a [Github](https://github.com/flashxio/FlashR) repo.
 We can install FlashR in R with [devtools](https://cran.r-project.org/web/packages/devtools/index.html)
 as follows.
 
@@ -65,6 +66,16 @@ We can also install it with the following link.
 
 ```R
 > install.packages("https://github.com/flashxio/FlashR/archive/FlashR-latest.tar.gz", repos=NULL)
+```
+
+### Install FlashGraphR
+
+FlashGraphR is uploaded to a [Github](https://github.com/flashxio/FlashGraphR) repo.
+Similar to installation of FlashR, we can install FlashGraphR as follows:
+
+```R
+> library(devtools)
+> install_github("flashxio/FlashGraphR")
 ```
 
 ## Run FlashR.
