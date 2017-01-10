@@ -103,9 +103,10 @@ the implementations in machine HW2.
 The FlashR implementations outperform the ones in R even with a single thread
 (Figure 3).
 
-![runtime of FlashR vs. R](http://flashx.io/images/FlashR.vs.R.png)
+![runtime of FlashR vs. R](http://flashxio.github.io/FlashX-doc/images/FlashR-perf-1T.png)
 
-Figure 3. The runtime of FlashR vs. R in a single thread on a dataset with 65 million data points and 32 features.
+Figure 3. The performance of FlashR vs. R in a single thread on a dataset
+with 65 million data points and 32 features.
 
 
 #### FlashR vs. Spark
