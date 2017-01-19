@@ -34,19 +34,23 @@ code.
 
 We provide instructions to install FlashX and use some simple examples to show how to use FlashR for computation.
 
-# [Performance](FlashX-perf.html)
+# [Benchmark](FlashX-perf.html)
 
 We show the lightning speed of FlashX, compared with its main competitors.
 
-# [User Guide](FlashMatrix-user-guide.html)
+# User Guide
 
-This documentation provides detailed description of the FlashR functions.
+FlashX provides both C++ and R programming interfaces. We provide multiple user guide
+to explain these interfaces of FlashGraph and FlashMatrix.
 
 # Tutorials
 
 This lists specific applications and shows how to solve them with FlashX.
 
 # [Contributing](Contributing.html)
+
+We hope more people will help and develop FlashX together to make this a successful project.
+Here we list a number of tasks in the TODO list.
 
 # [API](FlashX-API.html)
 
