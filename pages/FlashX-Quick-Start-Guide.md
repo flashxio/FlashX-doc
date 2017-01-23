@@ -62,9 +62,13 @@ as follows.
 > install_github("flashxio/FlashR")
 ```
 
-We can also install it with the following link.
+If a user don't want to install devtools or can't install devtools, he or she
+can install FlashR with the following link directly. Unfortunately, the user
+needs to install the dependencies manually.
 
 ```R
+> install.packages("Rcpp")
+> install.packages("RSpectra")
 > install.packages("https://github.com/flashxio/FlashR/archive/FlashR-latest.tar.gz", repos=NULL)
 ```
 
