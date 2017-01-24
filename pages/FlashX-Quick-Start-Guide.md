@@ -25,13 +25,14 @@ sudo apt-get update
 sudo apt-get install -y r-base-core
 ```
 To run FlashX faster and use disks to scale to large datasets, users
-needs to install some additional libraries: `libaio, libnuma, libhwloc`.
+needs to install some additional libraries: `libaio, libnuma, libhwloc, libatlas`.
 All of the libraries are **optional**. Users need to install these
 libraries before compiling the code of FlashX. `libaio`
 is required to take advantage of SSDs to scale computation to large datasets.
 `libnuma` is required for machines with more than two processor sockets. `libhwloc`
 is required to tune FlashX automatically to achieve the best speed for a given
-hardware.
+hardware. `libatlas` is a faster BLAS implementation and it can accelerate
+matrix multilication in FlashR.
 
 In Ubuntu, users can install the additional libraries as follows:
 
