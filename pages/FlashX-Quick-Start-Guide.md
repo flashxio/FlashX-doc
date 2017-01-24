@@ -18,7 +18,7 @@ The installation steps have been tested in Ubuntu 14.04 and Ubuntu 16.04.
 ### Library dependency
 
 To install FlashX, users need to install R first.
-Users can install FlashR as follows:
+In Ubuntu, users can install FlashR as follows:
 
 ```shell
 sudo apt-get update
