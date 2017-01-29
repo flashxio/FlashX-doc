@@ -61,8 +61,7 @@ runs in a small Amazon instance.
 
 ![runtime](http://flashx.io/images/FlashGraph.vs.others.png)
 
-Figure 1. The runtime of FlashGraph vs. distributed graph engines in PageRank
-and weakly connected components.
+Figure 1. The speed of graph engines normalized to FlashGraph on the Twitter graph.
 
 Given such performance results, we can further demonstrate that FlashGraph is
 much more economical than distributed graph engines in the Amazon cloud. m2.4xlarge
@@ -76,7 +75,7 @@ costly than FlashGraph in the cloud.
 
 ![runtime dollors](http://flashx.io/images/FlashGraph.vs.others.dollor.png)
 
-Figure 2. The runtime dollars of FlashGraph vs. distributed graph engines.
+Figure 2. The runtime dollars (=runtime * instance cost) of graph engines on the Twitter graph.
 
 ### Machine learning
 
