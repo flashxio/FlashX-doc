@@ -75,7 +75,7 @@ costly than FlashGraph in the cloud.
 
 ![runtime dollors](https://flashxio.github.io/FlashX-doc/images/FlashGraph-cost.jpg)
 
-Figure 2. The runtime dollars (=runtime * instance cost) of graph engines on the Twitter graph.
+Figure 2. The runtime dollars (=runtime * instance cost) of graph engines on the Twitter graph in the Amazon cloud.
 
 ### Machine learning
 
