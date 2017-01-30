@@ -59,9 +59,9 @@ weakly connected components. [Giraph](http://giraph.apache.org/),
 PowerGraph is a little faster than FlashGraph in PageRank when FlashGraph
 runs in a small Amazon instance.
 
-![runtime](http://flashx.io/images/FlashGraph.vs.others.png)
+![runtime](https://flashxio.github.io/FlashX-doc/images/FlashGraph-speed.jpg)
 
-Figure 1. The speed of graph engines normalized to FlashGraph on the Twitter graph.
+Figure 1. The runtime of graph engines normalized to FlashGraph when processing the Twitter graph in the Amazon cloud.
 
 Given such performance results, we can further demonstrate that FlashGraph is
 much more economical than distributed graph engines in the Amazon cloud. m2.4xlarge
