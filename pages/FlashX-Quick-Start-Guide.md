@@ -16,22 +16,29 @@ Currently, FlashX provides R interfaces: FlashR and FlashGraphR.
 The installation steps have been tested in Ubuntu 14.04 and Ubuntu 16.04.
 
 ### Library dependency
-FlashX requires the following libraries: `libboost-dev, BLAS, libaio, libnuma, libhwloc`.
-Users need to install these libraries before compiling the code of FlashX.
-Among them, `libaio`, `libnuma` and `libhwloc` are optional. However, `libaio`
-is required to take advantage of SSDs to scale computation to large datasets.
-`libnuma` is required for machines with more than two processor sockets. `libhwloc`
-is required to tune FlashX automatically to achieve the best speed for a given
-hardware.
 
-In Ubuntu, we install all tools and libraries for compiling FlashX as follows:
+To install FlashX, users need to install R first.
+In Ubuntu, users can install FlashR as follows:
 
 ```shell
 sudo apt-get update
-sudo apt-get install -y g++ libboost-dev libatlas-base-dev
 sudo apt-get install -y r-base-core
-# This is optional
+```
+To run FlashX faster and use disks to scale to large datasets, users
+needs to install some additional libraries: `libaio, libnuma, libhwloc, libatlas`.
+All of the libraries are **optional**. Users need to install these
+libraries before compiling the code of FlashX.
+
+* `libaio` is required to take advantage of SSDs to scale computation to large datasets.
+* `libnuma` is required for machines with more than two processor sockets.
+* `libhwloc` is required to tune FlashX automatically to achieve the best speed for a given hardware.
+* `libatlas` is a faster BLAS implementation and it can accelerate matrix multilication in FlashR.
+
+In Ubuntu, users can install the additional libraries as follows:
+
+```R
 sudo apt-get install -y libnuma-dev libaio-dev libhwloc-dev
+sudo apt-get install -y libatlas-base-dev
 ```
 
 Users can use `devtools` or use a URL link to install FlashR and FlashGraphR in R.
