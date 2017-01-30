@@ -73,7 +73,7 @@ these graph engines with this metric, FlashGraph in i2.xlarge is the most
 economical. These distributed graph engines are one order of magnitude more
 costly than FlashGraph in the cloud.
 
-![runtime dollors](http://flashx.io/images/FlashGraph.vs.others.dollor.png)
+![runtime dollors](https://flashxio.github.io/FlashX-doc/images/FlashGraph-cost.jpg)
 
 Figure 2. The runtime dollars (=runtime * instance cost) of graph engines on the Twitter graph.
 
@@ -91,20 +91,7 @@ cross product and SVD) to implementations written from the scratch
 FlashR supports both in-memory and external-memory execution, so we will show
 both in-memory and external-memory performance.
 
-#### FlashR vs. R and RRO
-
-The FlashR implementations outperform the ones in R even with a single thread
-(Figure 3).
-The implementations in the R framework is written in C/FORTRAN and can only
-run in a single thread. As such, for a fair
-comparison, we run the FlashR implementations in a single thread when comparing
-with the C/FORTRAN implementations in the R framework. We evaluate
-the implementations in machine HW2.
-
-![Performance of FlashR vs. R](http://flashxio.github.io/FlashX-doc/images/FlashR-perf-1T.png)
-
-Figure 3. The performance of FlashR vs. R in a single thread on a dataset
-with 65 million data points and 32 features.
+#### FlashR vs. RRO
 
 We compare the performance of FlashR with RRO with the
 [RRO benchmark](https://mran.revolutionanalytics.com/documents/rro/multithread/)
@@ -115,8 +102,7 @@ more complex, the speed gap between FlashR and RRO gets larger.
 
 ![Performance of FlashR vs. RRO](http://flashxio.github.io/FlashX-doc/images/FlashR.vs.RRO.png)
 
-Figure 3. The performance of FlashR vs. RRO on HW2 on a matrix
-with 1 million rows and 1000 columns.
+Figure 3. The normalized runtime of FlashR vs. RRO on a matrix with 1 million rows and 1000 columns when running on HW2.
 
 #### FlashR vs. Spark
 
@@ -130,11 +116,11 @@ we demonstrate that FlashR can scale to very large datasets easily.
 
 ![Performance of FlashR vs. Spark MLlib](http://flashxio.github.io/FlashX-doc/images/FlashR-perf.png)
 
-Figure 4. The performance of FlashR vs. Spark MLlib in HW2.
+Figure 4. The normalized runtime of FlashR vs. Spark MLlib on a dataset with 1 billion data points and 32 features when running on HW2.
 
 ![Memory consumption of FlashR vs. Spark MLlib](http://flashxio.github.io/FlashX-doc/images/FlashR-mem.png)
 
-Figure 5. The memory consumption of FlashR vs. Spark MLlib.
+Figure 5. The memory consumption of FlashR vs. Spark MLlib on the dataset with one billion data points.
 
 ## Scalability of FlashX
 
