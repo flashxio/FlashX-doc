@@ -193,7 +193,7 @@ from a zipped file (if the feature is enabled). The constructed graph is
 an undirected graph with 4,036,538 vertices and 34,681,189 edges.
 
 ```R
-> fg <- fg.load.graph("./com-lj.ungraph.txt.gz", directed=FALSE)
+> fg <- fg.load.graph("./com-lj.ungraph.txt", directed=FALSE)
 > fg
 FlashGraph ./com-lj.ungraph.txt.gz (U): 4036538 34681189
 ```
@@ -223,12 +223,24 @@ vertices and 34,681,189 edges.
 FlashGraph ./com-lj.ungraph.txt.gz-sub (U): 3997962 34681189
 ```
 
+We can save the largest connected component in the FlashGraph format to local files for future use.
+
+```R
+> fg.export.graph(lcc, "lj-lcc.adj", "lj-lcc.index")
+```
+
+In the future, if we want to load the largest connected component to FlashGraphR, we can run the instruction below.
+
+```R
+> lcc <- fg.load.graph("./lj-lcc.adj", "./lj-lcc.index")
+```
+
 We compute eigenvalues of the largest connected component.
 
 ```R
 > m <- fg.get.sparse.matrix(lcc)
 > multiply <- function(x, extra) m %*% x
-> res <- fm.eigen(multiply, options=list(n=dim(m)[1], nev=10))
+> res <- fm.eigen(multiply, k=10, n=nrow(m), which="LM", sym=TRUE)
 > res$vals
 ```
 
