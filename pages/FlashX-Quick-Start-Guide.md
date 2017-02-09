@@ -188,9 +188,9 @@ mix.mvrnorm <- function(n, p, m)
 > mat <- mix.mvrnorm(1000000, 10, 10)
 > res <- fm.kmeans(mat, 10, max.iters=100)
 > cnt <- fm.table(res)
-> as.vector(cnt$val)
+> as.vector(cnt@val)
  [1] 0 1 2 3 4 5 6 7 8 9
-> as.vector(cnt$Freq)
+> as.vector(cnt@Freq)
  [1]  914957 1000803  982197 1058306  907314  957551 1060443 1101763 1065113
 [10]  951553
 ```
