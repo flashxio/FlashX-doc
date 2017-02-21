@@ -14,6 +14,7 @@ folder: mydoc
 This document shows the installation of FlashX with the R programming interfaces.
 Currently, FlashX provides R interfaces: FlashR and FlashGraphR.
 The installation steps have been tested in Ubuntu 14.04 and Ubuntu 16.04.
+
 **WARNING! FlashR conflicts with the Matrix package because both packages override the same matrix functions.** Please remove Matrix when installing FlashR.
 
 ### Library dependency
