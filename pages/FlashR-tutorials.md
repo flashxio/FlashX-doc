@@ -204,10 +204,6 @@ isolated vertices.
 
 ```R
 > cc <- fg.clusters(fg, mode="weak")
-> table(cc)
-cc
-     -1       0 
-  38576 3997962 
 ```
 
 We extract the largest connected component from the graph and construct
@@ -215,8 +211,9 @@ a new graph with the largest connected component. The new graph has 3,997,962
 vertices and 34,681,189 edges.
 
 ```R
-> tcc <- table(cc)
-> lccV <- which(cc == as.integer(names(which(tcc == max(tcc)))))
+> tcc <- fm.table(cc)
+> max.idx <- which(as.vector(tcc@Freq == max(tcc@Freq)))
+> lccV <- which(as.vector(cc == tcc@val[max.idx]))
 
 > lcc <- fg.fetch.subgraph(fg, vertices=lccV - 1, compress=TRUE)
 > lcc
