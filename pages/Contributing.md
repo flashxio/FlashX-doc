@@ -13,7 +13,6 @@ TODO list for the R interface
 
 * Port R packages ([MASS](https://cran.r-project.org/web/packages/MASS/index.html), [e1071](https://cran.r-project.org/web/packages/e1071/index.html), [caret](http://topepo.github.io/caret/index.html), [NMF](https://cran.r-project.org/web/packages/NMF/index.html)) to FlashR.
 * Implement [dplyr](https://cran.r-project.org/web/packages/dplyr/index.html).
-* Implement and port [mclust](https://cran.r-project.org/web/packages/mclust/index.html)
 
 TODO list for the Python interface
 
