@@ -28,6 +28,12 @@ x[i, j, drop = TRUE]
 
 ## S4 method for signature 'fmV,ANY,ANY,ANY'
 x[i]
+
+## S4 replacement method for signature 'fm,ANY,missing,ANY'
+x[i, j] &lt;- value
+
+## S4 replacement method for signature 'fm,missing,ANY,ANY'
+x[i, j] &lt;- value
 </pre>
 
 
@@ -38,7 +44,7 @@ x[i]
 <td>
 <p>object from which to extract elements.</p>
 </td></tr>
-<tr valign="top"><td><code>i,j</code></td>
+<tr valign="top"><td><code>i, j</code></td>
 <td>
 <p>indices specifying elements to extract. Indices are integer
 or numeric vectors.</p>
@@ -47,13 +53,18 @@ or numeric vectors.</p>
 <td>
 <p>for matrices. If <code>TRUE</code>, the result is coerced to a vector.</p>
 </td></tr>
+<tr valign="top"><td><code>value</code></td>
+<td>
+<p>a FlashR vector or matrix that contains new data for the rows</p>
+</td></tr>
 </table>
 
 
 <h3>Details</h3>
 
-<p>FlashR only supports extracting data from an object. It doesn't support
-replace data in an object.
+<p>FlashR supports extracting data from an object as well as replacing data
+of a matrix. To assign data in a matrix, it only supports setting
+the entire rows or columns.
 </p>
 
 
@@ -64,6 +75,7 @@ mat &lt;- fm.runif.matrix(100, 10)
 mat[1:5,]
 mat[,1:5]
 mat[1:5,1:5]
+mat[,1] &lt;- fm.runif(nrow(mat))
 </pre>
 
 

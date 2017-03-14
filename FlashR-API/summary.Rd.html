@@ -1,0 +1,82 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd"><html xmlns="http://www.w3.org/1999/xhtml"><head><title>R: FlashR Summaries</title>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<link rel="stylesheet" type="text/css" href="R.css" />
+</head><body>
+
+<table width="100%" summary="page for summary"><tr><td>summary</td><td style="text-align: right;">R Documentation</td></tr></table>
+
+<h2>FlashR Summaries</h2>
+
+<h3>Description</h3>
+
+<p><code>summary</code> produces summaries of a FlashR object.
+</p>
+
+
+<h3>Usage</h3>
+
+<pre>
+.summary(x)
+
+## S4 method for signature 'fm'
+summary(object, ...)
+
+## S4 method for signature 'fmV'
+summary(object, ...)
+</pre>
+
+
+<h3>Arguments</h3>
+
+<table summary="R argblock">
+<tr valign="top"><td><code>x</code></td>
+<td>
+<p>a FlashR vector or matrix.</p>
+</td></tr>
+</table>
+
+
+<h3>Details</h3>
+
+<p>It computes the min, max, sum, mean, L1, L2, number of non-zero values if
+the argument is a vector, or these statistics for each column if the argument
+is a matrix.
+</p>
+
+
+<h3>Value</h3>
+
+<p>A list containing the following named components:
+</p>
+
+<ul>
+<li><p>minThe minimum value
+</p>
+</li>
+<li><p>maxThe maximum value
+</p>
+</li>
+<li><p>meanThe average
+</p>
+</li>
+<li><p>normL1The L1 norm
+</p>
+</li>
+<li><p>normL2The L2 norm
+</p>
+</li>
+<li><p>numNonzerosThe number of non-zero values
+</p>
+</li></ul>
+
+
+
+<h3>Examples</h3>
+
+<pre>
+mat &lt;- fm.runif.matrix(100, 10)
+summary(mat)
+</pre>
+
+
+</body></html>

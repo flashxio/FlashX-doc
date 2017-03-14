@@ -32,7 +32,10 @@ fm.load.dense.matrix(src.file, in.mem, ele.type = "D", delim = ",",
 fm.load.dense.matrix.bin(src.file, in.mem, nrow, ncol, byrow, ele.type,
   name = "")
 
-fm.load.sparse.matrix(spm, spm.idx, t.spm = NULL, t.spm.idx = NULL,
+fm.load.sparse.matrix(file, in.mem = TRUE, is.sym = FALSE, ele.type = "B",
+  delim = ",", name = "")
+
+fm.load.sparse.matrix.bin(spm, spm.idx, t.spm = NULL, t.spm.idx = NULL,
   in.mem = TRUE)
 </pre>
 
@@ -56,7 +59,9 @@ that stores data to be loaded to FlashR.</p>
 </td></tr>
 <tr valign="top"><td><code>ele.type</code></td>
 <td>
-<p>The element type in a matrix.</p>
+<p>A string that represents the element type in a matrix.
+&quot;B&quot; means binary, &quot;I&quot; means integer, &quot;L&quot; means long integer,
+&quot;F&quot; means single-precision floating point, &quot;D&quot; means double-precision floating point.</p>
 </td></tr>
 <tr valign="top"><td><code>delim</code></td>
 <td>

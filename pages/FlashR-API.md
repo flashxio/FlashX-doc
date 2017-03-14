@@ -29,7 +29,6 @@ folder: mydoc
 | [fm.agg.op-class](FlashR-API/fm.agg.op-class.Rd.html) | An S4 class to represent an aggregation operator used in aggregation operations in FlashR. |
 | [fm.apply](FlashR-API/fm.apply.Rd.html) | Apply Functions Over Array Margins |
 | [fm.apply.op-class](FlashR-API/fm.apply.op-class.Rd.html) | An S4 class to represent an apply operator on rows/columns in a matrix. This operator is used in 'fm.apply'. |
-| [fm.ase](FlashR-API/fm.ase.Rd.html) | Spectral embedding |
 | [fm.as.factor](FlashR-API/fm.as.factor.Rd.html) | FlashR factor vector. |
 | [fm.basic.op](FlashR-API/fm.basic.op.Rd.html) | The basic operators supported by FlashR. |
 | [fm.bind](FlashR-API/fm.bind.Rd.html) | Combine FlashR Vectors/Matrices by Rows or Columns |
@@ -41,9 +40,7 @@ folder: mydoc
 | [fm.conv.store](FlashR-API/fm.conv.store.Rd.html) | Convert the Storage of an Object. |
 | [fm.create.agg.op](FlashR-API/fm.create.agg.op.Rd.html) | Create an aggregate operator |
 | [fm.eigen](FlashR-API/fm.eigen.Rd.html) | Eigensolver |
-| [fmFactorV-class](FlashR-API/fmFactorV-class.Rd.html) | An S4 class to represent a FlashR factor vector. It inherits from a FlashR vector. |
 | [fm.get.eles](FlashR-API/fm.get.eles.Rd.html) | Get a submatrix from a FlashR matrix |
-| [fm.get.layout](FlashR-API/fm.get.layout.Rd.html) | Get the data layout of a FlashR matrix. |
 | [fm.get.matrix](FlashR-API/fm.get.matrix.Rd.html) | Load a matrix to FlashR. |
 | [fm.groupby](FlashR-API/fm.groupby.Rd.html) | Groupby on a FlashR vector. |
 | [fm.info](FlashR-API/fm.info.Rd.html) | The information of a FlashR object |
@@ -51,7 +48,6 @@ folder: mydoc
 | [fm.kmeans](FlashR-API/fm.kmeans.Rd.html) | KMeans clustering |
 | [fm.mapply2](FlashR-API/fm.mapply2.Rd.html) | Apply a Function to two FlashR vectors/matrices. |
 | [fm.multiply](FlashR-API/fm.multiply.Rd.html) | Matrix multiplication |
-| [fm.PageRank](FlashR-API/fm.PageRank.Rd.html) | Compute PageRank on a graph. |
 | [fm.print.mat.info](FlashR-API/fm.print.mat.info.Rd.html) | Print the information of a FlashR object |
 | [fm.read.obj](FlashR-API/fm.read.obj.Rd.html) | Read a FlashR object (vector/matrix) from a file. |
 | [fm.rep.int](FlashR-API/fm.rep.int.Rd.html) | Create a FlashR vector with replicated elements. |
@@ -61,10 +57,10 @@ folder: mydoc
 | [fm.sapply](FlashR-API/fm.sapply.Rd.html) | Apply a Function to a FlashR vector/matrix. |
 | [fm.seq](FlashR-API/fm.seq.Rd.html) | Sequence Generation |
 | [fm.set.conf](FlashR-API/fm.set.conf.Rd.html) | Reconfigure FlashR |
-| [fm.summary](FlashR-API/fm.summary.Rd.html) | FlashR Summaries |
 | [fm.t](FlashR-API/fm.t.Rd.html) | Transpose a FlashR matrix. |
 | [fm.table](FlashR-API/fm.table.Rd.html) | Count the number of elements |
 | [fmV-class](FlashR-API/fmV-class.Rd.html) | An S4 class to represent a FlashR vector. |
+| [fmVFactor-class](FlashR-API/fmVFactor-class.Rd.html) | An S4 class to represent a FlashR factor vector. It inherits from a FlashR vector. |
 | [fm.write.obj](FlashR-API/fm.write.obj.Rd.html) | Write a FlashR object (vector/matrix) to a file |
 | [head](FlashR-API/head.Rd.html) | Return the First or Last part of an Object |
 | [ifelse](FlashR-API/ifelse.Rd.html) | Conditional Element Selection |
@@ -91,6 +87,7 @@ folder: mydoc
 | [scale](FlashR-API/scale.Rd.html) | Scaling and Centering of Matrix |
 | [sd](FlashR-API/sd.Rd.html) | Standard Deviation |
 | [sum](FlashR-API/sum.Rd.html) | Sum of Vector Elements |
+| [summary](FlashR-API/summary.Rd.html) | FlashR Summaries |
 | [svd](FlashR-API/svd.Rd.html) | Compute the singular-value decomposition on a large matrix. |
 | [sweep](FlashR-API/sweep.Rd.html) | Sweep out Array Summaries |
 | [transpose](FlashR-API/transpose.Rd.html) | Matrix Transpose |

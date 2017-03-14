@@ -1,0 +1,38 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd"><html xmlns="http://www.w3.org/1999/xhtml"><head><title>R: Load a sparse matrix to FlashGraphR.</title>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<link rel="stylesheet" type="text/css" href="R.css" />
+</head><body>
+
+<table width="100%" summary="page for fg.get.sparse.matrix"><tr><td>fg.get.sparse.matrix</td><td style="text-align: right;">R Documentation</td></tr></table>
+
+<h2>Load a sparse matrix to FlashGraphR.</h2>
+
+<h3>Description</h3>
+
+<p>Load a sparse matrix to FlashGraphR from FlashGraph.
+</p>
+
+
+<h3>Usage</h3>
+
+<pre>
+fg.get.sparse.matrix(fg)
+</pre>
+
+
+<h3>Details</h3>
+
+<p>&lsquo;fg.get.sparse.matrix&rsquo; gets a FlashMatrix sparse matrix that references
+a matrix represented by a FlashGraph object.
+</p>
+
+
+<h3>Examples</h3>
+
+<pre>
+fg &lt;- fg.load.graph("graph.adj", "graph.index")
+fm &lt;- fg.get.sparse.matrix(fg)
+</pre>
+
+
+</body></html>
