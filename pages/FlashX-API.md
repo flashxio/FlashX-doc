@@ -12,4 +12,5 @@ folder: mydoc
 FlashX exposes both C++ interface and R interface. Here lists all of the programming interface of FlashX.
 
 * [FlashX C++ interface](http://flashx.io/docs/html/) documents the C++ interface of FlashGraph and FlashMatrix.
-* [FlashR](FlashR-API.html) lists all of the FlashR functions.
+* [FlashR](FlashR-API.html) lists all of the functions in FlashR.
+* [FlashGraphR](FlashGraphR-API.html) lists all of the functions in FlashGraphR.
