@@ -194,3 +194,26 @@ mix.mvrnorm <- function(n, p, m)
  [1]  914957 1000803  982197 1058306  907314  957551 1060443 1101763 1065113
 [10]  951553
 ```
+
+## Run FlashGraphR
+Users can run graph algorithms provided by FlashGraphR.
+
+Users can load a graph in both text edge list format and the FlashGraph format. If users provide a the text edge list format, FlashR will construct the FlashGraph format directly. e.g., both of the following commands loads the wiki-Vote graph to FlashR (assume the text edge list and the FlashGraph image are both in the current directory).
+```R
+g <- fg.load.graph("./wiki-Vote.txt", directed=TRUE)
+g <- fg.load.graph("./wiki-Vote.adj", "./wiki-Vote.index")
+```
+
+Here shows an example of running PageRank.
+```R
+> library(FlashGraphR)
+> fg.set.conf("flash-graph/conf/run_test.txt")
+> g <- fg.load.graph("./wiki-Vote.adj", "./wiki-Vote.index")
+> res <- fg.page.rank(g)
+> res <- sort(as.vector(res), decreasing=FALSE, index.return=TRUE)
+> tail(res$x, n=10)
+ [1]  6.354546  6.411633  6.703026  7.396998  7.483035  7.702387  9.680690
+ [8] 10.584648 10.879063 13.640081
+> tail(res$ix, n=10)-1
+ [1] 5254 7553 4191 2237 2470 2398 2625 6634   15 4037
+```
