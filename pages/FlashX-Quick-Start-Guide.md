@@ -89,6 +89,19 @@ Similar to installation of FlashR, we can install FlashGraphR as follows:
 > install_github("flashxio/FlashGraphR")
 ```
 
+### Install FlashX in a docker container
+
+If a user chooses to install FlashR and FlashGraphR in a docker container,
+the user needs to clone the FlashX repository and follows the steps below
+to install it.
+```
+$ git clone https://github.com/flashxio/FlashX.git
+$ cd FlashX
+$ docker build -t flashx docker
+$ docker run -d flashx
+$ docker exec -it <container id> bash
+```
+
 ## Run FlashR.
 
 FlashR is designed to optimize for different hardware. If FlashR is installed
