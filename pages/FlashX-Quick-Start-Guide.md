@@ -230,3 +230,27 @@ Here shows an example of running PageRank.
 > tail(res$ix, n=10)-1
  [1] 5254 7553 4191 2237 2470 2398 2625 6634   15 4037
 ```
+
+## Launch FlashX Jupyter Notebook in EC2
+
+To launch a FlashX Jupyter Notebook in EC2, a user first needs to install the boto3 library:
+
+```
+$ pip install boto3
+```
+
+Next, set up credentials (in e.g. ~/.aws/credentials):
+
+```
+[default]
+aws_access_key_id = YOUR_KEY
+aws_secret_access_key = YOUR_SECRET
+```
+After setting up boto3, a user can run the [script](https://github.com/flashxio/FlashX/blob/dev/EC2/create_instance.py) to launch a FlashX Jupyter Notebook.
+
+```
+$ python create_instance.py
+```
+
+The script will print an IP address of the EC2 instance. Access the Jupyter Notebook with "http://ec2_ip:8888".
+*NOTE*: an EC2 instance may take a few minutes to fully set up. A user should wait for a few minutes to access the Notebook.
