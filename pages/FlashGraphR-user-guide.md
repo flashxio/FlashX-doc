@@ -22,13 +22,10 @@ Users can call `fg.set.conf` to initialize FlashGraphR. Users can specify the nu
 
 Before running any graph algorithms on a graph, users need to first load the graph to FlashGraphR. There are multiple ways of loading a graph to FlashGraphR.
 
-* Load a graph from a file that contains an edge list in the text format in Linux filesystem:
-`g <- fg.load.graph("edge_list_file")`. FlashGraphR reads the graph in the edge list file and converts it into the FlashGraph format. The graph is kept in memory. The function returns a FlashGraphR object.
+* Load a graph from a text file that contains an edge list in Linux filesystem:
+`g <- fg.load.graph("/path/to/edge/list/file")`. FlashGraphR reads the graph in the edge list file and converts it into the FlashGraph format. The graph is kept in memory. The function returns a FlashGraphR object. To utilize SSDs, a user should pass `in.mem=FALSE` to this function. In this case, the graph is constructed and stored on SSDs.
 * Load a graph from a file that contains a graph in the FlashGraph format:
-`g <- fg.load.graph("adj_list_file", index="index_file")`. A graph in the FlashGraph format has two parts: the graph file and the index file. When users specify an index file, FlashGraphR assumes that the input graph file is in the FlashGraph format. FlashGraphR reads the graph and its index and keeps them in memory. The function returns a FlashGraphR object.
-* Load a graph from iGraph.
-`g <- fg.load.igraph(ig)`. FlashGraphR converts the iGraph object into the FlashGraph format and keeps it in memory. The function returns a FlashGraphR object.
-* Load a graph in the FlashGraph format to SAFS. Users need to use a SAFS tool [SAFS-util](https://github.com/icoming/FlashGraph/wiki/SAFS-user-manual#utility-tool-in-safs) to load a graph in the FlashGraph format to SAFS. Later, FlashGraphR can perform graph algorithms on the graph without loading it to memory. Right now, this is the only way of realizing the full power of FlashGraph to perform graph analysis. After loading a graph to SAFS, users need to invoke `fg.get.graph` to get a FlashGraphR object to access a graph on SAFS.
+`g <- fg.load.graph("/path/to/adj/list/file", index="/path/to/index/file")`. A graph in the FlashGraph format has two parts: the graph file and the index file. When users specify an index file, FlashGraphR assumes that the input graph file is in the FlashGraph format. FlashGraphR reads the graph and its index and keeps them in memory. The function returns a FlashGraphR object.
 
 ## The graph algorithms
 
@@ -42,7 +39,7 @@ Once a graph is loaded to FlashGraphR, users can perform graph algorithms on the
 * scan statistics: `fg.topK.scan(g)` and `fg.local.scan(g)`
 * coreness: `fg.coreness(g)`
 * diameter estimation: `fg.diameter(g)`
-* spectral clustering: `fg.spectral.clusters(g, num.clusters, which="adj")`. It supports performing spectral clustering on adjacency matrix, Laplacian matrix and normalized Laplacian matrix.
+* spectral embedding: `fg.spectral.embedding(g, nev)`. It supports performing spectral embedding on an adjacency matrix, a Laplacian matrix and a normalized Laplacian matrix.
 
 ## Other functions
 
@@ -57,43 +54,21 @@ Once a graph is loaded to FlashGraphR, users can perform graph algorithms on the
 
 ## Examples of using FlashGraphR
 
-Users can use R to further process the results returned from FlashGraph. Here are some examples how users process the results of the strongly connected components.
+Compute spectral embedding on the largest connected component in a graph.
 
 ```R
 # Get the strongly connected components.
 # It returns an array whose elements are the component Ids of the vertices.
-cc <- fg.cluster(fg, "strong")
+cc <- fg.cluster(fg, "weakly")
 # Get the size of each component
-counts <- as.data.frame(table(cc[cc >= 0]))
+counts <- as.data.frame(fm.table(cc[cc >= 0]))
 # Get the largest component ID
-lcc.id <- as.integer(levels(counts$Var1)[which.max(counts$Freq)])
+lcc.id <- as.integer(levels(counts$val)[which.max(counts$Freq)])
 # Get all vertices in the largest component
 lcc.v <- which(cc == lcc.id)
 # Get the induced subgraph with all vertices in the largest components
-# Right now, this function is implemented with all data in memory, so run this function with caution.
-sub.fg <- fg.fetch.subgraph(fg, vertices=lcc.v - 1, compress=FALSE)
-```
-
-Some of the graph algorithms in FlashGraphR are implemented in R by using other graph algorithms in FlashGraphR. Below show two examples of how to use existing graph algorithms in FlashGraphR to implement other graph algorithms.
-
-One example is to compute graph transitivity. The code below computes both global and local graph transitivity for both directed and undirected graphs.
-
-```R
-    deg <- fg.degree(graph)
-    if (type == "local") {
-        if (graph$directed) {
-            (fg.local.scan(graph) - deg) / (deg * (deg - 1))
-        }
-        else {
-            2 * fg.undirected.triangles(graph) / (deg * (deg - 1))
-        }
-    }
-    else {
-        if (graph$directed) {
-            sum(fg.local.scan(graph) - deg) / sum(deg * (deg - 1))
-        }
-        else {
-            2 * sum(fg.undirected.triangles(graph)) / sum(deg * (deg - 1))
-        }
-    }
+# The function outputs a graph in the FlashGraph format.
+sub.fg <- fg.fetch.subgraph(fg, vertices=lcc.v, compress=FALSE)
+# Compute spectral embedding on the largest connected component.
+res <- fg.spectral.embedding(sub.fg, 10)
 ```
