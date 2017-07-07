@@ -9,6 +9,15 @@ permalink: FlashGraphR-user-guide.html
 folder: mydoc
 ---
 
+## Load and initialize FlashGraphR
+
+Users can call `fg.set.conf` to initialize FlashGraphR. Users can specify the number of threads to use and enable FlashGraphR to use SSDs to process large graphs. [Here](https://github.com/flashxio/FlashX/blob/release/flash-graph/conf/run_test.txt) shows an example of a configuration file. [This page](https://flashxio.github.io/FlashX-doc/FlashX-config.html) explains important parameters in the configuration file.
+
+```R
+> library(FlashGraphR)
+> fg.set.conf("/path/to/conf/file")
+```
+
 ## Load a graph to FlashGraphR
 
 Before running any graph algorithms on a graph, users need to first load the graph to FlashGraphR. There are multiple ways of loading a graph to FlashGraphR.
