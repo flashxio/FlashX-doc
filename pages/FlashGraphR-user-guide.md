@@ -57,18 +57,24 @@ Once a graph is loaded to FlashGraphR, users can perform graph algorithms on the
 Compute spectral embedding on the largest connected component in a graph.
 
 ```R
+library(FlashGraphR)
+fg.set.conf("flash-graph/conf/run_test.txt")
+# Load the Facebook graph as an undirected graph.
+fg <- fg.load.graph("/mnt/nfs/graph-data/facebook_combined.txt", directed=FALSE)
 # Get the strongly connected components.
 # It returns an array whose elements are the component Ids of the vertices.
-cc <- fg.cluster(fg, "weakly")
+cc <- fg.clusters(fg, "weakly")
 # Get the size of each component
 counts <- as.data.frame(fm.table(cc[cc >= 0]))
 # Get the largest component ID
-lcc.id <- as.integer(levels(counts$val)[which.max(counts$Freq)])
+lcc.id <- as.vector(counts$val)[which.max(as.vector(counts$Freq))]
 # Get all vertices in the largest component
 lcc.v <- which(cc == lcc.id)
 # Get the induced subgraph with all vertices in the largest components
 # The function outputs a graph in the FlashGraph format.
 sub.fg <- fg.fetch.subgraph(fg, vertices=lcc.v, compress=FALSE)
 # Compute spectral embedding on the largest connected component.
-res <- fg.spectral.embedding(sub.fg, 10)
+res <- fg.spectral.embedding(sub.fg, 10, which="A")
+# Use kmeans to cluster the vertices.
+clus.res <- kmeans(res$vectors, 10)
 ```
