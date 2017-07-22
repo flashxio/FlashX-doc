@@ -21,8 +21,10 @@ To install FlashX, users need to install R first.
 In Ubuntu, users can install FlashR as follows:
 
 ```shell
-sudo apt-get update
-sudo apt-get install -y r-base-core
+$ sudo sh -c "echo \"deb http://cran.rstudio.com/bin/linux/ubuntu xenial/\" >> /etc/apt/sources.list"
+$ sudo apt-key adv --keyserver keyserver.ubuntu.com --recv-keys E084DAB9
+$ sudo apt-get update
+$ sudo apt-get install -y r-base-core
 ```
 To run FlashX faster and use disks to scale to large datasets, users
 needs to install some additional libraries: `libaio, libnuma, libhwloc, libatlas`.
@@ -36,7 +38,7 @@ libraries before compiling the code of FlashX.
 
 In Ubuntu, users can install the additional libraries as follows:
 
-```R
+```shell
 sudo apt-get install -y libnuma-dev libaio-dev libhwloc-dev
 sudo apt-get install -y libatlas-base-dev
 ```
@@ -46,12 +48,7 @@ If users choose to use `devtools`, they need to install `devtools` first:
 
 ```shell
 sudo apt-get install -y libcurl4-openssl-dev libssl-dev
-```
-
-and
-
-```R
-> install.packages("devtools")
+R -e "install.packages('devtools', repos = 'http://cran.rstudio.com/')"
 ```
 
 **NOTE**: the current `devtools` package has a bug in the low-version R framework.
@@ -59,9 +56,9 @@ Ubuntu 14.04 users should follow the instructions
 [here](https://www.digitalocean.com/community/tutorials/how-to-set-up-r-on-ubuntu-14-04)
 to upgrade the R framework before installing `devtools`.
 
-### Install FlashR
-FlashR is uploaded to a [Github](https://github.com/flashxio/FlashR) repo.
-We can install FlashR in R with [devtools](https://cran.r-project.org/web/packages/devtools/index.html)
+### Install FlashR & FlashGraphR from Github directly
+FlashR is uploaded to a [Github](https://github.com/flashxio/FlashR) repo and FlashGraphR is uploaded to a [Github](https://github.com/flashxio/FlashGraphR) repo.
+We can install FlashR & FlashGraphR in R with [devtools](https://cran.r-project.org/web/packages/devtools/index.html)
 as follows.
 
 ```R
@@ -79,14 +76,26 @@ needs to install the dependencies manually.
 > install.packages("https://github.com/flashxio/FlashR/archive/FlashR-latest.tar.gz", repos=NULL)
 ```
 
-### Install FlashGraphR
-
-FlashGraphR is uploaded to a [Github](https://github.com/flashxio/FlashGraphR) repo.
-Similar to installation of FlashR, we can install FlashGraphR as follows:
+Similarly, we can install FlashGraphR as follows:
 
 ```R
 > library(devtools)
 > install_github("flashxio/FlashGraphR")
+```
+
+### Install FlashR & FlashGraphR manually
+Another option of installing FlashR and FlashGraphR is to download from Github and install them manually.
+The benefit of such an approach is to customize the installation process. For example, this allows us to compile the code in parallel.
+
+```shell
+$ git clone https://github.com/flashxio/FlashX.git
+$ cd FlashX
+$ mkdir -p build; cd build; cmake ../; make -j4; cd ..
+$ RUN R -e "install.packages('Rcpp', repos = 'http://cran.rstudio.com/')"
+$ RUN R -e "install.packages('RSpectra', repos = 'http://cran.rstudio.com/')"
+$ RUN R -e "install.packages('igraph', repos = 'http://cran.rstudio.com/')"
+$ ./install_FlashR.sh
+$ ./install_FlashGraphR.sh
 ```
 
 ### Install FlashX in a docker container
