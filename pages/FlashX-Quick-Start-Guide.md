@@ -91,9 +91,9 @@ The benefit of such an approach is to customize the installation process. For ex
 $ git clone https://github.com/flashxio/FlashX.git
 $ cd FlashX
 $ mkdir -p build; cd build; cmake ../; make -j4; cd ..
-$ RUN R -e "install.packages('Rcpp', repos = 'http://cran.rstudio.com/')"
-$ RUN R -e "install.packages('RSpectra', repos = 'http://cran.rstudio.com/')"
-$ RUN R -e "install.packages('igraph', repos = 'http://cran.rstudio.com/')"
+$ R -e "install.packages('Rcpp', repos = 'http://cran.rstudio.com/')"
+$ R -e "install.packages('RSpectra', repos = 'http://cran.rstudio.com/')"
+$ R -e "install.packages('igraph', repos = 'http://cran.rstudio.com/')"
 $ ./install_FlashR.sh
 $ ./install_FlashGraphR.sh
 ```
