@@ -231,7 +231,7 @@ Here shows an example of running PageRank.
 ```R
 > library(FlashGraphR)
 > fg.set.conf("flash-graph/conf/run_test.txt")
-> g <- fg.load.graph("./wiki-Vote.adj", "./wiki-Vote.index")
+> g <- fg.load.graph("./wiki-Vote.txt", directed=TRUE)
 > res <- fg.page.rank(g)
 > res <- sort(as.vector(res), decreasing=FALSE, index.return=TRUE)
 > tail(res$x, n=10)
