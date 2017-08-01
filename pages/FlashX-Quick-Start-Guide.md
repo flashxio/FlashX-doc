@@ -177,6 +177,7 @@ outputs a vector, each of whose elements indicates the cluster id of a data poin
 We run `fm.table` to count the number of data points in each cluster.
 
 ```R
+library(FlashR)
 mvrnorm <-
     function(n = 1, mu, Sigma, tol=1e-6, empirical = FALSE, EISPACK = FALSE)
 {
@@ -208,8 +209,8 @@ mix.mvrnorm <- function(n, p, m)
 }
 
 > mat <- mix.mvrnorm(1000000, 10, 10)
-> res <- fm.kmeans(mat, 10, max.iters=100)
-> cnt <- fm.table(res)
+> res <- fm.kmeans(mat, 10)
+> cnt <- fm.table(res$cluster)
 > as.vector(cnt@val)
  [1] 0 1 2 3 4 5 6 7 8 9
 > as.vector(cnt@Freq)
