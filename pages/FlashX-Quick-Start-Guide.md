@@ -43,45 +43,23 @@ sudo apt-get install -y libnuma-dev libaio-dev libhwloc-dev
 sudo apt-get install -y libatlas-base-dev
 ```
 
-Users can use `devtools` or use a URL link to install FlashR and FlashGraphR in R.
-If users choose to use `devtools`, they need to install `devtools` first:
-
-```shell
-sudo apt-get install -y libcurl4-openssl-dev libssl-dev
-R -e "install.packages('devtools', repos = 'http://cran.rstudio.com/')"
-```
-
-**NOTE**: the current `devtools` package has a bug in the low-version R framework.
-Ubuntu 14.04 users should follow the instructions
-[here](https://www.digitalocean.com/community/tutorials/how-to-set-up-r-on-ubuntu-14-04)
-to upgrade the R framework before installing `devtools`.
-
 ### Install FlashR & FlashGraphR from Github directly
 FlashR is uploaded to a [Github](https://github.com/flashxio/FlashR) repo and FlashGraphR is uploaded to a [Github](https://github.com/flashxio/FlashGraphR) repo.
-We can install FlashR & FlashGraphR in R with [devtools](https://cran.r-project.org/web/packages/devtools/index.html)
-as follows.
-
-```R
-> library(devtools)
-> install_github("flashxio/FlashR")
-```
-
-If a user don't want to install devtools or can't install devtools, he or she
-can install FlashR with the following link directly. Unfortunately, the user
-needs to install the dependencies manually.
+We can install FlashR & FlashGraphR in R as follows.
 
 ```R
 > install.packages("Rcpp")
 > install.packages("RSpectra")
-> install.packages("https://github.com/flashxio/FlashR/archive/FlashR-latest.tar.gz", repos=NULL)
+> install.packages("https://github.com/flashxio/FlashR/releases/download/FlashR-latest/FlashR.tar.gz", repos=NULL)
 ```
 
 Similarly, we can install FlashGraphR as follows:
 
 ```R
-> library(devtools)
-> install_github("flashxio/FlashGraphR")
+> install.packages('igraph', repos = 'http://cran.rstudio.com/')
+> install.packages("https://github.com/flashxio/FlashGraphR/releases/download/FlashGraphR-latest/FlashGraphR.tar.gz", repos=NULL)
 ```
+** NOTE: FlashGraphR relies on FlashR. Please install FlashR first before installing FlashGraphR.**
 
 ### Install FlashR & FlashGraphR manually
 Another option of installing FlashR and FlashGraphR is to download from Github and install them manually.
